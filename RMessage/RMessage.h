@@ -1,0 +1,194 @@
+//
+//  RMessage.h
+//  RMessage
+//
+//  Created by Adonis Peralta on 12/7/15.
+//  Copyright © 2015 Rendezvous Inc. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@class RMessageView;
+
+typedef NS_ENUM(NSInteger, RMessageType)
+{
+    RMessageTypeNormal = 0,
+    RMessageTypeWarning,
+    RMessageTypeError,
+    RMessageTypeSuccess,
+    RMessageTypeCustom
+};
+
+typedef NS_ENUM(NSInteger, RMessagePosition)
+{
+    RMessagePositionTop = 0,
+    RMessagePositionNavBarOverlay,
+    RMessagePositionBottom
+};
+
+/** This enum can be passed to the duration parameter */
+typedef NS_ENUM(NSInteger, RMessageDuration)
+{
+    RMessageDurationAutomatic = 0,
+    RMessageDurationEndless = -1 // The notification is displayed until the user dismissed it or it is dismissed by calling dismissActiveNotification
+};
+
+/** Define on which position a specific RMessage should be displayed */
+@protocol RMessageProtocol <NSObject>
+
+@optional
+
+/** Implement this method to pass a custom position for a specific message */
+- (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView;
+
+/** You can customize the given RMessageView, like setting its alpha or adding a subview */
+- (void)customizeMessageView:(RMessageView *)messageView;
+
+@end
+
+@interface RMessage : NSObject
+
+/** By setting this delegate it's possible to set a custom offset for the message view */
+@property (nonatomic, assign) id <RMessageProtocol> delegate;
+
++ (instancetype)sharedMessage;
+
+/** Shows a notification message
+ @param message The title of the message view
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ */
++ (void)showNotificationWithTitle:(NSString *)message
+                             type:(RMessageType)type
+                 customTypeString:(NSString *)customTypeString;
+
+/** Shows a notification message
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ */
++ (void)showNotificationWithTitle:(NSString *)title
+                         subtitle:(NSString *)subtitle
+                             type:(RMessageType)type
+                 customTypeString:(NSString *)customTypeString;
+
+/** Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ You can use +setDefaultViewController: to set the the default one instead
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(RMessageType)type
+                        customTypeString:(NSString *)customTypeString;
+
+/** Shows a notification message in a specific view controller with a specific duration
+ @param viewController The view controller to show the notification in.
+ You can use +setDefaultViewController: to set the the default one instead
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(RMessageType)type
+                        customTypeString:(NSString *)customTypeString
+                                duration:(NSTimeInterval)duration;
+
+/** Shows a notification message in a specific view controller with a specific duration
+ @param viewController The view controller to show the notification in.
+ You can use +setDefaultViewController: to set the the default one instead
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                    type:(RMessageType)type
+                        customTypeString:(NSString *)customTypeString
+                                duration:(NSTimeInterval)duration
+                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+
+
+
+/** Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param iconImage A custom icon image (optional)
+ @param type The message type (Message, Warning, Error, Success)
+ @param customTypeString The string identifier/key for the custom style to use from specified custom design file. Only use when
+ specifying an additional custom design file and when the type parameter in this call is RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ @param callback The block that should be executed, when the user tapped on the message
+ @param buttonTitle The title for button (optional)
+ @param buttonCallback The block that should be executed, when the user tapped on the button
+ @param messagePosition The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   iconImage:(UIImage *)iconImage
+                                    type:(RMessageType)type
+                        customTypeString:(NSString *)customTypeString
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(RMessagePosition)messagePosition
+                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+
+/** Fades out the currently displayed notification. If another notification is in the queue,
+ the next one will be displayed automatically
+ @return YES if the currently displayed notification was successfully dismissed. NO if no notification
+ was currently displayed.
+ */
++ (BOOL)dismissActiveNotification;
+
+/** Fades out the currently displayed notification with a completion block after the animation has finished. If another notification is in the queue,
+ the next one will be displayed automatically
+ @return YES if the currently displayed notification was successfully dismissed. NO if no notification
+ was currently displayed.
+ */
++ (BOOL)dismissActiveNotificationWithCompletion:(void (^)(void))completionBlock;
+
+/** Use this method to set a default view controller to display the messages in */
++ (void)setDefaultViewController:(UIViewController *)defaultViewController;
+
+/** Set a delegate to have full control over the position of the message view */
++ (void)setDelegate:(id<RMessageProtocol>)delegate;
+
+/** Use this method to use custom designs in your messages. Must be a JSON formatted file but do not include the .json extension
+ in the name*/
++ (void)addCustomDesignFromFileWithName:(NSString *)fileName;
+
+/** Indicates whether a notification is currently active. */
++ (BOOL)isNotificationActive;
+
+/** Returns the currently queued array of RMessageView */
++ (NSArray *)queuedMessages;
+
+/** Prepares the message view to be displayed in the future. It is queued and then
+ displayed in fadeInCurrentNotification.
+ You don't have to use this method. */
++ (void)prepareNotificationForPresentation:(RMessageView *)messageView;
+
+@end

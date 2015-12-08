@@ -1,0 +1,34 @@
+PODS:
+  - HexColors (3.0.0)
+  - PPTopMostController (0.0.1)
+  - RMessage (1.0.1):
+    - HexColors (~> 3.0.0)
+    - PPTopMostController
+
+DEPENDENCIES:
+  - HexColors (from `https://github.com/mRs-/HexColors.git`)
+  - PPTopMostController (from `https://github.com/donileo/PPTopMostController.git`)
+  - RMessage (from `../`)
+
+EXTERNAL SOURCES:
+  HexColors:
+    :git: https://github.com/mRs-/HexColors.git
+  PPTopMostController:
+    :git: https://github.com/donileo/PPTopMostController.git
+  RMessage:
+    :path: "../"
+
+CHECKOUT OPTIONS:
+  HexColors:
+    :commit: aa42656d5fb8ca7942927a4d73696900d7306914
+    :git: https://github.com/mRs-/HexColors.git
+  PPTopMostController:
+    :commit: 9e725746cff79a6286554d76dcce279909c327ab
+    :git: https://github.com/donileo/PPTopMostController.git
+
+SPEC CHECKSUMS:
+  HexColors: 8b83e3fe90c0d466dae7b98c9d22da95799f99cb
+  PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
+  RMessage: 824c881c073427bd3334716630ac4b53dbb2b6a8
+
+COCOAPODS: 0.39.0
