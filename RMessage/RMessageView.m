@@ -154,7 +154,7 @@ static NSMutableDictionary *globalDesignDictionary;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-    self = [[NSBundle mainBundle] loadNibNamed:@"RMessageView" owner:self options:nil].firstObject;
+    self = [[NSBundle bundleForClass:[RMessageView class]] loadNibNamed:@"RMessageView" owner:self options:nil].firstObject;
     if (self) {
         _delegate = delegate;
         _title = title;
