@@ -174,9 +174,9 @@
 - (IBAction)didTapCustomDesign:(id)sender
 {
     // this is an example on how to apply a custom design
-    [RMessage addCustomDesignFromFileWithName:@"AlternativeDesign"];
-    [RMessage showNotificationWithTitle:NSLocalizedString(@"Updated to custom design file", nil)
-                                subtitle:NSLocalizedString(@"From now on, all the titles of success messages are larger", nil)
+    [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]];
+    [RMessage showNotificationWithTitle:NSLocalizedString(@"Added custom design file", nil)
+                                subtitle:NSLocalizedString(@"This background is blue while the subtitles are white. Yes this is still an alternate error design :)", nil)
                                     type:RMessageTypeCustom
                         customTypeString:@"alternate-error"];
 }

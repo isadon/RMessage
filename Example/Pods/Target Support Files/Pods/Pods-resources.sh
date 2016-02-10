@@ -59,7 +59,6 @@ install_resource()
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "../../RMessage/Resources/RMessageView.xib"
-  install_resource "../../RMessage/Assets/AlternativeDesign.json"
   install_resource "../../RMessage/Assets/NotificationBackgroundError.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundError@2x.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundErrorIcon.png"
@@ -80,7 +79,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../RMessage/Resources/RMessageView.xib"
-  install_resource "../../RMessage/Assets/AlternativeDesign.json"
   install_resource "../../RMessage/Assets/NotificationBackgroundError.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundError@2x.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundErrorIcon.png"

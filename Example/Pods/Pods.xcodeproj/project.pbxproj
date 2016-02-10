@@ -69,16 +69,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		09E35BFD539CDB3825221F71E0B7DD85 /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
+		006C69CFB2A695D4BBB8CB8A6AE3200C /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		0B9F93FB2054B84208D96EF3C93F57F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF9E1B5B0B3AA74BF0B0A3369A14A3E /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
+		0C50B2707D2C6572BD9D064FD96C9D79 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		1079966FA3780A25B199F756B250A7D7 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
 		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		12B02F3709E2B9CD1BA6F27ED67F4602 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
-		15018C95B6E0DBAD01B2B988940433E1 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
 		1686AB8A2BFCB742CE7C049ED1650607 /* RMessage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-prefix.pch"; sourceTree = "<group>"; };
 		179E81B3B20AD8434A3BB528029889B7 /* PPTopMostController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPTopMostController-prefix.pch"; sourceTree = "<group>"; };
 		244269FA4FABEFBE123CD786CB007189 /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
-		26A1A16F407081A9077669811C9FE78A /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarning.png; sourceTree = "<group>"; };
 		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		2D73840065923F8038A892201689702A /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
 		316870125844702EBA1FBE955FE47E92 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
@@ -87,42 +86,42 @@
 		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3F67BD84B208B68CE8510151ED5462EC /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBarController+PPTopMostController.h"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
-		409AD58F7FBA2833D3D06325A38A6348 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		40AE39C456ACBF10BB69BDB53D2F0BFC /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
 		430FA11FFF0BEE864CF1C6A8E6BBFDDB /* RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMessage-dummy.m"; sourceTree = "<group>"; };
 		4343F23FBF438B643B8CF50EEF5841B3 /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PPTopMostControllerProtocol.h; path = "PPTopMostController-Files/PPTopMostControllerProtocol.h"; sourceTree = "<group>"; };
 		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		4FFA578BD9CB365254B3CE12929A3A5E /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		52B2E69A6CD64591B7AC0CCB21B3278C /* NotificationBackgroundError.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
 		54BC84662E53D1F0C081E99F9C16FA6F /* RMessage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.xcconfig; sourceTree = "<group>"; };
 		54D93A189FABC413AED0AE7DAE215206 /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
 		5F8231D271F29202100DB59055D2C4A7 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PPTopMostController.m"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
 		5FD8F456E674D220D2221D71BA6655FD /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
 		603B7D7A97FB39877B9FC4CB9F09ABF5 /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		67F568774F05D1C7E1A6C4FEF61B2AF6 /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
 		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
+		69E1A009B0C8EB2022CA979B8E934AD1 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundMessage.png; sourceTree = "<group>"; };
 		6FE18BF16B99DA5B588DF7FEDE455422 /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PPTopMostController.h"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
-		7A6F93B1C0E91F535877FBABBA0EEEE6 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
+		77737903CDFEE2C3DC2982E6E4F577E2 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		7C536324B351642A7A28220D1F472957 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
 		7E1D69932A80D3AB72A769B50E0391E3 /* PPTopMostController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.xcconfig; sourceTree = "<group>"; };
+		7F253604E21C2DC6F41E7BD3E378EA42 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
 		8B834D2305652A7C1E7901DC677BAE06 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+PPTopMostController.h"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
-		951853E52F17622C80D1B3EBE27A9267 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
-		98431717943EC65E622A673BFE79754A /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
+		90A5FB1336A8D22C53EBEE781274D420 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
+		96A78EBF4721CDA100F8CF5529C2068B /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
 		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		9A8BE4231801B9D5432534836ACCF85E /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		9D1028310BCA754DB7D3B9165EE74B1E /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
 		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		AD91582FDB4595E2C2CA636CF1B0103A /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
 		B3D45C1BE24BDC76D60F8D12623E1106 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7034106E1B0D65F9359BA35BB7FB9EE /* libPPTopMostController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPPTopMostController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C0CFB939D5B8C9910708B314FCA3AB15 /* PPTopMostController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PPTopMostController-dummy.m"; sourceTree = "<group>"; };
-		C611DE38A047C878B4C6131C68F8A485 /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		C1AFA59FE9AE003719E67ABD9A9489EC /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
 		C9BAB675D080D11807A83F8FD66BA317 /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
-		CD49EA750E73821420BD4D3B5783C573 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
-		D84E2D4054C2A4EC07F8E98121F0ECF7 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
-		DF428199C7900A68E522809505182AE8 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
+		DAAB7CE9E9DF6702FB053A5BB621D9CE /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarning.png; sourceTree = "<group>"; };
 		E0B75E5BD7E9DDDBBB5D8C00709D4C41 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
-		E178891019F9EBC840C5687FB5D760B8 /* AlternativeDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = AlternativeDesign.json; sourceTree = "<group>"; };
 		E7B56304CE2DA8850A548481AB2B9395 /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITabBarController+PPTopMostController.m"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
-		E90E1344A7C361D7747623BC9D1E9EAB /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
-		EB30BBEC761F07F7B38BCB5E7CADEA1D /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundMessage.png; sourceTree = "<group>"; };
-		F3099F0486CC0E5E24F68E3084393771 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
-		FBA35DC7046F26703A3BA16FDBF0E408 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		EF0182C8941B6E4D676F5319CB40A0E5 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
+		FA1D1A5F12EFC2D492CAC03C9CA901EB /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +208,7 @@
 		56CFAB44E0BA7F9D9ECEF855A281C6B0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AFE32F938B27A257FD3E2D02E4733809 /* RMessage */,
+				AB5668655CA870A993FF81287814C0CF /* RMessage */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -225,6 +224,14 @@
 			path = "../Target Support Files/HexColors";
 			sourceTree = "<group>";
 		};
+		6E3AD330AEBF7133C346CFCC0E45343D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1079966FA3780A25B199F756B250A7D7 /* RMessageView.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +244,30 @@
 			);
 			sourceTree = "<group>";
 		};
+		7F93813A19551C4EFB1A6584EDD035D8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				52B2E69A6CD64591B7AC0CCB21B3278C /* NotificationBackgroundError.png */,
+				90A5FB1336A8D22C53EBEE781274D420 /* NotificationBackgroundError@2x.png */,
+				C1AFA59FE9AE003719E67ABD9A9489EC /* NotificationBackgroundErrorIcon.png */,
+				7C536324B351642A7A28220D1F472957 /* NotificationBackgroundErrorIcon@2x.png */,
+				69E1A009B0C8EB2022CA979B8E934AD1 /* NotificationBackgroundMessage.png */,
+				67F568774F05D1C7E1A6C4FEF61B2AF6 /* NotificationBackgroundMessage@2x.png */,
+				FA1D1A5F12EFC2D492CAC03C9CA901EB /* NotificationBackgroundSuccess.png */,
+				0C50B2707D2C6572BD9D064FD96C9D79 /* NotificationBackgroundSuccess@2x.png */,
+				40AE39C456ACBF10BB69BDB53D2F0BFC /* NotificationBackgroundSuccessIcon.png */,
+				77737903CDFEE2C3DC2982E6E4F577E2 /* NotificationBackgroundSuccessIcon@2x.png */,
+				DAAB7CE9E9DF6702FB053A5BB621D9CE /* NotificationBackgroundWarning.png */,
+				96A78EBF4721CDA100F8CF5529C2068B /* NotificationBackgroundWarning@2x.png */,
+				7F253604E21C2DC6F41E7BD3E378EA42 /* NotificationBackgroundWarningIcon.png */,
+				9D1028310BCA754DB7D3B9165EE74B1E /* NotificationBackgroundWarningIcon@2x.png */,
+				EF0182C8941B6E4D676F5319CB40A0E5 /* NotificationButtonBackground.png */,
+				006C69CFB2A695D4BBB8CB8A6AE3200C /* NotificationButtonBackground@2x.png */,
+				AD91582FDB4595E2C2CA636CF1B0103A /* RMessageDefaultDesign.json */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		84D278C2C4D8EC4CE0FEA99DC0F3E9F4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,11 +277,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AFE32F938B27A257FD3E2D02E4733809 /* RMessage */ = {
+		AB5668655CA870A993FF81287814C0CF /* RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				EB074D808F72A90D9EA215119B3DE579 /* Assets */,
-				E324728B9C62A3AE725002E3DD113501 /* Resources */,
+				7F93813A19551C4EFB1A6584EDD035D8 /* Assets */,
+				6E3AD330AEBF7133C346CFCC0E45343D /* Resources */,
 			);
 			path = RMessage;
 			sourceTree = "<group>";
@@ -305,14 +336,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E324728B9C62A3AE725002E3DD113501 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DF428199C7900A68E522809505182AE8 /* RMessageView.xib */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		E55B395346EEFAAB4CB40F65E4945D94 /* HexColors */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,31 +344,6 @@
 				5F9DDD8E96B8CF836DFC3C84A5C609EB /* Support Files */,
 			);
 			path = HexColors;
-			sourceTree = "<group>";
-		};
-		EB074D808F72A90D9EA215119B3DE579 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				E178891019F9EBC840C5687FB5D760B8 /* AlternativeDesign.json */,
-				15018C95B6E0DBAD01B2B988940433E1 /* NotificationBackgroundError.png */,
-				951853E52F17622C80D1B3EBE27A9267 /* NotificationBackgroundError@2x.png */,
-				CD49EA750E73821420BD4D3B5783C573 /* NotificationBackgroundErrorIcon.png */,
-				D84E2D4054C2A4EC07F8E98121F0ECF7 /* NotificationBackgroundErrorIcon@2x.png */,
-				EB30BBEC761F07F7B38BCB5E7CADEA1D /* NotificationBackgroundMessage.png */,
-				98431717943EC65E622A673BFE79754A /* NotificationBackgroundMessage@2x.png */,
-				09E35BFD539CDB3825221F71E0B7DD85 /* NotificationBackgroundSuccess.png */,
-				409AD58F7FBA2833D3D06325A38A6348 /* NotificationBackgroundSuccess@2x.png */,
-				9A8BE4231801B9D5432534836ACCF85E /* NotificationBackgroundSuccessIcon.png */,
-				FBA35DC7046F26703A3BA16FDBF0E408 /* NotificationBackgroundSuccessIcon@2x.png */,
-				26A1A16F407081A9077669811C9FE78A /* NotificationBackgroundWarning.png */,
-				C611DE38A047C878B4C6131C68F8A485 /* NotificationBackgroundWarning@2x.png */,
-				F3099F0486CC0E5E24F68E3084393771 /* NotificationBackgroundWarningIcon.png */,
-				12B02F3709E2B9CD1BA6F27ED67F4602 /* NotificationBackgroundWarningIcon@2x.png */,
-				7A6F93B1C0E91F535877FBABBA0EEEE6 /* NotificationButtonBackground.png */,
-				E90E1344A7C361D7747623BC9D1E9EAB /* NotificationButtonBackground@2x.png */,
-				4FFA578BD9CB365254B3CE12929A3A5E /* RMessageDefaultDesign.json */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		FC007F005C2617666B0E68BA7281FD18 /* Support Files */ = {

@@ -176,9 +176,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration)
 /** Set a delegate to have full control over the position of the message view */
 + (void)setDelegate:(id<RMessageProtocol>)delegate;
 
-/** Use this method to use custom designs in your messages. Must be a JSON formatted file but do not include the .json extension
- in the name*/
-+ (void)addCustomDesignFromFileWithName:(NSString *)fileName;
+/** Use this method to use custom designs in your messages. Must be a JSON formatted file - do not include the .json extension in the name*/
++ (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 
 /** Indicates whether a notification is currently active. */
 + (BOOL)isNotificationActive;
@@ -187,8 +186,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration)
 + (NSArray *)queuedMessages;
 
 /** Prepares the message view to be displayed in the future. It is queued and then
- displayed in fadeInCurrentNotification.
- You don't have to use this method. */
+ displayed in fadeInCurrentNotification. You don't have to use this method. */
 + (void)prepareNotificationForPresentation:(RMessageView *)messageView;
 
 @end

@@ -2,7 +2,7 @@ PODS:
   - HexColors (3.0.0)
   - PPTopMostController (0.0.1)
   - RMessage (1.0.1):
-    - HexColors (~> 3.0.0)
+    - HexColors (~> 3.0)
     - PPTopMostController
 
 DEPENDENCIES:
@@ -29,6 +29,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   HexColors: 8b83e3fe90c0d466dae7b98c9d22da95799f99cb
   PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
-  RMessage: 824c881c073427bd3334716630ac4b53dbb2b6a8
+  RMessage: 51a9982e86753aed8824e10cb9ec7b50e622eee1
 
 COCOAPODS: 0.39.0

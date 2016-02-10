@@ -200,9 +200,9 @@ static UIViewController *_defaultViewController;
     [RMessage sharedMessage].delegate = delegate;
 }
 
-+ (void)addCustomDesignFromFileWithName:(NSString *)fileName
++ (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle
 {
-    [RMessageView addDesignFromFile:fileName];
+    [RMessageView addDesignsFromFileWithName:filename inBundle:bundle];
 }
 
 #pragma mark - Misc Methods

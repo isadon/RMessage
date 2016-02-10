@@ -87,8 +87,8 @@
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled;
 
-/** Use this method to load a custom design file */
-+ (void)addDesignFromFile:(NSString *)file;
+/** Use this method to load a custom design file on top of the base design file. Can be called multiple times to add designs from multiple files*/
++ (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 
 /** Execute the message view call back if set */
 - (void)executeMessageViewCallBack;

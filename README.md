@@ -27,6 +27,8 @@ Welcome to RMessage! RMessage is a reworking of the original [TSMessages](https:
 * Much more im sure :).
 *
 
+Note: Buttons within RMessage are not currently fully supported as in TSMessages but will be soon.
+
 # Description
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
 
@@ -35,7 +37,7 @@ There are 4 different types already set up for you: Success, Error, Warning, Nor
 It is very easy to add new notification types with a different design.
 
 1. Add the new type to the messageType enum.
-2. Create a new configuration file and add it to RMessage by calling [RMessageView addNotificationDesignFromFile:]
+2. Create a new configuration file and add it to RMessage by calling [RMessage addDesignsFromFileWithName:inBundle:]
 3. Present the notification with your custom design by calling any of the class methods on RMessageView with the type as RMessageTypeCustom and the CustomTypeString equal to the key corresponding to your theme in the configuration file.
 
 **Take a look at the Example project to see how to use this library.** Make sure to open the workspace, not the project file, since the Example project uses cocoapods.
@@ -51,7 +53,7 @@ it, simply add the following line to your Podfile:
     pod "RMessage"
 
 ## Manually
-Copy the source files RMessageView and RMessage into your project. Also copy the RMessageDesignDefault.json.
+Copy the source files RMessageView and RMessage into your project. Also copy the RMessageDefaultDesign.json.
 
 # Usage
 
@@ -60,7 +62,7 @@ To show notifications use the following code:
 ```objective-c
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
-                                    type:RMessageNotificationTypeError
+                                    type:RMessageTypeError
                                     customTypeString:nil];
 
 
@@ -69,23 +71,23 @@ To show notifications use the following code:
                                           title:@"Update available"
                                        subtitle:@"Please update the app"
                                           image:nil
-                                           type:RMessageNotificationTypeNormal
+                                           type:RMessageTypeNormal
                                customTypeString:nil
-                                       duration:RMessageNotificationDurationAutomatic
+                                       duration:RMessageDurationAutomatic
                                        callback:nil
                                     buttonTitle:@"Update"
                                  buttonCallback:^{
                                      NSLog(@"User tapped the button");
                                  }
-                                     atPosition:RMessageNotificationPositionTop
+                                     atPosition:RMessagePositionTop
                            canBeDismissedByUser:YES];
 
 
     // Use a custom design file must be a json file though no need to include the json extension in the argument
-    [RMessage addCustomDesignFromFileWithName:@"AlternativeDesign"]; // has an @"alternate-error" key specified with custom design properties
+    [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]]; // has an @"alternate-error" key specified with custom design properties
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
-                                    type:RMessageNotificationTypeCustom
+                                    type:RMessageTypeCustom
                                     customTypeString:@"alternate-error"];
 ```
 

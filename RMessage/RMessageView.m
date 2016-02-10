@@ -72,24 +72,25 @@ static NSMutableDictionary *globalDesignDictionary;
 + (NSError *)setupGlobalDesignDictionary
 {
     if (!globalDesignDictionary) {
-        NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:RDesignFileName ofType:@"json"];
+        NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:RDesignFileName ofType:@"json"];
         NSData *data = [NSData dataWithContentsOfFile:path];
         NSAssert(data != nil, @"Could not read RMessage config file from main bundle with name %@.json", RDesignFileName);
         if (!data) {
             NSString *configFileErrorMessage = [NSString stringWithFormat:@"There seems to be an error with the %@ configuration file", RDesignFileName];
-            return [NSError errorWithDomain:[NSBundle mainBundle].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:configFileErrorMessage}];
+            return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:configFileErrorMessage}];
         }
-        globalDesignDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data
-                                                                                                               options:kNilOptions
-                                                                                                                 error:nil]];
+        globalDesignDictionary = [NSMutableDictionary
+                                  dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data
+                                                                                           options:kNilOptions
+                                                                                             error:nil]];
     }
     return nil;
 }
 
-+ (void)addDesignFromFile:(NSString *)filename
++ (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 {
     [RMessageView setupGlobalDesignDictionary];
-    NSString *path = [[NSBundle bundleForClass:self.class] pathForResource:filename ofType:@"json"];
+    NSString *path = [bundle pathForResource:filename ofType:@"json"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         NSDictionary *newDesignStyle = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
                                                                        options:kNilOptions
@@ -133,8 +134,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (UIImage *)bundledImageNamed:(NSString*)name
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[RMessageView class]];
-    NSString *imagePath = [bundle pathForResource:name ofType:nil];
+    NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
     return [[UIImage alloc] initWithContentsOfFile:imagePath];
 }
 
@@ -154,7 +154,9 @@ static NSMutableDictionary *globalDesignDictionary;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-    self = [[NSBundle mainBundle] loadNibNamed:@"RMessageView" owner:self options:nil].firstObject;
+    self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class])
+                                                          owner:self
+                                                        options:nil].firstObject;
     if (self) {
         _delegate = delegate;
         _title = title;
@@ -291,7 +293,7 @@ static NSMutableDictionary *globalDesignDictionary;
             NSParameterAssert(customTypeString != nil);
             NSParameterAssert(![customTypeString isEqualToString: @""]);
             if (!customTypeString || [customTypeString isEqualToString:@""]) {
-                return [NSError errorWithDomain:[NSBundle mainBundle].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
+                return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
             }
             messageTypeDesignString = customTypeString;
             break;
@@ -302,7 +304,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _messageViewDesignDictionary = [globalDesignDictionary valueForKey:messageTypeDesignString];
     NSParameterAssert(_messageViewDesignDictionary != nil);
     if (!_messageViewDesignDictionary) {
-        return [NSError errorWithDomain:[NSBundle mainBundle].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
+        return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
     }
     return nil;
 }
@@ -356,7 +358,7 @@ static NSMutableDictionary *globalDesignDictionary;
     [super didMoveToWindow];
     if (self.duration == RMessageDurationEndless && self.superview && !self.window) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(windowChangedForMessageView:)]) {
-            [self.delegate performSelector:@selector(windowChangedForMessageView:)];
+            [self.delegate windowChangedForMessageView:self];
         }
     }
 }
@@ -384,7 +386,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupImagesAndBackground
 {
-    UIColor *backgroundColor = [UIColor hx_colorWithHexString:_messageViewDesignDictionary[@"backgroundColor"]];
+    UIColor *backgroundColor = [self colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
     if (backgroundColor) self.backgroundColor = backgroundColor;
     id messageOpacity = _messageViewDesignDictionary[@"opacity"];
     if (messageOpacity) {
@@ -410,9 +412,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupTitleLabel
 {
-    UIColor *titleFontColor = [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"titleFontColor"]];
+    UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
     _titleLabel.text = _title ? _title : @"";
-    if (titleFontColor) _titleLabel.textColor = titleFontColor;
+    if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
     CGFloat titleFontSize = [[_messageViewDesignDictionary valueForKey:@"titleFontSize"] floatValue];
     NSString *titleFontName = [_messageViewDesignDictionary valueForKey:@"titleFontName"];
@@ -421,7 +423,8 @@ static NSMutableDictionary *globalDesignDictionary;
     } else if (titleFontSize) {
         _titleLabel.font = [UIFont boldSystemFontOfSize:titleFontSize];
     }
-    UIColor *titleShadowColor= [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
+
+    UIColor *titleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
     if (titleShadowColor) _titleLabel.shadowColor = titleShadowColor;
     id titleShadowOffsetX = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetX"];
     id titleShadowOffsetY = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetY"];
@@ -433,12 +436,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupSubTitleLabel
 {
-    UIColor *subTitleFontColor = [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"subTitleFontColor"]];
-    if (!subTitleFontColor) {
-        subTitleFontColor = [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"subtitleFontColor"]];
+    UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
+    if (!subTitleTextColor) {
+        subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
     }
-    if (!subTitleFontColor) {
-        subTitleFontColor = _titleLabel.textColor;
+    if (!subTitleTextColor) {
+        subTitleTextColor = _titleLabel.textColor;
     }
 
     id subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subTitleFontSize"];
@@ -455,11 +458,11 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitleLabel.numberOfLines = 0;
     _subtitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _subtitleLabel.text = _subtitle ? _subtitle : @"";
-    if (subTitleFontColor) _subtitleLabel.textColor = subTitleFontColor;
+    if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
 
-    UIColor *subTitleShadowColor= [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"subTitleShadowColor"]];
+    UIColor *subTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleShadowColor"]];
     if (!subTitleShadowColor) {
-        subTitleShadowColor = [UIColor hx_colorWithHexString:[_messageViewDesignDictionary valueForKey:@"subtitleShadowColor"]];
+        subTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleShadowColor"]];
     }
 
     if (subTitleShadowColor) _subtitleLabel.shadowColor = subTitleShadowColor;
@@ -505,19 +508,18 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)didSwipeToDismissMessageView:(UISwipeGestureRecognizer *)swipeGesture
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
-        [self.delegate performSelector:@selector(didSwipeToDismissMessageView:) withObject:self];
+        [self.delegate didSwipeToDismissMessageView:self];
     }
 }
 
 - (void)didTapMessageView:(UITapGestureRecognizer *)tapGesture
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMessageView:)]) {
-        [self.delegate performSelector:@selector(didTapMessageView:) withObject:self];
+        [self.delegate didTapMessageView:self];
     }
 }
 
 #pragma mark - Presentation Methods
-
 
 - (void)present
 {
@@ -551,7 +553,6 @@ static NSMutableDictionary *globalDesignDictionary;
     }
 
     BOOL messageNavigationBarHidden = [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
-    //BOOL viewIsUnderStatusBar = messageNavigationController.childViewControllers.firstObject.extendedLayoutIncludesOpaqueBars;
 
     // navigation bar is shown and we are being asked to show below nav bar (!not as an overlay)
     if (!messageNavigationBarHidden && self.messagePosition != RMessagePositionNavBarOverlay) {
@@ -606,7 +607,6 @@ static NSMutableDictionary *globalDesignDictionary;
                              self.alpha = self.messageOpacity;
                              self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
                              [self layoutIfNeeded];
-                             //self.center = toPoint;
                          }
                          completion:^(BOOL finished) {
                              self.messageIsFullyDisplayed = YES;
@@ -623,7 +623,6 @@ static NSMutableDictionary *globalDesignDictionary;
                              self.alpha = self.messageOpacity;
                              self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
                              [self layoutIfNeeded];
-                             //self.center = toPoint;
                          } completion:^(BOOL finished) {
                              self.messageIsFullyDisplayed = YES;
                              if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
@@ -658,6 +657,18 @@ static NSMutableDictionary *globalDesignDictionary;
             completionBlock();
         }
     }];
+}
+
+#pragma mark - Misc methods
+
+// Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexString
+// Returns nil or a color
+- (UIColor *)colorForString:(NSString *)string
+{
+    if (string) {
+        return [UIColor hx_colorWithHexString:string];
+    }
+    return nil;
 }
 
 @end
