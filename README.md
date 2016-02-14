@@ -63,7 +63,8 @@ To show notifications use the following code:
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
                                     type:RMessageTypeError
-                                    customTypeString:nil];
+                                    customTypeName:nil
+                                    callback:nil];
 
 
     // Add a button inside the message
@@ -72,7 +73,7 @@ To show notifications use the following code:
                                        subtitle:@"Please update the app"
                                           image:nil
                                            type:RMessageTypeNormal
-                               customTypeString:nil
+                               customTypeName:nil
                                        duration:RMessageDurationAutomatic
                                        callback:nil
                                     buttonTitle:@"Update"
@@ -88,7 +89,8 @@ To show notifications use the following code:
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
                                     type:RMessageTypeCustom
-                                    customTypeString:@"alternate-error"];
+                                    customTypeName:@"alternate-error"
+                                    callback:nil];
 ```
 
 You can define a default view controller in which the notifications should be displayed:
@@ -141,7 +143,7 @@ The following properties can be set when creating a new notification:
 * **type**: The notification type (Message, Warning, Error, Success, Custom)
 * **duration**: The duration the notification should be displayed
 * **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
-* **customTypeString**: When using a custom design that you have added specify the key to use from your design, otherwise set to nil if not using a custom design.
+* **customTypeName**: When using a custom design that you have added specify the key to use from your design, otherwise set to nil if not using a custom design.
 
 Except the title and the notification type, all of the listed values are optional
 

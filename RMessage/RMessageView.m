@@ -145,7 +145,7 @@ static NSMutableDictionary *globalDesignDictionary;
                         subtitle:(NSString *)subtitle
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
-                customTypeString:(NSString *)customTypeString
+                customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
@@ -171,7 +171,7 @@ static NSMutableDictionary *globalDesignDictionary;
         _messageType = messageType;
         _buttonCallback = buttonCallback;
 
-        NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeString:customTypeString];
+        NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
         if (designError) {
             return nil;
         }
@@ -272,7 +272,7 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 - (NSError *)setupDesignDictionariesWithMessageType:(RMessageType)messageType
-                                   customTypeString:(NSString *)customTypeString
+                                   customTypeName:(NSString *)customTypeName
 {
     [RMessageView setupGlobalDesignDictionary];
     NSString *messageTypeDesignString;
@@ -290,12 +290,12 @@ static NSMutableDictionary *globalDesignDictionary;
             messageTypeDesignString = @"warning";
             break;
         case RMessageTypeCustom:
-            NSParameterAssert(customTypeString != nil);
-            NSParameterAssert(![customTypeString isEqualToString: @""]);
-            if (!customTypeString || [customTypeString isEqualToString:@""]) {
-                return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
+            NSParameterAssert(customTypeName != nil);
+            NSParameterAssert(![customTypeName isEqualToString: @""]);
+            if (!customTypeName || [customTypeName isEqualToString:@""]) {
+                return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeName parameter. This string should match a Key in your custom design file."}];
             }
-            messageTypeDesignString = customTypeString;
+            messageTypeDesignString = customTypeName;
             break;
         default:
             break;
@@ -304,7 +304,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _messageViewDesignDictionary = [globalDesignDictionary valueForKey:messageTypeDesignString];
     NSParameterAssert(_messageViewDesignDictionary != nil);
     if (!_messageViewDesignDictionary) {
-        return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeString parameter. This string should match a Key in your custom design file."}];
+        return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier code:0 userInfo:@{NSLocalizedDescriptionKey:@"When specifying a type RMessageTypeCustom make sure to pass in a valid argument for customTypeName parameter. This string should match a Key in your custom design file."}];
     }
     return nil;
 }

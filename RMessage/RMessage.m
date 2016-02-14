@@ -36,41 +36,106 @@ static UIViewController *_defaultViewController;
 
 + (void)showNotificationWithTitle:(NSString *)title
                              type:(RMessageType)type
-                 customTypeString:(NSString *)customTypeString
+                   customTypeName:(NSString *)customTypeName
+                         callback:(void (^)())callback
 {
     [self showNotificationWithTitle:title
                            subtitle:nil
                                type:type
-                   customTypeString:(NSString *)customTypeString];
+                     customTypeName:customTypeName
+                           callback:callback];
 }
 
 + (void)showNotificationWithTitle:(NSString *)title
                          subtitle:(NSString *)subtitle
                              type:(RMessageType)type
-                 customTypeString:(NSString *)customTypeString
+                   customTypeName:(NSString *)customTypeName
+                         callback:(void (^)())callback
 {
     [self showNotificationInViewController:_defaultViewController
                                      title:title
                                   subtitle:subtitle
                                       type:type
-                          customTypeString:(NSString *)customTypeString];
+                            customTypeName:customTypeName
+                                  callback:callback];
+}
+
++ (void)showNotificationWithTitle:(NSString *)title
+                         subtitle:(NSString *)subtitle
+                             type:(RMessageType)type
+                   customTypeName:(NSString *)customTypeName
+                         duration:(NSTimeInterval)duration
+                         callback:(void (^)())callback
+{
+    [self showNotificationInViewController:_defaultViewController
+                                     title:title
+                                  subtitle:subtitle
+                                      type:type
+                            customTypeName:customTypeName
+                                  duration:duration
+                                  callback:callback];
+}
+
++ (void)showNotificationWithTitle:(NSString *)title
+                         subtitle:(NSString *)subtitle
+                             type:(RMessageType)type
+                   customTypeName:(NSString *)customTypeName
+                         duration:(NSTimeInterval)duration
+                         callback:(void (^)())callback
+             canBeDismissedByUser:(BOOL)dismissingEnabled
+{
+    [self showNotificationInViewController:_defaultViewController
+                                     title:title
+                                  subtitle:subtitle
+                                      type:type
+                            customTypeName:customTypeName
+                                  duration:duration
+                                  callback:callback
+                      canBeDismissedByUser:dismissingEnabled];
+}
+
++ (void)showNotificationWithTitle:(NSString *)title
+                         subtitle:(NSString *)subtitle
+                        iconImage:(UIImage *)iconImage
+                             type:(RMessageType)type
+                   customTypeName:(NSString *)customTypeName
+                         duration:(NSTimeInterval)duration
+                         callback:(void (^)())callback
+                      buttonTitle:(NSString *)buttonTitle
+                   buttonCallback:(void (^)())buttonCallback
+                       atPosition:(RMessagePosition)messagePosition
+             canBeDismissedByUser:(BOOL)dismissingEnabled
+{
+    [self showNotificationInViewController:_defaultViewController
+                                     title:title
+                                  subtitle:subtitle
+                                 iconImage:iconImage
+                                      type:type
+                            customTypeName:customTypeName
+                                  duration:duration
+                                  callback:callback
+                               buttonTitle:buttonTitle
+                            buttonCallback:buttonCallback
+                                atPosition:messagePosition
+                      canBeDismissedByUser:dismissingEnabled];
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
-                        customTypeString:(NSString *)customTypeString
+                          customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
 {
     [self showNotificationInViewController:viewController
                                      title:title
                                   subtitle:subtitle
                                  iconImage:nil
                                       type:type
-                          customTypeString:(NSString *)customTypeString
+                            customTypeName:customTypeName
                                   duration:duration
-                                  callback:nil
+                                  callback:callback
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:RMessagePositionTop
@@ -81,8 +146,9 @@ static UIViewController *_defaultViewController;
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
-                        customTypeString:(NSString *)customTypeString
+                          customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
     [self showNotificationInViewController:viewController
@@ -90,9 +156,9 @@ static UIViewController *_defaultViewController;
                                   subtitle:subtitle
                                  iconImage:nil
                                       type:type
-                          customTypeString:(NSString *)customTypeString
+                            customTypeName:(NSString *)customTypeName
                                   duration:duration
-                                  callback:nil
+                                  callback:callback
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:RMessagePositionTop
@@ -103,16 +169,17 @@ static UIViewController *_defaultViewController;
                                    title:(NSString *)title
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
-                        customTypeString:(NSString *)customTypeString
+                          customTypeName:(NSString *)customTypeName
+                                callback:(void (^)())callback
 {
     [self showNotificationInViewController:viewController
                                      title:title
                                   subtitle:subtitle
                                  iconImage:nil
                                       type:type
-                          customTypeString:(NSString *)customTypeString
+                            customTypeName:(NSString *)customTypeName
                                   duration:RMessageDurationAutomatic
-                                  callback:nil
+                                  callback:callback
                                buttonTitle:nil
                             buttonCallback:nil
                                 atPosition:RMessagePositionTop
@@ -125,7 +192,7 @@ static UIViewController *_defaultViewController;
                                 subtitle:(NSString *)subtitle
                                iconImage:(UIImage *)iconImage
                                     type:(RMessageType)type
-                        customTypeString:(NSString *)customTypeString
+                          customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
                              buttonTitle:(NSString *)buttonTitle
@@ -136,17 +203,17 @@ static UIViewController *_defaultViewController;
     // Create the RMessageView
     RMessageView *messageView = [[RMessageView alloc] initWithDelegate:[RMessage sharedMessage]
                                                                  title:title
-                                                           subtitle:subtitle
-                                                          iconImage:iconImage
-                                                               type:type
-                                                   customTypeString:(NSString *)customTypeString
-                                                           duration:duration
-                                                   inViewController:viewController
-                                                           callback:callback
-                                                        buttonTitle:buttonTitle
-                                                     buttonCallback:buttonCallback
-                                                         atPosition:messagePosition
-                                               canBeDismissedByUser:dismissingEnabled];
+                                                              subtitle:subtitle
+                                                             iconImage:iconImage
+                                                                  type:type
+                                                        customTypeName:(NSString *)customTypeName
+                                                              duration:duration
+                                                      inViewController:viewController
+                                                              callback:callback
+                                                           buttonTitle:buttonTitle
+                                                        buttonCallback:buttonCallback
+                                                            atPosition:messagePosition
+                                                  canBeDismissedByUser:dismissingEnabled];
     [self prepareNotificationForPresentation:messageView];
 }
 

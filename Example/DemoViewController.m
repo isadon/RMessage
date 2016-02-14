@@ -28,53 +28,58 @@
 - (IBAction)didTapError:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
-                                subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
-                                    type:RMessageTypeError
-                        customTypeString:nil];
+                               subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+                                   type:RMessageTypeError
+                         customTypeName:nil
+                               callback:nil];
 }
 
 - (IBAction)didTapWarning:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Some random warning", nil)
-                                subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
-                                    type:RMessageTypeWarning
-                        customTypeString:nil];
+                               subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
+                                   type:RMessageTypeWarning
+                         customTypeName:nil
+                               callback:nil];
 }
 
 - (IBAction)didTapMessage:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Tell the user something", nil)
-                                subtitle:NSLocalizedString(@"This is some neutral notification!", nil)
-                                    type:RMessageTypeNormal
-                        customTypeString:nil];
+                               subtitle:NSLocalizedString(@"This is some neutral notification!", nil)
+                                   type:RMessageTypeNormal
+                         customTypeName:nil
+                               callback:nil];
 }
 
 - (IBAction)didTapSuccess:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                                subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
-                                    type:RMessageTypeSuccess
-                        customTypeString:nil];
+                               subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
+                                   type:RMessageTypeSuccess
+                         customTypeName:nil
+                               callback:nil];
 }
 
 - (IBAction)didTapButton:(id)sender
 {
     [RMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"New version available", nil)
-                                       subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
-                                          iconImage:nil
-                                           type:RMessageTypeNormal
-                               customTypeString:nil
-                                       duration:RMessageDurationAutomatic
-                                       callback:nil
-                                    buttonTitle:NSLocalizedString(@"Update", nil)
-                                 buttonCallback:^{
-                                     [RMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
-                                                                     type:RMessageTypeSuccess
-                                                         customTypeString:nil];
-                                 }
-                                     atPosition:RMessagePositionTop
-                           canBeDismissedByUser:YES];
+                                         title:NSLocalizedString(@"New version available", nil)
+                                      subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeNormal
+                                customTypeName:nil
+                                      duration:RMessageDurationAutomatic
+                                      callback:nil
+                                   buttonTitle:NSLocalizedString(@"Update", nil)
+                                buttonCallback:^{
+                                    [RMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
+                                                                   type:RMessageTypeSuccess
+                                                         customTypeName:nil
+                                                               callback:nil];
+                                }
+                                    atPosition:RMessagePositionTop
+                          canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapToggleNavigationBar:(id)sender
@@ -97,17 +102,17 @@
 - (IBAction)didTapCustomImage:(id)sender
 {
     [RMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"Custom image", nil)
-                                       subtitle:NSLocalizedString(@"This uses an image you can define", nil)
-                                          iconImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]
-                                           type:RMessageTypeNormal
-                               customTypeString:nil
-                                       duration:RMessageDurationAutomatic
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:RMessagePositionTop
-                           canBeDismissedByUser:YES];
+                                         title:NSLocalizedString(@"Custom image", nil)
+                                      subtitle:NSLocalizedString(@"This uses an image you can define", nil)
+                                     iconImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]
+                                          type:RMessageTypeNormal
+                                customTypeName:nil
+                                      duration:RMessageDurationAutomatic
+                                      callback:nil
+                                   buttonTitle:nil
+                                buttonCallback:nil
+                                    atPosition:RMessagePositionTop
+                          canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
@@ -118,57 +123,58 @@
 - (IBAction)didTapEndless:(id)sender
 {
     [RMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"Endless", nil)
-                                       subtitle:NSLocalizedString(@"This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the currently shown message", nil)
-                                          iconImage:nil
-                                           type:RMessageTypeSuccess
-                               customTypeString:nil
-                                       duration:RMessageDurationEndless
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:RMessagePositionTop
-                           canBeDismissedByUser:NO];
+                                         title:NSLocalizedString(@"Endless", nil)
+                                      subtitle:NSLocalizedString(@"This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the currently shown message", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeSuccess
+                                customTypeName:nil
+                                      duration:RMessageDurationEndless
+                                      callback:nil
+                                   buttonTitle:nil
+                                buttonCallback:nil
+                                    atPosition:RMessagePositionTop
+                          canBeDismissedByUser:NO];
 }
 
 - (IBAction)didTapLong:(id)sender
 {
     [RMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"Long", nil)
-                                       subtitle:NSLocalizedString(@"This message is displayed 10 seconds instead of the calculated value", nil)
-                                          iconImage:nil
-                                           type:RMessageTypeWarning
-                               customTypeString:nil
-                                       duration:10.0
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:RMessagePositionTop
-                           canBeDismissedByUser:YES];
+                                         title:NSLocalizedString(@"Long", nil)
+                                      subtitle:NSLocalizedString(@"This message is displayed 10 seconds instead of the calculated value", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeWarning
+                                customTypeName:nil
+                                      duration:10.0
+                                      callback:nil
+                                   buttonTitle:nil
+                                buttonCallback:nil
+                                    atPosition:RMessagePositionTop
+                          canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapBottom:(id)sender
 {
     [RMessage showNotificationInViewController:self
-                                          title:NSLocalizedString(@"Hu!", nil)
-                                       subtitle:NSLocalizedString(@"I'm down here :)", nil)
-                                          iconImage:nil
-                                           type:RMessageTypeSuccess
-                               customTypeString:nil
-                                       duration:RMessageDurationAutomatic
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:RMessagePositionBottom
-                           canBeDismissedByUser:YES];
+                                         title:NSLocalizedString(@"Hu!", nil)
+                                      subtitle:NSLocalizedString(@"I'm down here :)", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeSuccess
+                                customTypeName:nil
+                                      duration:RMessageDurationAutomatic
+                                      callback:nil
+                                   buttonTitle:nil
+                                buttonCallback:nil
+                                    atPosition:RMessagePositionBottom
+                          canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapText:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
-                                subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
-                                    type:RMessageTypeWarning
-                        customTypeString:nil];
+                               subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus", nil)
+                                   type:RMessageTypeWarning
+                         customTypeName:nil
+                               callback:nil];
 }
 
 - (IBAction)didTapCustomDesign:(id)sender
@@ -176,9 +182,10 @@
     // this is an example on how to apply a custom design
     [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]];
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Added custom design file", nil)
-                                subtitle:NSLocalizedString(@"This background is blue while the subtitles are white. Yes this is still an alternate error design :)", nil)
-                                    type:RMessageTypeCustom
-                        customTypeString:@"alternate-error"];
+                               subtitle:NSLocalizedString(@"This background is blue while the subtitles are white. Yes this is still an alternate error design :)", nil)
+                                   type:RMessageTypeCustom
+                         customTypeName:@"alternate-error"
+                               callback:nil];
 }
 
 
@@ -189,20 +196,18 @@
     }
 
     [RMessage showNotificationInViewController:self.navigationController
-                                          title:NSLocalizedString(@"Whoa!", nil)
-                                       subtitle:NSLocalizedString(@"Over the Navigation Bar!", nil)
-                                          iconImage:nil
-                                           type:RMessageTypeSuccess
-                               customTypeString:nil
-                                       duration:RMessageDurationAutomatic
-                                       callback:nil
-                                    buttonTitle:nil
-                                 buttonCallback:nil
-                                     atPosition:RMessagePositionNavBarOverlay
-                           canBeDismissedByUser:YES];
+                                         title:NSLocalizedString(@"Whoa!", nil)
+                                      subtitle:NSLocalizedString(@"Over the Navigation Bar!", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeSuccess
+                                customTypeName:nil
+                                      duration:RMessageDurationAutomatic
+                                      callback:nil
+                                   buttonTitle:nil
+                                buttonCallback:nil
+                                    atPosition:RMessagePositionNavBarOverlay
+                          canBeDismissedByUser:YES];
 }
-
-
 
 //- (CGFloat)messageLocationOfMessageView:(RMessageView *)messageView
 //{

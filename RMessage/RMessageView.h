@@ -78,7 +78,7 @@
                         subtitle:(NSString *)subtitle
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
-                customTypeString:(NSString *)customTypeString
+                customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
