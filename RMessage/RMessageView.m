@@ -61,8 +61,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
 @property (nonatomic, assign) RMessageType messageType;
 
-@property (nonatomic, assign) CGFloat messageOpacity;
-
 @end
 
 @implementation RMessageView
@@ -311,6 +309,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupDesign
 {
+    [self setupDesignDefaults];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     if (self.messagePosition != RMessagePositionBottom) {
         self.topToVCStartConstant = -self.bounds.size.height;
@@ -331,8 +330,6 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                       multiplier:1.f
                                                                         constant:0];
     }
-
-    [self setupDesignDefaults];
     [self setupImagesAndBackground];
     [self setupTitleLabel];
     [self setupSubTitleLabel];
@@ -560,7 +557,8 @@ static NSMutableDictionary *globalDesignDictionary;
         [messageNavigationController.view insertSubview:self
                                            belowSubview:messageNavigationController.navigationBar];
         [messageNavigationController.view addConstraint:self.topToVCLayoutConstraint];
-        self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height;
+
+        self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
     } else {
         //navigation bar hidden and we are being asked to show below just the status bar
         UIView *presentationView = self.viewController.view;
@@ -568,12 +566,12 @@ static NSMutableDictionary *globalDesignDictionary;
         [presentationView addConstraint:self.topToVCLayoutConstraint];
 
         self.titleSubtitleContainerViewTopLayoutConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height;
-        self.topToVCFinalConstant = 0.f;
+        self.topToVCFinalConstant = 0.f + [self customVerticalOffset];
     }
 
     // asking to animate from bottom up.. set the topToVCFinalConstant here.
     if (self.messagePosition == RMessagePositionBottom) {
-        CGFloat offset = -self.bounds.size.height;
+        CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
         if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
             // if tool bar present animate above toolbar
             offset -= messageNavigationController.toolbar.bounds.size.height;
@@ -587,6 +585,7 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)handleNormalPresentation
 {
     UIView *presentationView = self.viewController.view;
+    self.topToVCFinalConstant = [self customVerticalOffset];
     [presentationView addSubview:self];
     [presentationView addConstraint:self.topToVCLayoutConstraint];
     [self handleAnimationWithNavigationController:nil];
@@ -661,8 +660,26 @@ static NSMutableDictionary *globalDesignDictionary;
 
 #pragma mark - Misc methods
 
-// Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexString
-// Returns nil or a color
+/**
+ *  Get the custom vertical offset from the delegate if any
+ *  @return a custom vertical offset or 0.f
+ */
+- (CGFloat)customVerticalOffset
+{
+    CGFloat customVerticalOffset = 0.f;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(customVerticalOffsetForMessageView:)]) {
+        customVerticalOffset = [self.delegate customVerticalOffsetForMessageView:self];
+    }
+    return customVerticalOffset;
+}
+
+/**
+ *  Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexString
+ *
+ *  @param string A hex string representation of a color.
+ *
+ *  @return nil or a color.
+ */
 - (UIColor *)colorForString:(NSString *)string
 {
     if (string) {

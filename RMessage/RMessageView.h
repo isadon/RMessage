@@ -44,8 +44,10 @@
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) RMessagePosition messagePosition;
 
-/** The opacity of the message view */
-@property (nonatomic, assign, readonly) CGFloat messageOpacity;
+/** The opacity of the message view. When customizing RMessage always set this value to the desired opacity
+ instead of the alpha property. Internally the alpha property is changed during animations; this property allows RMessage
+ to always know the final alpha value.*/
+@property (nonatomic, assign) CGFloat messageOpacity;
 
 /** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
@@ -96,13 +98,10 @@
 /** Execute the message view button call back if set */
 - (void)executeMessageViewButtonCallBack;
 
+/** Present the message view */
 - (void)present;
 
+/** Dismiss the view with a completion block */
 - (void)dismissWithCompletion:(void (^) (void))completionBlock;
-
-///** Indicates whether the current navigationBar is hidden by isNavigationBarHidden
-// on the UINavigationController or isHidden on the navigationBar of the current
-// UINavigationController */
-//+ (BOOL)isNavigationBarHiddenForNavigationController:(UINavigationController *)navController;
 
 @end

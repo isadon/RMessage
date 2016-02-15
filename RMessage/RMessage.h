@@ -38,10 +38,10 @@ typedef NS_ENUM(NSInteger, RMessageDuration)
 
 @optional
 
-/** Implement this method to pass a custom position for a specific message */
+/** Implement this method to manipulate the vertical message offset for a specific message */
 - (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView;
 
-/** You can customize the given RMessageView, like setting its alpha or adding a subview */
+/** You can customize the given RMessageView, like setting its alpha via (messageOpacity) or adding a subview */
 - (void)customizeMessageView:(RMessageView *)messageView;
 
 @end

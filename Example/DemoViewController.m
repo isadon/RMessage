@@ -209,19 +209,19 @@
                           canBeDismissedByUser:YES];
 }
 
-//- (CGFloat)messageLocationOfMessageView:(RMessageView *)messageView
-//{
-//    return 44.0; // any calculation here
-//}
-
-//- (void)customizeMessageView:(RMessageView *)messageView
-//{
-//    messageView.alpha = 0.5;
-//}
-
 - (IBAction)didTapNavbarHidden:(id)sender
 {
     self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
 }
+
+//- (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView
+//{
+//    return 88.f; // specify an additional offset here.
+//}
+
+//- (void)customizeMessageView:(RMessageView *)messageView
+//{
+//    messageView.messageOpacity = 0.5f;
+//}
 
 @end

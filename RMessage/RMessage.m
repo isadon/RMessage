@@ -156,7 +156,7 @@ static UIViewController *_defaultViewController;
                                   subtitle:subtitle
                                  iconImage:nil
                                       type:type
-                            customTypeName:(NSString *)customTypeName
+                            customTypeName:customTypeName
                                   duration:duration
                                   callback:callback
                                buttonTitle:nil
@@ -177,7 +177,7 @@ static UIViewController *_defaultViewController;
                                   subtitle:subtitle
                                  iconImage:nil
                                       type:type
-                            customTypeName:(NSString *)customTypeName
+                            customTypeName:customTypeName
                                   duration:RMessageDurationAutomatic
                                   callback:callback
                                buttonTitle:nil
@@ -206,7 +206,7 @@ static UIViewController *_defaultViewController;
                                                               subtitle:subtitle
                                                              iconImage:iconImage
                                                                   type:type
-                                                        customTypeName:(NSString *)customTypeName
+                                                        customTypeName:customTypeName
                                                               duration:duration
                                                       inViewController:viewController
                                                               callback:callback
