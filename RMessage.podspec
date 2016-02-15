@@ -9,12 +9,12 @@
 
 Pod::Spec.new do |s|
   s.name             = "RMessage"
-  s.version          = "1.0.1"
-  s.summary          = "Easy to use and customizable messages/notifications for iOS à la Tweetbot."
+  s.version          = "2.0.0"
+  s.summary          = "Easy to use and customizable messages/notifications for iOS"
   s.description  = <<-DESC
-                    This framework provides an easy to use class to show little notification views on the top of the screen. (à la Tweetbot).
+                    This framework provides an easy to use class to show little notification views on the top of the screen.
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
-There are 4 different types already set up for you: Success, Error, Warning, Message.
+There are 4 different types already set up for you: Success, Error, Warning, Message, Custom.
                    DESC
   s.homepage     = "https://github.com/donileo/RMessage"
 

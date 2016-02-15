@@ -3,7 +3,7 @@
 //  RMessage
 //
 //  Created by Adonis Peralta on 12/7/15.
-//  Copyright © 2015 Rendezvous Inc. All rights reserved.
+//  Copyright © 2015 Adonis Peralta. All rights reserved.
 //
 
 #import "RMessage.h"
