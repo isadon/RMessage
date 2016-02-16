@@ -44,6 +44,12 @@
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) RMessagePosition messagePosition;
 
+/** The message type that the RMessageView was initialized with */
+@property (nonatomic, assign, readonly) RMessageType messageType;
+
+/** The customTypeName if any the RMessageView was initialized with */
+@property (nonatomic, copy, readonly) NSString *customTypeName;
+
 /** The opacity of the message view. When customizing RMessage always set this value to the desired opacity
  instead of the alpha property. Internally the alpha property is changed during animations; this property allows RMessage
  to always know the final alpha value.*/

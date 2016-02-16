@@ -61,6 +61,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 @property (nonatomic, assign) CGFloat iconRelativeCornerRadius;
 @property (nonatomic, assign) RMessageType messageType;
+@property (nonatomic, copy) NSString *customTypeName;
 
 @end
 
@@ -168,6 +169,7 @@ static NSMutableDictionary *globalDesignDictionary;
         _messagePosition = position;
         _callback = callback;
         _messageType = messageType;
+        _customTypeName = customTypeName;
         _buttonCallback = buttonCallback;
 
         NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
