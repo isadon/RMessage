@@ -59,6 +59,7 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The final constant value that should be set for the topToVCTopLayoutConstraint when animating */
 @property (nonatomic, assign) CGFloat topToVCFinalConstant;
 
+@property (nonatomic, assign) CGFloat iconRelativeCornerRadius;
 @property (nonatomic, assign) RMessageType messageType;
 
 @end
@@ -360,6 +361,14 @@ static NSMutableDictionary *globalDesignDictionary;
     }
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (self.iconRelativeCornerRadius > 0) {
+        self.iconImageView.layer.cornerRadius = self.iconRelativeCornerRadius * self.iconImageView.bounds.size.width;
+    }
+}
+
 - (void)setupDesignDefaults
 {
     self.backgroundColor = [UIColor lightGrayColor];
@@ -379,6 +388,8 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitleLabel.shadowColor = nil;
     _subtitleLabel.shadowOffset = CGSizeZero;
     _subtitleLabel.backgroundColor = nil;
+
+    _iconImageView.clipsToBounds = NO;
 }
 
 - (void)setupImagesAndBackground
@@ -398,7 +409,16 @@ static NSMutableDictionary *globalDesignDictionary;
         }
     }
 
-    if (_iconImage) _iconImageView.image = _iconImage;
+    if (_iconImage) {
+        _iconImageView.image = _iconImage;
+        if ([_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"]) {
+            self.iconRelativeCornerRadius = [[_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"] floatValue];
+            _iconImageView.clipsToBounds = YES;
+        } else {
+             self.iconRelativeCornerRadius = 0.f;
+            _iconImageView.clipsToBounds = NO;
+        }
+    }
 
     UIImage *backgroundImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundImage"]];
     if (backgroundImage) {

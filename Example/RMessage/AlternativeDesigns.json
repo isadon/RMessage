@@ -4,7 +4,7 @@
         "buttonTitleTextColor": "#FF0040",
         "subTitleFontSize": 14,
         "subTitleTextColor": "#FFFFFF",
-        "imageName": "NotificationBackgroundErrorIcon.png",
+        "iconImage": "NotificationBackgroundErrorIcon.png",
         "titleTextColor": "#48FCEB",
         "titleFontSize": 14,
         "backgroundColor": "#008AFC",
