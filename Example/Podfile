@@ -1,4 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-pod 'HexColors', ~> 3.0
+pod 'HexColors', '~> 3.0'
 pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
 pod 'RMessage', :path => '../' 
