@@ -46,7 +46,7 @@
 - (IBAction)didTapMessage:(id)sender
 {
     [RMessage showNotificationWithTitle:NSLocalizedString(@"Tell the user something", nil)
-                               subtitle:NSLocalizedString(@"This is some neutral notification!", nil)
+                               subtitle:NSLocalizedString(@"This is a neutral notification!", nil)
                                    type:RMessageTypeNormal
                          customTypeName:nil
                                callback:nil];
