@@ -1,12 +1,12 @@
 PODS:
-  - HexColors (3.1.1)
+  - HexColors (4.0.0)
   - PPTopMostController (0.0.1)
   - RMessage (2.0.0):
-    - HexColors (~> 3.0)
+    - HexColors (~> 4.0)
     - PPTopMostController
 
 DEPENDENCIES:
-  - HexColors (~> 3.0)
+  - HexColors (~> 4.0)
   - PPTopMostController (from `https://github.com/donileo/PPTopMostController.git`)
   - RMessage (from `../`)
 
@@ -22,8 +22,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/donileo/PPTopMostController.git
 
 SPEC CHECKSUMS:
-  HexColors: d837cebe691e52c867d401ecd2374111add5445f
+  HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
-  RMessage: 219006cce6fa67ece0874e9dad4d3bff9332d491
+  RMessage: 3a09e93d07a092cb2c057bce1684b78b7c1f9c87
 
 COCOAPODS: 0.39.0

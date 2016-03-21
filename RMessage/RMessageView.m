@@ -699,7 +699,7 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 /**
- *  Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexString
+ *  Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexRGBAString
  *
  *  @param string A hex string representation of a color.
  *
@@ -708,7 +708,7 @@ static NSMutableDictionary *globalDesignDictionary;
 - (UIColor *)colorForString:(NSString *)string
 {
     if (string) {
-        return [UIColor hx_colorWithHexString:string];
+        return [UIColor hx_colorWithHexRGBAString:string];
     }
     return nil;
 }
