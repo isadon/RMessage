@@ -342,7 +342,7 @@ static UIViewController *_defaultViewController;
     return 0.f;
 }
 
-- (void)windowChangedForMessageView:(RMessageView *)messageView
+- (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView
 {
     [self dismissMessageView:messageView completion:nil];
 }

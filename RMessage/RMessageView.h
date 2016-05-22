@@ -17,7 +17,7 @@
 
 - (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView;
 
-- (void)windowChangedForMessageView:(RMessageView *)messageView;
+- (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView;
 
 - (void)didSwipeToDismissMessageView:(RMessageView *)messageView;
 

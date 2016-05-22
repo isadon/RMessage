@@ -120,6 +120,11 @@
     [RMessage dismissActiveNotification];
 }
 
+//only applies to modally displayed DemoViewController with Dismiss Modal Button
+- (IBAction)didTapDismissModal:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)didTapEndless:(id)sender
 {
     [RMessage showNotificationInViewController:self

@@ -383,11 +383,11 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)didMoveToWindow
 {
-    //called when adding adding to a new subview programmatically
     [super didMoveToWindow];
+    //
     if (self.duration == RMessageDurationEndless && self.superview && !self.window) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(windowChangedForMessageView:)]) {
-            [self.delegate windowChangedForMessageView:self];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
+            [self.delegate windowRemovedForEndlessDurationMessageView:self];
         }
     }
 }
