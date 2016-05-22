@@ -141,9 +141,12 @@ static NSMutableDictionary *globalDesignDictionary;
  */
 + (BOOL)viewControllerEdgesExtendUnderTopBars:(UIViewController *)viewController
 {
-    BOOL vcAskedToExtendUnderTopBars = YES;
+    BOOL vcAskedToExtendUnderTopBars = NO;
 
-    if (viewController.edgesForExtendedLayout != UIRectEdgeTop && viewController.edgesForExtendedLayout != UIRectEdgeAll) {
+    if (viewController.edgesForExtendedLayout == UIRectEdgeTop || viewController.edgesForExtendedLayout == UIRectEdgeAll) {
+        vcAskedToExtendUnderTopBars = YES;
+    } else {
+        vcAskedToExtendUnderTopBars = NO;
         return NO;
     }
 
