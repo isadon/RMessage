@@ -28,6 +28,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, unsafe_unretained) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopLayoutConstraint;
+@property (nonatomic, unsafe_unretained) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
 
 @property (nonatomic, strong) UIImage *iconImage;
 
@@ -588,6 +589,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)handleNavigationControllerPresentation
 {
+    self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
+    self.titleSubtitleContainerViewCenterYConstraint.constant = 0.f;
+
     UINavigationController *messageNavigationController;
 
     if ([self.viewController isKindOfClass:[UINavigationController class]]) {
@@ -610,7 +614,6 @@ static NSMutableDictionary *globalDesignDictionary;
         if ([[self class] viewControllerEdgesExtendUnderTopBars:self.viewController]) {
             self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
         }
-        self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
     } else {
         //navigation bar hidden and we are being asked to show below just the status bar
         UIView *presentationView = self.viewController.view;
@@ -618,8 +621,12 @@ static NSMutableDictionary *globalDesignDictionary;
         [presentationView addConstraint:self.topToVCLayoutConstraint];
 
         self.topToVCFinalConstant = 0.f + [self customVerticalOffset];
-        self.titleSubtitleContainerViewTopLayoutConstraint.constant = 5.f + [UIApplication sharedApplication].statusBarFrame.size.height;
+        self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
+        self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
     }
+
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 
     // asking to animate from bottom up.. set the topToVCFinalConstant here.
     if (self.messagePosition == RMessagePositionBottom) {
@@ -629,7 +636,6 @@ static NSMutableDictionary *globalDesignDictionary;
             offset -= messageNavigationController.toolbar.bounds.size.height;
         }
         self.topToVCFinalConstant = offset;
-        self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
     }
 
     [self handleAnimationWithNavigationController:messageNavigationController];
@@ -641,7 +647,8 @@ static NSMutableDictionary *globalDesignDictionary;
     self.topToVCFinalConstant = [self customVerticalOffset];
     [presentationView addSubview:self];
     [presentationView addConstraint:self.topToVCLayoutConstraint];
-    self.titleSubtitleContainerViewTopLayoutConstraint.constant = 5.f + [UIApplication sharedApplication].statusBarFrame.size.height;
+    self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
+    self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
     [self handleAnimationWithNavigationController:nil];
 }
 
