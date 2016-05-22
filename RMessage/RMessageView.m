@@ -130,6 +130,31 @@ static NSMutableDictionary *globalDesignDictionary;
     return viewController;
 }
 
+/**
+ *  Method which determines if viewController edges extend under top bars (navigation bars for example).
+ *  There are various scenarios and even iOS bugs in which view controllers that ask to
+ *  present under top bars don't truly do but this method hopes to properly catch all these bugs and scenarios and
+ *  let its caller know.
+ *
+ *  @return YES if viewController
+ */
++ (BOOL)viewControllerEdgesExtendUnderTopBars:(UIViewController *)viewController
+{
+    BOOL vcAskedToExtendUnderTopBars = YES;
+
+    if (viewController.edgesForExtendedLayout != UIRectEdgeTop && viewController.edgesForExtendedLayout != UIRectEdgeAll) {
+        return NO;
+    }
+
+    //When a table view controller asks to extend under top bars, if the navigation bar is translucent iOS will not
+    //extend the edges of the table view controller under the top bars.
+    if ([viewController isKindOfClass:[UITableViewController class]] && vcAskedToExtendUnderTopBars && !viewController.navigationController.navigationBar.translucent) {
+        return NO;
+    }
+
+    return YES;
+}
+
 #pragma mark - Get Image From Resource Bundle
 
 + (UIImage *)bundledImageNamed:(NSString*)name
@@ -580,7 +605,11 @@ static NSMutableDictionary *globalDesignDictionary;
                                            belowSubview:messageNavigationController.navigationBar];
         [messageNavigationController.view addConstraint:self.topToVCLayoutConstraint];
 
-        self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
+        //If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
+        //navigation bar frame when animating RMessage's final position.
+        if ([[self class] viewControllerEdgesExtendUnderTopBars:self.viewController]) {
+            self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
+        }
         self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
     } else {
         //navigation bar hidden and we are being asked to show below just the status bar
