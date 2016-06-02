@@ -67,11 +67,11 @@ To show notifications use the following code:
                                     callback:nil];
 
 
-    // Add a button inside the message
+    // Add an icon image inside the message, appears on the left
     [RMessage showNotificationInViewController:self
                                           title:@"Update available"
                                        subtitle:@"Please update the app"
-                                          image:nil
+                                          iconImage:iconUIImageHere
                                            type:RMessageTypeNormal
                                customTypeName:nil
                                        duration:RMessageDurationAutomatic
@@ -122,8 +122,8 @@ You can customize message view elements using UIAppearance
 //If you want you can override some properties using UIAppearance
 [[RMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
 [[RMessageView appearance] setTitleTextColor:[UIColor redColor]];
-[[RMessageView appearance] setContentFont:[UIFont boldSystemFontOfSize:10]];
-[[RMessageView appearance] setContentTextColor:[UIColor greenColor]];
+[[RMessageView appearance] setSubtitleFont:[UIFont boldSystemFontOfSize:10]];
+[[RMessageView appearance] setSubtitleTextColor:[UIColor greenColor]];
 [[RMessageView appearance] setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
 [[RMessageView appearance] setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
 [[RMessageView appearance] setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
@@ -139,7 +139,7 @@ The following properties can be set when creating a new notification:
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
 * **title**: The title of the notification view
 * **subtitle**: The text that is displayed underneath the title (optional)
-* **image**: A custom icon image that is used instead of the default one (optional)
+* **iconImage**: A custom icon image that is used instead of the default one (optional)
 * **type**: The notification type (Message, Warning, Error, Success, Custom)
 * **duration**: The duration the notification should be displayed
 * **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
