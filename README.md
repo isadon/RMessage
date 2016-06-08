@@ -153,18 +153,13 @@ If you don't want a detailed description (the text underneath the title) you don
 
 **Design Examples**
 
-![Error](http://www.toursprung.com/wp-content/uploads/2013/09/error_ios7.png)
+![ErrorUnder](Screenshots/ErrorUnder.png)
 
-![Message](http://www.toursprung.com/wp-content/uploads/2013/09/warning_ios7.png)
+![SuccessUnder](Screenshots/SuccessUnder.png)
 
-![Warning](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationWarning.png)
+![ErrorOver](Screenshots/ErrorOver.png)
 
-![Success](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationSuccess.png)
-
-![Alt-Error](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationError.png)
-
-![Alt-Message](http://www.toursprung.com/wp-content/uploads/2013/04/iNotificationMessage.png)
-
+![WarningOver](Screenshots/WarningOver.png)
 
 # License
 RMessage is available under the MIT license. See the LICENSE file for more information.

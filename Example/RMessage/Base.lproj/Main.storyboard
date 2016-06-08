@@ -248,7 +248,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="Y90-4e-iya"/>
+                    <navigationItem key="navigationItem" title="NavBar" id="Y90-4e-iya"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cw6-py-int" sceneMemberID="firstResponder"/>
             </objects>
@@ -263,6 +263,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G8g-c7-Y0C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
