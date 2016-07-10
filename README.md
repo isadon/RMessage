@@ -134,7 +134,7 @@ return YES;
 }
 ```
 
-The following properties can be set when creating a new notification:
+The following arguments can be passed in programmatically when creating a new notification:
 
 * **viewController**: The view controller to show the notification in. This might be the navigation controller.
 * **title**: The title of the notification view
@@ -148,6 +148,37 @@ The following properties can be set when creating a new notification:
 Except the title and the notification type, all of the listed values are optional
 
 If you don't want a detailed description (the text underneath the title) you don't need to set one. The notification will automatically resize itself properly.
+
+## Custom Design File Properties
+
+* **backgroundColor**: Background color for the RMessage. String: [#000000, #FFFFFF].
+* **opacity**: Opacity of the RMessage. Numeric: [0, 1.0].
+* **iconImage**: Filename of image (in app bundle) to use as an icon on the left side of the RMessage. String.
+* **iconImageRelativeCornerRadius**: Corner radius percentage relative to icon image to apply to icon image. For example 0.5 (use 50% of icon image width as corner radius) would mask the icon image to always be a circle. Numeric: [0, 1.0].
+* **backgroundImage**: Filename of image (in app bundle) to use as a background image for the RMessage. String.
+* **titleTextColor**: Color of the title text. String: [#000000, #FFFFFF].
+* **titleFontName**: Name of font to use for title text. String.
+* **titleFontSize**: Size of the title font. Numeric: [0, Max depending on font used]
+* **titleShadowColor**: Color of the title shadow. String: [#000000, #FFFFFF].
+* **titleShadowOffsetX**: Amount of pt to offset in x direction title shadow from title text. Numeric.
+* **titleShadowOffsetY**: Amount of pt to offset in y direction title shadow from title text. Numeric.
+* **subTitleTextColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
+* **subTitleFontName**: Name of font to use for subtitle text. String.
+* **subTitleFontSize**: Size of the subtitle font. Numeric: [0, Max depending on font used].
+* **subTitleShadowColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
+* **subTitleShadowOffsetX**: Amount of pt to offset in x direction subtitle shadow from subtitle text. Numeric.
+* **subTitleShadowOffsetY**: Amount of pt to offset in y direction subtitle shadow from subtitle text. Numeric.
+
+Property keys are always strings, values can be string or numeric. If specifying a numeric value don't encapsulate the numeric value in a string.
+
+[x,y] Signifies the range of values x to y that are allowed for the field.
+
+For example:
+
+```
+"backgroundColor": "#FFFFFF",
+"opacity": 1.0
+```
 
 ## Screenshots
 
