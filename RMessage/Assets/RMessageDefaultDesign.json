@@ -8,11 +8,9 @@
         "iconImage": "NotificationBackgroundSuccessIcon.png"
     },
     "normal": {
-        "backgroundColor": "#E8E8E8",
-        "titleTextColor": "#727C83",
+        "backgroundColor": "#3E88FF",
+        "titleTextColor": "#FFFFFF",
         "titleFontSize": 14,
-        "subTitleFontSize": 12,
-        "subTitleTextColor": "#727C83"
     },
     "warning": {
         "backgroundColor": "#FFCC00",
