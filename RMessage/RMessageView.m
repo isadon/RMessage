@@ -27,8 +27,8 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, unsafe_unretained) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopLayoutConstraint;
-@property (nonatomic, unsafe_unretained) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
 
 @property (nonatomic, strong) UIImage *iconImage;
 
@@ -150,8 +150,8 @@ static NSMutableDictionary *globalDesignDictionary;
         return NO;
     }
 
-    //When a table view controller asks to extend under top bars, if the navigation bar is translucent iOS will not
-    //extend the edges of the table view controller under the top bars.
+    // When a table view controller asks to extend under top bars, if the navigation bar is translucent iOS will not
+    // extend the edges of the table view controller under the top bars.
     if ([viewController isKindOfClass:[UITableViewController class]] && vcAskedToExtendUnderTopBars && !viewController.navigationController.navigationBar.translucent) {
         return NO;
     }
@@ -191,7 +191,6 @@ static NSMutableDictionary *globalDesignDictionary;
         _title = title;
         _subtitle = subtitle;
         _messageOpacity = 0.97f;
-        //_buttonTitle = buttonTitle;
         _iconImage = iconImage;
         _duration = duration;
         viewController ? _viewController = viewController : (_viewController = [RMessageView defaultViewController]);
@@ -207,6 +206,7 @@ static NSMutableDictionary *globalDesignDictionary;
         }
 
         [self setupDesign];
+        [self setupLayout];
         if (dismissingEnabled) {
             [self setupGestureRecognizers];
         }
@@ -216,8 +216,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (CGSize)intrinsicContentSize
 {
-    CGSize standardSize = CGSizeMake(self.viewController.view.bounds.size.width, self.titleSubtitleContainerView.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height);
-    return standardSize;
+    return CGSizeMake(self.viewController.view.bounds.size.width, self.titleSubtitleContainerView.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height);
 }
 
 - (void)setSubtitleFont:(UIFont *)subtitleFont
@@ -342,29 +341,53 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupDesign
 {
     [self setupDesignDefaults];
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    if (self.messagePosition != RMessagePositionBottom) {
-        self.topToVCStartConstant = -self.bounds.size.height;
-        self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeTop
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.viewController.view
-                                                                       attribute:NSLayoutAttributeTop
-                                                                      multiplier:1.f
-                                                                        constant:self.topToVCStartConstant];
-    } else {
-        self.topToVCStartConstant = 0;
-        self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeTop
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.viewController.view
-                                                                       attribute:NSLayoutAttributeBottom
-                                                                      multiplier:1.f
-                                                                        constant:0];
-    }
     [self setupImagesAndBackground];
     [self setupTitleLabel];
     [self setupSubTitleLabel];
+}
+
+- (void)setupLayout
+{
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+
+    // Add RMessage to superview and prepare the ending y position constants
+    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
+        [self layoutMessageForNavigationControllerPresentation];
+    } else {
+        [self layoutMessageForStandardPresentation];
+    }
+
+    // Prepare the starting y position constants
+    if (self.messagePosition != RMessagePositionBottom) {
+        [self layoutIfNeeded];
+        self.topToVCStartConstant = -self.bounds.size.height;
+        self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.viewController.view
+                                                                    attribute:NSLayoutAttributeTop
+                                                                   multiplier:1.f
+                                                                     constant:self.topToVCStartConstant];
+    } else {
+        self.topToVCStartConstant = 0;
+        self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.viewController.view
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.f
+                                                                     constant:0.f];
+    }
+
+    NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.viewController.view
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.f
+                                                                         constant:0.f];
+    centerXConstraint.active = YES;
+    self.topToVCLayoutConstraint.active = YES;
 }
 
 - (void)executeMessageViewCallBack
@@ -384,7 +407,6 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)didMoveToWindow
 {
     [super didMoveToWindow];
-    //
     if (self.duration == RMessageDurationEndless && self.superview && !self.window) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
             [self.delegate windowRemovedForEndlessDurationMessageView:self];
@@ -571,11 +593,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)present
 {
-    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
-        [self handleNavigationControllerPresentation];
-    } else {
-        [self handleNormalPresentation];
-    }
+    [self animateMessage];
 
     if (self.duration == RMessageDurationAutomatic) {
         self.duration = kRMessageAnimationDuration + kRMessageDisplayTime + self.frame.size.height * kRMessageExtraDisplayTimePerPixel;
@@ -590,7 +608,7 @@ static NSMutableDictionary *globalDesignDictionary;
     }
 }
 
-- (void)handleNavigationControllerPresentation
+- (void)layoutMessageForNavigationControllerPresentation
 {
     self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
     self.titleSubtitleContainerViewCenterYConstraint.constant = 0.f;
@@ -605,63 +623,54 @@ static NSMutableDictionary *globalDesignDictionary;
 
     BOOL messageNavigationBarHidden = [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
 
-    // navigation bar is shown and we are being asked to show below nav bar (!not as an overlay)
+    // Navigation bar is shown and we are being asked to present from below nav bar (not as an overlay)
     if (!messageNavigationBarHidden && self.messagePosition != RMessagePositionNavBarOverlay) {
         // position notification below nav bar so it animates from below the nav bar
         [messageNavigationController.view insertSubview:self
-                                           belowSubview:messageNavigationController.navigationBar];
-        [messageNavigationController.view addConstraint:self.topToVCLayoutConstraint];
+                                        belowSubview:messageNavigationController.navigationBar];
 
-        //If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
-        //navigation bar frame when animating RMessage's final position.
+        // If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
+        // navigation bar frame when animating RMessage's final position.
         if ([[self class] viewControllerEdgesExtendUnderTopBars:self.viewController]) {
             self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
+        } else {
+            self.topToVCFinalConstant = [self customVerticalOffset];
         }
     } else {
-        //navigation bar hidden and we are being asked to show below just the status bar
-        UIView *presentationView = self.viewController.view;
-        [presentationView addSubview:self];
-        [presentationView addConstraint:self.topToVCLayoutConstraint];
-
-        self.topToVCFinalConstant = 0.f + [self customVerticalOffset];
+        self.topToVCFinalConstant = [self customVerticalOffset];
         self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
         self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+
+        // Navigation bar hidden and we are being asked to show below just the status bar
+        [self.viewController.view addSubview:self];
     }
 
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
-
-    // asking to animate from bottom up.. set the topToVCFinalConstant here.
+    // Asking to animate from bottom up.. set the topToVCFinalConstant here.
     if (self.messagePosition == RMessagePositionBottom) {
+        [self layoutIfNeeded];
         CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
         if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
-            // if tool bar present animate above toolbar
+            // If tool bar present animate above toolbar
             offset -= messageNavigationController.toolbar.bounds.size.height;
         }
         self.topToVCFinalConstant = offset;
     }
-
-    [self handleAnimationWithNavigationController:messageNavigationController];
 }
 
-- (void)handleNormalPresentation
+- (void)layoutMessageForStandardPresentation
 {
-    UIView *presentationView = self.viewController.view;
     self.topToVCFinalConstant = [self customVerticalOffset];
-    [presentationView addSubview:self];
-    [presentationView addConstraint:self.topToVCLayoutConstraint];
     self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
     self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
-    [self handleAnimationWithNavigationController:nil];
+    [self.viewController.view addSubview:self];
 }
 
-- (void)handleAnimationWithNavigationController:(UINavigationController *)navigationController
+- (void)animateMessage
 {
-    //if nil navigation controller passed simply animate normally
-    [self layoutIfNeeded];
+    [self.superview layoutIfNeeded];
     self.alpha = 0.f;
     if ([RMessageView runtimeIsIos7OrHigher]) {
-        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2
+        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
                               delay:0.f
              usingSpringWithDamping:0.7
               initialSpringVelocity:0.f
@@ -669,7 +678,7 @@ static NSMutableDictionary *globalDesignDictionary;
                          animations:^{
                              self.alpha = self.messageOpacity;
                              self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
-                             [self layoutIfNeeded];
+                             [self.superview layoutIfNeeded];
                          }
                          completion:^(BOOL finished) {
                              self.messageIsFullyDisplayed = YES;
@@ -679,13 +688,13 @@ static NSMutableDictionary *globalDesignDictionary;
                          }];
 
     } else {
-        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2
+        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
                               delay:0.f
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                          animations:^{
                              self.alpha = self.messageOpacity;
                              self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
-                             [self layoutIfNeeded];
+                             [self.superview layoutIfNeeded];
                          } completion:^(BOOL finished) {
                              self.messageIsFullyDisplayed = YES;
                              if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
@@ -710,15 +719,13 @@ static NSMutableDictionary *globalDesignDictionary;
     [UIView animateWithDuration:kRMessageAnimationDuration animations:^{
         self.alpha = 0.f;
         self.topToVCLayoutConstraint.constant = self.topToVCStartConstant;
-        [self layoutIfNeeded];
+        [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
         if ([self.delegate respondsToSelector:@selector(messageViewDidDismiss:)]) {
             [self.delegate messageViewDidDismiss:self];
         }
-        if (completionBlock) {
-            completionBlock();
-        }
+        if (completionBlock) completionBlock();
     }];
 }
 
