@@ -1,5 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
-pod 'HexColors', '~> 4.0'
-pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
-#pod 'Reveal-iOS-SDK', :configurations => ['Debug']
-pod 'RMessage', :path => '../' 
+
+target "RMessage" do
+  pod 'HexColors', '~> 4.0'
+  pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
+  #pod 'Reveal-SDK', :configurations => ['Debug']
+  pod 'RMessage', :path => '..' 
+end

@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13D35098CB928A2DF0BA1C1A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 369A336D2AF5EA764AE7E770 /* libPods.a */; };
 		7A0BF4C31C6AED7300F92A38 /* AlternativeDesigns.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */; };
 		7AD2C5BB1C16735F007C3580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BA1C16735F007C3580 /* main.m */; };
 		7AD2C5BE1C16735F007C3580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BD1C16735F007C3580 /* AppDelegate.m */; };
 		7AD2C5C41C16735F007C3580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2C5C21C16735F007C3580 /* Main.storyboard */; };
 		7AD2C5C61C16735F007C3580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2C5C51C16735F007C3580 /* Assets.xcassets */; };
 		7AD2C5D51C1673DF007C3580 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5D41C1673DF007C3580 /* DemoViewController.m */; };
+		9EE78E97B955D2D1A0FEC74F /* libPods-RMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2348D3162BCD308122824EC5 /* libPods-RMessage.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		369A336D2AF5EA764AE7E770 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2348D3162BCD308122824EC5 /* libPods-RMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
 		7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesigns.json; sourceTree = "<group>"; };
 		7AD2C5B61C16735E007C3580 /* RMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD2C5BA1C16735F007C3580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -28,8 +29,7 @@
 		7AD2C5CA1C16735F007C3580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD2C5D31C1673DF007C3580 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoViewController.h; path = ../DemoViewController.h; sourceTree = "<group>"; };
 		7AD2C5D41C1673DF007C3580 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoViewController.m; path = ../DemoViewController.m; sourceTree = "<group>"; };
-		D9CC742C62BE6C0939CD549E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		F5834E5A10291127301EF8E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,19 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13D35098CB928A2DF0BA1C1A /* libPods.a in Frameworks */,
+				9EE78E97B955D2D1A0FEC74F /* libPods-RMessage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1966B751D2BF2A51DBF3588B /* Frameworks */ = {
+		466A8545BAD9F4E2078E4EB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				369A336D2AF5EA764AE7E770 /* libPods.a */,
+				2348D3162BCD308122824EC5 /* libPods-RMessage.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7410A5CE830B3A57D6337ADD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */,
+				4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		7A0BF4C21C6AEADD00F92A38 /* Resources */ = {
@@ -65,8 +74,8 @@
 			children = (
 				7AD2C5B81C16735F007C3580 /* Demo */,
 				7AD2C5B71C16735E007C3580 /* Products */,
-				D5809C0B5B5C21856BC5DA8E /* Pods */,
-				1966B751D2BF2A51DBF3588B /* Frameworks */,
+				7410A5CE830B3A57D6337ADD /* Pods */,
+				466A8545BAD9F4E2078E4EB1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,15 +112,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D5809C0B5B5C21856BC5DA8E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F5834E5A10291127301EF8E4 /* Pods.debug.xcconfig */,
-				D9CC742C62BE6C0939CD549E /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,12 +119,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AD2C5CD1C16735F007C3580 /* Build configuration list for PBXNativeTarget "RMessage" */;
 			buildPhases = (
-				56D03E78D6CF2D1E949FF57F /* Check Pods Manifest.lock */,
+				791415B2244664DEAF7520C3 /* [CP] Check Pods Manifest.lock */,
 				7AD2C5B21C16735E007C3580 /* Sources */,
 				7AD2C5B31C16735E007C3580 /* Frameworks */,
 				7AD2C5B41C16735E007C3580 /* Resources */,
-				26C08ACE53590D74F43B5E9D /* Embed Pods Frameworks */,
-				2215EA575C91B399E0BDE45F /* Copy Pods Resources */,
+				5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */,
+				8F8A7C132FB881CE238B9622 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,11 +141,12 @@
 		7AD2C5AE1C16735E007C3580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Rendezvous Inc.";
 				TargetAttributes = {
 					7AD2C5B51C16735E007C3580 = {
 						CreatedOnToolsVersion = 7.1.1;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -181,49 +182,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2215EA575C91B399E0BDE45F /* Copy Pods Resources */ = {
+		5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		26C08ACE53590D74F43B5E9D /* Embed Pods Frameworks */ = {
+		791415B2244664DEAF7520C3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		56D03E78D6CF2D1E949FF57F /* Check Pods Manifest.lock */ = {
+		8F8A7C132FB881CE238B9622 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -266,11 +267,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -289,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -310,11 +313,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -327,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -337,26 +342,28 @@
 		};
 		7AD2C5CE1C16735F007C3580 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5834E5A10291127301EF8E4 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rendezvous.RMessage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		7AD2C5CF1C16735F007C3580 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9CC742C62BE6C0939CD549E /* Pods.release.xcconfig */;
+			baseConfigurationReference = 4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rendezvous.RMessage;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
