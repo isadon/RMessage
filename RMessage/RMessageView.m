@@ -113,9 +113,9 @@ static NSMutableDictionary *globalDesignDictionary;
     }
 }
 
-+ (BOOL)runtimeIsIos7OrHigher
++ (BOOL)compilingForHigherThanIosVersion:(CGFloat)version
 {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= version * 10000
     return YES;
 #else
     return NO;
@@ -386,8 +386,12 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                         attribute:NSLayoutAttributeCenterX
                                                                        multiplier:1.f
                                                                          constant:0.f];
-    centerXConstraint.active = YES;
-    self.topToVCLayoutConstraint.active = YES;
+    if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
+        centerXConstraint.active = YES;
+        self.topToVCLayoutConstraint.active = YES;
+    } else {
+        [self.viewController.view addConstraints:@[centerXConstraint, self.topToVCLayoutConstraint]];
+    }
 }
 
 - (void)executeMessageViewCallBack
@@ -669,39 +673,22 @@ static NSMutableDictionary *globalDesignDictionary;
 {
     [self.superview layoutIfNeeded];
     self.alpha = 0.f;
-    if ([RMessageView runtimeIsIos7OrHigher]) {
-        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
-                              delay:0.f
-             usingSpringWithDamping:0.7
-              initialSpringVelocity:0.f
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             self.alpha = self.messageOpacity;
-                             self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
-                             [self.superview layoutIfNeeded];
+    [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
+                          delay:0.f
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         self.alpha = self.messageOpacity;
+                         self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
+                         [self.superview layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         self.messageIsFullyDisplayed = YES;
+                         if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
+                             [self.delegate messageViewDidPresent:self];
                          }
-                         completion:^(BOOL finished) {
-                             self.messageIsFullyDisplayed = YES;
-                             if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
-                                 [self.delegate messageViewDidPresent:self];
-                             }
-                         }];
-
-    } else {
-        [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
-                              delay:0.f
-                            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             self.alpha = self.messageOpacity;
-                             self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
-                             [self.superview layoutIfNeeded];
-                         } completion:^(BOOL finished) {
-                             self.messageIsFullyDisplayed = YES;
-                             if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
-                                 [self.delegate messageViewDidPresent:self];
-                             }
-                         }];
-    }
+                     }];
 }
 
 - (void)dismiss
