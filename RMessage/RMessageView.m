@@ -22,13 +22,14 @@ static NSMutableDictionary *globalDesignDictionary;
 
 @interface RMessageView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, weak) IBOutlet UIImageView *iconImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopLayoutConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
+
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 
 @property (nonatomic, strong) UIImage *iconImage;
 
@@ -150,8 +151,8 @@ static NSMutableDictionary *globalDesignDictionary;
         return NO;
     }
 
-    // When a table view controller asks to extend under top bars, if the navigation bar is translucent iOS will not
-    // extend the edges of the table view controller under the top bars.
+    /* When a table view controller asks to extend under top bars, if the navigation bar is translucent iOS will not
+       extend the edges of the table view controller under the top bars. */
     if ([viewController isKindOfClass:[UITableViewController class]] && vcAskedToExtendUnderTopBars && !viewController.navigationController.navigationBar.translucent) {
         return NO;
     }
@@ -165,6 +166,15 @@ static NSMutableDictionary *globalDesignDictionary;
 {
     NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
     return [[UIImage alloc] initWithContentsOfFile:imagePath];
+}
+
++ (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
+{
+    if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
+        for (NSLayoutConstraint *constraint in constraints) constraint.active = YES;
+    } else {
+        [superview addConstraints:constraints];
+    }
 }
 
 #pragma mark - Instance Methods
@@ -201,22 +211,13 @@ static NSMutableDictionary *globalDesignDictionary;
         _buttonCallback = buttonCallback;
 
         NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
-        if (designError) {
-            return nil;
-        }
+        if (designError) return nil;
 
         [self setupDesign];
         [self setupLayout];
-        if (dismissingEnabled) {
-            [self setupGestureRecognizers];
-        }
+        if (dismissingEnabled) [self setupGestureRecognizers];
     }
     return self;
-}
-
-- (CGSize)intrinsicContentSize
-{
-    return CGSizeMake(self.viewController.view.bounds.size.width, self.titleSubtitleContainerView.bounds.size.height + [UIApplication sharedApplication].statusBarFrame.size.height);
 }
 
 - (void)setSubtitleFont:(UIFont *)subtitleFont
@@ -351,11 +352,13 @@ static NSMutableDictionary *globalDesignDictionary;
     self.translatesAutoresizingMaskIntoConstraints = NO;
 
     // Add RMessage to superview and prepare the ending y position constants
-    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
+    if ([self.viewController isKindOfClass:[UINavigationController class]] || [self.viewController.parentViewController
+                                                                               isKindOfClass:[UINavigationController class]]) {
         [self layoutMessageForNavigationControllerPresentation];
     } else {
         [self layoutMessageForStandardPresentation];
     }
+    [self setupLabelPreferredMaxLayoutWidth];
 
     // Prepare the starting y position constants
     if (self.messagePosition != RMessagePositionBottom) {
@@ -364,7 +367,7 @@ static NSMutableDictionary *globalDesignDictionary;
         self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                     attribute:NSLayoutAttributeTop
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.viewController.view
+                                                                       toItem:self.superview
                                                                     attribute:NSLayoutAttributeTop
                                                                    multiplier:1.f
                                                                      constant:self.topToVCStartConstant];
@@ -373,7 +376,7 @@ static NSMutableDictionary *globalDesignDictionary;
         self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                     attribute:NSLayoutAttributeTop
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.viewController.view
+                                                                       toItem:self.superview
                                                                     attribute:NSLayoutAttributeBottom
                                                                    multiplier:1.f
                                                                      constant:0.f];
@@ -382,30 +385,55 @@ static NSMutableDictionary *globalDesignDictionary;
     NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                         attribute:NSLayoutAttributeCenterX
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.viewController.view
+                                                                           toItem:self.superview
                                                                         attribute:NSLayoutAttributeCenterX
                                                                        multiplier:1.f
                                                                          constant:0.f];
-    if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
-        centerXConstraint.active = YES;
-        self.topToVCLayoutConstraint.active = YES;
-    } else {
-        [self.viewController.view addConstraints:@[centerXConstraint, self.topToVCLayoutConstraint]];
-    }
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                         attribute:NSLayoutAttributeLeading
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.superview
+                                                                         attribute:NSLayoutAttributeLeading
+                                                                        multiplier:1.f
+                                                                          constant:0.f];
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.superview
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                         multiplier:1.f
+                                                                           constant:0.f];
+    [[self class] activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint] inSuperview:self.superview];
+}
+
+- (void)setupBackgroundImageViewWithImage:(UIImage *)image
+{
+    _backgroundImageView = [[UIImageView alloc] initWithImage:image];
+    _backgroundImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    [self insertSubview:_backgroundImageView atIndex:0];
+    NSLayoutConstraint *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundImageView]-0-|" options:0 metrics:nil views:@{@"backgroundImageView":_backgroundImageView}];
+    NSLayoutConstraint *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundImageView]-0-|" options:0 metrics:nil views:@{@"backgroundImageView":_backgroundImageView}];
+    [[self class] activateConstraints:hConstraints inSuperview:self];
+    [[self class] activateConstraints:vConstraints inSuperview:self];
+}
+
+- (void)setupLabelPreferredMaxLayoutWidth
+{
+    CGFloat iconImageWidthAndPadding = 0.f;
+    if (_iconImage) iconImageWidthAndPadding = _iconImage.size.width + 15.f;
+    _titleLabel.preferredMaxLayoutWidth = self.superview.bounds.size.width - iconImageWidthAndPadding - 30.f;
+    _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
 }
 
 - (void)executeMessageViewCallBack
 {
-    if (self.callback) {
-        self.callback();
-    }
+    if (self.callback) self.callback();
 }
 
 - (void)executeMessageViewButtonCallBack
 {
-    if (self.buttonCallback) {
-        self.buttonCallback();
-    }
+    if (self.buttonCallback) self.buttonCallback();
 }
 
 - (void)didMoveToWindow
@@ -467,7 +495,7 @@ static NSMutableDictionary *globalDesignDictionary;
     }
 
     if (_iconImage) {
-        _iconImageView.image = _iconImage;
+        _iconImageView = [[UIImageView alloc] initWithImage:_iconImage];
         if ([_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"]) {
             self.iconRelativeCornerRadius = [[_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"] floatValue];
             _iconImageView.clipsToBounds = YES;
@@ -475,12 +503,13 @@ static NSMutableDictionary *globalDesignDictionary;
              self.iconRelativeCornerRadius = 0.f;
             _iconImageView.clipsToBounds = NO;
         }
+        [self setupIconImageView];
     }
 
     UIImage *backgroundImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundImage"]];
     if (backgroundImage) {
         backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeStretch];
-        _backgroundImageView.image = backgroundImage;
+        [self setupBackgroundImageViewWithImage:backgroundImage];
     }
 }
 
@@ -505,7 +534,6 @@ static NSMutableDictionary *globalDesignDictionary;
     if (titleShadowOffsetX && titleShadowOffsetY) {
         _titleLabel.shadowOffset = CGSizeMake([titleShadowOffsetX floatValue], [titleShadowOffsetY floatValue]);
     }
-    _titleLabel.preferredMaxLayoutWidth = self.viewController.view.bounds.size.width - _iconImage.size.width - 70.f;
 }
 
 - (void)setupSubTitleLabel
@@ -557,7 +585,43 @@ static NSMutableDictionary *globalDesignDictionary;
     } else if (subTitleFontSize) {
         _subtitleLabel.font = [UIFont systemFontOfSize:subTitleFontSize];
     }
-    _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
+}
+
+- (void)setupIconImageView
+{
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    NSLayoutConstraint *imgViewCenterY = [NSLayoutConstraint constraintWithItem:self.iconImageView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.titleSubtitleContainerView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.f
+                                                                      constant:0.f];
+    NSLayoutConstraint *imgViewLeading = [NSLayoutConstraint constraintWithItem:self.iconImageView
+                                                                     attribute:NSLayoutAttributeLeading
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeLeading
+                                                                    multiplier:1.f
+                                                                      constant:15.f];
+    NSLayoutConstraint *imgViewTrailing = [NSLayoutConstraint constraintWithItem:self.iconImageView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.titleSubtitleContainerView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                     multiplier:1.f
+                                                                       constant:-15.f];
+    NSLayoutConstraint *imgViewBottom = [NSLayoutConstraint constraintWithItem:self.iconImageView
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.f
+                                                                     constant:-10.f];
+    [self addSubview:self.iconImageView];
+    [[self class] activateConstraints:@[imgViewCenterY, imgViewLeading, imgViewTrailing, imgViewBottom] inSuperview:self];
 }
 
 - (void)setupGestureRecognizers
@@ -576,9 +640,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 #pragma mark - Gesture Recognizers
 
-/** called after the following gesture depending on message position during initialization
+/* called after the following gesture depending on message position during initialization
  UISwipeGestureRecognizerDirectionUp when message position set to Top, UISwipeGestureRecognizerDirectionDown when
- message position set to Bottom */
+ message position set to bottom */
 - (void)didSwipeToDismissMessageView:(UISwipeGestureRecognizer *)swipeGesture
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
@@ -633,19 +697,18 @@ static NSMutableDictionary *globalDesignDictionary;
         [messageNavigationController.view insertSubview:self
                                         belowSubview:messageNavigationController.navigationBar];
 
-        // If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
-        // navigation bar frame when animating RMessage's final position.
-        if ([[self class] viewControllerEdgesExtendUnderTopBars:self.viewController]) {
+        /* If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
+           navigation bar frame when animating RMessage's final position. */
+        if ([[self class] viewControllerEdgesExtendUnderTopBars:messageNavigationController]) {
             self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
         } else {
             self.topToVCFinalConstant = [self customVerticalOffset];
         }
     } else {
+        // Navigation bar hidden and we are being asked to show below just the status bar
         self.topToVCFinalConstant = [self customVerticalOffset];
         self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
         self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
-
-        // Navigation bar hidden and we are being asked to show below just the status bar
         [self.viewController.view addSubview:self];
     }
 
@@ -740,9 +803,7 @@ static NSMutableDictionary *globalDesignDictionary;
  */
 - (UIColor *)colorForString:(NSString *)string
 {
-    if (string) {
-        return [UIColor hx_colorWithHexRGBAString:string];
-    }
+    if (string) return [UIColor hx_colorWithHexRGBAString:string];
     return nil;
 }
 
