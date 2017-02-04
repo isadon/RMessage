@@ -3,6 +3,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 target "RMessage" do
   pod 'HexColors', '~> 4.0'
   pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
-  #pod 'Reveal-SDK', :configurations => ['Debug']
   pod 'RMessage', :path => '..' 
+  #pod 'Reveal-SDK', :configurations => ['Debug']
 end

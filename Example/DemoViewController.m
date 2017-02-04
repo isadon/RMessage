@@ -19,10 +19,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [RMessage setDefaultViewController:self];
-    [RMessage setDelegate:self];
     [self.navigationController.navigationBar setTranslucent:YES];
     self.extendedLayoutIncludesOpaqueBars = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    /* Normally we would set the default view controller and delegate in viewDidLoad
+       but since we are using this view controller for our modal view also it is important to properly re-set the
+       variables once the modal dismisses. */
+    [RMessage setDefaultViewController:self];
+    [RMessage setDelegate:self];
 }
 
 - (IBAction)didTapError:(id)sender
@@ -82,23 +90,6 @@
                           canBeDismissedByUser:YES];
 }
 
-- (IBAction)didTapToggleNavigationBar:(id)sender
-{
-    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
-}
-
-- (IBAction)didTapToggleNavigationBarAlpha:(id)sender
-{
-    CGFloat alpha = self.navigationController.navigationBar.alpha;
-    self.navigationController.navigationBar.alpha = (alpha == 1.f) ? 0.5 : 1;
-}
-
-- (IBAction)didTapToggleWantsFullscreen:(id)sender
-{
-    self.extendedLayoutIncludesOpaqueBars = !self.extendedLayoutIncludesOpaqueBars;
-    [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
-}
-
 - (IBAction)didTapCustomImage:(id)sender
 {
     [RMessage showNotificationInViewController:self
@@ -113,16 +104,6 @@
                                 buttonCallback:nil
                                     atPosition:RMessagePositionTop
                           canBeDismissedByUser:YES];
-}
-
-- (IBAction)didTapDismissCurrentMessage:(id)sender
-{
-    [RMessage dismissActiveNotification];
-}
-
-//only applies to modally displayed DemoViewController with Dismiss Modal Button
-- (IBAction)didTapDismissModal:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)didTapEndless:(id)sender
@@ -193,6 +174,31 @@
                                callback:nil];
 }
 
+- (IBAction)didTapDismissCurrentMessage:(id)sender
+{
+    [RMessage dismissActiveNotification];
+}
+
+- (IBAction)didTapDismissModal:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)didTapToggleNavigationBar:(id)sender
+{
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+}
+
+- (IBAction)didTapToggleNavigationBarAlpha:(id)sender
+{
+    CGFloat alpha = self.navigationController.navigationBar.alpha;
+    self.navigationController.navigationBar.alpha = (alpha == 1.f) ? 0.5 : 1;
+}
+
+- (IBAction)didTapToggleWantsFullscreen:(id)sender
+{
+    self.extendedLayoutIncludesOpaqueBars = !self.extendedLayoutIncludesOpaqueBars;
+    [self.navigationController.navigationBar setTranslucent:!self.navigationController.navigationBar.isTranslucent];
+}
 
 - (IBAction)didTapNavBarOverlay:(id)sender
 {
