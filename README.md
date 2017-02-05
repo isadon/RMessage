@@ -21,7 +21,7 @@ Welcome to RMessage! RMessage is a reworking of the original [TSMessages](https:
   * Title and Subtitle labels no longer need to have the same shadows applied.
 * Custom Design icon image no longer needs to be a fixed size. Notification sizes itself accordingly.
 * No need to worry about missing a key in your design file. If not specified the default design takes over.
-* Removed Old Blur code which was broken when iOS7 was introduced - There is no proper way to properly implement this currently so please dont submit features asking for this to be added until Apple adds an API enabling it.
+* Replaced old blur code which was broken when iOS7 was introduced.
 * Better default view controller detection with use of PPTopMostController. TSMessages would assume the window root view controller would be the default view controller. This could cause issues with showing in modals for example.
 * Removed the forcing of a specific design - TSMessages forced an iOS7 design or iOS6. Here there is no distinction - though the library is styled for iOS7 by default.
 * Much more im sure :).
@@ -152,6 +152,8 @@ If you don't want a detailed description (the text underneath the title) you don
 ## Custom Design File Properties
 
 * **backgroundColor**: Background color for the RMessage. String: [#000000, #FFFFFF].
+* **backgroundColorAlpha**: Apply a transparency to the background color. Must be less than 1.0 but not 0 for blurring to work 
+  when blurBackground key is set to enabled. Numeric: [0, 1.0].
 * **opacity**: Opacity of the RMessage. Numeric: [0, 1.0].
 * **iconImage**: Filename of image (in app bundle) to use as an icon on the left side of the RMessage. String.
 * **iconImageRelativeCornerRadius**: Corner radius percentage relative to icon image to apply to icon image. For example 0.5 (use 50% of icon image width as corner radius) would mask the icon image to always be a circle. Numeric: [0, 1.0].
@@ -168,9 +170,10 @@ If you don't want a detailed description (the text underneath the title) you don
 * **subTitleShadowColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
 * **subTitleShadowOffsetX**: Amount of pt to offset in x direction subtitle shadow from subtitle text. Numeric.
 * **subTitleShadowOffsetY**: Amount of pt to offset in y direction subtitle shadow from subtitle text. Numeric.
+* **blurBackground**: Enable/disable blurring of the background behind the RMessage. Use in conjunction with 
+  backgroundColorAlpha. Numeric boolean [0, 1].
 
 Property keys are always strings, values can be string or numeric. If specifying a numeric value don't encapsulate the numeric value in a string.
-
 [x,y] Signifies the range of values x to y that are allowed for the field.
 
 For example:

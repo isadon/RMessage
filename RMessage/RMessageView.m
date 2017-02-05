@@ -65,6 +65,8 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, assign) RMessageType messageType;
 @property (nonatomic, copy) NSString *customTypeName;
 
+@property (nonatomic, assign) BOOL shouldBlurBackground;
+
 @end
 
 @implementation RMessageView
@@ -160,6 +162,25 @@ static NSMutableDictionary *globalDesignDictionary;
     return YES;
 }
 
+- (UIColor *)colorForString:(NSString *)string
+{
+    if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:1.f];
+    return nil;
+}
+
+/**
+ *  Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexRGBAString
+ *
+ *  @param string A hex string representation of a color.
+ *
+ *  @return nil or a color.
+ */
+- (UIColor *)colorForString:(NSString *)string alpha:(CGFloat)alpha
+{
+    if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:alpha];
+    return nil;
+}
+
 #pragma mark - Get Image From Resource Bundle
 
 + (UIImage *)bundledImageNamed:(NSString*)name
@@ -200,7 +221,6 @@ static NSMutableDictionary *globalDesignDictionary;
         _delegate = delegate;
         _title = title;
         _subtitle = subtitle;
-        _messageOpacity = 0.97f;
         _iconImage = iconImage;
         _duration = duration;
         viewController ? _viewController = viewController : (_viewController = [RMessageView defaultViewController]);
@@ -218,6 +238,12 @@ static NSMutableDictionary *globalDesignDictionary;
         if (dismissingEnabled) [self setupGestureRecognizers];
     }
     return self;
+}
+
+- (void)setMessageOpacity:(CGFloat)messageOpacity
+{
+    _messageOpacity = messageOpacity;
+    self.alpha = _messageOpacity;
 }
 
 - (void)setSubtitleFont:(UIFont *)subtitleFont
@@ -404,6 +430,7 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                          multiplier:1.f
                                                                            constant:0.f];
     [[self class] activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint] inSuperview:self.superview];
+    if (self.shouldBlurBackground) [self setupBlurBackground];
 }
 
 - (void)setupBackgroundImageViewWithImage:(UIImage *)image
@@ -414,6 +441,18 @@ static NSMutableDictionary *globalDesignDictionary;
     [self insertSubview:_backgroundImageView atIndex:0];
     NSLayoutConstraint *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundImageView]-0-|" options:0 metrics:nil views:@{@"backgroundImageView":_backgroundImageView}];
     NSLayoutConstraint *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundImageView]-0-|" options:0 metrics:nil views:@{@"backgroundImageView":_backgroundImageView}];
+    [[self class] activateConstraints:hConstraints inSuperview:self];
+    [[self class] activateConstraints:vConstraints inSuperview:self];
+}
+
+- (void)setupBlurBackground
+{
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self insertSubview:blurView atIndex:0];
+    NSLayoutConstraint *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|" options:0 metrics:nil views:@{@"blurBackgroundView":blurView}];
+    NSLayoutConstraint *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|" options:0 metrics:nil views:@{@"blurBackgroundView":blurView}];
     [[self class] activateConstraints:hConstraints inSuperview:self];
     [[self class] activateConstraints:vConstraints inSuperview:self];
 }
@@ -456,8 +495,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupDesignDefaults
 {
-    self.backgroundColor = [UIColor lightGrayColor];
-    self.alpha = _messageOpacity;
+    self.backgroundColor = nil;
+    self.messageOpacity = 0.97f;
+    _shouldBlurBackground = NO;
     _titleLabel.numberOfLines = 0;
     _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
@@ -479,12 +519,23 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupImagesAndBackground
 {
-    UIColor *backgroundColor = [self colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
+    UIColor *backgroundColor;
+    if (_messageViewDesignDictionary[@"backgroundColor"] && _messageViewDesignDictionary[@"backgroundColorAlpha"]) {
+        backgroundColor = [self colorForString:_messageViewDesignDictionary[@"backgroundColor"] alpha:[_messageViewDesignDictionary[@"backgroundColorAlpha"] floatValue]];
+    } else if (_messageViewDesignDictionary[@"backgroundColor"]) {
+        backgroundColor =  [self colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
+    }
+
     if (backgroundColor) self.backgroundColor = backgroundColor;
-    id messageOpacity = _messageViewDesignDictionary[@"opacity"];
-    if (messageOpacity) {
-        _messageOpacity = [messageOpacity floatValue];
-        self.alpha = _messageOpacity;
+    if (_messageViewDesignDictionary[@"opacity"]) {
+        self.messageOpacity = [_messageViewDesignDictionary[@"opacity"] floatValue];
+    }
+
+    if ([_messageViewDesignDictionary[@"blurBackground"] floatValue] == 1) {
+        _shouldBlurBackground = YES;
+        /* As per apple docs when using UIVisualEffectView and blurring the superview of the blur view must have
+        an opacity of 1.f */
+        self.messageOpacity = 1.f;
     }
 
     if (!_iconImage && ((NSString*)[_messageViewDesignDictionary valueForKey:@"iconImage"]).length > 0) {
@@ -735,14 +786,14 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)animateMessage
 {
     [self.superview layoutIfNeeded];
-    self.alpha = 0.f;
+    if (!self.shouldBlurBackground) self.alpha = 0.f;
     [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
                           delay:0.f
          usingSpringWithDamping:0.7
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         self.alpha = self.messageOpacity;
+                         if (!self.shouldBlurBackground) self.alpha = self.messageOpacity;
                          self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
                          [self.superview layoutIfNeeded];
                      }
@@ -767,7 +818,7 @@ static NSMutableDictionary *globalDesignDictionary;
                                                object:self];
 
     [UIView animateWithDuration:kRMessageAnimationDuration animations:^{
-        self.alpha = 0.f;
+        if (!self.shouldBlurBackground) self.alpha = 0.f;
         self.topToVCLayoutConstraint.constant = self.topToVCStartConstant;
         [self.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -792,19 +843,6 @@ static NSMutableDictionary *globalDesignDictionary;
         customVerticalOffset = [self.delegate customVerticalOffsetForMessageView:self];
     }
     return customVerticalOffset;
-}
-
-/**
- *  Wrapper method to avoid getting a black color when passing a nil string to hx_colorWithHexRGBAString
- *
- *  @param string A hex string representation of a color.
- *
- *  @return nil or a color.
- */
-- (UIColor *)colorForString:(NSString *)string
-{
-    if (string) return [UIColor hx_colorWithHexRGBAString:string];
-    return nil;
 }
 
 @end
