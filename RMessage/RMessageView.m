@@ -245,28 +245,40 @@ static NSMutableDictionary *globalDesignDictionary;
     self.alpha = _messageOpacity;
 }
 
-- (void)setSubtitleFont:(UIFont *)subtitleFont
-{
-    _subtitleFont = subtitleFont;
-    [self.subtitleLabel setFont:subtitleFont];
-}
-
-- (void)setSubtitleTextColor:(UIColor *)subtitleTextColor
-{
-    _subtitleTextColor = subtitleTextColor;
-    [self.subtitleLabel setTextColor:_subtitleTextColor];
-}
-
 - (void)setTitleFont:(UIFont *)aTitleFont
 {
     _titleFont = aTitleFont;
     [self.titleLabel setFont:_titleFont];
 }
 
+- (void)setTitleAlignment:(NSTextAlignment)titleAlignment
+{
+    _titleAlignment = titleAlignment;
+    self.titleLabel.textAlignment = _titleAlignment;
+}
+
 - (void)setTitleTextColor:(UIColor *)aTextColor
 {
     _titleTextColor = aTextColor;
     [self.titleLabel setTextColor:_titleTextColor];
+}
+
+- (void)setSubtitleFont:(UIFont *)subtitleFont
+{
+    _subtitleFont = subtitleFont;
+    [self.subtitleLabel setFont:subtitleFont];
+}
+
+- (void)setSubtitleAlignment:(NSTextAlignment)subtitleAlignment
+{
+    _subtitleAlignment = subtitleAlignment;
+    self.subtitleLabel.textAlignment = _subtitleAlignment;
+}
+
+- (void)setSubtitleTextColor:(UIColor *)subtitleTextColor
+{
+    _subtitleTextColor = subtitleTextColor;
+    [self.subtitleLabel setTextColor:_subtitleTextColor];
 }
 
 - (void)setMessageIcon:(UIImage *)messageIcon
@@ -500,6 +512,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _titleLabel.numberOfLines = 0;
     _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _titleLabel.font = [UIFont boldSystemFontOfSize:14.f];
+    _titleLabel.textAlignment = NSTextAlignmentLeft;
     _titleLabel.textColor = [UIColor blackColor];
     _titleLabel.shadowColor = nil;
     _titleLabel.shadowOffset = CGSizeZero;
@@ -508,6 +521,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitleLabel.numberOfLines = 0;
     _subtitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _subtitleLabel.font = [UIFont boldSystemFontOfSize:12.f];
+    _subtitleLabel.textAlignment = NSTextAlignmentLeft;
     _subtitleLabel.textColor = [UIColor darkGrayColor];
     _subtitleLabel.shadowColor = nil;
     _subtitleLabel.shadowOffset = CGSizeZero;
@@ -565,10 +579,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupTitleLabel
 {
-    UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
-    _titleLabel.text = _title ? _title : @"";
-    if (titleTextColor) _titleLabel.textColor = titleTextColor;
-
     CGFloat titleFontSize = [[_messageViewDesignDictionary valueForKey:@"titleFontSize"] floatValue];
     NSString *titleFontName = [_messageViewDesignDictionary valueForKey:@"titleFontName"];
     if (titleFontName) {
@@ -576,6 +586,12 @@ static NSMutableDictionary *globalDesignDictionary;
     } else if (titleFontSize) {
         _titleLabel.font = [UIFont boldSystemFontOfSize:titleFontSize];
     }
+
+    self.titleLabel.textAlignment = [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"titleTextAlignment"]];
+
+    UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
+    _titleLabel.text = _title ? _title : @"";
+    if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
     UIColor *titleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
     if (titleShadowColor) _titleLabel.shadowColor = titleShadowColor;
@@ -588,14 +604,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupSubTitleLabel
 {
-    UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
-    if (!subTitleTextColor) {
-        subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
-    }
-    if (!subTitleTextColor) {
-        subTitleTextColor = _titleLabel.textColor;
-    }
-
     id subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subTitleFontSize"];
     if (!subTitleFontSizeValue) {
         subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subtitleFontSize"];
@@ -607,8 +615,22 @@ static NSMutableDictionary *globalDesignDictionary;
         subTitleFontName = [_messageViewDesignDictionary valueForKey:@"subtitleFontName"];
     }
 
-    _subtitleLabel.numberOfLines = 0;
-    _subtitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    if (subTitleFontName) {
+        _subtitleLabel.font = [UIFont fontWithName:subTitleFontName size:subTitleFontSize];
+    } else if (subTitleFontSize) {
+        _subtitleLabel.font = [UIFont systemFontOfSize:subTitleFontSize];
+    }
+
+    self.subtitleLabel.textAlignment = [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextAlignment"]];
+
+    UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
+    if (!subTitleTextColor) {
+        subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
+    }
+    if (!subTitleTextColor) {
+        subTitleTextColor = _titleLabel.textColor;
+    }
+
     _subtitleLabel.text = _subtitle ? _subtitle : @"";
     if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
 
@@ -628,12 +650,6 @@ static NSMutableDictionary *globalDesignDictionary;
     }
     if (subTitleShadowOffsetX && subTitleShadowOffsetY) {
         _subtitleLabel.shadowOffset = CGSizeMake([subTitleShadowOffsetX floatValue], [subTitleShadowOffsetY floatValue]);
-    }
-
-    if (subTitleFontName) {
-        _subtitleLabel.font = [UIFont fontWithName:subTitleFontName size:subTitleFontSize];
-    } else if (subTitleFontSize) {
-        _subtitleLabel.font = [UIFont systemFontOfSize:subTitleFontSize];
     }
 }
 
@@ -844,6 +860,23 @@ static NSMutableDictionary *globalDesignDictionary;
         customVerticalOffset = [self.delegate customVerticalOffsetForMessageView:self];
     }
     return customVerticalOffset;
+}
+
+- (NSTextAlignment)textAlignmentForString:(NSString *)textAlignment
+{
+    if ([textAlignment isEqualToString:@"left"]) {
+        return NSTextAlignmentLeft;
+    } else if ([textAlignment isEqualToString:@"right"]) {
+        return NSTextAlignmentRight;
+    } else if ([textAlignment isEqualToString:@"center"]) {
+        return NSTextAlignmentCenter;
+    } else if ([textAlignment isEqualToString:@"justified"]) {
+        return NSTextAlignmentJustified;
+    } else if ([textAlignment isEqualToString:@"natural"]) {
+        return NSTextAlignmentNatural;
+    } else {
+        return NSTextAlignmentLeft;
+    }
 }
 
 @end

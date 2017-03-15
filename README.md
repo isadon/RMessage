@@ -25,7 +25,7 @@ Welcome to RMessage! RMessage is a reworking of the original [TSMessages](https:
 * Better default view controller detection with use of PPTopMostController. TSMessages would assume the window root view controller would be the default view controller. This could cause issues with showing in modals for example.
 * Removed the forcing of a specific design - TSMessages forced an iOS7 design or iOS6. Here there is no distinction - though the library is styled for iOS7 by default.
 * Much more im sure :).
-*
+
 
 Note: Buttons within RMessage are not currently fully supported as in TSMessages but will be soon.
 
@@ -158,15 +158,17 @@ If you don't want a detailed description (the text underneath the title) you don
 * **iconImage**: Filename of image (in app bundle) to use as an icon on the left side of the RMessage. String.
 * **iconImageRelativeCornerRadius**: Corner radius percentage relative to icon image to apply to icon image. For example 0.5 (use 50% of icon image width as corner radius) would mask the icon image to always be a circle. Numeric: [0, 1.0].
 * **backgroundImage**: Filename of image (in app bundle) to use as a background image for the RMessage. String.
-* **titleTextColor**: Color of the title text. String: [#000000, #FFFFFF].
 * **titleFontName**: Name of font to use for title text. String.
 * **titleFontSize**: Size of the title font. Numeric: [0, Max depending on font used]
+* **titleTextAlignment**: Alignment to apply to title label. String: {"left", "right", "center", "justified", "normal"}.
+* **titleTextColor**: Color of the title text. String: [#000000, #FFFFFF].
 * **titleShadowColor**: Color of the title shadow. String: [#000000, #FFFFFF].
 * **titleShadowOffsetX**: Amount of pt to offset in x direction title shadow from title text. Numeric.
 * **titleShadowOffsetY**: Amount of pt to offset in y direction title shadow from title text. Numeric.
-* **subTitleTextColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
 * **subTitleFontName**: Name of font to use for subtitle text. String.
 * **subTitleFontSize**: Size of the subtitle font. Numeric: [0, Max depending on font used].
+* **subtitleTextAlignment**: Alignment to apply to subtitle label. String: {"left", "right", "center", "justified", "normal"}.
+* **subTitleTextColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
 * **subTitleShadowColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
 * **subTitleShadowOffsetX**: Amount of pt to offset in x direction subtitle shadow from subtitle text. Numeric.
 * **subTitleShadowOffsetY**: Amount of pt to offset in y direction subtitle shadow from subtitle text. Numeric.
