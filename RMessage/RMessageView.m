@@ -25,7 +25,6 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopLayoutConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
 
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -729,7 +728,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)layoutMessageForNavigationControllerPresentation
 {
-    self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f;
     self.titleSubtitleContainerViewCenterYConstraint.constant = 0.f;
 
     UINavigationController *messageNavigationController;
@@ -742,29 +740,27 @@ static NSMutableDictionary *globalDesignDictionary;
 
     BOOL messageNavigationBarHidden = [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
 
-    // Navigation bar is shown and we are being asked to present from below nav bar (not as an overlay)
-    if (!messageNavigationBarHidden && self.messagePosition != RMessagePositionNavBarOverlay) {
-        // position notification below nav bar so it animates from below the nav bar
-        [messageNavigationController.view insertSubview:self
-                                        belowSubview:messageNavigationController.navigationBar];
+    if (self.messagePosition != RMessagePositionBottom) {
+        if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
+            // Present from below nav bar when presenting from the top and navigation bar is present
+            [messageNavigationController.view insertSubview:self
+                                               belowSubview:messageNavigationController.navigationBar];
 
-        /* If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
-           navigation bar frame when animating RMessage's final position. */
-        if ([[self class] viewControllerEdgesExtendUnderTopBars:messageNavigationController]) {
-            self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
+            /* If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the navigation bar frame when animating RMessage's final position */
+            if ([[self class] viewControllerEdgesExtendUnderTopBars:messageNavigationController]) {
+                self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height + messageNavigationController.navigationBar.bounds.size.height + [self customVerticalOffset];
+            } else {
+                self.topToVCFinalConstant = [self customVerticalOffset];
+            }
         } else {
+            // Navigation bar hidden or being asked to present as nav bar overlay, so present
+            // above status bar and/or navigation bar.
             self.topToVCFinalConstant = [self customVerticalOffset];
+            self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+            [self.viewController.view addSubview:self];
         }
     } else {
-        // Navigation bar hidden and we are being asked to show below just the status bar
-        self.topToVCFinalConstant = [self customVerticalOffset];
-        self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
-        self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
-        [self.viewController.view addSubview:self];
-    }
-
-    // Asking to animate from bottom up.. set the topToVCFinalConstant here.
-    if (self.messagePosition == RMessagePositionBottom) {
+        // Present from bottom
         [self layoutIfNeeded];
         CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
         if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
@@ -772,14 +768,19 @@ static NSMutableDictionary *globalDesignDictionary;
             offset -= messageNavigationController.toolbar.bounds.size.height;
         }
         self.topToVCFinalConstant = offset;
+        [self.viewController.view addSubview:self];
     }
 }
 
 - (void)layoutMessageForStandardPresentation
 {
-    self.topToVCFinalConstant = [self customVerticalOffset];
-    self.titleSubtitleContainerViewTopLayoutConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
-    self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+    [self layoutIfNeeded];
+    if (self.messagePosition == RMessagePositionBottom) {
+        self.topToVCFinalConstant = -self.bounds.size.height - [self customVerticalOffset];
+    } else {
+        self.topToVCFinalConstant = [self customVerticalOffset];
+        self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+    }
     [self.viewController.view addSubview:self];
 }
 
