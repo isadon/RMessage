@@ -6,8 +6,8 @@
 //  Copyright © 2015 Adonis Peralta. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RMessage.h"
+#import <UIKit/UIKit.h>
 
 @protocol RMessageViewProtocol <NSObject>
 
@@ -27,7 +27,7 @@
 
 @interface RMessageView : UIView
 
-@property (nonatomic, weak) id <RMessageViewProtocol> delegate;
+@property (nonatomic, weak) id<RMessageViewProtocol> delegate;
 
 /** The displayed title of this message */
 @property (nonatomic, readonly) NSString *title;
@@ -50,9 +50,9 @@
 /** The customTypeName if any the RMessageView was initialized with */
 @property (nonatomic, copy, readonly) NSString *customTypeName;
 
-/** The opacity of the message view. When customizing RMessage always set this value to the desired opacity
- instead of the alpha property. Internally the alpha property is changed during animations; this property allows RMessage
- to always know the final alpha value.*/
+/** The opacity of the message view. When customizing RMessage always set this value to the desired opacity instead of
+ the alpha property. Internally the alpha property is changed during animations; this property allows RMessage to
+ always know the final alpha value.*/
 @property (nonatomic, assign) CGFloat messageOpacity;
 
 /** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
@@ -70,7 +70,8 @@
 @property (nonatomic, strong) UIImage *successIcon UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIImage *warningIcon UI_APPEARANCE_SELECTOR;
 
-/** Inits the message view. Do not call this from outside this library.
+/**
+ Inits the message view. Do not call this from outside this library.
  @param title The title of the message view
  @param subtitle The subtitle of the message view (optional)
  @param iconImage A custom icon image (optional)
@@ -88,7 +89,7 @@
                         subtitle:(NSString *)subtitle
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
-                customTypeName:(NSString *)customTypeName
+                  customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
@@ -97,7 +98,8 @@
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled;
 
-/** Use this method to load a custom design file on top of the base design file. Can be called multiple times to add designs from multiple files*/
+/** Use this method to load a custom design file on top of the base design file. Can be called
+ multiple times to add designs from multiple files */
 + (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 
 /** Execute the message view call back if set */
@@ -110,6 +112,6 @@
 - (void)present;
 
 /** Dismiss the view with a completion block */
-- (void)dismissWithCompletion:(void (^) (void))completionBlock;
+- (void)dismissWithCompletion:(void (^)(void))completionBlock;
 
 @end
