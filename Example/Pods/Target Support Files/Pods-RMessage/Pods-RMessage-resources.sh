@@ -81,8 +81,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "../../RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundWarningIcon.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundWarningIcon@2x.png"
-  install_resource "../../RMessage/Assets/NotificationButtonBackground.png"
-  install_resource "../../RMessage/Assets/NotificationButtonBackground@2x.png"
   install_resource "../../RMessage/Assets/RMessageDefaultDesign.json"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -93,8 +91,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "../../RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundWarningIcon.png"
   install_resource "../../RMessage/Assets/NotificationBackgroundWarningIcon@2x.png"
-  install_resource "../../RMessage/Assets/NotificationButtonBackground.png"
-  install_resource "../../RMessage/Assets/NotificationButtonBackground@2x.png"
   install_resource "../../RMessage/Assets/RMessageDefaultDesign.json"
 fi
 

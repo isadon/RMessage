@@ -93,8 +93,7 @@
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
-                     buttonTitle:(NSString *)buttonTitle
-                  buttonCallback:(void (^)())buttonCallback
+                          button:(UIButton *)button
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled;
 
@@ -104,9 +103,6 @@
 
 /** Execute the message view call back if set */
 - (void)executeMessageViewCallBack;
-
-/** Execute the message view button call back if set */
-- (void)executeMessageViewButtonCallBack;
 
 /** Present the message view */
 - (void)present;

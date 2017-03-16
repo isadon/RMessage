@@ -72,6 +72,13 @@
 
 - (IBAction)didTapButton:(id)sender
 {
+  UIImage *downloadImage = [UIImage imageNamed:@"downloadIcon"];
+  UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  downloadButton.frame = CGRectMake(0.f, 0.f, downloadImage.size.width, downloadImage.size.height);
+  [downloadButton setImage:[UIImage imageNamed:@"downloadIcon"] forState:UIControlStateNormal];
+  downloadButton.clipsToBounds = YES;
+  [downloadButton addTarget:self action:@selector(downloadButtonPushed) forControlEvents:UIControlEventTouchUpInside];
+
   [RMessage showNotificationInViewController:self
                                        title:NSLocalizedString(@"New version available", nil)
                                     subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
@@ -80,15 +87,26 @@
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                 buttonTitle:NSLocalizedString(@"Update", nil)
-                              buttonCallback:^{
-                                [RMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
-                                                               type:RMessageTypeSuccess
-                                                     customTypeName:nil
-                                                           callback:nil];
-                              }
+                                      button:downloadButton
                                   atPosition:RMessagePositionTop
                         canBeDismissedByUser:YES];
+}
+
+- (void)downloadButtonPushed
+{
+  [RMessage dismissActiveNotificationWithCompletion:^{
+    [RMessage showNotificationInViewController:self
+                                         title:NSLocalizedString(@"Download Finished", nil)
+                                      subtitle:NSLocalizedString(@"Thanks!", nil)
+                                     iconImage:nil
+                                          type:RMessageTypeSuccess
+                                customTypeName:nil
+                                      duration:RMessageDurationAutomatic
+                                      callback:nil
+                                        button:nil
+                                    atPosition:RMessagePositionTop
+                          canBeDismissedByUser:YES];
+  }];
 }
 
 - (IBAction)didTapCustomImage:(id)sender
@@ -101,8 +119,7 @@
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                 buttonTitle:nil
-                              buttonCallback:nil
+                                      button:nil
                                   atPosition:RMessagePositionTop
                         canBeDismissedByUser:YES];
 }
@@ -112,36 +129,34 @@
   [RMessage showNotificationInViewController:self
                                        title:NSLocalizedString(@"Endless", nil)
                                     subtitle:NSLocalizedString(@"This message can not be dismissed and will not be "
-                                                               @"hidden automatically. Tap the 'Dismiss' button "
-                                                               @"to dismiss the currently shown message",
+                                                               @"hidden automatically. Tap the 'Dismiss' button to "
+                                                               @"dismiss the currently shown message",
                                                                nil)
                                    iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationEndless
                                     callback:nil
-                                 buttonTitle:nil
-                              buttonCallback:nil
+                                      button:nil
                                   atPosition:RMessagePositionTop
                         canBeDismissedByUser:NO];
 }
 
 - (IBAction)didTapLong:(id)sender
 {
-  [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"Long", nil)
-                                    subtitle:NSLocalizedString(@"This message is displayed 10 seconds "
-                                                               @"instead of the calculated value",
-                                                               nil)
-                                   iconImage:nil
-                                        type:RMessageTypeWarning
-                              customTypeName:nil
-                                    duration:10.0
-                                    callback:nil
-                                 buttonTitle:nil
-                              buttonCallback:nil
-                                  atPosition:RMessagePositionTop
-                        canBeDismissedByUser:YES];
+  [RMessage
+    showNotificationInViewController:self
+                               title:NSLocalizedString(@"Long", nil)
+                            subtitle:NSLocalizedString(
+                                       @"This message is displayed 10 seconds instead of the calculated value", nil)
+                           iconImage:nil
+                                type:RMessageTypeWarning
+                      customTypeName:nil
+                            duration:10.0
+                            callback:nil
+                              button:nil
+                          atPosition:RMessagePositionTop
+                canBeDismissedByUser:YES];
 }
 
 - (IBAction)didTapBottom:(id)sender
@@ -154,8 +169,7 @@
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                 buttonTitle:nil
-                              buttonCallback:nil
+                                      button:nil
                                   atPosition:RMessagePositionBottom
                         canBeDismissedByUser:YES];
 }
@@ -238,8 +252,7 @@
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                 buttonTitle:nil
-                              buttonCallback:nil
+                                      button:nil
                                   atPosition:RMessagePositionNavBarOverlay
                         canBeDismissedByUser:YES];
 }
