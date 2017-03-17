@@ -461,20 +461,18 @@ static NSMutableDictionary *globalDesignDictionary;
   _backgroundImageView.translatesAutoresizingMaskIntoConstraints = NO;
   _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
   [self insertSubview:_backgroundImageView atIndex:0];
-  NSLayoutConstraint *hConstraints =
-    [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundImageView]-0-|"
-                                            options:0
-                                            metrics:nil
-                                              views:@{
-                                                @"backgroundImageView": _backgroundImageView
-                                              }];
-  NSLayoutConstraint *vConstraints =
-    [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundImageView]-0-|"
-                                            options:0
-                                            metrics:nil
-                                              views:@{
-                                                @"backgroundImageView": _backgroundImageView
-                                              }];
+  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundImageView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"backgroundImageView": _backgroundImageView
+                                                                    }];
+  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundImageView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"backgroundImageView": _backgroundImageView
+                                                                    }];
   [[self class] activateConstraints:hConstraints inSuperview:self];
   [[self class] activateConstraints:vConstraints inSuperview:self];
 }
@@ -485,18 +483,18 @@ static NSMutableDictionary *globalDesignDictionary;
   UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
   blurView.translatesAutoresizingMaskIntoConstraints = NO;
   [self insertSubview:blurView atIndex:0];
-  NSLayoutConstraint *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{
-                                                                                 @"blurBackgroundView": blurView
-                                                                               }];
-  NSLayoutConstraint *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:@{
-                                                                                 @"blurBackgroundView": blurView
-                                                                               }];
+  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"blurBackgroundView": blurView
+                                                                    }];
+  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"blurBackgroundView": blurView
+                                                                    }];
   [[self class] activateConstraints:hConstraints inSuperview:self];
   [[self class] activateConstraints:vConstraints inSuperview:self];
 }
