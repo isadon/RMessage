@@ -78,8 +78,6 @@
  @param duration The duration this notification should be displayed (optional)
  @param viewController The view controller this message should be displayed in
  @param callback The block that should be executed, when the user tapped on the message
- @param buttonTitle The title for button (optional)
- @param buttonCallback The block that should be executed, when the user tapped on the button
  @param position The position of the message on the screen
  @param dismissingEnabled Should this message be dismissed when the user taps/swipes it?
  */

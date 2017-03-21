@@ -32,8 +32,6 @@
 		7A298E111E7AF68700F24D5E /* NotificationBackgroundSuccessIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE61E7AF44200F24D5E /* NotificationBackgroundSuccessIcon@2x.png */; };
 		7A298E121E7AF68700F24D5E /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE71E7AF44200F24D5E /* NotificationBackgroundWarningIcon.png */; };
 		7A298E131E7AF68700F24D5E /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE81E7AF44200F24D5E /* NotificationBackgroundWarningIcon@2x.png */; };
-		7A298E141E7AF68700F24D5E /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE91E7AF44200F24D5E /* NotificationButtonBackground.png */; };
-		7A298E151E7AF68700F24D5E /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DEA1E7AF44200F24D5E /* NotificationButtonBackground@2x.png */; };
 		7A298E161E7AF68700F24D5E /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DEB1E7AF44200F24D5E /* RMessageDefaultDesign.json */; };
 		7A298E171E7AF68C00F24D5E /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DED1E7AF44200F24D5E /* RMessageView.xib */; };
 		7AF3550B1E7D7AED008264AA /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3550A1E7D7AED008264AA /* HexColors.framework */; };
@@ -298,8 +296,6 @@
 				7A298E101E7AF68700F24D5E /* NotificationBackgroundSuccessIcon.png in Resources */,
 				7A298E0E1E7AF68700F24D5E /* NotificationBackgroundErrorIcon.png in Resources */,
 				7A298E161E7AF68700F24D5E /* RMessageDefaultDesign.json in Resources */,
-				7A298E151E7AF68700F24D5E /* NotificationButtonBackground@2x.png in Resources */,
-				7A298E141E7AF68700F24D5E /* NotificationButtonBackground.png in Resources */,
 				7A298E131E7AF68700F24D5E /* NotificationBackgroundWarningIcon@2x.png in Resources */,
 				7A298E111E7AF68700F24D5E /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
 				7A298E0F1E7AF68700F24D5E /* NotificationBackgroundErrorIcon@2x.png in Resources */,
