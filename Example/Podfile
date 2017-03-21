@@ -1,8 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
+#use_frameworks!
 
-target "RMessage" do
+target "Example" do
   pod 'HexColors', '~> 4.0'
-  pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
   pod 'RMessage', :path => '..' 
   #pod 'Reveal-SDK', :configurations => ['Debug']
 end

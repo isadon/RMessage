@@ -7,7 +7,6 @@
 //
 
 #import "RMessage.h"
-#import <UIKit/UIKit.h>
 
 @protocol RMessageViewProtocol <NSObject>
 

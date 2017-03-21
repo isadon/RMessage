@@ -1,0 +1,6 @@
+framework module HexColors {
+  umbrella header "HexColors.h"
+
+  export *
+  module * { export * }
+}

@@ -7,8 +7,8 @@
 //
 
 #import "RMessageView.h"
-#import "HexColors.h"
-#import "UIViewController+PPTopMostController.h"
+#import "UIWindow+TopViewController.h"
+#import <HexColors/HexColors.h>
 
 static NSString *const RDesignFileName = @"RMessageDefaultDesign";
 
@@ -122,15 +122,6 @@ static NSMutableDictionary *globalDesignDictionary;
 #endif
 }
 
-+ (UIViewController *)defaultViewController
-{
-  UIViewController *viewController = [UIViewController topMostController];
-  if (!viewController) {
-    viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-  }
-  return viewController;
-}
-
 /**
  Method which determines if viewController edges extend under top bars
  (navigation bars for example). There are various scenarios and even iOS bugs in which view
@@ -218,7 +209,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitle = subtitle;
     _iconImage = iconImage;
     _duration = duration;
-    viewController ? _viewController = viewController : (_viewController = [RMessageView defaultViewController]);
+    viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
     _messagePosition = position;
     _callback = callback;
     _messageType = messageType;

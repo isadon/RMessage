@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "RMessage"
-  s.version          = "2.1.3"
+  s.version          = "3.0.0"
   s.summary          = "Easy to use and customizable messages/notifications for iOS"
   s.description  = <<-DESC
                     This framework provides an easy to use class to show little notification views on the top of the screen.
@@ -23,12 +23,11 @@ There are 4 different types already set up for you: Success, Error, Warning, Mes
   s.source           = { :git => "https://github.com/donileo/RMessage.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/donileo'
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'RMessage/**/*.{h,m}'
-  s.resources = ['RMessage/Resources/**/*.xib', 'RMessage/Assets/**/*.{png,jpg,json}']
+  s.resources = ['RMessage/Xibs/**/*.xib', 'RMessage/Assets/**/*.{png,jpg,json}']
   s.public_header_files = 'RMessage/*.h'
   s.dependency 'HexColors', '~> 4.0'
-  s.dependency 'PPTopMostController'
 end
