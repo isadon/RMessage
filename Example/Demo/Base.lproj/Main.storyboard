@@ -220,6 +220,14 @@
                                 <rect key="frame" x="97" y="0.0" width="193" height="193"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iux-yo-jjd">
+                                <rect key="frame" x="19" y="447" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Attributed Styling"/>
+                                <connections>
+                                    <action selector="didTapAttributedStyling:" destination="h0s-uL-LZy" eventType="touchUpInside" id="wen-hS-NBM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -415,6 +423,14 @@
                                 <connections>
                                     <action selector="didTapDismissModal:" destination="1kT-B0-h7w" eventType="touchUpInside" id="nVC-2n-v8K"/>
                                     <action selector="didTapPresentModal:" destination="h0s-uL-LZy" eventType="touchUpInside" id="E5G-dU-8sU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaN-Ce-syj">
+                                <rect key="frame" x="23" y="447" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Attributed Styling"/>
+                                <connections>
+                                    <action selector="didTapAttributedStyling:" destination="1kT-B0-h7w" eventType="touchUpInside" id="Y7a-gG-t7q"/>
                                 </connections>
                             </button>
                         </subviews>

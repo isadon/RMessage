@@ -34,7 +34,7 @@ static UIViewController *_defaultViewController;
   return sharedMessage;
 }
 
-+ (void)showNotificationWithTitle:(NSString *)title
++ (void)showNotificationWithTitle:(NSAttributedString *)title
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          callback:(void (^)())callback
@@ -42,8 +42,8 @@ static UIViewController *_defaultViewController;
   [self showNotificationWithTitle:title subtitle:nil type:type customTypeName:customTypeName callback:callback];
 }
 
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          callback:(void (^)())callback
@@ -56,8 +56,8 @@ static UIViewController *_defaultViewController;
                                 callback:callback];
 }
 
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
@@ -72,8 +72,8 @@ static UIViewController *_defaultViewController;
                                 callback:callback];
 }
 
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
@@ -90,8 +90,8 @@ static UIViewController *_defaultViewController;
                     canBeDismissedByUser:dismissingEnabled];
 }
 
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                         iconImage:(UIImage *)iconImage
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
@@ -115,8 +115,8 @@ static UIViewController *_defaultViewController;
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
@@ -136,8 +136,8 @@ static UIViewController *_defaultViewController;
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
@@ -158,8 +158,8 @@ static UIViewController *_defaultViewController;
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 callback:(void (^)())callback
@@ -178,8 +178,8 @@ static UIViewController *_defaultViewController;
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                iconImage:(UIImage *)iconImage
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
@@ -189,7 +189,6 @@ static UIViewController *_defaultViewController;
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  // Create the RMessageView
   RMessageView *messageView = [[RMessageView alloc] initWithDelegate:[RMessage sharedMessage]
                                                                title:title
                                                             subtitle:subtitle
@@ -207,12 +206,12 @@ static UIViewController *_defaultViewController;
 
 + (void)prepareNotificationForPresentation:(RMessageView *)messageView
 {
-  NSString *title = messageView.title;
-  NSString *subtitle = messageView.subtitle;
+  NSAttributedString *title = messageView.title;
+  NSAttributedString *subtitle = messageView.subtitle;
 
   for (RMessageView *messageView in [RMessage sharedMessage].messages) {
-    if (([messageView.title isEqualToString:title] || (!messageView.title && !title)) &&
-        ([messageView.subtitle isEqualToString:subtitle] || (!messageView.subtitle && !subtitle))) {
+    if (([messageView.title isEqualToAttributedString:title] || (!messageView.title && !title)) &&
+        ([messageView.subtitle isEqualToAttributedString:subtitle] || (!messageView.subtitle && !subtitle))) {
       return; // avoid showing the same messages twice in a row
     }
   }

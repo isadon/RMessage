@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  RMessageTypeCustom
  @param callback The block that should be executed, when the user tapped on the message
  */
-+ (void)showNotificationWithTitle:(NSString *)message
++ (void)showNotificationWithTitle:(NSAttributedString *)message
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          callback:(void (^)())callback;
@@ -73,8 +73,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  RMessageTypeCustom
  @param callback The block that should be executed, when the user tapped on the message
  */
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          callback:(void (^)())callback;
@@ -89,8 +89,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  RMessageTypeCustom
  @param callback The block that should be executed, when the user tapped on the message
  */
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
@@ -108,8 +108,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param callback The block that should be executed, when the user tapped on the message
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
@@ -131,8 +131,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param messagePosition The position of the message on the screen
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
-+ (void)showNotificationWithTitle:(NSString *)title
-                         subtitle:(NSString *)subtitle
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
                         iconImage:(UIImage *)iconImage
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
@@ -155,8 +155,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param callback The block that should be executed, when the user tapped on the message
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 callback:(void (^)())callback;
@@ -175,8 +175,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param callback The block that should be executed, when the user tapped on the message
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
@@ -197,8 +197,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
@@ -222,8 +222,8 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSString *)title
-                                subtitle:(NSString *)subtitle
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
                                iconImage:(UIImage *)iconImage
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName

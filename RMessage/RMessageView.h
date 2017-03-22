@@ -29,10 +29,10 @@
 @property (nonatomic, weak) id<RMessageViewProtocol> delegate;
 
 /** The displayed title of this message */
-@property (nonatomic, readonly) NSString *title;
+@property (nonatomic, readonly) NSAttributedString *title;
 
 /** The displayed subtitle of this message */
-@property (nonatomic, readonly) NSString *subtitle;
+@property (nonatomic, readonly) NSAttributedString *subtitle;
 
 /** The view controller this message is displayed in */
 @property (nonatomic, readonly) UIViewController *viewController;
@@ -82,8 +82,8 @@
  @param dismissingEnabled Should this message be dismissed when the user taps/swipes it?
  */
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
-                           title:(NSString *)title
-                        subtitle:(NSString *)subtitle
+                           title:(NSAttributedString *)title
+                        subtitle:(NSAttributedString *)subtitle
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName

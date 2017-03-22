@@ -38,10 +38,10 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, strong) NSDictionary *messageViewDesignDictionary;
 
 /** The displayed title of this message */
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSAttributedString *title;
 
 /** The displayed subtitle of this message view */
-@property (nonatomic, strong) NSString *subtitle;
+@property (nonatomic, strong) NSAttributedString *subtitle;
 
 /** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
@@ -189,8 +189,8 @@ static NSMutableDictionary *globalDesignDictionary;
 #pragma mark - Instance Methods
 
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
-                           title:(NSString *)title
-                        subtitle:(NSString *)subtitle
+                           title:(NSAttributedString *)title
+                        subtitle:(NSAttributedString *)subtitle
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
@@ -204,29 +204,54 @@ static NSMutableDictionary *globalDesignDictionary;
   self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil]
            .firstObject;
   if (self) {
-    _delegate = delegate;
-    _title = title;
-    _subtitle = subtitle;
-    _iconImage = iconImage;
-    _duration = duration;
-    viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
-    _messagePosition = position;
-    _callback = callback;
-    _messageType = messageType;
-    _customTypeName = customTypeName;
-    if (button) {
-      _button = button;
-      [self setupButton];
-    }
-
-    NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
-    if (designError) return nil;
-
-    [self setupDesign];
-    [self setupLayout];
-    if (dismissingEnabled) [self setupGestureRecognizers];
+    _title = title ? title : [[NSAttributedString alloc] initWithString:@""];
+    _subtitle = subtitle ? subtitle : [[NSAttributedString alloc] initWithString:@""];
+    NSError *error = [self setupDefaultsWithDelegate:delegate
+                                           iconImage:iconImage
+                                                type:messageType
+                                      customTypeName:customTypeName
+                                            duration:duration
+                                    inViewController:viewController
+                                            callback:callback
+                                              button:button
+                                          atPosition:position
+                                canBeDismissedByUser:dismissingEnabled];
+    if (error) return nil;
   }
   return self;
+}
+
+- (NSError *)setupDefaultsWithDelegate:(id<RMessageViewProtocol>)delegate
+                             iconImage:(UIImage *)iconImage
+                                  type:(RMessageType)messageType
+                        customTypeName:(NSString *)customTypeName
+                              duration:(CGFloat)duration
+                      inViewController:(UIViewController *)viewController
+                              callback:(void (^)())callback
+                                button:(UIButton *)button
+                            atPosition:(RMessagePosition)position
+                  canBeDismissedByUser:(BOOL)dismissingEnabled
+{
+  _delegate = delegate;
+  _iconImage = iconImage;
+  _duration = duration;
+  viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
+  _messagePosition = position;
+  _callback = callback;
+  _messageType = messageType;
+  _customTypeName = customTypeName;
+  if (button) {
+    _button = button;
+    [self setupButton];
+  }
+
+  NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
+  if (designError) return designError;
+
+  [self setupDesign];
+  [self setupLayout];
+  if (dismissingEnabled) [self setupGestureRecognizers];
+  return nil;
 }
 
 - (void)setMessageOpacity:(CGFloat)messageOpacity
@@ -602,6 +627,11 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupTitleLabel
 {
+  if (_messageViewDesignDictionary[@"titleTextAlignment"]) {
+    _titleLabel.textAlignment =
+      [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"titleTextAlignment"]];
+  }
+
   CGFloat titleFontSize = [[_messageViewDesignDictionary valueForKey:@"titleFontSize"] floatValue];
   NSString *titleFontName = [_messageViewDesignDictionary valueForKey:@"titleFontName"];
   if (titleFontName) {
@@ -610,11 +640,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _titleLabel.font = [UIFont boldSystemFontOfSize:titleFontSize];
   }
 
-  self.titleLabel.textAlignment =
-    [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"titleTextAlignment"]];
-
   UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
-  _titleLabel.text = _title ? _title : @"";
   if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
   UIColor *titleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
@@ -624,10 +650,16 @@ static NSMutableDictionary *globalDesignDictionary;
   if (titleShadowOffsetX && titleShadowOffsetY) {
     _titleLabel.shadowOffset = CGSizeMake([titleShadowOffsetX floatValue], [titleShadowOffsetY floatValue]);
   }
+  _titleLabel.attributedText = _title;
 }
 
 - (void)setupSubTitleLabel
 {
+  if (_messageViewDesignDictionary[@"subtitleTextAlignment"]) {
+    self.subtitleLabel.textAlignment =
+      [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextAlignment"]];
+  }
+
   id subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subTitleFontSize"];
   if (!subTitleFontSizeValue) {
     subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subtitleFontSize"];
@@ -645,18 +677,11 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitleLabel.font = [UIFont systemFontOfSize:subTitleFontSize];
   }
 
-  self.subtitleLabel.textAlignment =
-    [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextAlignment"]];
-
   UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
   if (!subTitleTextColor) {
     subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
   }
-  if (!subTitleTextColor) {
-    subTitleTextColor = _titleLabel.textColor;
-  }
 
-  _subtitleLabel.text = _subtitle ? _subtitle : @"";
   if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
 
   UIColor *subTitleShadowColor =
@@ -677,6 +702,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (subTitleShadowOffsetX && subTitleShadowOffsetY) {
     _subtitleLabel.shadowOffset = CGSizeMake([subTitleShadowOffsetX floatValue], [subTitleShadowOffsetY floatValue]);
   }
+  _subtitleLabel.attributedText = _subtitle;
 }
 
 - (void)setupIconImageView
