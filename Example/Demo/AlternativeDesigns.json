@@ -1,13 +1,10 @@
 {
-    "alternate-error": {
-        "buttonBackgroundImageName": "NotificationButtonBackground.png",
-        "buttonTitleTextColor": "#FF0040",
-        "subTitleFontSize": 14,
-        "subTitleTextColor": "#FFFFFF",
-        "iconImage": "NotificationBackgroundErrorIcon.png",
-        "titleTextColor": "#48FCEB",
-        "titleFontSize": 14,
-        "backgroundColor": "#008AFC",
-        "opacity": 0.95
-    }
+  "alternate-error": {
+    "titleTextColor": "#48FCEB",
+    "titleFontSize": 14,
+    "subtitleFontSize": 14,
+    "subtitleTextColor": "#FFFFFF",
+    "leftViewImage": "NotificationBackgroundErrorIcon.png",
+    "backgroundColor": "#008AFC"
+  }
 }

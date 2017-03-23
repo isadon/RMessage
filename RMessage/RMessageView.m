@@ -341,7 +341,7 @@ static NSMutableDictionary *globalDesignDictionary;
     break;
   }
 
-  _messageViewDesignDictionary = [globalDesignDictionary valueForKey:messageTypeDesignString];
+  _messageViewDesignDictionary = globalDesignDictionary[messageTypeDesignString];
   NSParameterAssert(_messageViewDesignDictionary != nil);
   if (!_messageViewDesignDictionary) {
     return
@@ -361,7 +361,7 @@ static NSMutableDictionary *globalDesignDictionary;
   [self setupDesignDefaults];
   [self setupImagesAndBackground];
   [self setupTitleLabel];
-  [self setupSubTitleLabel];
+  [self setupSubtitleLabel];
 }
 
 - (void)setupLayout
@@ -559,10 +559,10 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupLeftViewImageFromDesignFile
 {
   UIImage *leftViewImage;
-  if (!leftViewImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"leftViewImage"]).length > 0) {
-    leftViewImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"leftViewImage"]];
+  if (!leftViewImage && ((NSString *)_messageViewDesignDictionary[@"leftViewImage"]).length > 0) {
+    leftViewImage = [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"leftViewImage"]];
     if (!leftViewImage) {
-      leftViewImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"leftViewImage"]];
+      leftViewImage = [UIImage imageNamed:_messageViewDesignDictionary[@"leftViewImage"]];
     }
   }
 
@@ -570,9 +570,8 @@ static NSMutableDictionary *globalDesignDictionary;
     _leftView = [[UIImageView alloc] initWithImage:leftViewImage];
     _leftView.clipsToBounds = YES;
     _leftView.contentMode = UIViewContentModeScaleAspectFit;
-    if ([_messageViewDesignDictionary valueForKey:@"leftViewRelativeCornerRadius"]) {
-      _leftViewRelativeCornerRadius =
-        [[_messageViewDesignDictionary valueForKey:@"leftViewRelativeCornerRadius"] floatValue];
+    if (_messageViewDesignDictionary[@"leftViewRelativeCornerRadius"]) {
+      _leftViewRelativeCornerRadius = [_messageViewDesignDictionary[@"leftViewRelativeCornerRadius"] floatValue];
     } else {
       _leftViewRelativeCornerRadius = 0.f;
     }
@@ -583,10 +582,10 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupRightViewImageFromDesignFile
 {
   UIImage *rightViewImage;
-  if (!rightViewImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"rightViewImage"]).length > 0) {
-    rightViewImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"rightViewImage"]];
+  if (!rightViewImage && ((NSString *)_messageViewDesignDictionary[@"rightViewImage"]).length > 0) {
+    rightViewImage = [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"rightViewImage"]];
     if (!rightViewImage) {
-      rightViewImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"rightViewImage"]];
+      rightViewImage = [UIImage imageNamed:_messageViewDesignDictionary[@"rightViewImage"]];
     }
   }
 
@@ -594,9 +593,8 @@ static NSMutableDictionary *globalDesignDictionary;
     _rightView = [[UIImageView alloc] initWithImage:rightViewImage];
     _rightView.clipsToBounds = YES;
     _rightView.contentMode = UIViewContentModeScaleAspectFit;
-    if ([_messageViewDesignDictionary valueForKey:@"rightViewRelativeCornerRadius"]) {
-      _rightViewRelativeCornerRadius =
-        [[_messageViewDesignDictionary valueForKey:@"rightViewRelativeCornerRadius"] floatValue];
+    if (_messageViewDesignDictionary[@"rightViewRelativeCornerRadius"]) {
+      _rightViewRelativeCornerRadius = [_messageViewDesignDictionary[@"rightViewRelativeCornerRadius"] floatValue];
     } else {
       _rightViewRelativeCornerRadius = 0.f;
     }
@@ -607,7 +605,7 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupBackgroundImageFromDesignFile
 {
   UIImage *backgroundImage =
-    [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundViewResizeableImage"]];
+    [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"backgroundViewResizeableImage"]];
   if (backgroundImage && !_backgroundView) {
     _backgroundView.clipsToBounds = YES;
     backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
@@ -627,79 +625,56 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupTitleLabel
 {
   if (_messageViewDesignDictionary[@"titleTextAlignment"]) {
-    _titleLabel.textAlignment =
-      [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"titleTextAlignment"]];
+    _titleLabel.textAlignment = [self textAlignmentForString:_messageViewDesignDictionary[@"titleTextAlignment"]];
   }
 
-  CGFloat titleFontSize = [[_messageViewDesignDictionary valueForKey:@"titleFontSize"] floatValue];
-  NSString *titleFontName = [_messageViewDesignDictionary valueForKey:@"titleFontName"];
+  CGFloat titleFontSize = [_messageViewDesignDictionary[@"titleFontSize"] floatValue];
+  NSString *titleFontName = _messageViewDesignDictionary[@"titleFontName"];
   if (titleFontName) {
     _titleLabel.font = [UIFont fontWithName:titleFontName size:titleFontSize];
   } else if (titleFontSize) {
     _titleLabel.font = [UIFont boldSystemFontOfSize:titleFontSize];
   }
 
-  UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
+  UIColor *titleTextColor = [self colorForString:_messageViewDesignDictionary[@"titleTextColor"]];
   if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
-  UIColor *titleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
+  UIColor *titleShadowColor = [self colorForString:_messageViewDesignDictionary[@"titleShadowColor"]];
   if (titleShadowColor) _titleLabel.shadowColor = titleShadowColor;
-  id titleShadowOffsetX = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetX"];
-  id titleShadowOffsetY = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetY"];
+  id titleShadowOffsetX = _messageViewDesignDictionary[@"titleShadowOffsetX"];
+  id titleShadowOffsetY = _messageViewDesignDictionary[@"titleShadowOffsetY"];
   if (titleShadowOffsetX && titleShadowOffsetY) {
     _titleLabel.shadowOffset = CGSizeMake([titleShadowOffsetX floatValue], [titleShadowOffsetY floatValue]);
   }
   _titleLabel.attributedText = _title;
 }
 
-- (void)setupSubTitleLabel
+- (void)setupSubtitleLabel
 {
-  if (_messageViewDesignDictionary[@"subtitleTextAlignment"]) {
-    self.subtitleLabel.textAlignment =
-      [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextAlignment"]];
+  NSString *subtitleTextAlignment = _messageViewDesignDictionary[@"subtitleTextAlignment"];
+  if (subtitleTextAlignment) self.subtitleLabel.textAlignment = [self textAlignmentForString:subtitleTextAlignment];
+
+  id subtitleFontSizeValue = _messageViewDesignDictionary[@"subtitleFontSize"];
+
+  CGFloat subtitleFontSize = [subtitleFontSizeValue floatValue];
+  NSString *subtitleFontName = _messageViewDesignDictionary[@"subtitleFontName"];
+
+  if (subtitleFontName) {
+    _subtitleLabel.font = [UIFont fontWithName:subtitleFontName size:subtitleFontSize];
+  } else if (subtitleFontSize) {
+    _subtitleLabel.font = [UIFont systemFontOfSize:subtitleFontSize];
   }
 
-  id subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subTitleFontSize"];
-  if (!subTitleFontSizeValue) {
-    subTitleFontSizeValue = [_messageViewDesignDictionary valueForKey:@"subtitleFontSize"];
-  }
+  UIColor *subtitleTextColor = [self colorForString:_messageViewDesignDictionary[@"subtitleTextColor"]];
+  if (subtitleTextColor) _subtitleLabel.textColor = subtitleTextColor;
 
-  CGFloat subTitleFontSize = [subTitleFontSizeValue floatValue];
-  NSString *subTitleFontName = [_messageViewDesignDictionary valueForKey:@"subTitleFontName"];
-  if (!subTitleFontName) {
-    subTitleFontName = [_messageViewDesignDictionary valueForKey:@"subtitleFontName"];
-  }
+  UIColor *subtitleShadowColor = [self colorForString:_messageViewDesignDictionary[@"subtitleShadowColor"]];
 
-  if (subTitleFontName) {
-    _subtitleLabel.font = [UIFont fontWithName:subTitleFontName size:subTitleFontSize];
-  } else if (subTitleFontSize) {
-    _subtitleLabel.font = [UIFont systemFontOfSize:subTitleFontSize];
-  }
-
-  UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
-  if (!subTitleTextColor) {
-    subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
-  }
-
-  if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
-
-  UIColor *subTitleShadowColor =
-    [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleShadowColor"]];
-  if (!subTitleShadowColor) {
-    subTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleShadowColor"]];
-  }
-
-  if (subTitleShadowColor) _subtitleLabel.shadowColor = subTitleShadowColor;
-  id subTitleShadowOffsetX = [_messageViewDesignDictionary valueForKey:@"subTitleShadowOffsetX"];
-  id subTitleShadowOffsetY = [_messageViewDesignDictionary valueForKey:@"subTitleShadowOffsetY"];
-  if (!subTitleShadowOffsetX) {
-    subTitleShadowOffsetX = [_messageViewDesignDictionary valueForKey:@"subtitleShadowOffsetX"];
-  }
-  if (!subTitleShadowOffsetY) {
-    subTitleShadowOffsetY = [_messageViewDesignDictionary valueForKey:@"subtitleShadowOffsetY"];
-  }
-  if (subTitleShadowOffsetX && subTitleShadowOffsetY) {
-    _subtitleLabel.shadowOffset = CGSizeMake([subTitleShadowOffsetX floatValue], [subTitleShadowOffsetY floatValue]);
+  if (subtitleShadowColor) _subtitleLabel.shadowColor = subtitleShadowColor;
+  id subtitleShadowOffsetX = _messageViewDesignDictionary[@"subtitleShadowOffsetX"];
+  id subtitleShadowOffsetY = _messageViewDesignDictionary[@"subtitleShadowOffsetY"];
+  if (subtitleShadowOffsetX && subtitleShadowOffsetY) {
+    _subtitleLabel.shadowOffset = CGSizeMake([subtitleShadowOffsetX floatValue], [subtitleShadowOffsetY floatValue]);
   }
   _subtitleLabel.attributedText = _subtitle;
 }
