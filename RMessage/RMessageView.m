@@ -428,6 +428,10 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupBackgroundView
 {
+  UIViewContentMode contentMode =
+    [self contentModeForString:_messageViewDesignDictionary[@"backgroundViewContentMode"]];
+  if (contentMode) _backgroundView.contentMode = contentMode;
+
   _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
   [self insertSubview:_backgroundView atIndex:0];
   NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundView]-0-|"
@@ -570,6 +574,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _leftView = [[UIImageView alloc] initWithImage:leftViewImage];
     _leftView.clipsToBounds = YES;
     _leftView.contentMode = UIViewContentModeScaleAspectFit;
+
     if (_messageViewDesignDictionary[@"leftViewRelativeCornerRadius"]) {
       _leftViewRelativeCornerRadius = [_messageViewDesignDictionary[@"leftViewRelativeCornerRadius"] floatValue];
     } else {
@@ -593,6 +598,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _rightView = [[UIImageView alloc] initWithImage:rightViewImage];
     _rightView.clipsToBounds = YES;
     _rightView.contentMode = UIViewContentModeScaleAspectFit;
+
     if (_messageViewDesignDictionary[@"rightViewRelativeCornerRadius"]) {
       _rightViewRelativeCornerRadius = [_messageViewDesignDictionary[@"rightViewRelativeCornerRadius"] floatValue];
     } else {
@@ -604,14 +610,21 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupBackgroundImageFromDesignFile
 {
-  UIImage *backgroundImage =
-    [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"backgroundViewResizeableImage"]];
+  BOOL resizeableImageFound = NO;
+
+  UIImage *backgroundImage = [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"backgroundViewImage"]];
+  if (!backgroundImage) {
+    backgroundImage = [RMessageView bundledImageNamed:_messageViewDesignDictionary[@"backgroundViewResizeableImage"]];
+    if (backgroundImage) resizeableImageFound = YES;
+  }
+
   if (backgroundImage && !_backgroundView) {
     _backgroundView.clipsToBounds = YES;
-    backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
-                                                      resizingMode:UIImageResizingModeStretch];
+    if (resizeableImageFound) {
+      backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
+                                                        resizingMode:UIImageResizingModeStretch];
+    }
     _backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
-
     // When initializing the background view with an image from the json design file
     // dont allow the stretchable image to dictate the size of the view
     [self.backgroundView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
@@ -681,6 +694,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupLeftView
 {
+  UIViewContentMode contentMode = [self contentModeForString:_messageViewDesignDictionary[@"leftViewContentMode"]];
+  if (contentMode) _leftView.contentMode = contentMode;
+
   self.leftView.translatesAutoresizingMaskIntoConstraints = NO;
 
   NSLayoutConstraint *leftViewCenterY = [NSLayoutConstraint constraintWithItem:self.leftView
@@ -718,6 +734,9 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupRightView
 {
+  UIViewContentMode contentMode = [self contentModeForString:_messageViewDesignDictionary[@"rightViewContentMode"]];
+  if (contentMode) _rightView.contentMode = contentMode;
+
   self.rightView.translatesAutoresizingMaskIntoConstraints = NO;
   [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
   [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
@@ -940,6 +959,38 @@ static NSMutableDictionary *globalDesignDictionary;
   return customVerticalOffset;
 }
 
+- (UIViewContentMode)contentModeForString:(NSString *)contentMode
+{
+  if ([contentMode isEqualToString:@"scaleToFill"]) {
+    return UIViewContentModeScaleToFill;
+  } else if ([contentMode isEqualToString:@"scaleAspectFill"]) {
+    return UIViewContentModeScaleAspectFill;
+  } else if ([contentMode isEqualToString:@"scaleAspectFit"]) {
+    return UIViewContentModeScaleAspectFit;
+  } else if ([contentMode isEqualToString:@"redraw"]) {
+    return UIViewContentModeRedraw;
+  } else if ([contentMode isEqualToString:@"center"]) {
+    return UIViewContentModeCenter;
+  } else if ([contentMode isEqualToString:@"top"]) {
+    return UIViewContentModeTop;
+  } else if ([contentMode isEqualToString:@"bottom"]) {
+    return UIViewContentModeBottom;
+  } else if ([contentMode isEqualToString:@"left"]) {
+    return UIViewContentModeLeft;
+  } else if ([contentMode isEqualToString:@"right"]) {
+    return UIViewContentModeRight;
+  } else if ([contentMode isEqualToString:@"topLeft"]) {
+    return UIViewContentModeTopLeft;
+  } else if ([contentMode isEqualToString:@"topRight"]) {
+    return UIViewContentModeTopRight;
+  } else if ([contentMode isEqualToString:@"bottomLeft"]) {
+    return UIViewContentModeBottomLeft;
+  } else if ([contentMode isEqualToString:@"bottomRight"]) {
+    return UIViewContentModeBottomRight;
+  } else {
+    return UIViewContentModeScaleToFill;
+  }
+}
 - (NSTextAlignment)textAlignmentForString:(NSString *)textAlignment
 {
   if ([textAlignment isEqualToString:@"left"]) {
