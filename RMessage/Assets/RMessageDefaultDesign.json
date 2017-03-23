@@ -6,7 +6,7 @@
     "titleFontSize": 14,
     "subTitleFontSize": 12,
     "subTitleTextColor": "#FFFFFF",
-    "iconImage": "NotificationBackgroundSuccessIcon.png",
+    "leftViewImage": "NotificationBackgroundSuccessIcon.png",
     "blurBackground": 0
   },
   "normal": {
@@ -25,7 +25,7 @@
     "titleFontSize": 14,
     "subTitleFontSize": 12,
     "subTitleTextColor": "#484638",
-    "iconImage": "NotificationBackgroundWarningIcon.png",
+    "leftViewImage": "NotificationBackgroundWarningIcon.png",
     "blurBackground": 0
   },
   "error": {
@@ -35,7 +35,7 @@
     "titleFontSize": 14,
     "subTitleFontSize": 12,
     "subTitleTextColor": "#FFFFFF",
-    "iconImage": "NotificationBackgroundErrorIcon.png",
+    "leftViewImage": "NotificationBackgroundErrorIcon.png",
     "blurBackground": 0
   }
 }

@@ -100,13 +100,14 @@
   [RMessage showNotificationInViewController:self
                                        title:@"New version available".attributedString
                                     subtitle:@"Please update our app. We would be very thankful".attributedString
-                                   iconImage:nil
                                         type:RMessageTypeNormal
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                      button:downloadButton
                                   atPosition:RMessagePositionTop
+                                    leftView:nil
+                                   rightView:downloadButton
+                              backgroundView:nil
                         canBeDismissedByUser:YES];
 }
 
@@ -116,29 +117,33 @@
     [RMessage showNotificationInViewController:self
                                          title:@"Download Finished".attributedString
                                       subtitle:@"Thanks!".attributedString
-                                     iconImage:nil
                                           type:RMessageTypeSuccess
                                 customTypeName:nil
                                       duration:RMessageDurationAutomatic
                                       callback:nil
-                                        button:nil
                                     atPosition:RMessagePositionTop
+                                      leftView:nil
+                                     rightView:nil
+                                backgroundView:nil
                           canBeDismissedByUser:YES];
   }];
 }
 
 - (IBAction)didTapCustomImage:(id)sender
 {
+  //
   [RMessage showNotificationInViewController:self
                                        title:@"Custom image".attributedString
                                     subtitle:@"This uses an image you can define".attributedString
-                                   iconImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]
                                         type:RMessageTypeNormal
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                      button:nil
                                   atPosition:RMessagePositionTop
+                                    leftView:[[UIImageView alloc]
+                                               initWithImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]]
+                                   rightView:nil
+                              backgroundView:nil
                         canBeDismissedByUser:YES];
 }
 
@@ -149,13 +154,14 @@
                                title:@"Endless".attributedString
                             subtitle:@"This message can not be dismissed and will not be hidden automatically. Tap the "
                                      @"'Dismiss' button to dismiss the currently shown message".attributedString
-                           iconImage:nil
                                 type:RMessageTypeSuccess
                       customTypeName:nil
                             duration:RMessageDurationEndless
                             callback:nil
-                              button:nil
                           atPosition:RMessagePositionTop
+                            leftView:nil
+                           rightView:nil
+                      backgroundView:nil
                 canBeDismissedByUser:NO];
 }
 
@@ -165,13 +171,14 @@
                                        title:@"Long".attributedString
                                     subtitle:@"This message is displayed 10 seconds instead of the calculated value"
                                                .attributedString
-                                   iconImage:nil
                                         type:RMessageTypeWarning
                               customTypeName:nil
                                     duration:10.0
                                     callback:nil
-                                      button:nil
                                   atPosition:RMessagePositionTop
+                                    leftView:nil
+                                   rightView:nil
+                              backgroundView:nil
                         canBeDismissedByUser:YES];
 }
 
@@ -180,13 +187,14 @@
   [RMessage showNotificationInViewController:self
                                        title:@"Hu!".attributedString
                                     subtitle:@"I'm down here :)".attributedString
-                                   iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                      button:nil
                                   atPosition:RMessagePositionBottom
+                                    leftView:nil
+                                   rightView:nil
+                              backgroundView:nil
                         canBeDismissedByUser:YES];
 }
 
@@ -257,13 +265,14 @@
   [RMessage showNotificationInViewController:self.navigationController
                                        title:@"Whoa!".attributedString
                                     subtitle:@"Over the Navigation Bar!".attributedString
-                                   iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                      button:nil
                                   atPosition:RMessagePositionNavBarOverlay
+                                    leftView:nil
+                                   rightView:nil
+                              backgroundView:nil
                         canBeDismissedByUser:YES];
 }
 

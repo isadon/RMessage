@@ -27,12 +27,9 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
 
-@property (nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) UIImageView *backgroundImageView;
-
-@property (nonatomic, strong) UIButton *button;
-
-@property (nonatomic, strong) UIImage *iconImage;
+@property (nonatomic, strong) UIView *leftView;
+@property (nonatomic, strong) UIView *rightView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 /** Contains the appropriate design dictionary for the specified message view type */
 @property (nonatomic, strong) NSDictionary *messageViewDesignDictionary;
@@ -57,7 +54,9 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The final constant value that should be set for the topToVCTopLayoutConstraint when animating */
 @property (nonatomic, assign) CGFloat topToVCFinalConstant;
 
-@property (nonatomic, assign) CGFloat iconRelativeCornerRadius;
+@property (nonatomic, assign) CGFloat leftViewRelativeCornerRadius;
+@property (nonatomic, assign) CGFloat rightViewRelativeCornerRadius;
+
 @property (nonatomic, assign) RMessageType messageType;
 @property (nonatomic, copy) NSString *customTypeName;
 
@@ -191,14 +190,15 @@ static NSMutableDictionary *globalDesignDictionary;
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
                            title:(NSAttributedString *)title
                         subtitle:(NSAttributedString *)subtitle
-                       iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
-                          button:(UIButton *)button
                       atPosition:(RMessagePosition)position
+                        leftView:(UIView *)leftView
+                       rightView:(UIView *)rightView
+                  backgroundView:(UIView *)backgroundView
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil]
@@ -207,14 +207,15 @@ static NSMutableDictionary *globalDesignDictionary;
     _title = title ? title : [[NSAttributedString alloc] initWithString:@""];
     _subtitle = subtitle ? subtitle : [[NSAttributedString alloc] initWithString:@""];
     NSError *error = [self setupDefaultsWithDelegate:delegate
-                                           iconImage:iconImage
                                                 type:messageType
                                       customTypeName:customTypeName
                                             duration:duration
                                     inViewController:viewController
                                             callback:callback
-                                              button:button
                                           atPosition:position
+                                            leftView:leftView
+                                           rightView:rightView
+                                      backgroundView:backgroundView
                                 canBeDismissedByUser:dismissingEnabled];
     if (error) return nil;
   }
@@ -222,27 +223,35 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 - (NSError *)setupDefaultsWithDelegate:(id<RMessageViewProtocol>)delegate
-                             iconImage:(UIImage *)iconImage
                                   type:(RMessageType)messageType
                         customTypeName:(NSString *)customTypeName
                               duration:(CGFloat)duration
                       inViewController:(UIViewController *)viewController
                               callback:(void (^)())callback
-                                button:(UIButton *)button
                             atPosition:(RMessagePosition)position
+                              leftView:(UIView *)leftView
+                             rightView:(UIView *)rightView
+                        backgroundView:(UIView *)backgroundView
                   canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   _delegate = delegate;
-  _iconImage = iconImage;
   _duration = duration;
   viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
   _messagePosition = position;
   _callback = callback;
   _messageType = messageType;
   _customTypeName = customTypeName;
-  if (button) {
-    _button = button;
-    [self setupButton];
+  if (leftView) {
+    _leftView = leftView;
+    [self setupLeftView];
+  }
+  if (rightView) {
+    _rightView = rightView;
+    [self setupRightView];
+  }
+  if (backgroundView) {
+    _backgroundView = backgroundView;
+    [self setupBackgroundView];
   }
 
   NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
@@ -294,59 +303,6 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   _subtitleTextColor = subtitleTextColor;
   [self.subtitleLabel setTextColor:_subtitleTextColor];
-}
-
-- (void)setMessageIcon:(UIImage *)messageIcon
-{
-  _messageIcon = messageIcon;
-  [self updateCurrentIconIfNeeded];
-}
-
-- (void)setErrorIcon:(UIImage *)errorIcon
-{
-  _errorIcon = errorIcon;
-  [self updateCurrentIconIfNeeded];
-}
-
-- (void)setSuccessIcon:(UIImage *)successIcon
-{
-  _successIcon = successIcon;
-  [self updateCurrentIconIfNeeded];
-}
-
-- (void)setWarningIcon:(UIImage *)warningIcon
-{
-  _warningIcon = warningIcon;
-  [self updateCurrentIconIfNeeded];
-}
-
-- (void)updateCurrentIconIfNeeded
-{
-  UIImage *image = nil;
-  switch (self.messageType) {
-  case RMessageTypeNormal: {
-    image = _messageIcon;
-    self.iconImageView.image = _messageIcon;
-    break;
-  }
-  case RMessageTypeError: {
-    image = _errorIcon;
-    self.iconImageView.image = _errorIcon;
-    break;
-  }
-  case RMessageTypeSuccess: {
-    image = _successIcon;
-    self.iconImageView.image = _successIcon;
-    break;
-  }
-  case RMessageTypeWarning: {
-    image = _warningIcon;
-    self.iconImageView.image = _warningIcon;
-    break;
-  }
-  default:
-    break;
-  }
 }
 
 - (NSError *)setupDesignDictionariesWithMessageType:(RMessageType)messageType customTypeName:(NSString *)customTypeName
@@ -470,23 +426,21 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.shouldBlurBackground) [self setupBlurBackground];
 }
 
-- (void)setupBackgroundImageViewWithImage:(UIImage *)image
+- (void)setupBackgroundView
 {
-  _backgroundImageView = [[UIImageView alloc] initWithImage:image];
-  _backgroundImageView.translatesAutoresizingMaskIntoConstraints = NO;
-  _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
-  [self insertSubview:_backgroundImageView atIndex:0];
-  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundImageView]-0-|"
+  _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+  [self insertSubview:_backgroundView atIndex:0];
+  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundView]-0-|"
                                                                   options:0
                                                                   metrics:nil
                                                                     views:@{
-                                                                      @"backgroundImageView": _backgroundImageView
+                                                                      @"backgroundView": _backgroundView
                                                                     }];
-  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundImageView]-0-|"
+  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundView]-0-|"
                                                                   options:0
                                                                   metrics:nil
                                                                     views:@{
-                                                                      @"backgroundImageView": _backgroundImageView
+                                                                      @"backgroundView": _backgroundView
                                                                     }];
   [[self class] activateConstraints:hConstraints inSuperview:self];
   [[self class] activateConstraints:vConstraints inSuperview:self];
@@ -516,12 +470,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupLabelPreferredMaxLayoutWidth
 {
-  CGFloat iconImageWidthAndPadding = 0.f;
-  CGFloat buttonSizeAndPadding = 0.f;
-  if (_iconImage) iconImageWidthAndPadding = _iconImage.size.width + 15.f;
-  if (_button) buttonSizeAndPadding = _button.bounds.size.width + 15.f;
+  CGFloat leftViewWidthAndPadding = 0.f;
+  CGFloat rightViewWidthAndPadding = 0.f;
+  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + 15.f;
+  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + 15.f;
   _titleLabel.preferredMaxLayoutWidth =
-    self.superview.bounds.size.width - iconImageWidthAndPadding - buttonSizeAndPadding - 30.f;
+    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 30.f;
   _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
 }
 
@@ -543,8 +497,11 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  if (self.iconRelativeCornerRadius > 0) {
-    self.iconImageView.layer.cornerRadius = self.iconRelativeCornerRadius * self.iconImageView.bounds.size.width;
+  if (self.leftViewRelativeCornerRadius > 0) {
+    self.leftView.layer.cornerRadius = self.leftViewRelativeCornerRadius * self.leftView.bounds.size.width;
+  }
+  if (self.rightViewRelativeCornerRadius > 0) {
+    self.rightView.layer.cornerRadius = self.rightViewRelativeCornerRadius * self.rightView.bounds.size.width;
   }
 }
 
@@ -570,8 +527,6 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.shadowColor = nil;
   _subtitleLabel.shadowOffset = CGSizeZero;
   _subtitleLabel.backgroundColor = nil;
-
-  _iconImageView.clipsToBounds = NO;
 }
 
 - (void)setupImagesAndBackground
@@ -596,32 +551,76 @@ static NSMutableDictionary *globalDesignDictionary;
     self.messageOpacity = 1.f;
   }
 
-  if (!_iconImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"iconImage"]).length > 0) {
-    _iconImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"iconImage"]];
-    if (!_iconImage) {
-      _iconImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"iconImage"]];
+  [self setupLeftViewImageFromDesignFile];
+  [self setupRightViewImageFromDesignFile];
+  [self setupBackgroundImageFromDesignFile];
+}
+
+- (void)setupLeftViewImageFromDesignFile
+{
+  UIImage *leftViewImage;
+  if (!leftViewImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"leftViewImage"]).length > 0) {
+    leftViewImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"leftViewImage"]];
+    if (!leftViewImage) {
+      leftViewImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"leftViewImage"]];
     }
   }
 
-  if (_iconImage) {
-    _iconImageView = [[UIImageView alloc] initWithImage:_iconImage];
-    if ([_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"]) {
-      self.iconRelativeCornerRadius =
-        [[_messageViewDesignDictionary valueForKey:@"iconImageRelativeCornerRadius"] floatValue];
-      _iconImageView.clipsToBounds = YES;
+  if (leftViewImage && !_leftView) {
+    _leftView = [[UIImageView alloc] initWithImage:leftViewImage];
+    _leftView.clipsToBounds = YES;
+    _leftView.contentMode = UIViewContentModeScaleAspectFit;
+    if ([_messageViewDesignDictionary valueForKey:@"leftViewRelativeCornerRadius"]) {
+      _leftViewRelativeCornerRadius =
+        [[_messageViewDesignDictionary valueForKey:@"leftViewRelativeCornerRadius"] floatValue];
     } else {
-      self.iconRelativeCornerRadius = 0.f;
-      _iconImageView.clipsToBounds = NO;
+      _leftViewRelativeCornerRadius = 0.f;
     }
-    [self setupIconImageView];
+    [self setupLeftView];
+  }
+}
+
+- (void)setupRightViewImageFromDesignFile
+{
+  UIImage *rightViewImage;
+  if (!rightViewImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"rightViewImage"]).length > 0) {
+    rightViewImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"rightViewImage"]];
+    if (!rightViewImage) {
+      rightViewImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"rightViewImage"]];
+    }
   }
 
+  if (rightViewImage && !_rightView) {
+    _rightView = [[UIImageView alloc] initWithImage:rightViewImage];
+    _rightView.clipsToBounds = YES;
+    _rightView.contentMode = UIViewContentModeScaleAspectFit;
+    if ([_messageViewDesignDictionary valueForKey:@"rightViewRelativeCornerRadius"]) {
+      _rightViewRelativeCornerRadius =
+        [[_messageViewDesignDictionary valueForKey:@"rightViewRelativeCornerRadius"] floatValue];
+    } else {
+      _rightViewRelativeCornerRadius = 0.f;
+    }
+    [self setupRightView];
+  }
+}
+
+- (void)setupBackgroundImageFromDesignFile
+{
   UIImage *backgroundImage =
-    [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundImage"]];
-  if (backgroundImage) {
+    [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundViewResizeableImage"]];
+  if (backgroundImage && !_backgroundView) {
+    _backgroundView.clipsToBounds = YES;
     backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
                                                       resizingMode:UIImageResizingModeStretch];
-    [self setupBackgroundImageViewWithImage:backgroundImage];
+    _backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
+
+    // When initializing the background view with an image from the json design file
+    // dont allow the stretchable image to dictate the size of the view
+    [self.backgroundView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
+                                                         forAxis:UILayoutConstraintAxisHorizontal];
+    [self.backgroundView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
+                                                         forAxis:UILayoutConstraintAxisVertical];
+    [self setupBackgroundView];
   }
 }
 
@@ -705,87 +704,88 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.attributedText = _subtitle;
 }
 
-- (void)setupIconImageView
+- (void)setupLeftView
 {
-  self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
-  self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
+  self.leftView.translatesAutoresizingMaskIntoConstraints = NO;
 
-  NSLayoutConstraint *imgViewCenterY = [NSLayoutConstraint constraintWithItem:self.iconImageView
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.titleSubtitleContainerView
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                   multiplier:1.f
-                                                                     constant:0.f];
-  NSLayoutConstraint *imgViewLeading = [NSLayoutConstraint constraintWithItem:self.iconImageView
-                                                                    attribute:NSLayoutAttributeLeading
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeLeading
-                                                                   multiplier:1.f
-                                                                     constant:15.f];
-  NSLayoutConstraint *imgViewTrailing = [NSLayoutConstraint constraintWithItem:self.iconImageView
-                                                                     attribute:NSLayoutAttributeTrailing
+  NSLayoutConstraint *leftViewCenterY = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                                     attribute:NSLayoutAttributeCenterY
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:self.titleSubtitleContainerView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.f
+                                                                      constant:0.f];
+  NSLayoutConstraint *leftViewLeading = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                                     attribute:NSLayoutAttributeLeading
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
                                                                      attribute:NSLayoutAttributeLeading
                                                                     multiplier:1.f
-                                                                      constant:-15.f];
-  NSLayoutConstraint *imgViewBottom = [NSLayoutConstraint constraintWithItem:self.iconImageView
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                   relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                      toItem:self
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                  multiplier:1.f
-                                                                    constant:-10.f];
-  [self addSubview:self.iconImageView];
-  [[self class] activateConstraints:@[imgViewCenterY, imgViewLeading, imgViewTrailing, imgViewBottom] inSuperview:self];
+                                                                      constant:15.f];
+  NSLayoutConstraint *leftViewTrailing = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.titleSubtitleContainerView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                     multiplier:1.f
+                                                                       constant:-15.f];
+  NSLayoutConstraint *leftViewBottom = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.f
+                                                                     constant:-10.f];
+  [self addSubview:self.leftView];
+  [[self class] activateConstraints:@[leftViewCenterY, leftViewLeading, leftViewTrailing, leftViewBottom]
+                        inSuperview:self];
 }
 
-- (void)setupButton
+- (void)setupRightView
 {
-  self.button.translatesAutoresizingMaskIntoConstraints = NO;
-  [self.button setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-  [self.button setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
+  self.rightView.translatesAutoresizingMaskIntoConstraints = NO;
+  [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+  [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
 
-  NSLayoutConstraint *buttonCenterY = [NSLayoutConstraint constraintWithItem:self.button
-                                                                   attribute:NSLayoutAttributeCenterY
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self.titleSubtitleContainerView
-                                                                   attribute:NSLayoutAttributeCenterY
-                                                                  multiplier:1.f
-                                                                    constant:0.f];
-  NSLayoutConstraint *buttonLeading = [NSLayoutConstraint constraintWithItem:self.button
-                                                                   attribute:NSLayoutAttributeLeading
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self.titleSubtitleContainerView
-                                                                   attribute:NSLayoutAttributeTrailing
-                                                                  multiplier:1.f
-                                                                    constant:15.f];
-  NSLayoutConstraint *buttonTrailing = [NSLayoutConstraint constraintWithItem:self.button
-                                                                    attribute:NSLayoutAttributeTrailing
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeTrailing
-                                                                   multiplier:1.f
-                                                                     constant:-15.f];
-  NSLayoutConstraint *buttonTop = [NSLayoutConstraint constraintWithItem:self.button
-                                                               attribute:NSLayoutAttributeTop
-                                                               relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeTop
-                                                              multiplier:1.f
-                                                                constant:10.f];
-  NSLayoutConstraint *buttonBottom = [NSLayoutConstraint constraintWithItem:self.button
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                  relatedBy:NSLayoutRelationLessThanOrEqual
+  NSLayoutConstraint *rightViewCenterY = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                                      attribute:NSLayoutAttributeCenterY
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.titleSubtitleContainerView
+                                                                      attribute:NSLayoutAttributeCenterY
+                                                                     multiplier:1.f
+                                                                       constant:0.f];
+  NSLayoutConstraint *rightViewLeading = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.titleSubtitleContainerView
+                                                                      attribute:NSLayoutAttributeTrailing
+                                                                     multiplier:1.f
+                                                                       constant:15.f];
+  NSLayoutConstraint *rightViewTrailing = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.f
+                                                                        constant:-15.f];
+  NSLayoutConstraint *rightViewTop = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                                  attribute:NSLayoutAttributeTop
+                                                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:self
-                                                                  attribute:NSLayoutAttributeBottom
+                                                                  attribute:NSLayoutAttributeTop
                                                                  multiplier:1.f
-                                                                   constant:-10.f];
-  [self addSubview:self.button];
-  [[self class] activateConstraints:@[buttonCenterY, buttonLeading, buttonTrailing, buttonTop, buttonBottom]
-                        inSuperview:self];
+                                                                   constant:10.f];
+  NSLayoutConstraint *rightViewBottom = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                     relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1.f
+                                                                      constant:-10.f];
+  [self addSubview:self.rightView];
+  [[self class]
+    activateConstraints:@[rightViewCenterY, rightViewLeading, rightViewTrailing, rightViewTop, rightViewBottom]
+            inSuperview:self];
 }
 
 - (void)setupGestureRecognizers

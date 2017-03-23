@@ -120,26 +120,28 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  Shows a notification message
  @param title The title of the message view
  @param subtitle The message that is displayed underneath the title (optional)
- @param iconImage A custom icon image (optional)
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
  @param callback The block that should be executed, when the user tapped on the message
- @param button The button to display on the right side of the message (optional)
  @param messagePosition The position of the message on the screen
+ @param leftView The view to position on the left of the title and subtitle labels
+ @param rightView The view to position on the right of the title and subtitle labels
+ @param backgroundView The view to position as the background view of the message
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationWithTitle:(NSAttributedString *)title
                          subtitle:(NSAttributedString *)subtitle
-                        iconImage:(UIImage *)iconImage
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
                          callback:(void (^)())callback
-                           button:(UIButton *)button
                        atPosition:(RMessagePosition)messagePosition
+                         leftView:(UIView *)leftView
+                        rightView:(UIView *)rightView
+                   backgroundView:(UIView *)backgroundView
              canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /**
@@ -210,27 +212,29 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  @param viewController The view controller to show the notification in.
  @param title The title of the message view
  @param subtitle The message that is displayed underneath the title (optional)
- @param iconImage A custom icon image (optional)
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
  @param callback The block that should be executed, when the user tapped on the message
- @param button The button to display on the right side of the message (optional)
  @param messagePosition The position of the message on the screen
+ @param leftView The view to position on the left of the title and subtitle labels
+ @param rightView The view to position on the right of the title and subtitle labels
+ @param backgroundView The view to position as the background view of the message
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSAttributedString *)title
                                 subtitle:(NSAttributedString *)subtitle
-                               iconImage:(UIImage *)iconImage
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
-                                  button:(UIButton *)button
                               atPosition:(RMessagePosition)messagePosition
+                                leftView:(UIView *)leftView
+                               rightView:(UIView *)rightView
+                          backgroundView:(UIView *)backgroundView
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /**

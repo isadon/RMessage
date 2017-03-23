@@ -92,25 +92,27 @@ static UIViewController *_defaultViewController;
 
 + (void)showNotificationWithTitle:(NSAttributedString *)title
                          subtitle:(NSAttributedString *)subtitle
-                        iconImage:(UIImage *)iconImage
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
                          callback:(void (^)())callback
-                           button:(UIButton *)button
                        atPosition:(RMessagePosition)messagePosition
+                         leftView:(UIView *)leftView
+                        rightView:(UIView *)rightView
+                   backgroundView:(UIView *)backgroundView
              canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   [self showNotificationInViewController:_defaultViewController
                                    title:title
                                 subtitle:subtitle
-                               iconImage:iconImage
                                     type:type
                           customTypeName:customTypeName
                                 duration:duration
                                 callback:callback
-                                  button:button
                               atPosition:messagePosition
+                                leftView:leftView
+                               rightView:rightView
+                          backgroundView:backgroundView
                     canBeDismissedByUser:dismissingEnabled];
 }
 
@@ -125,13 +127,14 @@ static UIViewController *_defaultViewController;
   [self showNotificationInViewController:viewController
                                    title:title
                                 subtitle:subtitle
-                               iconImage:nil
                                     type:type
                           customTypeName:customTypeName
                                 duration:duration
                                 callback:callback
-                                  button:nil
                               atPosition:RMessagePositionTop
+                                leftView:nil
+                               rightView:nil
+                          backgroundView:nil
                     canBeDismissedByUser:YES];
 }
 
@@ -147,13 +150,14 @@ static UIViewController *_defaultViewController;
   [self showNotificationInViewController:viewController
                                    title:title
                                 subtitle:subtitle
-                               iconImage:nil
                                     type:type
                           customTypeName:customTypeName
                                 duration:duration
                                 callback:callback
-                                  button:nil
                               atPosition:RMessagePositionTop
+                                leftView:nil
+                               rightView:nil
+                          backgroundView:nil
                     canBeDismissedByUser:dismissingEnabled];
 }
 
@@ -167,39 +171,42 @@ static UIViewController *_defaultViewController;
   [self showNotificationInViewController:viewController
                                    title:title
                                 subtitle:subtitle
-                               iconImage:nil
                                     type:type
                           customTypeName:customTypeName
                                 duration:RMessageDurationAutomatic
                                 callback:callback
-                                  button:nil
                               atPosition:RMessagePositionTop
+                                leftView:nil
+                               rightView:nil
+                          backgroundView:nil
                     canBeDismissedByUser:YES];
 }
 
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSAttributedString *)title
                                 subtitle:(NSAttributedString *)subtitle
-                               iconImage:(UIImage *)iconImage
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
                                 callback:(void (^)())callback
-                                  button:(UIButton *)button
                               atPosition:(RMessagePosition)messagePosition
+                                leftView:(UIView *)leftView
+                               rightView:(UIView *)rightView
+                          backgroundView:(UIView *)backgroundView
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   RMessageView *messageView = [[RMessageView alloc] initWithDelegate:[RMessage sharedMessage]
                                                                title:title
                                                             subtitle:subtitle
-                                                           iconImage:iconImage
                                                                 type:type
                                                       customTypeName:customTypeName
                                                             duration:duration
                                                     inViewController:viewController
                                                             callback:callback
-                                                              button:button
                                                           atPosition:messagePosition
+                                                            leftView:leftView
+                                                           rightView:rightView
+                                                      backgroundView:backgroundView
                                                 canBeDismissedByUser:dismissingEnabled];
   [self prepareNotificationForPresentation:messageView];
 }

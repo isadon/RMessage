@@ -64,16 +64,11 @@
 @property (nonatomic, strong) UIFont *subtitleFont UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign) NSTextAlignment subtitleAlignment UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor *subtitleTextColor UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIImage *messageIcon UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIImage *errorIcon UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIImage *successIcon UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIImage *warningIcon UI_APPEARANCE_SELECTOR;
 
 /**
  Inits the message view. Do not call this from outside this library.
  @param title The title of the message view
  @param subtitle The subtitle of the message view (optional)
- @param iconImage A custom icon image (optional)
  @param messageType The type of message view
  @param duration The duration this notification should be displayed (optional)
  @param viewController The view controller this message should be displayed in
@@ -84,14 +79,15 @@
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
                            title:(NSAttributedString *)title
                         subtitle:(NSAttributedString *)subtitle
-                       iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)())callback
-                          button:(UIButton *)button
                       atPosition:(RMessagePosition)position
+                        leftView:(UIView *)leftView
+                       rightView:(UIView *)rightView
+                  backgroundView:(UIView *)backgroundView
             canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /** Use this method to load a custom design file on top of the base design file. Can be called
