@@ -7,19 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		054CB543C577F0F5BA94039F35B09CBD /* RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C061AE6DB29DF48823C3AE889B1FE5E /* RMessage-dummy.m */; };
+		054CB543C577F0F5BA94039F35B09CBD /* RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E6578D6AAFC2A3CB6CE4961EF998AD7B /* RMessage-dummy.m */; };
 		0E79DD563F5A48504792C5B52F93E671 /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 853BB94042284CB4296D1239BE467FB0 /* Pods-Example-dummy.m */; };
 		14DD78062E33839871A3CFA30EAEF0F8 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C14560A3FBF4F3510139C792964A87 /* HexColors-dummy.m */; };
-		48CC7F4E91E4488F238FE32084B3C9AD /* UIWindow+TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796D93B6DC145E58CDD0F06DF9770307 /* UIWindow+TopViewController.m */; };
+		48CC7F4E91E4488F238FE32084B3C9AD /* UIWindow+TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C94FB4A9708D8E4417EFFC588567DA /* UIWindow+TopViewController.m */; };
+		4B7DCCE679AD4AEF060B7E96FD324747 /* RMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = AF0E7B5C975699E25FDC8BF4BFA8F88F /* RMessageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C15E9FEE3A7C5D621CCE7DB55B0DA53 /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = F7EA367A35BCA242B3F3CA7582F600C8 /* HexColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7656462F2EDF8C60F8D4500CA8C2CF23 /* RMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 88538E9469148EF838CD29C859813F47 /* RMessageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7A0C150B0AA58CDD1C9E9254CA4B2480 /* RMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = B6384F94467B53291A790BC0FB91502F /* RMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605720954DECC616BDB7D9FC3B94799D /* UIWindow+TopViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 32C90ADCE8A5745155BB4CE9D516F4FC /* UIWindow+TopViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		924BC01236EBBD1B2C4F3270BFEBAA0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		9B98BE9EE06BAC5D1F7F6B08B3ACBC78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		A4950E142AD29C6F3F5E021256208496 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = C310A47DD4F0E6BD03DB9EBD17787EAE /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		B021D215E30415093CD76BFCBB7E16DA /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D689EAFAA11153EB030ED15FF1AAF655 /* RMessageView.m */; };
-		C44CD12FA1FDA5678EA866856698A27C /* UIWindow+TopViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B97B68B935563CA673C02CB2B451FBB4 /* UIWindow+TopViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E440259C2C0D75AC9D8126B11D9D99A2 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BEAF8D3762E687D9C412349FE994E6 /* RMessage.m */; };
+		B021D215E30415093CD76BFCBB7E16DA /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 166C4837C02B3506A4CA7771428BBB9F /* RMessageView.m */; };
+		B174582B609C2A3AA8A24DEC06FEA199 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 09732CB77595C733E29758C9CB4F0FEF /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E440259C2C0D75AC9D8126B11D9D99A2 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3B14A568D36A5220D3BF9695CAE579 /* RMessage.m */; };
+		E7CB436B3599EFE5F27CEA2D35E7BBDB /* RMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = EBC3218F52DA35F8295A2C44088FD883 /* RMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8AABE3150F942E9C29F5B026CD5211B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,39 +50,40 @@
 
 /* Begin PBXFileReference section */
 		0716B3CD81DC5C4FBA72F1EECCEFBBDE /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
+		09732CB77595C733E29758C9CB4F0FEF /* RMessageViewProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessageViewProtocol.h; sourceTree = "<group>"; };
 		0AECF4A22395C2FDE55673592687C1AB /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0E6C05F73D6EEE81290CB50056C0FFBF /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
-		1C061AE6DB29DF48823C3AE889B1FE5E /* RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMessage-dummy.m"; sourceTree = "<group>"; };
+		10D1141FF5F7705B56FC3B68D9B48820 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		13B18F92B62E1F9CC49C4BE1161D21FF /* RMessage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.xcconfig; sourceTree = "<group>"; };
+		166C4837C02B3506A4CA7771428BBB9F /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
 		2625EF054ADFD72AB2B6340CA93F309F /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRMessage.a; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		270ED54D428BAC0EA3BEA314A2E887E7 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
 		2C83BF6702F0C48A8D1C5A59935A2117 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		31D5B4CF493482334F19250CF0094AB9 /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
-		42265C1C92561FD23AAC3C90065C0BCC /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
-		4EB8390EC72E906A6A5659DB4F5206F4 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		32C90ADCE8A5745155BB4CE9D516F4FC /* UIWindow+TopViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIWindow+TopViewController.h"; sourceTree = "<group>"; };
+		4E6FFE6400DDEC95494C7A9E1B327688 /* RMessage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-prefix.pch"; sourceTree = "<group>"; };
+		54C94FB4A9708D8E4417EFFC588567DA /* UIWindow+TopViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+TopViewController.m"; sourceTree = "<group>"; };
 		5AC126EEC71A1BC407FE1D9DB3984EF4 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
+		690D2CBC4C908E47C1B8B972921A3BF1 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
 		6B8DEA77BF5F973582271D22CEB6A82C /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libHexColors.a; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		74D16BBB58D3D00FC3350B65437D5E18 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
-		796D93B6DC145E58CDD0F06DF9770307 /* UIWindow+TopViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+TopViewController.m"; sourceTree = "<group>"; };
 		7A17B2D7486AA2A9CFA43FE47668BC7C /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		7E9BACC4F6CE9D7F6D385894366F3DEC /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
 		853BB94042284CB4296D1239BE467FB0 /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		88538E9469148EF838CD29C859813F47 /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E5986C76C3794D885674BCBA51DD4C4 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
-		A4BEAF8D3762E687D9C412349FE994E6 /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
 		A60AE5813015A26005B313BF947C1B66 /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Example.a"; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B03AB91D88320FABB52569156D177E92 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
-		B6384F94467B53291A790BC0FB91502F /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
-		B97B68B935563CA673C02CB2B451FBB4 /* UIWindow+TopViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIWindow+TopViewController.h"; sourceTree = "<group>"; };
-		BE3036FFB03D29B55BD705A8E5108178 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
-		BE72D1A1B39BBD2041ECCDB5F5F7106F /* RMessage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.xcconfig; sourceTree = "<group>"; };
+		AF0E7B5C975699E25FDC8BF4BFA8F88F /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
 		C310A47DD4F0E6BD03DB9EBD17787EAE /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
 		C6E3D4A869A4034AC4D2D2194B92A7A0 /* Pods-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-resources.sh"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D689EAFAA11153EB030ED15FF1AAF655 /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
+		D24C3B6EDB00D357654BD29CCF756EDC /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
 		D7C14560A3FBF4F3510139C792964A87 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
-		E282F3CC9146A4FA73AEBA015ED85F21 /* RMessage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-prefix.pch"; sourceTree = "<group>"; };
-		E8E54BB6D78EB039152E866F02CAA1EE /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
-		F105D1937CFDB9DC5B32D48DFE3D46A8 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		E6578D6AAFC2A3CB6CE4961EF998AD7B /* RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMessage-dummy.m"; sourceTree = "<group>"; };
+		EB23B31769254D3D758E7915D69AA969 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
+		EBC3218F52DA35F8295A2C44088FD883 /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
+		EC3B14A568D36A5220D3BF9695CAE579 /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
 		F7EA367A35BCA242B3F3CA7582F600C8 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
+		FDAF86712F12B3F55C73CB2D5703DE8E /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		FF6A66527AC2D50285521CBE80B94A39 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,49 @@
 			);
 			name = HexColors;
 			path = HexColors;
+			sourceTree = "<group>";
+		};
+		10958852C66D88F9029ECEEB486952EB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				270ED54D428BAC0EA3BEA314A2E887E7 /* NotificationBackgroundErrorIcon.png */,
+				10D1141FF5F7705B56FC3B68D9B48820 /* NotificationBackgroundErrorIcon@2x.png */,
+				FF6A66527AC2D50285521CBE80B94A39 /* NotificationBackgroundSuccessIcon.png */,
+				D24C3B6EDB00D357654BD29CCF756EDC /* NotificationBackgroundSuccessIcon@2x.png */,
+				7E9BACC4F6CE9D7F6D385894366F3DEC /* NotificationBackgroundWarningIcon.png */,
+				690D2CBC4C908E47C1B8B972921A3BF1 /* NotificationBackgroundWarningIcon@2x.png */,
+				FDAF86712F12B3F55C73CB2D5703DE8E /* RMessageDefaultDesign.json */,
+			);
+			name = Assets;
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		1E5CA9E4878703CC1090930E14DCC0CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A28F477700189D265808FD3498415E42 /* RMessage */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5A14D73F626581AE822A11CB8EF4A029 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				13B18F92B62E1F9CC49C4BE1161D21FF /* RMessage.xcconfig */,
+				E6578D6AAFC2A3CB6CE4961EF998AD7B /* RMessage-dummy.m */,
+				4E6FFE6400DDEC95494C7A9E1B327688 /* RMessage-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/RMessage";
+			sourceTree = "<group>";
+		};
+		5A6A95991864F276635B933CEB11B184 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				EB23B31769254D3D758E7915D69AA969 /* RMessageView.xib */,
+			);
+			name = Xibs;
+			path = Xibs;
 			sourceTree = "<group>";
 		};
 		6C49482DA5D4F97709CE2787E2211CE4 /* Targets Support Files */ = {
@@ -165,28 +210,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		791D0F31BDD9B4495293B6E8D4E6584E /* RMessage */ = {
-			isa = PBXGroup;
-			children = (
-				A594AB401D7DFA2BE28922C83493EAB6 /* Resources */,
-				DB51ECBD6C0F3A37CE031B1CCEBA65C9 /* RMessage */,
-				7CD658D3C45BE6FD426B4B567BBF6C57 /* Support Files */,
-			);
-			name = RMessage;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		7CD658D3C45BE6FD426B4B567BBF6C57 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				BE72D1A1B39BBD2041ECCDB5F5F7106F /* RMessage.xcconfig */,
-				1C061AE6DB29DF48823C3AE889B1FE5E /* RMessage-dummy.m */,
-				E282F3CC9146A4FA73AEBA015ED85F21 /* RMessage-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/RMessage";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +222,17 @@
 			);
 			sourceTree = "<group>";
 		};
+		848851F37CD20CDDBFC4AC4C7ACFFB85 /* RMessage */ = {
+			isa = PBXGroup;
+			children = (
+				1E5CA9E4878703CC1090930E14DCC0CF /* Resources */,
+				9561D18D2A9C75A3AB290E791AA9329E /* RMessage */,
+				5A14D73F626581AE822A11CB8EF4A029 /* Support Files */,
+			);
+			name = RMessage;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		89B5D5810DF9965952CBEA516DFBD80B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,43 +243,44 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8BD2DF79E8B6C4E5178E5D888B03C0C6 /* Assets */ = {
+		9561D18D2A9C75A3AB290E791AA9329E /* RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				4EB8390EC72E906A6A5659DB4F5206F4 /* NotificationBackgroundErrorIcon.png */,
-				9E5986C76C3794D885674BCBA51DD4C4 /* NotificationBackgroundErrorIcon@2x.png */,
-				E8E54BB6D78EB039152E866F02CAA1EE /* NotificationBackgroundSuccessIcon.png */,
-				42265C1C92561FD23AAC3C90065C0BCC /* NotificationBackgroundSuccessIcon@2x.png */,
-				F105D1937CFDB9DC5B32D48DFE3D46A8 /* NotificationBackgroundWarningIcon.png */,
-				BE3036FFB03D29B55BD705A8E5108178 /* NotificationBackgroundWarningIcon@2x.png */,
-				31D5B4CF493482334F19250CF0094AB9 /* RMessageDefaultDesign.json */,
+				EBC3218F52DA35F8295A2C44088FD883 /* RMessage.h */,
+				EC3B14A568D36A5220D3BF9695CAE579 /* RMessage.m */,
+				AF0E7B5C975699E25FDC8BF4BFA8F88F /* RMessageView.h */,
+				166C4837C02B3506A4CA7771428BBB9F /* RMessageView.m */,
+				09732CB77595C733E29758C9CB4F0FEF /* RMessageViewProtocol.h */,
+				AFC272C8A25E5BFE5C11B532AEAD7387 /* Categories */,
 			);
-			name = Assets;
-			path = Assets;
+			name = RMessage;
+			path = RMessage;
 			sourceTree = "<group>";
 		};
-		A012D45C1E3F54D415A6B504FE86654A /* Categories */ = {
+		A28F477700189D265808FD3498415E42 /* RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				B97B68B935563CA673C02CB2B451FBB4 /* UIWindow+TopViewController.h */,
-				796D93B6DC145E58CDD0F06DF9770307 /* UIWindow+TopViewController.m */,
+				10958852C66D88F9029ECEEB486952EB /* Assets */,
+				5A6A95991864F276635B933CEB11B184 /* Xibs */,
+			);
+			name = RMessage;
+			path = RMessage;
+			sourceTree = "<group>";
+		};
+		AFC272C8A25E5BFE5C11B532AEAD7387 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				32C90ADCE8A5745155BB4CE9D516F4FC /* UIWindow+TopViewController.h */,
+				54C94FB4A9708D8E4417EFFC588567DA /* UIWindow+TopViewController.m */,
 			);
 			name = Categories;
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		A594AB401D7DFA2BE28922C83493EAB6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F6B4554EF008C86E39DFB7585CF17700 /* RMessage */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		B9BC57F5D0B6D3B9938C2019FBC259DF /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				791D0F31BDD9B4495293B6E8D4E6584E /* RMessage */,
+				848851F37CD20CDDBFC4AC4C7ACFFB85 /* RMessage */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -256,38 +291,6 @@
 				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CD5F4F66B164DC373E379CFF2A0670B3 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				B03AB91D88320FABB52569156D177E92 /* RMessageView.xib */,
-			);
-			name = Xibs;
-			path = Xibs;
-			sourceTree = "<group>";
-		};
-		DB51ECBD6C0F3A37CE031B1CCEBA65C9 /* RMessage */ = {
-			isa = PBXGroup;
-			children = (
-				B6384F94467B53291A790BC0FB91502F /* RMessage.h */,
-				A4BEAF8D3762E687D9C412349FE994E6 /* RMessage.m */,
-				88538E9469148EF838CD29C859813F47 /* RMessageView.h */,
-				D689EAFAA11153EB030ED15FF1AAF655 /* RMessageView.m */,
-				A012D45C1E3F54D415A6B504FE86654A /* Categories */,
-			);
-			name = RMessage;
-			path = RMessage;
-			sourceTree = "<group>";
-		};
-		F6B4554EF008C86E39DFB7585CF17700 /* RMessage */ = {
-			isa = PBXGroup;
-			children = (
-				8BD2DF79E8B6C4E5178E5D888B03C0C6 /* Assets */,
-				CD5F4F66B164DC373E379CFF2A0670B3 /* Xibs */,
-			);
-			name = RMessage;
-			path = RMessage;
 			sourceTree = "<group>";
 		};
 		F9A417A795CBB0D3515C1BAEC1225A8D /* Pods */ = {
@@ -301,13 +304,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		27E4C1A996FBA0FD5275C1098BCDD096 /* Headers */ = {
+		A4E27EF80894AF74164AF48CBC444FA9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A0C150B0AA58CDD1C9E9254CA4B2480 /* RMessage.h in Headers */,
-				7656462F2EDF8C60F8D4500CA8C2CF23 /* RMessageView.h in Headers */,
-				C44CD12FA1FDA5678EA866856698A27C /* UIWindow+TopViewController.h in Headers */,
+				E7CB436B3599EFE5F27CEA2D35E7BBDB /* RMessage.h in Headers */,
+				4B7DCCE679AD4AEF060B7E96FD324747 /* RMessageView.h in Headers */,
+				B174582B609C2A3AA8A24DEC06FEA199 /* RMessageViewProtocol.h in Headers */,
+				605720954DECC616BDB7D9FC3B94799D /* UIWindow+TopViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +332,7 @@
 			buildPhases = (
 				AEBAB432E979AA30FC74E9F0C9C3A01A /* Sources */,
 				87E0D685DFF2E24AEB8D47F87A5A4A2E /* Frameworks */,
-				27E4C1A996FBA0FD5275C1098BCDD096 /* Headers */,
+				A4E27EF80894AF74164AF48CBC444FA9 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -611,7 +615,7 @@
 		};
 		AEFA1220A7E43AD0F245A48512D361F4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE72D1A1B39BBD2041ECCDB5F5F7106F /* RMessage.xcconfig */;
+			baseConfigurationReference = 13B18F92B62E1F9CC49C4BE1161D21FF /* RMessage.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -634,7 +638,7 @@
 		};
 		D7509DDA4EFC82DA4B744D683482773E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE72D1A1B39BBD2041ECCDB5F5F7106F /* RMessage.xcconfig */;
+			baseConfigurationReference = 13B18F92B62E1F9CC49C4BE1161D21FF /* RMessage.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

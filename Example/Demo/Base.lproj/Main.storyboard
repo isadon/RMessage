@@ -134,11 +134,11 @@
                                 <rect key="frame" x="147" y="410" width="104" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Custom image">
+                                <state key="normal" title="Custom view">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapCustomImage:" destination="h0s-uL-LZy" eventType="touchUpInside" id="tSA-Pn-SVe"/>
+                                    <action selector="didTapCustomView:" destination="h0s-uL-LZy" eventType="touchUpInside" id="dIb-rR-XwP"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqV-FN-wIM">
@@ -382,11 +382,11 @@
                                 <rect key="frame" x="151" y="410" width="104" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Custom image">
+                                <state key="normal" title="Custom view">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="didTapCustomImage:" destination="1kT-B0-h7w" eventType="touchUpInside" id="6lf-iP-KjO"/>
+                                    <action selector="didTapCustomView:" destination="1kT-B0-h7w" eventType="touchUpInside" id="Fri-wp-FHi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe2-mq-OY0">

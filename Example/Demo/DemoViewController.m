@@ -39,7 +39,7 @@
                              subtitle:@"The internet connection seems to be down. Please check it!".attributedString
                                  type:RMessageTypeError
                        customTypeName:nil
-                             callback:nil];
+                            tapAction:nil];
 }
 
 - (IBAction)didTapAttributedStyling:(id)sender
@@ -58,7 +58,7 @@
                                       NSUnderlineColorAttributeName: [UIColor whiteColor]
                                     }];
 
-  [RMessage showNotificationWithTitle:title subtitle:subtitle type:RMessageTypeError customTypeName:nil callback:nil];
+  [RMessage showNotificationWithTitle:title subtitle:subtitle type:RMessageTypeError customTypeName:nil tapAction:nil];
 }
 
 - (IBAction)didTapWarning:(id)sender
@@ -67,7 +67,7 @@
                              subtitle:@"Look out! Something is happening there!".attributedString
                                  type:RMessageTypeWarning
                        customTypeName:nil
-                             callback:nil];
+                            tapAction:nil];
 }
 
 - (IBAction)didTapMessage:(id)sender
@@ -76,7 +76,7 @@
                              subtitle:@"This is a neutral notification!".attributedString
                                  type:RMessageTypeNormal
                        customTypeName:nil
-                             callback:nil];
+                            tapAction:nil];
 }
 
 - (IBAction)didTapSuccess:(id)sender
@@ -85,7 +85,7 @@
                              subtitle:@"Some task was successfully completed!".attributedString
                                  type:RMessageTypeSuccess
                        customTypeName:nil
-                             callback:nil];
+                            tapAction:nil];
 }
 
 - (IBAction)didTapButton:(id)sender
@@ -103,12 +103,12 @@
                                         type:RMessageTypeNormal
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
-                                    callback:nil
                                   atPosition:RMessagePositionTop
+                        canBeDismissedByUser:YES
                                     leftView:nil
                                    rightView:downloadButton
                               backgroundView:nil
-                        canBeDismissedByUser:YES];
+                                   tapAction:nil];
 }
 
 - (void)downloadButtonPushed
@@ -119,32 +119,30 @@
                                       subtitle:@"Thanks!".attributedString
                                           type:RMessageTypeSuccess
                                 customTypeName:nil
-                                      duration:RMessageDurationAutomatic
-                                      callback:nil
-                                    atPosition:RMessagePositionTop
-                                      leftView:nil
-                                     rightView:nil
-                                backgroundView:nil
-                          canBeDismissedByUser:YES];
+                                     tapAction:nil];
   }];
 }
 
-- (IBAction)didTapCustomImage:(id)sender
+- (IBAction)didTapCustomView:(id)sender
 {
-  //
+  UIImageView *doggyView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"doggy"]];
+  doggyView.clipsToBounds = YES;
+  doggyView.contentMode = UIViewContentModeScaleAspectFill;
+  doggyView.frame = CGRectMake(0, 0, 80.f, 80.f);
+  doggyView.layer.cornerRadius = doggyView.bounds.size.width / 2.f;
+
   [RMessage showNotificationInViewController:self
-                                       title:@"Custom image".attributedString
-                                    subtitle:@"This uses an image you can define".attributedString
+                                       title:@"Custom view".attributedString
+                                    subtitle:@"This uses a view you can define".attributedString
                                         type:RMessageTypeNormal
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
-                                    callback:nil
                                   atPosition:RMessagePositionTop
-                                    leftView:[[UIImageView alloc]
-                                               initWithImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]]
+                        canBeDismissedByUser:YES
+                                    leftView:doggyView
                                    rightView:nil
                               backgroundView:nil
-                        canBeDismissedByUser:YES];
+                                   tapAction:nil];
 }
 
 - (IBAction)didTapEndless:(id)sender
@@ -157,12 +155,9 @@
                                 type:RMessageTypeSuccess
                       customTypeName:nil
                             duration:RMessageDurationEndless
-                            callback:nil
                           atPosition:RMessagePositionTop
-                            leftView:nil
-                           rightView:nil
-                      backgroundView:nil
-                canBeDismissedByUser:NO];
+                canBeDismissedByUser:NO
+                           tapAction:nil];
 }
 
 - (IBAction)didTapLong:(id)sender
@@ -173,13 +168,10 @@
                                                .attributedString
                                         type:RMessageTypeWarning
                               customTypeName:nil
-                                    duration:10.0
-                                    callback:nil
+                                    duration:10.f
                                   atPosition:RMessagePositionTop
-                                    leftView:nil
-                                   rightView:nil
-                              backgroundView:nil
-                        canBeDismissedByUser:YES];
+                        canBeDismissedByUser:YES
+                                   tapAction:nil];
 }
 
 - (IBAction)didTapBottom:(id)sender
@@ -190,12 +182,12 @@
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
-                                    callback:nil
                                   atPosition:RMessagePositionBottom
+                        canBeDismissedByUser:YES
                                     leftView:nil
                                    rightView:nil
                               backgroundView:nil
-                        canBeDismissedByUser:YES];
+                                   tapAction:nil];
 }
 
 - (IBAction)didTapText:(id)sender
@@ -214,7 +206,7 @@
                                 .attributedString
                          type:RMessageTypeWarning
                customTypeName:nil
-                     callback:nil];
+                    tapAction:nil];
 }
 
 - (IBAction)didTapCustomDesign:(id)sender
@@ -226,7 +218,7 @@
                                       @"alternate error design :)".attributedString
                                  type:RMessageTypeCustom
                        customTypeName:@"alternate-error"
-                             callback:nil];
+                            tapAction:nil];
 }
 
 - (IBAction)didTapDismissCurrentMessage:(id)sender
@@ -268,12 +260,9 @@
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
-                                    callback:nil
                                   atPosition:RMessagePositionNavBarOverlay
-                                    leftView:nil
-                                   rightView:nil
-                              backgroundView:nil
-                        canBeDismissedByUser:YES];
+                        canBeDismissedByUser:YES
+                                   tapAction:nil];
 }
 
 - (IBAction)didTapNavbarHidden:(id)sender
