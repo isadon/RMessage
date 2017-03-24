@@ -47,6 +47,8 @@ static NSMutableDictionary *globalDesignDictionary;
 
 /** The vertical space between the message view top to its view controller top */
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewLeadingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTrailingConstraint;
 
 @property (nonatomic, copy) void (^dismissalBlock)();
 @property (nonatomic, copy) void (^tapBlock)();
@@ -709,7 +711,10 @@ static NSMutableDictionary *globalDesignDictionary;
   UIViewContentMode contentMode = [self contentModeForString:_messageViewDesignDictionary[@"leftViewContentMode"]];
   if (contentMode) _leftView.contentMode = contentMode;
 
+  if (self.titleSubtitleContainerViewLeadingConstraint) self.titleSubtitleContainerViewLeadingConstraint.active = NO;
   self.leftView.translatesAutoresizingMaskIntoConstraints = NO;
+  [self.leftView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+  [self.leftView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
 
   NSLayoutConstraint *leftViewCenterY = [NSLayoutConstraint constraintWithItem:self.leftView
                                                                      attribute:NSLayoutAttributeCenterY
@@ -739,8 +744,24 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                     attribute:NSLayoutAttributeBottom
                                                                    multiplier:1.f
                                                                      constant:-10.f];
+
+  NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                           attribute:NSLayoutAttributeWidth
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1.f
+                                                            constant:self.leftView.bounds.size.width];
+  NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.leftView
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                           multiplier:1.f
+                                                             constant:self.leftView.bounds.size.height];
+
   [self addSubview:self.leftView];
-  [[self class] activateConstraints:@[leftViewCenterY, leftViewLeading, leftViewTrailing, leftViewBottom]
+  [[self class] activateConstraints:@[leftViewCenterY, leftViewLeading, leftViewTrailing, leftViewBottom, width, height]
                         inSuperview:self];
 }
 
@@ -750,6 +771,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (contentMode) _rightView.contentMode = contentMode;
 
   self.rightView.translatesAutoresizingMaskIntoConstraints = NO;
+  if (self.titleSubtitleContainerViewTrailingConstraint) self.titleSubtitleContainerViewTrailingConstraint.active = NO;
   [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
   [self.rightView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
 
@@ -788,10 +810,26 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1.f
                                                                       constant:-10.f];
+  NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                           attribute:NSLayoutAttributeWidth
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:nil
+                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                          multiplier:1.f
+                                                            constant:self.rightView.bounds.size.width];
+  NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.rightView
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                           multiplier:1.f
+                                                             constant:self.rightView.bounds.size.height];
+
   [self addSubview:self.rightView];
-  [[self class]
-    activateConstraints:@[rightViewCenterY, rightViewLeading, rightViewTrailing, rightViewTop, rightViewBottom]
-            inSuperview:self];
+  [[self class] activateConstraints:@[
+    rightViewCenterY, rightViewLeading, rightViewTrailing, rightViewTop, rightViewBottom, width, height
+  ]
+                        inSuperview:self];
 }
 
 - (void)setupGestureRecognizers
