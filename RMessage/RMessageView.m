@@ -46,7 +46,9 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The vertical space between the message view top to its view controller top */
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
 
-@property (nonatomic, copy) void (^callback)();
+@property (nonatomic, copy) void (^dismissalBlock)();
+@property (nonatomic, copy) void (^tapBlock)();
+@property (nonatomic, copy) void (^completionBlock)();
 
 /** The starting constant value that should be set for the topToVCTopLayoutConstraint when animating */
 @property (nonatomic, assign) CGFloat topToVCStartConstant;
@@ -194,12 +196,14 @@ static NSMutableDictionary *globalDesignDictionary;
                   customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
-                        callback:(void (^)())callback
                       atPosition:(RMessagePosition)position
+            canBeDismissedByUser:(BOOL)dismissingEnabled
                         leftView:(UIView *)leftView
                        rightView:(UIView *)rightView
                   backgroundView:(UIView *)backgroundView
-            canBeDismissedByUser:(BOOL)dismissingEnabled
+                       tapAction:(void (^)(void))tapBlock
+                       dismissal:(void (^)(void))dismissalBlock
+                      completion:(void (^)(void))completionBlock
 {
   self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil]
            .firstObject;
@@ -211,12 +215,14 @@ static NSMutableDictionary *globalDesignDictionary;
                                       customTypeName:customTypeName
                                             duration:duration
                                     inViewController:viewController
-                                            callback:callback
                                           atPosition:position
+                                canBeDismissedByUser:dismissingEnabled
                                             leftView:leftView
                                            rightView:rightView
                                       backgroundView:backgroundView
-                                canBeDismissedByUser:dismissingEnabled];
+                                           tapAction:tapBlock
+                                           dismissal:dismissalBlock
+                                          completion:completionBlock];
     if (error) return nil;
   }
   return self;
@@ -227,18 +233,22 @@ static NSMutableDictionary *globalDesignDictionary;
                         customTypeName:(NSString *)customTypeName
                               duration:(CGFloat)duration
                       inViewController:(UIViewController *)viewController
-                              callback:(void (^)())callback
                             atPosition:(RMessagePosition)position
+                  canBeDismissedByUser:(BOOL)dismissingEnabled
                               leftView:(UIView *)leftView
                              rightView:(UIView *)rightView
                         backgroundView:(UIView *)backgroundView
-                  canBeDismissedByUser:(BOOL)dismissingEnabled
+                             tapAction:(void (^)(void))tapBlock
+                             dismissal:(void (^)(void))dismissalBlock
+                            completion:(void (^)(void))completionBlock
+
 {
   _delegate = delegate;
   _duration = duration;
   viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
   _messagePosition = position;
-  _callback = callback;
+  _dismissalBlock = dismissalBlock;
+  _completionBlock = completionBlock;
   _messageType = messageType;
   _customTypeName = customTypeName;
   if (leftView) {
@@ -483,9 +493,9 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
 }
 
-- (void)executeMessageViewCallBack
+- (void)executeMessageViewTapAction
 {
-  if (self.callback) self.callback();
+  if (self.tapBlock) self.tapBlock();
 }
 
 - (void)didMoveToWindow
@@ -914,6 +924,7 @@ static NSMutableDictionary *globalDesignDictionary;
     completion:^(BOOL finished) {
       self.messageIsFullyDisplayed = YES;
       if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
+        if (self.completionBlock) self.completionBlock();
         [self.delegate messageViewDidPresent:self];
       }
     }];
@@ -941,6 +952,7 @@ static NSMutableDictionary *globalDesignDictionary;
         [self.delegate messageViewDidDismiss:self];
       }
       if (completionBlock) completionBlock();
+      if (self.dismissalBlock) self.dismissalBlock();
     }];
 }
 

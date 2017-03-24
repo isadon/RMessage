@@ -50,54 +50,38 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
 + (instancetype)sharedMessage;
 
 /**
- Shows a notification message
- @param message The title of the message view
+ Shows a notification message in the top-most view controller in the window or the default view controller if set via
+ the +setDefaultViewController function
+ @param title The title of the message view
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
- @param callback The block that should be executed, when the user tapped on the message
+ @param tapBlock The block that should be executed when the user taps on the message
  */
-+ (void)showNotificationWithTitle:(NSAttributedString *)message
++ (void)showNotificationWithTitle:(NSAttributedString *)title
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback;
-
+                        tapAction:(void (^)(void))tapBlock;
 /**
- Shows a notification message
+ Shows a notification message in the top-most view controller in the window or the default view controller if set via
+ the +setDefaultViewController function
  @param title The title of the message view
  @param subtitle The text that is displayed underneath the title
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
- @param callback The block that should be executed, when the user tapped on the message
+ @param tapBlock The block that should be executed when the user taps on the message
  */
 + (void)showNotificationWithTitle:(NSAttributedString *)title
                          subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback;
-
+                        tapAction:(void (^)(void))tapBlock;
 /**
- Shows a notification message
- @param title The title of the message view
- @param subtitle The text that is displayed underneath the title
- @param type The message type (Message, Warning, Error, Success, Custom)
- @param customTypeName The string identifier/key for the custom style to use from specified custom
- design file. Only use when specifying an additional custom design file and when the type parameter in this call is
- RMessageTypeCustom
- @param callback The block that should be executed, when the user tapped on the message
- */
-+ (void)showNotificationWithTitle:(NSAttributedString *)title
-                         subtitle:(NSAttributedString *)subtitle
-                             type:(RMessageType)type
-                   customTypeName:(NSString *)customTypeName
-                         duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback;
-
-/**
- Shows a notification message
+ Shows a notification message in the top-most view controller in the window or the default view controller if set via
+ the +setDefaultViewController function
  @param title The title of the message view
  @param subtitle The text that is displayed underneath the title
  @param type The message type (Message, Warning, Error, Success, Custom)
@@ -105,68 +89,51 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
+ @param position The position of the message on the screen
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param tapBlock The block that should be executed when the user taps on the message
  */
 + (void)showNotificationWithTitle:(NSAttributedString *)title
                          subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
-             canBeDismissedByUser:(BOOL)dismissingEnabled;
+                       atPosition:(RMessagePosition)position
+             canBeDismissedByUser:(BOOL)dismissingEnabled
+                        tapAction:(void (^)(void))tapBlock;
 
 /**
- Shows a notification message
+ Shows a notification message in the top-most view controller in the window or the default view controller if set via
+ the +setDefaultViewController function
  @param title The title of the message view
- @param subtitle The message that is displayed underneath the title (optional)
+ @param subtitle The text that is displayed underneath the title
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- @param messagePosition The position of the message on the screen
+ @param position The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
  @param leftView The view to position on the left of the title and subtitle labels
  @param rightView The view to position on the right of the title and subtitle labels
  @param backgroundView The view to position as the background view of the message
- @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param tapBlock The block that should be executed when the user taps on the message
  */
 + (void)showNotificationWithTitle:(NSAttributedString *)title
                          subtitle:(NSAttributedString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
-                       atPosition:(RMessagePosition)messagePosition
+                       atPosition:(RMessagePosition)position
+             canBeDismissedByUser:(BOOL)dismissingEnabled
                          leftView:(UIView *)leftView
                         rightView:(UIView *)rightView
                    backgroundView:(UIView *)backgroundView
-             canBeDismissedByUser:(BOOL)dismissingEnabled;
+                        tapAction:(void (^)(void))tapBlock;
 
 /**
- Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- You can use +setDefaultViewController: to set the the default one instead
- @param title The title of the message view
- @param subtitle The text that is displayed underneath the title
- @param type The message type (Message, Warning, Error, Success, Custom)
- @param customTypeName The string identifier/key for the custom style to use from specified custom
- design file. Only use when specifying an additional custom design file and when the type parameter in this call is
- RMessageTypeCustom
- @param callback The block that should be executed, when the user tapped on the message
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSAttributedString *)title
-                                subtitle:(NSAttributedString *)subtitle
-                                    type:(RMessageType)type
-                          customTypeName:(NSString *)customTypeName
-                                callback:(void (^)())callback;
-
-/**
- Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- You can use +setDefaultViewController: to set the the default one instead
+ Shows a notification message in the top-most view controller in the window or the default view controller if set via
+ the +setDefaultViewController function
  @param title The title of the message view
  @param subtitle The text that is displayed underneath the title
  @param type The message type (Message, Warning, Error, Success, Custom)
@@ -174,29 +141,75 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- */
-+ (void)showNotificationInViewController:(UIViewController *)viewController
-                                   title:(NSAttributedString *)title
-                                subtitle:(NSAttributedString *)subtitle
-                                    type:(RMessageType)type
-                          customTypeName:(NSString *)customTypeName
-                                duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback;
-
-/**
- Shows a notification message in a specific view controller
- @param viewController The view controller to show the notification in.
- You can use +setDefaultViewController: to set the the default one instead
- @param title The title of the message view
- @param subtitle The text that is displayed underneath the title
- @param type The message type (Message, Warning, Error, Success, Custom)
- @param customTypeName The string identifier/key for the custom style to use from specified custom
- design file. Only use when specifying an additional custom design file and when the type parameter in this call is
- RMessageTypeCustom
- @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
+ @param position The position of the message on the screen
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param leftView The view to position on the left of the title and subtitle labels
+ @param rightView The view to position on the right of the title and subtitle labels
+ @param backgroundView The view to position as the background view of the message
+ @param tapBlock The block that should be executed when the user taps on the message
+ @param dismissalBlock The block that should be executed, after the message is dismissed
+ @param completionBlock The block that should be executed after the message finishes presenting
+ */
++ (void)showNotificationWithTitle:(NSAttributedString *)title
+                         subtitle:(NSAttributedString *)subtitle
+                             type:(RMessageType)type
+                   customTypeName:(NSString *)customTypeName
+                         duration:(NSTimeInterval)duration
+                       atPosition:(RMessagePosition)position
+             canBeDismissedByUser:(BOOL)dismissingEnabled
+                         leftView:(UIView *)leftView
+                        rightView:(UIView *)rightView
+                   backgroundView:(UIView *)backgroundView
+                        tapAction:(void (^)(void))tapBlock
+                        dismissal:(void (^)(void))dismissalBlock
+                       completion:(void (^)(void))completionBlock;
+/**
+ Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param type The message type (Message, Warning, Error, Success, Custom)
+ @param customTypeName The string identifier/key for the custom style to use from specified custom
+ design file. Only use when specifying an additional custom design file and when the type parameter in this call is
+ RMessageTypeCustom
+ @param tapBlock The block that should be executed when the user taps on the message
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSAttributedString *)title
+                                    type:(RMessageType)type
+                          customTypeName:(NSString *)customTypeName
+                               tapAction:(void (^)(void))tapBlock;
+
+/**
+ Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success, Custom)
+ @param customTypeName The string identifier/key for the custom style to use from specified custom
+ design file. Only use when specifying an additional custom design file and when the type parameter in this call is
+ RMessageTypeCustom
+ @param tapBlock The block that should be executed when the user taps on the message
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
+                                    type:(RMessageType)type
+                          customTypeName:(NSString *)customTypeName
+                               tapAction:(void (^)(void))tapBlock;
+
+/**
+ Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success, Custom)
+ @param customTypeName The string identifier/key for the custom style to use from specified custom
+ design file. Only use when specifying an additional custom design file and when the type parameter in this call is
+ RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ @param position The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param tapBlock The block that should be executed when the user taps on the message
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSAttributedString *)title
@@ -204,25 +217,58 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
-                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+                              atPosition:(RMessagePosition)position
+                    canBeDismissedByUser:(BOOL)dismissingEnabled
+                               tapAction:(void (^)(void))tapBlock;
 
 /**
  Shows a notification message in a specific view controller
  @param viewController The view controller to show the notification in.
  @param title The title of the message view
- @param subtitle The message that is displayed underneath the title (optional)
+ @param subtitle The text that is displayed underneath the title
  @param type The message type (Message, Warning, Error, Success, Custom)
  @param customTypeName The string identifier/key for the custom style to use from specified custom
  design file. Only use when specifying an additional custom design file and when the type parameter in this call is
  RMessageTypeCustom
  @param duration The duration of the notification being displayed
- @param callback The block that should be executed, when the user tapped on the message
- @param messagePosition The position of the message on the screen
+ @param position The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param leftView The view to position on the left of the title and subtitle labels
+ @param rightView The view to position on the right of the title and subtitle labels
+ @param backgroundView The view to position as the background view of the message
+ @param tapBlock The block that should be executed when the user taps on the message
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSAttributedString *)title
+                                subtitle:(NSAttributedString *)subtitle
+                                    type:(RMessageType)type
+                          customTypeName:(NSString *)customTypeName
+                                duration:(NSTimeInterval)duration
+                              atPosition:(RMessagePosition)position
+                    canBeDismissedByUser:(BOOL)dismissingEnabled
+                                leftView:(UIView *)leftView
+                               rightView:(UIView *)rightView
+                          backgroundView:(UIView *)backgroundView
+                               tapAction:(void (^)(void))tapBlock;
+
+/**
+ Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param subtitle The text that is displayed underneath the title
+ @param type The message type (Message, Warning, Error, Success, Custom)
+ @param customTypeName The string identifier/key for the custom style to use from specified custom
+ design file. Only use when specifying an additional custom design file and when the type parameter in this call is
+ RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ @param position The position of the message on the screen
  @param leftView The view to position on the left of the title and subtitle labels
  @param rightView The view to position on the right of the title and subtitle labels
  @param backgroundView The view to position as the background view of the message
  @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ @param tapBlock The block that should be executed when the user taps on the message
+ @param dismissalBlock The block that should be executed, after the message is dismissed
+ @param completionBlock The block that should be executed after the message finishes presenting
  */
 + (void)showNotificationInViewController:(UIViewController *)viewController
                                    title:(NSAttributedString *)title
@@ -230,12 +276,14 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
-                              atPosition:(RMessagePosition)messagePosition
+                              atPosition:(RMessagePosition)position
+                    canBeDismissedByUser:(BOOL)dismissingEnabled
                                 leftView:(UIView *)leftView
                                rightView:(UIView *)rightView
                           backgroundView:(UIView *)backgroundView
-                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+                               tapAction:(void (^)(void))tapBlock
+                               dismissal:(void (^)(void))dismissalBlock
+                              completion:(void (^)(void))completionBlock;
 
 /**
  Fades out the currently displayed notification. If another notification is in the queue,
