@@ -34,6 +34,8 @@
 		7A298E131E7AF68700F24D5E /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE81E7AF44200F24D5E /* NotificationBackgroundWarningIcon@2x.png */; };
 		7A298E161E7AF68700F24D5E /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DEB1E7AF44200F24D5E /* RMessageDefaultDesign.json */; };
 		7A298E171E7AF68C00F24D5E /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DED1E7AF44200F24D5E /* RMessageView.xib */; };
+		7A57F2EC1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7A57F2ED1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7AF3550B1E7D7AED008264AA /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3550A1E7D7AED008264AA /* HexColors.framework */; };
 		7AF355351E807038008264AA /* RMessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF355341E807038008264AA /* RMessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF3553C1E8073E4008264AA /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A298DDE1E7AF44200F24D5E /* RMessageView.m */; };
@@ -72,6 +74,7 @@
 		7A298DED1E7AF44200F24D5E /* RMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
 		7A298E031E7AF64E00F24D5E /* RMessageKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RMessageKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A2EFD781E80C2A2005DEDAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../RMessageKit/Info.plist; sourceTree = "<group>"; };
+		7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMessageViewProtocol.h; sourceTree = "<group>"; };
 		7AF3550A1E7D7AED008264AA /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HexColors.framework; sourceTree = "<group>"; };
 		7AF355341E807038008264AA /* RMessageKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMessageKit.h; path = ../RMessageKit/RMessageKit.h; sourceTree = "<group>"; };
 		7AFF46E01E7B24D200AE2C89 /* UIWindow+TopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+TopViewController.h"; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 			children = (
 				7A07D1C41E7B13330024C4F7 /* RMessage.h */,
 				7A07D1C51E7B13330024C4F7 /* RMessage.m */,
+				7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */,
 				7A298DE11E7AF44200F24D5E /* RMessageView.h */,
 				7A298DDE1E7AF44200F24D5E /* RMessageView.m */,
 				7A07D1D01E7B1CE70024C4F7 /* Categories */,
@@ -188,6 +192,7 @@
 				7AF355351E807038008264AA /* RMessageKit.h in Headers */,
 				7A07D1C61E7B13330024C4F7 /* RMessage.h in Headers */,
 				7A298E0D1E7AF68100F24D5E /* RMessageView.h in Headers */,
+				7A57F2EC1E84AEF700356338 /* RMessageViewProtocol.h in Headers */,
 				7AFF46E21E7B24D200AE2C89 /* UIWindow+TopViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +203,7 @@
 			files = (
 				7AF355491E80ADD5008264AA /* RMessage.h in Headers */,
 				7AF3554A1E80ADDA008264AA /* RMessageView.h in Headers */,
+				7A57F2ED1E84AEF700356338 /* RMessageViewProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

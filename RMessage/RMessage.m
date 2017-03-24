@@ -8,6 +8,7 @@
 
 #import "RMessage.h"
 #import "RMessageView.h"
+#import "RMessageViewProtocol.h"
 
 static UIViewController *_defaultViewController;
 
@@ -399,6 +400,9 @@ static UIViewController *_defaultViewController;
 - (void)messageViewDidPresent:(RMessageView *)messageView
 {
   self.notificationActive = YES;
+  if (self.delegate && [self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
+    [self.delegate messageViewDidPresent:messageView];
+  }
 }
 
 - (void)messageViewDidDismiss:(RMessageView *)messageView
@@ -407,6 +411,11 @@ static UIViewController *_defaultViewController;
     [self.messages removeObjectAtIndex:0];
   }
   self.notificationActive = NO;
+
+  if (self.delegate && [self.delegate respondsToSelector:@selector(messageViewDidDismiss:)]) {
+    [self.delegate messageViewDidDismiss:messageView];
+  }
+
   if (self.messages.count > 0) {
     [self presentMessageView];
   }
@@ -422,16 +431,25 @@ static UIViewController *_defaultViewController;
 
 - (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView
 {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
+    [self.delegate windowRemovedForEndlessDurationMessageView:messageView];
+  }
   [self dismissMessageView:messageView completion:nil];
 }
 
 - (void)didSwipeToDismissMessageView:(RMessageView *)messageView
 {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
+    [self.delegate didSwipeToDismissMessageView:messageView];
+  }
   [self dismissMessageView:messageView completion:nil];
 }
 
 - (void)didTapMessageView:(RMessageView *)messageView
 {
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMessageView:)]) {
+    [self.delegate didTapMessageView:messageView];
+  }
   [self dismissMessageView:messageView
                 completion:^{
                   [messageView executeMessageViewTapAction];

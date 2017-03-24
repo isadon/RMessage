@@ -28,24 +28,38 @@ typedef NS_ENUM(NSInteger, RMessagePosition) {
 /** This enum can be passed to the duration parameter */
 typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RMessageDurationEndless = -1 };
 
-/** Define on which position a specific RMessage should be displayed */
+/** Define on which position a specific RMessage should be displayed. */
 @protocol RMessageProtocol <NSObject>
 
 @optional
 
-/** Implement this method to manipulate the vertical message offset for a specific message */
+/** Tells the delegate when the message view has finished presenting. */
+- (void)messageViewDidPresent:(RMessageView *)messageView;
+
+/** Tells the delegate when the message view has finished dismissing. */
+- (void)messageViewDidDismiss:(RMessageView *)messageView;
+
+/** Allows the delegate to influence the vertifical offset for the message view. */
 - (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView;
 
-/** You can customize the given RMessageView, like setting its alpha via (messageOpacity) or adding
- a subview */
+/** Tells the delegate when the window has been removed for an endless duration message view. */
+- (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView;
+
+/** Tells the delegate when the message view was swiped to for dismissal. */
+- (void)didSwipeToDismissMessageView:(RMessageView *)messageView;
+
+/** Tells the delegate when the message view was tapped. */
+- (void)didTapMessageView:(RMessageView *)messageView;
+
+/** Allows the delegate to to customize the RMessageView, like setting its alpha via (messageOpacity) or adding
+ a subview. */
 - (void)customizeMessageView:(RMessageView *)messageView;
 
 @end
 
 @interface RMessage : NSObject
 
-/** By setting this delegate it's possible to set a custom offset for the message view */
-@property (nonatomic, assign) id<RMessageProtocol> delegate;
+@property (nonatomic, weak) id<RMessageProtocol> delegate;
 
 + (instancetype)sharedMessage;
 

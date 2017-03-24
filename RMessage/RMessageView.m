@@ -22,6 +22,8 @@ static NSMutableDictionary *globalDesignDictionary;
 
 @interface RMessageView () <UIGestureRecognizerDelegate>
 
+@property (nonatomic, weak) id<RMessageViewProtocol> delegate;
+
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;

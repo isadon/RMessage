@@ -7,26 +7,9 @@
 //
 
 #import "RMessage.h"
-
-@protocol RMessageViewProtocol <NSObject>
-
-- (void)messageViewDidPresent:(RMessageView *)messageView;
-
-- (void)messageViewDidDismiss:(RMessageView *)messageView;
-
-- (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView;
-
-- (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView;
-
-- (void)didSwipeToDismissMessageView:(RMessageView *)messageView;
-
-- (void)didTapMessageView:(RMessageView *)messageView;
-
-@end
+#import "RMessageViewProtocol.h"
 
 @interface RMessageView : UIView
-
-@property (nonatomic, weak) id<RMessageViewProtocol> delegate;
 
 /** The displayed title of this message */
 @property (nonatomic, readonly) NSAttributedString *title;
