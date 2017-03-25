@@ -161,26 +161,6 @@ static NSMutableDictionary *globalDesignDictionary;
   return YES;
 }
 
-- (UIColor *)colorForString:(NSString *)string
-{
-  if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:1.f];
-  return nil;
-}
-
-/**
- Wrapper method to avoid getting a black color when passing a nil string to
- hx_colorWithHexRGBAString
- @param string A hex string representation of a color.
- @return nil or a color.
- */
-- (UIColor *)colorForString:(NSString *)string alpha:(CGFloat)alpha
-{
-  if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:alpha];
-  return nil;
-}
-
-#pragma mark - Get Image From Resource Bundle
-
 + (UIImage *)bundledImageNamed:(NSString *)name
 {
   NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
@@ -196,7 +176,7 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
-#pragma mark - Instance Methods
+#pragma mark - Init Methods
 
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
                            title:(NSAttributedString *)title
@@ -237,56 +217,7 @@ static NSMutableDictionary *globalDesignDictionary;
   return self;
 }
 
-- (NSError *)setupDefaultsWithDelegate:(id<RMessageViewProtocol>)delegate
-                                  type:(RMessageType)messageType
-                        customTypeName:(NSString *)customTypeName
-                              duration:(CGFloat)duration
-                      inViewController:(UIViewController *)viewController
-                            atPosition:(RMessagePosition)position
-                  canBeDismissedByUser:(BOOL)dismissingEnabled
-                              leftView:(UIView *)leftView
-                             rightView:(UIView *)rightView
-                        backgroundView:(UIView *)backgroundView
-                             tapAction:(void (^)(void))tapBlock
-                             dismissal:(void (^)(void))dismissalBlock
-                            completion:(void (^)(void))completionBlock
-
-{
-  _delegate = delegate;
-  _duration = duration;
-  viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
-  _messagePosition = position;
-  _dismissalBlock = dismissalBlock;
-  _completionBlock = completionBlock;
-  _messageType = messageType;
-  _customTypeName = customTypeName;
-  _interElementMargin = 10.f;
-
-  _interElementMarginConstraints = [NSMutableArray
-    arrayWithObjects:self.titleSubtitleContainerViewLeadingConstraint, self.titleSubtitleVerticalSpacingConstraint,
-                     self.titleSubtitleContainerViewTrailingConstraint, self.bottomSpaceConstraint,
-                     self.topSpaceConstraint, nil];
-  if (leftView) {
-    _leftView = leftView;
-    [self setupLeftView];
-  }
-  if (rightView) {
-    _rightView = rightView;
-    [self setupRightView];
-  }
-  if (backgroundView) {
-    _backgroundView = backgroundView;
-    [self setupBackgroundView];
-  }
-
-  NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
-  if (designError) return designError;
-
-  [self setupDesign];
-  [self setupLayout];
-  if (dismissingEnabled) [self setupGestureRecognizers];
-  return nil;
-}
+#pragma mark Setter methods
 
 - (void)setMessageOpacity:(CGFloat)messageOpacity
 {
@@ -340,7 +271,83 @@ static NSMutableDictionary *globalDesignDictionary;
       c.constant = -_interElementMargin;
     }
   }
-  [self calculateAndSetFinalAnimationConstants];
+  [self setupFinalAnimationConstants];
+}
+
+#pragma mark View Methods
+
+- (void)didMoveToWindow
+{
+  [super didMoveToWindow];
+  if (self.duration == RMessageDurationEndless && self.superview && !self.window) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
+      [self.delegate windowRemovedForEndlessDurationMessageView:self];
+    }
+  }
+}
+
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  if (self.leftViewRelativeCornerRadius > 0) {
+    self.leftView.layer.cornerRadius = self.leftViewRelativeCornerRadius * self.leftView.bounds.size.width;
+  }
+  if (self.rightViewRelativeCornerRadius > 0) {
+    self.rightView.layer.cornerRadius = self.rightViewRelativeCornerRadius * self.rightView.bounds.size.width;
+  }
+}
+
+#pragma mark Setup Methods
+
+- (NSError *)setupDefaultsWithDelegate:(id<RMessageViewProtocol>)delegate
+                                  type:(RMessageType)messageType
+                        customTypeName:(NSString *)customTypeName
+                              duration:(CGFloat)duration
+                      inViewController:(UIViewController *)viewController
+                            atPosition:(RMessagePosition)position
+                  canBeDismissedByUser:(BOOL)dismissingEnabled
+                              leftView:(UIView *)leftView
+                             rightView:(UIView *)rightView
+                        backgroundView:(UIView *)backgroundView
+                             tapAction:(void (^)(void))tapBlock
+                             dismissal:(void (^)(void))dismissalBlock
+                            completion:(void (^)(void))completionBlock
+
+{
+  _delegate = delegate;
+  _duration = duration;
+  viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
+  _messagePosition = position;
+  _dismissalBlock = dismissalBlock;
+  _completionBlock = completionBlock;
+  _messageType = messageType;
+  _customTypeName = customTypeName;
+  _interElementMargin = 10.f;
+
+  _interElementMarginConstraints = [NSMutableArray
+    arrayWithObjects:self.titleSubtitleContainerViewLeadingConstraint, self.titleSubtitleVerticalSpacingConstraint,
+                     self.titleSubtitleContainerViewTrailingConstraint, self.bottomSpaceConstraint,
+                     self.topSpaceConstraint, nil];
+  if (leftView) {
+    _leftView = leftView;
+    [self setupLeftView];
+  }
+  if (rightView) {
+    _rightView = rightView;
+    [self setupRightView];
+  }
+  if (backgroundView) {
+    _backgroundView = backgroundView;
+    [self setupBackgroundView];
+  }
+
+  NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
+  if (designError) return designError;
+
+  [self setupDesign];
+  [self setupLayout];
+  if (dismissingEnabled) [self setupGestureRecognizers];
+  return nil;
 }
 
 - (NSError *)setupDesignDictionariesWithMessageType:(RMessageType)messageType customTypeName:(NSString *)customTypeName
@@ -457,89 +464,6 @@ static NSMutableDictionary *globalDesignDictionary;
     activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
   if (self.shouldBlurBackground) [self setupBlurBackground];
-}
-
-- (void)setupBackgroundView
-{
-  UIViewContentMode contentMode =
-    [self contentModeForString:_messageViewDesignDictionary[@"backgroundViewContentMode"]];
-  if (contentMode) _backgroundView.contentMode = contentMode;
-
-  _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-  [self insertSubview:_backgroundView atIndex:0];
-  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"backgroundView": _backgroundView
-                                                                    }];
-  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"backgroundView": _backgroundView
-                                                                    }];
-  [[self class] activateConstraints:hConstraints inSuperview:self];
-  [[self class] activateConstraints:vConstraints inSuperview:self];
-}
-
-- (void)setupBlurBackground
-{
-  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-  UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-  blurView.translatesAutoresizingMaskIntoConstraints = NO;
-  [self insertSubview:blurView atIndex:0];
-  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"blurBackgroundView": blurView
-                                                                    }];
-  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"blurBackgroundView": blurView
-                                                                    }];
-  [[self class] activateConstraints:hConstraints inSuperview:self];
-  [[self class] activateConstraints:vConstraints inSuperview:self];
-}
-
-- (void)setupLabelPreferredMaxLayoutWidth
-{
-  CGFloat leftViewWidthAndPadding = 0.f;
-  CGFloat rightViewWidthAndPadding = 0.f;
-  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + _interElementMargin;
-  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + _interElementMargin;
-  _titleLabel.preferredMaxLayoutWidth =
-    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 2 * _interElementMargin;
-  _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
-}
-
-- (void)executeMessageViewTapAction
-{
-  if (self.tapBlock) self.tapBlock();
-}
-
-- (void)didMoveToWindow
-{
-  [super didMoveToWindow];
-  if (self.duration == RMessageDurationEndless && self.superview && !self.window) {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
-      [self.delegate windowRemovedForEndlessDurationMessageView:self];
-    }
-  }
-}
-
-- (void)layoutSubviews
-{
-  [super layoutSubviews];
-  if (self.leftViewRelativeCornerRadius > 0) {
-    self.leftView.layer.cornerRadius = self.leftViewRelativeCornerRadius * self.leftView.bounds.size.width;
-  }
-  if (self.rightViewRelativeCornerRadius > 0) {
-    self.rightView.layer.cornerRadius = self.rightViewRelativeCornerRadius * self.rightView.bounds.size.width;
-  }
 }
 
 - (void)setupDesignDefaults
@@ -725,6 +649,39 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.attributedText = _subtitle;
 }
 
+- (void)setupLabelPreferredMaxLayoutWidth
+{
+  CGFloat leftViewWidthAndPadding = 0.f;
+  CGFloat rightViewWidthAndPadding = 0.f;
+  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + _interElementMargin;
+  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + _interElementMargin;
+  _titleLabel.preferredMaxLayoutWidth =
+    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 2 * _interElementMargin;
+  _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
+}
+
+- (void)setupBlurBackground
+{
+  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+  UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+  blurView.translatesAutoresizingMaskIntoConstraints = NO;
+  [self insertSubview:blurView atIndex:0];
+  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"blurBackgroundView": blurView
+                                                                    }];
+  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"blurBackgroundView": blurView
+                                                                    }];
+  [[self class] activateConstraints:hConstraints inSuperview:self];
+  [[self class] activateConstraints:vConstraints inSuperview:self];
+}
+
 - (void)setupLeftView
 {
   UIViewContentMode contentMode = [self contentModeForString:_messageViewDesignDictionary[@"leftViewContentMode"]];
@@ -855,55 +812,28 @@ static NSMutableDictionary *globalDesignDictionary;
                         inSuperview:self];
 }
 
-- (void)setupGestureRecognizers
+- (void)setupBackgroundView
 {
-  UISwipeGestureRecognizer *gestureRecognizer =
-    [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeToDismissMessageView:)];
-  [gestureRecognizer
-    setDirection:(self.messagePosition == RMessagePositionTop ? UISwipeGestureRecognizerDirectionUp :
-                                                                UISwipeGestureRecognizerDirectionDown)];
-  [self addGestureRecognizer:gestureRecognizer];
+  UIViewContentMode contentMode =
+    [self contentModeForString:_messageViewDesignDictionary[@"backgroundViewContentMode"]];
+  if (contentMode) _backgroundView.contentMode = contentMode;
 
-  UITapGestureRecognizer *tapRecognizer =
-    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMessageView:)];
-  [self addGestureRecognizer:tapRecognizer];
-}
-
-#pragma mark - Gesture Recognizers
-
-/* called after the following gesture depending on message position during initialization
- UISwipeGestureRecognizerDirectionUp when message position set to Top,
- UISwipeGestureRecognizerDirectionDown when message position set to bottom */
-- (void)didSwipeToDismissMessageView:(UISwipeGestureRecognizer *)swipeGesture
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
-    [self.delegate didSwipeToDismissMessageView:self];
-  }
-}
-
-- (void)didTapMessageView:(UITapGestureRecognizer *)tapGesture
-{
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMessageView:)]) {
-    [self.delegate didTapMessageView:self];
-  }
-}
-
-#pragma mark - Presentation Methods
-
-- (void)present
-{
-  [self animateMessage];
-
-  if (self.duration == RMessageDurationAutomatic) {
-    self.duration =
-      kRMessageAnimationDuration + kRMessageDisplayTime + self.frame.size.height * kRMessageExtraDisplayTimePerPixel;
-  }
-
-  if (self.duration != RMessageDurationEndless) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self performSelector:@selector(dismiss) withObject:self afterDelay:self.duration];
-    });
-  }
+  _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+  [self insertSubview:_backgroundView atIndex:0];
+  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[backgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"backgroundView": _backgroundView
+                                                                    }];
+  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[backgroundView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:@{
+                                                                      @"backgroundView": _backgroundView
+                                                                    }];
+  [[self class] activateConstraints:hConstraints inSuperview:self];
+  [[self class] activateConstraints:vConstraints inSuperview:self];
 }
 
 - (void)layoutMessageForPresentation
@@ -938,10 +868,10 @@ static NSMutableDictionary *globalDesignDictionary;
     }
   }
   if (!self.superview) [self.viewController.view addSubview:self];
-  [self calculateAndSetFinalAnimationConstants];
+  [self setupFinalAnimationConstants];
 }
 
-- (void)calculateAndSetFinalAnimationConstants
+- (void)setupFinalAnimationConstants
 {
   [self layoutIfNeeded];
   UINavigationController *messageNavigationController;
@@ -985,6 +915,57 @@ static NSMutableDictionary *globalDesignDictionary;
     } else {
       self.topToVCFinalConstant = [self customVerticalOffset];
     }
+  }
+}
+
+#pragma mark - Gesture Recognizers
+
+- (void)setupGestureRecognizers
+{
+  UISwipeGestureRecognizer *gestureRecognizer =
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeToDismissMessageView:)];
+  [gestureRecognizer
+    setDirection:(self.messagePosition == RMessagePositionTop ? UISwipeGestureRecognizerDirectionUp :
+                                                                UISwipeGestureRecognizerDirectionDown)];
+  [self addGestureRecognizer:gestureRecognizer];
+
+  UITapGestureRecognizer *tapRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMessageView:)];
+  [self addGestureRecognizer:tapRecognizer];
+}
+
+/* called after the following gesture depending on message position during initialization
+ UISwipeGestureRecognizerDirectionUp when message position set to Top,
+ UISwipeGestureRecognizerDirectionDown when message position set to bottom */
+- (void)didSwipeToDismissMessageView:(UISwipeGestureRecognizer *)swipeGesture
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
+    [self.delegate didSwipeToDismissMessageView:self];
+  }
+}
+
+- (void)didTapMessageView:(UITapGestureRecognizer *)tapGesture
+{
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMessageView:)]) {
+    [self.delegate didTapMessageView:self];
+  }
+}
+
+#pragma mark - Presentation Methods
+
+- (void)present
+{
+  [self animateMessage];
+
+  if (self.duration == RMessageDurationAutomatic) {
+    self.duration =
+      kRMessageAnimationDuration + kRMessageDisplayTime + self.frame.size.height * kRMessageExtraDisplayTimePerPixel;
+  }
+
+  if (self.duration != RMessageDurationEndless) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self performSelector:@selector(dismiss) withObject:self afterDelay:self.duration];
+    });
   }
 }
 
@@ -1039,6 +1020,24 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 #pragma mark - Misc methods
+
+- (UIColor *)colorForString:(NSString *)string
+{
+  if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:1.f];
+  return nil;
+}
+
+/**
+ Wrapper method to avoid getting a black color when passing a nil string to
+ hx_colorWithHexRGBAString
+ @param string A hex string representation of a color.
+ @return nil or a color.
+ */
+- (UIColor *)colorForString:(NSString *)string alpha:(CGFloat)alpha
+{
+  if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:alpha];
+  return nil;
+}
 
 /**
  Get the custom vertical offset from the delegate if any
@@ -1100,6 +1099,11 @@ static NSMutableDictionary *globalDesignDictionary;
   } else {
     return NSTextAlignmentLeft;
   }
+}
+
+- (void)executeMessageViewTapAction
+{
+  if (self.tapBlock) self.tapBlock();
 }
 
 @end
