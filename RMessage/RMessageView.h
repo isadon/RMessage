@@ -48,6 +48,9 @@
 @property (nonatomic, assign) NSTextAlignment subtitleAlignment UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor *subtitleTextColor UI_APPEARANCE_SELECTOR;
 
+/** Set the margin between all elements, by default 10.f */
+@property (nonatomic, assign) CGFloat interElementMargin UI_APPEARANCE_SELECTOR;
+
 /**
  Inits the message view. Do not call this from outside this library.
  @param delegate The delegate of the message view

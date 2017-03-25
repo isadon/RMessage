@@ -49,6 +49,11 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewLeadingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTrailingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleVerticalSpacingConstraint;
+
+@property (nonatomic, strong) NSMutableArray *interElementMarginConstraints;
 
 @property (nonatomic, copy) void (^dismissalBlock)();
 @property (nonatomic, copy) void (^tapBlock)();
@@ -255,6 +260,12 @@ static NSMutableDictionary *globalDesignDictionary;
   _completionBlock = completionBlock;
   _messageType = messageType;
   _customTypeName = customTypeName;
+  _interElementMargin = 10.f;
+
+  _interElementMarginConstraints = [NSMutableArray
+    arrayWithObjects:self.titleSubtitleContainerViewLeadingConstraint, self.titleSubtitleVerticalSpacingConstraint,
+                     self.titleSubtitleContainerViewTrailingConstraint, self.bottomSpaceConstraint,
+                     self.topSpaceConstraint, nil];
   if (leftView) {
     _leftView = leftView;
     [self setupLeftView];
@@ -317,6 +328,19 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   _subtitleTextColor = subtitleTextColor;
   [self.subtitleLabel setTextColor:_subtitleTextColor];
+}
+
+- (void)setInterElementMargin:(CGFloat)interElementMargin
+{
+  _interElementMargin = interElementMargin;
+  for (NSLayoutConstraint *c in self.interElementMarginConstraints) {
+    if (c.constant > 0) {
+      c.constant = _interElementMargin;
+    } else {
+      c.constant = -_interElementMargin;
+    }
+  }
+  [self calculateAndSetFinalAnimationConstants];
 }
 
 - (NSError *)setupDesignDictionariesWithMessageType:(RMessageType)messageType customTypeName:(NSString *)customTypeName
@@ -485,10 +509,10 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   CGFloat leftViewWidthAndPadding = 0.f;
   CGFloat rightViewWidthAndPadding = 0.f;
-  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + 15.f;
-  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + 15.f;
+  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + _interElementMargin;
+  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + _interElementMargin;
   _titleLabel.preferredMaxLayoutWidth =
-    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 30.f;
+    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 2 * _interElementMargin;
   _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
 }
 
@@ -724,22 +748,21 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                         toItem:self
                                                                      attribute:NSLayoutAttributeLeading
                                                                     multiplier:1.f
-                                                                      constant:15.f];
+                                                                      constant:_interElementMargin];
   NSLayoutConstraint *leftViewTrailing = [NSLayoutConstraint constraintWithItem:self.leftView
                                                                       attribute:NSLayoutAttributeTrailing
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:self.titleSubtitleContainerView
                                                                       attribute:NSLayoutAttributeLeading
                                                                      multiplier:1.f
-                                                                       constant:-15.f];
+                                                                       constant:-_interElementMargin];
   NSLayoutConstraint *leftViewBottom = [NSLayoutConstraint constraintWithItem:self.leftView
                                                                     attribute:NSLayoutAttributeBottom
                                                                     relatedBy:NSLayoutRelationLessThanOrEqual
                                                                        toItem:self
                                                                     attribute:NSLayoutAttributeBottom
                                                                    multiplier:1.f
-                                                                     constant:-10.f];
-
+                                                                     constant:-_interElementMargin];
   NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.leftView
                                                            attribute:NSLayoutAttributeWidth
                                                            relatedBy:NSLayoutRelationEqual
@@ -754,6 +777,8 @@ static NSMutableDictionary *globalDesignDictionary;
                                                             attribute:NSLayoutAttributeNotAnAttribute
                                                            multiplier:1.f
                                                              constant:self.leftView.bounds.size.height];
+
+  [self.interElementMarginConstraints addObjectsFromArray:@[leftViewLeading, leftViewTrailing, leftViewBottom]];
 
   [self addSubview:self.leftView];
   [[self class] activateConstraints:@[leftViewCenterY, leftViewLeading, leftViewTrailing, leftViewBottom, width, height]
@@ -783,28 +808,28 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                          toItem:self.titleSubtitleContainerView
                                                                       attribute:NSLayoutAttributeTrailing
                                                                      multiplier:1.f
-                                                                       constant:15.f];
+                                                                       constant:_interElementMargin];
   NSLayoutConstraint *rightViewTrailing = [NSLayoutConstraint constraintWithItem:self.rightView
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:NSLayoutRelationEqual
                                                                           toItem:self
                                                                        attribute:NSLayoutAttributeTrailing
                                                                       multiplier:1.f
-                                                                        constant:-15.f];
+                                                                        constant:-_interElementMargin];
   NSLayoutConstraint *rightViewTop = [NSLayoutConstraint constraintWithItem:self.rightView
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeTop
                                                                  multiplier:1.f
-                                                                   constant:10.f];
+                                                                   constant:_interElementMargin];
   NSLayoutConstraint *rightViewBottom = [NSLayoutConstraint constraintWithItem:self.rightView
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationLessThanOrEqual
                                                                         toItem:self
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1.f
-                                                                      constant:-10.f];
+                                                                      constant:-_interElementMargin];
   NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.rightView
                                                            attribute:NSLayoutAttributeWidth
                                                            relatedBy:NSLayoutRelationEqual
@@ -819,6 +844,9 @@ static NSMutableDictionary *globalDesignDictionary;
                                                             attribute:NSLayoutAttributeNotAnAttribute
                                                            multiplier:1.f
                                                              constant:self.rightView.bounds.size.height];
+
+  [self.interElementMarginConstraints
+    addObjectsFromArray:@[rightViewLeading, rightViewTrailing, rightViewTop, rightViewBottom]];
 
   [self addSubview:self.rightView];
   [[self class] activateConstraints:@[
