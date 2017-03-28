@@ -350,7 +350,7 @@ static NSMutableDictionary *globalDesignDictionary;
   _completionBlock = completionBlock;
   _messageType = messageType;
   _customTypeName = customTypeName;
-  _interElementMargin = 10.f;
+  _interElementMargin = 8.f;
 
   _interElementMarginConstraints = [NSMutableArray
     arrayWithObjects:self.titleSubtitleContainerViewLeadingConstraint, self.titleSubtitleVerticalSpacingConstraint,
@@ -443,7 +443,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
   // Add RMessage to superview and prepare the ending y position constants
   [self layoutMessageForPresentation];
-  [self setupLabelPreferredMaxLayoutWidth];
 
   // Prepare the starting y position constants
   if (self.messagePosition != RMessagePositionBottom) {
@@ -675,17 +674,6 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitleLabel.shadowOffset = CGSizeMake([subtitleShadowOffsetX floatValue], [subtitleShadowOffsetY floatValue]);
   }
   _subtitleLabel.attributedText = _subtitle;
-}
-
-- (void)setupLabelPreferredMaxLayoutWidth
-{
-  CGFloat leftViewWidthAndPadding = 0.f;
-  CGFloat rightViewWidthAndPadding = 0.f;
-  if (_leftView) leftViewWidthAndPadding = _leftView.bounds.size.width + _interElementMargin;
-  if (_rightView) rightViewWidthAndPadding = _rightView.bounds.size.width + _interElementMargin;
-  _titleLabel.preferredMaxLayoutWidth =
-    self.superview.bounds.size.width - leftViewWidthAndPadding - rightViewWidthAndPadding - 2 * _interElementMargin;
-  _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
 }
 
 - (void)setupBlurBackground
