@@ -52,7 +52,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bottomSpaceConstraint" destination="Urt-nc-SD2" id="DSC-wE-coF"/>
+                <outlet property="bottomSpaceGreaterOrEqualConstraint" destination="Urt-nc-SD2" id="8a7-g5-KEn"/>
                 <outlet property="subtitleLabel" destination="86Q-SR-N4H" id="b36-f7-jMs"/>
                 <outlet property="titleLabel" destination="bJU-tq-cfR" id="cQG-kC-CBc"/>
                 <outlet property="titleSubtitleContainerView" destination="49I-AE-5sP" id="gnK-Tn-Kb9"/>
@@ -61,8 +61,9 @@
                 <outlet property="titleSubtitleContainerViewTrailingConstraint" destination="N4l-Ol-H0N" id="Gxt-Jp-ZAW"/>
                 <outlet property="titleSubtitleVerticalSpacingConstraint" destination="sUB-xD-36O" id="Zge-tu-4Gu"/>
                 <outlet property="topSpaceConstraint" destination="uoF-wG-j5j" id="9Ta-qb-0u4"/>
+                <outlet property="topSpaceGreaterOrEqualConstraint" destination="Azz-KF-Xf8" id="py3-TR-zBQ"/>
             </connections>
-            <point key="canvasLocation" x="337" y="450"/>
+            <point key="canvasLocation" x="-258" y="723"/>
         </view>
     </objects>
 </document>

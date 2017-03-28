@@ -47,10 +47,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 /** The vertical space between the message view top to its view controller top */
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
+
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewLeadingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTrailingConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomSpaceConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceGreaterOrEqualConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *bottomSpaceGreaterOrEqualConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleVerticalSpacingConstraint;
 
 @property (nonatomic, strong) NSMutableArray *interElementMarginConstraints;
@@ -217,7 +219,7 @@ static NSMutableDictionary *globalDesignDictionary;
   return self;
 }
 
-#pragma mark Setter methods
+#pragma mark Customization methods
 
 - (void)setMessageOpacity:(CGFloat)messageOpacity
 {
@@ -274,6 +276,32 @@ static NSMutableDictionary *globalDesignDictionary;
   [self setupFinalAnimationConstants];
 }
 
+- (void)setTitleSubtitleLabelsVerticalSpacing:(CGFloat)spacing
+{
+  self.titleSubtitleVerticalSpacingConstraint.constant = spacing;
+}
+
+- (void)setTitleSubtitleLeadingMargin:(CGFloat)margin
+{
+  self.titleSubtitleContainerViewLeadingConstraint.constant = margin;
+}
+
+- (void)setTitleSubtitleTrailingMargin:(CGFloat)margin
+{
+  self.titleSubtitleContainerViewTrailingConstraint.constant = margin;
+}
+
+- (void)setVerticalSpacingToSuperViewTop:(CGFloat)spacing
+{
+  self.topSpaceGreaterOrEqualConstraint.constant = spacing;
+  self.topSpaceConstraint.constant = spacing;
+}
+
+- (void)setVerticalSpacingToSuperViewBottom:(CGFloat)spacing
+{
+  self.bottomSpaceGreaterOrEqualConstraint.constant = spacing;
+}
+
 #pragma mark View Methods
 
 - (void)didMoveToWindow
@@ -326,8 +354,8 @@ static NSMutableDictionary *globalDesignDictionary;
 
   _interElementMarginConstraints = [NSMutableArray
     arrayWithObjects:self.titleSubtitleContainerViewLeadingConstraint, self.titleSubtitleVerticalSpacingConstraint,
-                     self.titleSubtitleContainerViewTrailingConstraint, self.bottomSpaceConstraint,
-                     self.topSpaceConstraint, nil];
+                     self.titleSubtitleContainerViewTrailingConstraint, self.bottomSpaceGreaterOrEqualConstraint,
+                     self.topSpaceGreaterOrEqualConstraint, self.topSpaceConstraint, nil];
   if (leftView) {
     _leftView = leftView;
     [self setupLeftView];

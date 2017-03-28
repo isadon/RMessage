@@ -32,24 +32,25 @@
 /** The customTypeName if any the RMessageView was initialized with */
 @property (nonatomic, copy, readonly) NSString *customTypeName;
 
-/** The opacity of the message view. When customizing RMessage always set this value to the desired opacity instead of
- the alpha property. Internally the alpha property is changed during animations; this property allows RMessage to
- always know the final alpha value.*/
-@property (nonatomic, assign) CGFloat messageOpacity;
-
 /** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
-/** Customize RMessage using Appearance proxy */
-@property (nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
-@property (nonatomic, assign) NSTextAlignment titleAlignment UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIColor *titleTextColor UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIFont *subtitleFont UI_APPEARANCE_SELECTOR;
-@property (nonatomic, assign) NSTextAlignment subtitleAlignment UI_APPEARANCE_SELECTOR;
-@property (nonatomic, strong) UIColor *subtitleTextColor UI_APPEARANCE_SELECTOR;
+/** Customize RMessage properties via use of delegate customizeMessageView function */
+@property (nonatomic, strong) UIFont *titleFont;
+@property (nonatomic, assign) NSTextAlignment titleAlignment;
+@property (nonatomic, strong) UIColor *titleTextColor;
+@property (nonatomic, strong) UIFont *subtitleFont;
+@property (nonatomic, assign) NSTextAlignment subtitleAlignment;
+@property (nonatomic, strong) UIColor *subtitleTextColor;
+
+/** The opacity of the message view. When customizing RMessage always set this value to the desired opacity instead of
+ the alpha property. Internally the alpha property is changed during animations; this property allows RMessage to
+ always know the final alpha value
+ */
+@property (nonatomic, assign) CGFloat messageOpacity;
 
 /** Set the margin between all elements, by default 10.f */
-@property (nonatomic, assign) CGFloat interElementMargin UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) CGFloat interElementMargin;
 
 /**
  Inits the message view. Do not call this from outside this library.
@@ -97,5 +98,23 @@
 
 /** Dismiss the view with a completion block */
 - (void)dismissWithCompletion:(void (^)(void))completionBlock;
+
+#pragma mark Customization functions
+
+/** Set the vertical spacing/margin between the title and subtitle labels */
+- (void)setTitleSubtitleLabelsVerticalSpacing:(CGFloat)spacing;
+
+/** Set the horizontal leading margin between the title/subtitle labels and the container or leftView (if not nil)
+ */
+- (void)setTitleSubtitleLeadingMargin:(CGFloat)margin;
+
+/** Set the horizontal trailing margin between the title/subtitle labels and the container or rightView (if not nil) */
+- (void)setTitleSubtitleTrailingMargin:(CGFloat)margin;
+
+/** Set the vertical margin between the message top and the superview top */
+- (void)setVerticalSpacingToSuperViewTop:(CGFloat)spacing;
+
+/** Set the vertical margin between the message bottom and the superview bottom */
+- (void)setVerticalSpacingToSuperViewBottom:(CGFloat)spacing;
 
 @end
