@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
 @interface RMessage : NSObject
 
 /** By setting this delegate it's possible to set a custom offset for the message view */
-@property (nonatomic, assign) id<RMessageProtocol> delegate;
+@property (nonatomic, weak) id<RMessageProtocol> delegate;
 
 + (instancetype)sharedMessage;
 
