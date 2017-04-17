@@ -733,8 +733,7 @@ static NSMutableDictionary *globalDesignDictionary;
   UISwipeGestureRecognizer *gestureRecognizer =
     [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeToDismissMessageView:)];
   [gestureRecognizer
-    setDirection:(self.messagePosition == RMessagePositionTop ? UISwipeGestureRecognizerDirectionUp :
-                                                                UISwipeGestureRecognizerDirectionDown)];
+   setDirection:(self.messagePosition == RMessagePositionBottom) ? UISwipeGestureRecognizerDirectionDown : UISwipeGestureRecognizerDirectionUp];
   [self addGestureRecognizer:gestureRecognizer];
 
   UITapGestureRecognizer *tapRecognizer =
