@@ -346,6 +346,7 @@ static NSMutableDictionary *globalDesignDictionary;
   _duration = duration;
   viewController ? _viewController = viewController : (_viewController = [UIWindow topViewController]);
   _messagePosition = position;
+  _tapBlock = tapBlock;
   _dismissalBlock = dismissalBlock;
   _completionBlock = completionBlock;
   _messageType = messageType;
