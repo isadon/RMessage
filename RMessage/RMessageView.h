@@ -11,6 +11,8 @@
 
 @protocol RMessageViewProtocol <NSObject>
 
+- (void)messageViewIsPresenting:(RMessageView *)messageView;
+
 - (void)messageViewDidPresent:(RMessageView *)messageView;
 
 - (void)messageViewDidDismiss:(RMessageView *)messageView;
@@ -55,7 +57,10 @@
  always know the final alpha value.*/
 @property (nonatomic, assign) CGFloat messageOpacity;
 
-/** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
+/** Is the message currently in the process of presenting, but not yet displayed? */
+@property (nonatomic, assign) BOOL isPresenting;
+
+/** Is the message currently on screen, fully displayed? */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
 /** Customize RMessage using Appearance proxy */
@@ -113,5 +118,7 @@
 
 /** Dismiss the view with a completion block */
 - (void)dismissWithCompletion:(void (^)(void))completionBlock;
+
+- (void)interfaceDidRotate;
 
 @end

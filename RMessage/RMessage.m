@@ -312,7 +312,7 @@ static UIViewController *_defaultViewController;
 
 #pragma mark - RMessageView Delegate Methods
 
-- (void)messageViewDidPresent:(RMessageView *)messageView
+- (void)messageViewIsPresenting:(RMessageView *)messageView
 {
   self.notificationActive = YES;
 }
@@ -352,6 +352,12 @@ static UIViewController *_defaultViewController;
                 completion:^{
                   [messageView executeMessageViewCallBack];
                 }];
+}
+
++ (void)interfaceDidRotate
+{
+  if ([RMessage sharedMessage].messages.count == 0) return;
+  [[RMessage sharedMessage].messages[0] interfaceDidRotate];
 }
 
 @end
