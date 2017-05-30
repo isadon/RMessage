@@ -299,16 +299,6 @@ static UIViewController *_defaultViewController;
 
 + (void)prepareNotificationForPresentation:(RMessageView *)messageView
 {
-  NSAttributedString *title = messageView.title;
-  NSAttributedString *subtitle = messageView.subtitle;
-
-  for (RMessageView *messageView in [RMessage sharedMessage].messages) {
-    if (([messageView.title isEqualToAttributedString:title] || (!messageView.title && !title)) &&
-        ([messageView.subtitle isEqualToAttributedString:subtitle] || (!messageView.subtitle && !subtitle))) {
-      return; // avoid showing the same messages twice in a row
-    }
-  }
-
   [[RMessage sharedMessage].messages addObject:messageView];
 
   if (![RMessage sharedMessage].notificationActive) {
@@ -397,7 +387,7 @@ static UIViewController *_defaultViewController;
 
 #pragma mark - RMessageView Delegate Methods
 
-- (void)messageViewDidPresent:(RMessageView *)messageView
+- (void)messageViewIsPresenting:(RMessageView *)messageView
 {
   self.notificationActive = YES;
   if (self.delegate && [self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
@@ -454,6 +444,12 @@ static UIViewController *_defaultViewController;
                 completion:^{
                   [messageView executeMessageViewTapAction];
                 }];
+}
+
++ (void)interfaceDidRotate
+{
+  if ([RMessage sharedMessage].messages.count == 0) return;
+  [[RMessage sharedMessage].messages[0] interfaceDidRotate];
 }
 
 @end

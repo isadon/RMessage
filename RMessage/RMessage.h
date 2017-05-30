@@ -335,4 +335,10 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
  fadeInCurrentNotification. You don't have to use this method. */
 + (void)prepareNotificationForPresentation:(RMessageView *)messageView;
 
+/**
+ Call this method to notify any presenting or on screen messages that the interface has rotated.
+ Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
+ */
++ (void)interfaceDidRotate;
+
 @end

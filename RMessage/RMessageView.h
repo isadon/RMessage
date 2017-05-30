@@ -32,6 +32,9 @@
 /** The customTypeName if any the RMessageView was initialized with */
 @property (nonatomic, copy, readonly) NSString *customTypeName;
 
+/** Is the message currently in the process of presenting, but not yet displayed? */
+@property (nonatomic, assign) BOOL isPresenting;
+
 /** Is the message currently fully displayed? Is set as soon as the message is really fully visible */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
@@ -116,5 +119,7 @@
 
 /** Set the vertical margin between the message bottom and the superview bottom */
 - (void)setVerticalSpacingToSuperViewBottom:(CGFloat)spacing;
+
+- (void)interfaceDidRotate;
 
 @end

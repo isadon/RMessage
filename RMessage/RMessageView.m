@@ -996,11 +996,16 @@ static NSMutableDictionary *globalDesignDictionary;
     options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
             UIViewAnimationOptionAllowUserInteraction
     animations:^{
+      self.isPresenting = YES;
+      if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
+        [self.delegate messageViewIsPresenting:self];
+      }
       if (!self.shouldBlurBackground) self.alpha = self.messageOpacity;
       self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
       [self.superview layoutIfNeeded];
     }
     completion:^(BOOL finished) {
+      self.isPresenting = NO;
       self.messageIsFullyDisplayed = YES;
       if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
         if (self.completionBlock) self.completionBlock();
@@ -1053,6 +1058,15 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:alpha];
   return nil;
+}
+
+- (void)interfaceDidRotate
+{
+  if (self.isPresenting) [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
+
+  // on completion of UI rotation recalculate positioning
+  [self layoutMessageForPresentation];
+  self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
 }
 
 /**
