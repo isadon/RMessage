@@ -11,6 +11,7 @@
 
 @protocol RMessageViewProtocol <NSObject>
 
+@optional
 - (void)messageViewIsPresenting:(RMessageView *)messageView;
 
 - (void)messageViewDidPresent:(RMessageView *)messageView;
