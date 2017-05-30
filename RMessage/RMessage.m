@@ -214,16 +214,6 @@ static UIViewController *_defaultViewController;
 
 + (void)prepareNotificationForPresentation:(RMessageView *)messageView
 {
-  NSString *title = messageView.title;
-  NSString *subtitle = messageView.subtitle;
-
-  for (RMessageView *messageView in [RMessage sharedMessage].messages) {
-    if (([messageView.title isEqualToString:title] || (!messageView.title && !title)) &&
-        ([messageView.subtitle isEqualToString:subtitle] || (!messageView.subtitle && !subtitle))) {
-      return; // avoid showing the same messages twice in a row
-    }
-  }
-
   [[RMessage sharedMessage].messages addObject:messageView];
 
   if (![RMessage sharedMessage].notificationActive) {
