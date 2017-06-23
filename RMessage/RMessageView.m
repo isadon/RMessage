@@ -863,27 +863,24 @@ static NSMutableDictionary *globalDesignDictionary;
     messageNavigationController = (UINavigationController *)self.viewController.parentViewController;
   }
 
-  if (messageNavigationController) {
-    BOOL messageNavigationBarHidden =
+  if (self.messagePosition != RMessagePositionBottom) {
+    if (messageNavigationController) {
+      BOOL messageNavigationBarHidden =
       [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
 
-    if (self.messagePosition != RMessagePositionBottom) {
       if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
         // Present from below nav bar when presenting from the top and navigation bar is present
         [messageNavigationController.view insertSubview:self belowSubview:messageNavigationController.navigationBar];
       } else {
         /* Navigation bar hidden or being asked to present as nav bar overlay, so present above status bar and/or
          navigation bar */
-        self.titleSubtitleContainerViewCenterYConstraint.constant =
-          [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+        self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarHidden ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
       }
-    }
-  } else {
-    if (self.messagePosition != RMessagePositionBottom) {
-      self.titleSubtitleContainerViewCenterYConstraint.constant =
-        [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+    } else {
+      self.titleSubtitleContainerViewCenterYConstraint.constant = [UIApplication sharedApplication].statusBarHidden ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
     }
   }
+
   if (!self.superview) [self.viewController.view addSubview:self];
   [self setupFinalAnimationConstants];
 }
