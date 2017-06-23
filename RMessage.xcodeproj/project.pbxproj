@@ -34,8 +34,8 @@
 		7A298E131E7AF68700F24D5E /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DE81E7AF44200F24D5E /* NotificationBackgroundWarningIcon@2x.png */; };
 		7A298E161E7AF68700F24D5E /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DEB1E7AF44200F24D5E /* RMessageDefaultDesign.json */; };
 		7A298E171E7AF68C00F24D5E /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A298DED1E7AF44200F24D5E /* RMessageView.xib */; };
-		7A57F2EC1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7A57F2ED1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7A57F2EC1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A57F2ED1E84AEF700356338 /* RMessageViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A57F2EB1E84A81400356338 /* RMessageViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF3550B1E7D7AED008264AA /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF3550A1E7D7AED008264AA /* HexColors.framework */; };
 		7AF355351E807038008264AA /* RMessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AF355341E807038008264AA /* RMessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF3553C1E8073E4008264AA /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A298DDE1E7AF44200F24D5E /* RMessageView.m */; };
