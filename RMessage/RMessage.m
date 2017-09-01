@@ -316,7 +316,7 @@ static UIViewController *_defaultViewController;
   if ([RMessage sharedMessage].messages.count == 0 || ![RMessage sharedMessage].messages) return NO;
 
   dispatch_async(dispatch_get_main_queue(), ^{
-    RMessageView *currentMessage = [RMessage sharedMessage].messages[0];
+    RMessageView *currentMessage = [RMessage sharedMessage].messages.firstObject;
     if (currentMessage && currentMessage.messageIsFullyDisplayed) {
       [[RMessage sharedMessage] dismissMessageView:currentMessage completion:completionBlock];
     }
@@ -367,7 +367,7 @@ static UIViewController *_defaultViewController;
 - (void)presentMessageView
 {
   if (self.messages.count == 0) return;
-  RMessageView *messageView = self.messages[0];
+  RMessageView *messageView = self.messages.firstObject;
 
   if (self.delegate && [self.delegate respondsToSelector:@selector(customizeMessageView:)]) {
     [self.delegate customizeMessageView:messageView];
@@ -449,7 +449,7 @@ static UIViewController *_defaultViewController;
 + (void)interfaceDidRotate
 {
   if ([RMessage sharedMessage].messages.count == 0) return;
-  [[RMessage sharedMessage].messages[0] interfaceDidRotate];
+  [[RMessage sharedMessage].messages.firstObject interfaceDidRotate];
 }
 
 @end
