@@ -848,30 +848,32 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)animateMessage
 {
-  [self.superview layoutIfNeeded];
-  if (!self.shouldBlurBackground) self.alpha = 0.f;
-  [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
-    delay:0.f
-    usingSpringWithDamping:0.7
-    initialSpringVelocity:0.f
-    options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
-            UIViewAnimationOptionAllowUserInteraction
-    animations:^{
-      self.isPresenting = YES;
-      if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
-        [self.delegate messageViewIsPresenting:self];
-      }
-      if (!self.shouldBlurBackground) self.alpha = self.messageOpacity;
-      self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
-      [self.superview layoutIfNeeded];
-    }
-    completion:^(BOOL finished) {
-      self.isPresenting = NO;
-      self.messageIsFullyDisplayed = YES;
-      if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
-        [self.delegate messageViewDidPresent:self];
-      }
-    }];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.superview layoutIfNeeded];
+    if (!self.shouldBlurBackground) self.alpha = 0.f;
+    [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
+                          delay:0.f
+         usingSpringWithDamping:0.7
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
+     UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                       self.isPresenting = YES;
+                       if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
+                         [self.delegate messageViewIsPresenting:self];
+                       }
+                       if (!self.shouldBlurBackground) self.alpha = self.messageOpacity;
+                       self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
+                       [self.superview layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                       self.isPresenting = NO;
+                       self.messageIsFullyDisplayed = YES;
+                       if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
+                         [self.delegate messageViewDidPresent:self];
+                       }
+                     }];
+  });
 }
 
 - (void)dismiss
@@ -882,21 +884,23 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)dismissWithCompletion:(void (^)(void))completionBlock
 {
   self.messageIsFullyDisplayed = NO;
-  [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
 
-  [UIView animateWithDuration:kRMessageAnimationDuration
-    animations:^{
-      if (!self.shouldBlurBackground) self.alpha = 0.f;
-      self.topToVCLayoutConstraint.constant = self.topToVCStartConstant;
-      [self.superview layoutIfNeeded];
-    }
-    completion:^(BOOL finished) {
-      [self removeFromSuperview];
-      if ([self.delegate respondsToSelector:@selector(messageViewDidDismiss:)]) {
-        [self.delegate messageViewDidDismiss:self];
-      }
-      if (completionBlock) completionBlock();
-    }];
+    [UIView animateWithDuration:kRMessageAnimationDuration
+                     animations:^{
+                       if (!self.shouldBlurBackground) self.alpha = 0.f;
+                       self.topToVCLayoutConstraint.constant = self.topToVCStartConstant;
+                       [self.superview layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                       [self removeFromSuperview];
+                       if ([self.delegate respondsToSelector:@selector(messageViewDidDismiss:)]) {
+                         [self.delegate messageViewDidDismiss:self];
+                       }
+                       if (completionBlock) completionBlock();
+                     }];
+  });
 }
 
 #pragma mark - Misc methods
