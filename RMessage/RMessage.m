@@ -233,7 +233,7 @@ static UIViewController *_defaultViewController;
   dispatch_async(dispatch_get_main_queue(), ^{
     RMessageView *currentMessage = [RMessage sharedMessage].messages[0];
     if (currentMessage && currentMessage.messageIsFullyDisplayed) {
-      [[RMessage sharedMessage] dismissMessageView:currentMessage completion:completionBlock];
+      [currentMessage dismissWithCompletion:completionBlock];
     }
   });
   return YES;
@@ -290,16 +290,6 @@ static UIViewController *_defaultViewController;
   [messageView present];
 }
 
-- (void)dismissMessageView:(RMessageView *)messageView completion:(void (^)(void))completionBlock
-{
-  [messageView dismissWithCompletion:^{
-    // execute the completion block once the messageView has been truly dismissed
-    if (completionBlock) {
-      completionBlock();
-    }
-  }];
-}
-
 #pragma mark - RMessageView Delegate Methods
 
 - (void)messageViewIsPresenting:(RMessageView *)messageView
@@ -328,20 +318,19 @@ static UIViewController *_defaultViewController;
 
 - (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView
 {
-  [self dismissMessageView:messageView completion:nil];
+  [messageView dismissWithCompletion:nil];
 }
 
 - (void)didSwipeToDismissMessageView:(RMessageView *)messageView
 {
-  [self dismissMessageView:messageView completion:nil];
+  [messageView dismissWithCompletion:nil];
 }
 
 - (void)didTapMessageView:(RMessageView *)messageView
 {
-  [self dismissMessageView:messageView
-                completion:^{
-                  [messageView executeMessageViewCallBack];
-                }];
+  [messageView dismissWithCompletion:^{
+    [messageView executeMessageViewCallBack];
+  }];
 }
 
 + (void)interfaceDidRotate
