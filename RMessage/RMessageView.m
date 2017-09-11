@@ -909,7 +909,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   if (self.isPresenting) [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
 
-  // on completion of UI rotation recalculate positioning
+  // On completion of UI rotation recalculate positioning
   [self layoutMessageForPresentation];
   [self setupLabelPreferredMaxLayoutWidth];
   self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;

@@ -195,7 +195,6 @@ static UIViewController *_defaultViewController;
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  // Create the RMessageView
   RMessageView *messageView = [[RMessageView alloc] initWithDelegate:[RMessage sharedMessage]
                                                                title:title
                                                             subtitle:subtitle
