@@ -50,9 +50,9 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The vertical space between the message view top to its view controller top */
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
 
-@property (nonatomic, copy) void (^callback)();
+@property (nonatomic, copy) void (^callback)(void);
 
-@property (nonatomic, copy) void (^buttonCallback)();
+@property (nonatomic, copy) void (^buttonCallback)(void);
 
 /** The starting constant value that should be set for the topToVCTopLayoutConstraint when animating */
 @property (nonatomic, assign) CGFloat topToVCStartConstant;
@@ -208,9 +208,9 @@ static NSMutableDictionary *globalDesignDictionary;
                   customTypeName:(NSString *)customTypeName
                         duration:(CGFloat)duration
                 inViewController:(UIViewController *)viewController
-                        callback:(void (^)())callback
+                        callback:(void (^)(void))callback
                      buttonTitle:(NSString *)buttonTitle
-                  buttonCallback:(void (^)())buttonCallback
+                  buttonCallback:(void (^)(void))buttonCallback
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
