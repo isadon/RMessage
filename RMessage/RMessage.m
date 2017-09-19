@@ -40,7 +40,7 @@ static NSLock *mLock, *nLock;
 + (void)showNotificationWithTitle:(NSString *)title
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
   [self showNotificationWithTitle:title subtitle:nil type:type customTypeName:customTypeName callback:callback];
 }
@@ -49,7 +49,7 @@ static NSLock *mLock, *nLock;
                          subtitle:(NSString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
   [self showNotificationInViewController:_defaultViewController
                                    title:title
@@ -64,7 +64,7 @@ static NSLock *mLock, *nLock;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
 {
   [self showNotificationInViewController:_defaultViewController
                                    title:title
@@ -80,7 +80,7 @@ static NSLock *mLock, *nLock;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
              canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   [self showNotificationInViewController:_defaultViewController
@@ -99,9 +99,9 @@ static NSLock *mLock, *nLock;
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
                       buttonTitle:(NSString *)buttonTitle
-                   buttonCallback:(void (^)())buttonCallback
+                   buttonCallback:(void (^)(void))buttonCallback
                        atPosition:(RMessagePosition)messagePosition
              canBeDismissedByUser:(BOOL)dismissingEnabled
 {
@@ -125,7 +125,7 @@ static NSLock *mLock, *nLock;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
 {
   [self showNotificationInViewController:viewController
                                    title:title
@@ -147,7 +147,7 @@ static NSLock *mLock, *nLock;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
   [self showNotificationInViewController:viewController
@@ -169,7 +169,7 @@ static NSLock *mLock, *nLock;
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
 {
   [self showNotificationInViewController:viewController
                                    title:title
@@ -192,9 +192,9 @@ static NSLock *mLock, *nLock;
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(void))buttonCallback
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {

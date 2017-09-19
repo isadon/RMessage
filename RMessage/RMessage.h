@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
 + (void)showNotificationWithTitle:(NSString *)message
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback;
+                         callback:(void (^)(void))callback;
 
 /**
  Shows a notification message
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                          subtitle:(NSString *)subtitle
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
-                         callback:(void (^)())callback;
+                         callback:(void (^)(void))callback;
 
 /**
  Shows a notification message
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback;
+                         callback:(void (^)(void))callback;
 
 /**
  Shows a notification message
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
              canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /**
@@ -137,9 +137,9 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                              type:(RMessageType)type
                    customTypeName:(NSString *)customTypeName
                          duration:(NSTimeInterval)duration
-                         callback:(void (^)())callback
+                         callback:(void (^)(void))callback
                       buttonTitle:(NSString *)buttonTitle
-                   buttonCallback:(void (^)())buttonCallback
+                   buttonCallback:(void (^)(void))buttonCallback
                        atPosition:(RMessagePosition)messagePosition
              canBeDismissedByUser:(BOOL)dismissingEnabled;
 
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                 subtitle:(NSString *)subtitle
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
-                                callback:(void (^)())callback;
+                                callback:(void (^)(void))callback;
 
 /**
  Shows a notification message in a specific view controller
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback;
+                                callback:(void (^)(void))callback;
 
 /**
  Shows a notification message in a specific view controller
@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /**
@@ -230,9 +230,9 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                                     type:(RMessageType)type
                           customTypeName:(NSString *)customTypeName
                                 duration:(NSTimeInterval)duration
-                                callback:(void (^)())callback
+                                callback:(void (^)(void))callback
                              buttonTitle:(NSString *)buttonTitle
-                          buttonCallback:(void (^)())buttonCallback
+                          buttonCallback:(void (^)(void))buttonCallback
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
