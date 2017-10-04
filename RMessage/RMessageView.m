@@ -26,6 +26,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleVerticalSpacingConstraint;
 
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
@@ -228,6 +229,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _messageType = messageType;
     _customTypeName = customTypeName;
     _buttonCallback = buttonCallback;
+    _titleSubtitleLabelsSizeToFit = NO;
 
     NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
     if (designError) return nil;
@@ -396,10 +398,10 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupLayout
 {
   self.translatesAutoresizingMaskIntoConstraints = NO;
+  if (!_title || !_subtitle) self.titleSubtitleVerticalSpacingConstraint.constant = 0;
 
   // Add RMessage to superview and prepare the ending y position constants
   [self layoutMessageForPresentation];
-  [self setupLabelPreferredMaxLayoutWidth];
 
   // Prepare the starting y position constants
   if (self.messagePosition != RMessagePositionBottom) {
@@ -494,12 +496,32 @@ static NSMutableDictionary *globalDesignDictionary;
   [[self class] activateConstraints:vConstraints inSuperview:self];
 }
 
-- (void)setupLabelPreferredMaxLayoutWidth
+- (void)setupTitleSubtitleLabelsLayoutWidth
 {
   CGFloat iconImageWidthAndPadding = 0.f;
   if (_iconImage) iconImageWidthAndPadding = _iconImage.size.width + 15.f;
-  _titleLabel.preferredMaxLayoutWidth = self.superview.bounds.size.width - iconImageWidthAndPadding - 30.f;
-  _subtitleLabel.preferredMaxLayoutWidth = _titleLabel.preferredMaxLayoutWidth;
+
+  CGFloat prefferedLayoutWidth = self.superview.bounds.size.width - iconImageWidthAndPadding - 30.f;
+
+  if (_titleSubtitleLabelsSizeToFit) {
+    [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [self.subtitleLabel setContentHuggingPriority:751 forAxis:UILayoutConstraintAxisHorizontal];
+
+    // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
+    CGSize titleOneLineSize = [_title sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.f]}];
+    CGSize subtitleOneLineSize = [_subtitle sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12.f]}];
+    CGFloat maxOccupiedLineWidth = (titleOneLineSize.width > subtitleOneLineSize.width) ? titleOneLineSize.width : subtitleOneLineSize.width;
+    if (maxOccupiedLineWidth < prefferedLayoutWidth) prefferedLayoutWidth = maxOccupiedLineWidth;
+
+    if (!_title) {
+      [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    }
+    if (!_subtitle) {
+      [self.subtitleLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    }
+  }
+  _titleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
+  _subtitleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
 }
 
 - (void)executeMessageViewCallBack
@@ -700,7 +722,7 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                      constant:0.f];
   NSLayoutConstraint *imgViewLeading = [NSLayoutConstraint constraintWithItem:self.iconImageView
                                                                     attribute:NSLayoutAttributeLeading
-                                                                    relatedBy:NSLayoutRelationEqual
+                                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                        toItem:self
                                                                     attribute:NSLayoutAttributeLeading
                                                                    multiplier:1.f
@@ -820,8 +842,11 @@ static NSMutableDictionary *globalDesignDictionary;
         [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
       [self.viewController.view addSubview:self];
     }
+    [self setupTitleSubtitleLabelsLayoutWidth];
   } else {
     // Present from bottom
+    [self.viewController.view addSubview:self];
+    [self setupTitleSubtitleLabelsLayoutWidth];
     [self layoutIfNeeded];
     CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
     if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
@@ -829,12 +854,13 @@ static NSMutableDictionary *globalDesignDictionary;
       offset -= messageNavigationController.toolbar.bounds.size.height;
     }
     self.topToVCFinalConstant = offset;
-    [self.viewController.view addSubview:self];
   }
 }
 
 - (void)layoutMessageForStandardPresentation
 {
+  [self.viewController.view addSubview:self];
+  [self setupTitleSubtitleLabelsLayoutWidth];
   [self layoutIfNeeded];
   if (self.messagePosition == RMessagePositionBottom) {
     self.topToVCFinalConstant = -self.bounds.size.height - [self customVerticalOffset];
@@ -843,7 +869,6 @@ static NSMutableDictionary *globalDesignDictionary;
     self.titleSubtitleContainerViewCenterYConstraint.constant =
       [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
   }
-  [self.viewController.view addSubview:self];
 }
 
 - (void)animateMessage
@@ -911,7 +936,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
   // On completion of UI rotation recalculate positioning
   [self layoutMessageForPresentation];
-  [self setupLabelPreferredMaxLayoutWidth];
   self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
 }
 
