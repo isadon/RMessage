@@ -127,7 +127,9 @@
                                         type:RMessageTypeSuccess
                               customTypeName:nil
                                     duration:RMessageDurationEndless
-                                    callback:nil
+                                    callback:^{NSLog(@"tapped");}
+                        presentingCompletion:^{NSLog(@"presented");}
+                           dismissCompletion:^{NSLog(@"dismissed");}
                                  buttonTitle:nil
                               buttonCallback:nil
                                   atPosition:RMessagePositionTop
@@ -145,7 +147,9 @@
                                         type:RMessageTypeWarning
                               customTypeName:nil
                                     duration:10.0
-                                    callback:nil
+                                    callback:^{NSLog(@"tapped");}
+                        presentingCompletion:^{NSLog(@"presented");}
+                           dismissCompletion:^{NSLog(@"dismissed");}
                                  buttonTitle:nil
                               buttonCallback:nil
                                   atPosition:RMessagePositionTop

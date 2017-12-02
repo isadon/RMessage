@@ -51,9 +51,16 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The vertical space between the message view top to its view controller top */
 @property (nonatomic, strong) NSLayoutConstraint *topToVCLayoutConstraint;
 
+/** Callback block called after the user taps on the messageView */
 @property (nonatomic, copy) void (^callback)(void);
 
 @property (nonatomic, copy) void (^buttonCallback)(void);
+
+/** Callback block called after the messageView finishes presenting */
+@property (nonatomic, copy) void (^presentingCompletionCallback)(void);
+
+/** Callback block called after the messageView finishes dismissing */
+@property (nonatomic, copy) void (^dismissCompletionCallback)(void);
 
 /** The starting constant value that should be set for the topToVCTopLayoutConstraint when animating */
 @property (nonatomic, assign) CGFloat topToVCStartConstant;
@@ -215,8 +222,40 @@ static NSMutableDictionary *globalDesignDictionary;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil]
-           .firstObject;
+  return [self initWithDelegate:delegate
+                          title:title
+                       subtitle:subtitle
+                      iconImage:iconImage
+                           type:messageType
+                 customTypeName:customTypeName
+                       duration:duration
+               inViewController:viewController
+                       callback:callback
+           presentingCompletion:nil
+              dismissCompletion:nil
+                    buttonTitle:buttonTitle
+                 buttonCallback:buttonCallback
+                     atPosition:position
+           canBeDismissedByUser:dismissingEnabled];
+}
+
+- (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
+                           title:(NSString *)title
+                        subtitle:(NSString *)subtitle
+                       iconImage:(UIImage *)iconImage
+                            type:(RMessageType)messageType
+                  customTypeName:(NSString *)customTypeName
+                        duration:(CGFloat)duration
+                inViewController:(UIViewController *)viewController
+                        callback:(void (^)(void))callback
+            presentingCompletion:(void (^)(void))presentingCompletionCallback
+               dismissCompletion:(void (^)(void))dismissCompletionCallback
+                     buttonTitle:(NSString *)buttonTitle
+                  buttonCallback:(void (^)(void))buttonCallback
+                      atPosition:(RMessagePosition)position
+            canBeDismissedByUser:(BOOL)dismissingEnabled
+{
+  self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].firstObject;
   if (self) {
     _delegate = delegate;
     _title = title;
@@ -229,6 +268,8 @@ static NSMutableDictionary *globalDesignDictionary;
     _messageType = messageType;
     _customTypeName = customTypeName;
     _buttonCallback = buttonCallback;
+    _presentingCompletionCallback = presentingCompletionCallback;
+    _dismissCompletionCallback = dismissCompletionCallback;
     _titleSubtitleLabelsSizeToFit = NO;
 
     NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
@@ -541,6 +582,7 @@ static NSMutableDictionary *globalDesignDictionary;
     if (self.delegate && [self.delegate respondsToSelector:@selector(windowRemovedForEndlessDurationMessageView:)]) {
       [self.delegate windowRemovedForEndlessDurationMessageView:self];
     }
+    [self dismiss];
   }
 }
 
@@ -768,6 +810,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
     [self.delegate didSwipeToDismissMessageView:self];
   }
+  [self dismiss];
 }
 
 - (void)didTapMessageView:(UITapGestureRecognizer *)tapGesture
@@ -775,6 +818,8 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.delegate && [self.delegate respondsToSelector:@selector(didTapMessageView:)]) {
     [self.delegate didTapMessageView:self];
   }
+  if (self.callback) self.callback();
+  [self dismiss];
 }
 
 #pragma mark - Presentation Methods
@@ -897,6 +942,7 @@ static NSMutableDictionary *globalDesignDictionary;
                        if ([self.delegate respondsToSelector:@selector(messageViewDidPresent:)]) {
                          [self.delegate messageViewDidPresent:self];
                        }
+                       if (self.presentingCompletionCallback) self.presentingCompletionCallback();
                      }];
   });
 }
@@ -923,6 +969,7 @@ static NSMutableDictionary *globalDesignDictionary;
                        if ([self.delegate respondsToSelector:@selector(messageViewDidDismiss:)]) {
                          [self.delegate messageViewDidDismiss:self];
                        }
+                       if (self.dismissCompletionCallback) self.dismissCompletionCallback();
                        if (completionBlock) completionBlock();
                      }];
   });

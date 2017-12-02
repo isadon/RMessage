@@ -198,6 +198,37 @@ static NSLock *mLock, *nLock;
                               atPosition:(RMessagePosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled
 {
+  [self showNotificationInViewController:viewController
+                                   title:title
+                                subtitle:subtitle
+                               iconImage:iconImage
+                                    type:type
+                          customTypeName:customTypeName
+                                duration:duration
+                                callback:callback
+                    presentingCompletion:nil
+                       dismissCompletion:nil
+                             buttonTitle:buttonTitle
+                          buttonCallback:buttonCallback
+                              atPosition:messagePosition
+                    canBeDismissedByUser:dismissingEnabled];
+}
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                               iconImage:(UIImage *)iconImage
+                                    type:(RMessageType)type
+                          customTypeName:(NSString *)customTypeName
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)(void))callback
+                    presentingCompletion:(void (^)(void))presentingCompletionCallback
+                       dismissCompletion:(void (^)(void))dismissCompletionCallback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)(void))buttonCallback
+                              atPosition:(RMessagePosition)messagePosition
+                    canBeDismissedByUser:(BOOL)dismissingEnabled
+{
   RMessageView *messageView = [[RMessageView alloc] initWithDelegate:[RMessage sharedMessage]
                                                                title:title
                                                             subtitle:subtitle
@@ -207,6 +238,8 @@ static NSLock *mLock, *nLock;
                                                             duration:duration
                                                     inViewController:viewController
                                                             callback:callback
+                                                presentingCompletion:presentingCompletionCallback
+                                                   dismissCompletion:dismissCompletionCallback
                                                          buttonTitle:buttonTitle
                                                       buttonCallback:buttonCallback
                                                           atPosition:messagePosition
@@ -353,23 +386,6 @@ static NSLock *mLock, *nLock;
     return [self.delegate customVerticalOffsetForMessageView:messageView];
   }
   return 0.f;
-}
-
-- (void)windowRemovedForEndlessDurationMessageView:(RMessageView *)messageView
-{
-  [messageView dismissWithCompletion:nil];
-}
-
-- (void)didSwipeToDismissMessageView:(RMessageView *)messageView
-{
-  [messageView dismissWithCompletion:nil];
-}
-
-- (void)didTapMessageView:(RMessageView *)messageView
-{
-  [messageView dismissWithCompletion:^{
-    [messageView executeMessageViewCallBack];
-  }];
 }
 
 + (void)interfaceDidRotate

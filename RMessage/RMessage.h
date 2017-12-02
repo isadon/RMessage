@@ -237,6 +237,39 @@ typedef NS_ENUM(NSInteger, RMessageDuration) { RMessageDurationAutomatic = 0, RM
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
 /**
+ Shows a notification message in a specific view controller
+ @param viewController The view controller to show the notification in.
+ @param title The title of the message view
+ @param subtitle The message that is displayed underneath the title (optional)
+ @param iconImage A custom icon image (optional)
+ @param type The message type (Message, Warning, Error, Success, Custom)
+ @param customTypeName The string identifier/key for the custom style to use from specified custom
+ design file. Only use when specifying an additional custom design file and when the type parameter in this call is
+ RMessageTypeCustom
+ @param duration The duration of the notification being displayed
+ @param callback The block that should be executed, when the user tapped on the message
+ @param presentingCompletionCallback The block that should be executed on presentation of the message
+ @param dismissCompletionCallback The block that should be executed on dismissal of the message
+ @param buttonTitle The title for button (optional)
+ @param buttonCallback The block that should be executed, when the user tapped on the button
+ @param messagePosition The position of the message on the screen
+ @param dismissingEnabled Should the message be dismissed when the user taps/swipes it
+ */
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                               iconImage:(UIImage *)iconImage
+                                    type:(RMessageType)type
+                          customTypeName:(NSString *)customTypeName
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)(void))callback
+                    presentingCompletion:(void (^)(void))presentingCompletionCallback
+                       dismissCompletion:(void (^)(void))dismissCompletionCallback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)(void))buttonCallback
+                              atPosition:(RMessagePosition)messagePosition
+                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+/**
  Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically
  @return YES if the currently displayed notification was successfully dismissed. NO if no
