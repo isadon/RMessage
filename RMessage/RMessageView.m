@@ -73,6 +73,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, copy) NSString *customTypeName;
 
 @property (nonatomic, assign) BOOL shouldBlurBackground;
+@property (nonatomic, assign) BOOL dismissingEnabled;
 
 @end
 
@@ -271,13 +272,14 @@ static NSMutableDictionary *globalDesignDictionary;
     _presentingCompletionCallback = presentingCompletionCallback;
     _dismissCompletionCallback = dismissCompletionCallback;
     _titleSubtitleLabelsSizeToFit = NO;
+    _dismissingEnabled = dismissingEnabled;
 
     NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
     if (designError) return nil;
 
     [self setupDesign];
     [self setupLayout];
-    if (dismissingEnabled) [self setupGestureRecognizers];
+    [self setupGestureRecognizers];
   }
   return self;
 }
@@ -790,7 +792,7 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupGestureRecognizers
 {
   UISwipeGestureRecognizer *gestureRecognizer =
-    [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeToDismissMessageView:)];
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeMessageView:)];
   [gestureRecognizer
    setDirection:(self.messagePosition == RMessagePositionBottom) ? UISwipeGestureRecognizerDirectionDown : UISwipeGestureRecognizerDirectionUp];
   [self addGestureRecognizer:gestureRecognizer];
@@ -805,12 +807,12 @@ static NSMutableDictionary *globalDesignDictionary;
 /* called after the following gesture depending on message position during initialization
  UISwipeGestureRecognizerDirectionUp when message position set to Top,
  UISwipeGestureRecognizerDirectionDown when message position set to bottom */
-- (void)didSwipeToDismissMessageView:(UISwipeGestureRecognizer *)swipeGesture
+- (void)didSwipeMessageView:(UISwipeGestureRecognizer *)swipeGesture
 {
-  if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeToDismissMessageView:)]) {
-    [self.delegate didSwipeToDismissMessageView:self];
+  if (self.delegate && [self.delegate respondsToSelector:@selector(didSwipeMessageView:)]) {
+    [self.delegate didSwipeMessageView:self];
   }
-  [self dismiss];
+  if (self.dismissingEnabled) [self dismiss];
 }
 
 - (void)didTapMessageView:(UITapGestureRecognizer *)tapGesture
@@ -819,7 +821,7 @@ static NSMutableDictionary *globalDesignDictionary;
     [self.delegate didTapMessageView:self];
   }
   if (self.callback) self.callback();
-  [self dismiss];
+  if (self.dismissingEnabled) [self dismiss];
 }
 
 #pragma mark - Presentation Methods
