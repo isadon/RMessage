@@ -1,7 +1,7 @@
 PODS:
   - HexColors (4.0.0)
   - PPTopMostController (0.0.1)
-  - Reveal-SDK (12)
+  - Reveal-SDK (13)
   - RMessage (2.1.5):
     - HexColors (~> 4.0)
     - PPTopMostController
@@ -26,7 +26,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
-  Reveal-SDK: 58517b2a4d5d69dcb98e62aa4a5e62c84b5e0061
+  Reveal-SDK: ccc2b0f8014965ea448b7534a7c2c8da232b75e8
   RMessage: 31d44bd26a8f353f987d2e7194f3e9ffb203cbf2
 
 PODFILE CHECKSUM: 6e893d46b6a3a2b362c1f1150b5d4bf1e5c822b1
