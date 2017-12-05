@@ -7,3 +7,7 @@ target "RMessage" do
   pod 'RMessage', :path => '..' 
   pod 'Reveal-SDK', :configurations => ['Debug']
 end
+
+target "RMessageTests" do
+  platform :ios, '9.0'
+end
