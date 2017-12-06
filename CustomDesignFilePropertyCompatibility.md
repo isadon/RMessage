@@ -20,6 +20,13 @@
 * **subTitleShadowColor**: Initial Release - Latest
 * **subTitleShadowOffsetX**: Initial Release - Latest
 * **subTitleShadowOffsetY**: Initial Release - Latest
+* **buttonTitleFontName**: 2.2.0 - Latest
+* **buttonTitleFontSize**: 2.2.0 - Latest
+* **buttonResizeableBackgroundImage**: 2.2.0 - Latest
+* **buttonTitleTextColor**: 2.2.0 - Latest
+* **buttonTitleShadowColor**: 2.2.0 - Latest
+* **buttonTitleShadowOffsetX**: 2.2.0 - Latest
+* **buttonTitleShadowOffsetY**: 2.2.0 - Latest
 * **blurBackground**: 2.1.3 - Latest
 
 ### Deprecated (Last Release Supported Shown)
