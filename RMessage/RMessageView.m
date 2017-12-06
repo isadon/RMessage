@@ -25,8 +25,14 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleVerticalSpacingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTrailingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopConstraint;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleLabelLeadingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleLabelTrailingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *subtitleLabelLeadingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *subtitleLabelTrailingConstraint;
 
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
@@ -41,6 +47,8 @@ static NSMutableDictionary *globalDesignDictionary;
 
 /** The displayed subtitle of this message view */
 @property (nonatomic, strong) NSString *subtitle;
+
+@property (nonatomic, strong) UIButton *button;
 
 /** The title of the added button */
 @property (nonatomic, strong) NSString *buttonTitle;
@@ -207,6 +215,15 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
++ (void)deActivateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
+{
+  if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
+    for (NSLayoutConstraint *constraint in constraints) constraint.active = NO;
+  } else {
+    [superview removeConstraints:constraints];
+  }
+}
+
 #pragma mark - Instance Methods
 
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
@@ -268,7 +285,11 @@ static NSMutableDictionary *globalDesignDictionary;
     _callback = callback;
     _messageType = messageType;
     _customTypeName = customTypeName;
-    _buttonCallback = buttonCallback;
+    if ([buttonTitle length] > 0) {
+      _button = [UIButton buttonWithType:UIButtonTypeCustom];
+      _buttonTitle = buttonTitle;
+      _buttonCallback = buttonCallback;
+    }
     _presentingCompletionCallback = presentingCompletionCallback;
     _dismissCompletionCallback = dismissCompletionCallback;
     _titleSubtitleLabelsSizeToFit = NO;
@@ -324,6 +345,12 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   _subtitleTextColor = subtitleTextColor;
   [self.subtitleLabel setTextColor:_subtitleTextColor];
+}
+
+- (void)setTitleSubtitleLabelsSizeToFit:(BOOL)titleSubtitleLabelsSizeToFit
+{
+  _titleSubtitleLabelsSizeToFit = titleSubtitleLabelsSizeToFit;
+  [self setupLabelConstraints];
 }
 
 - (void)setMessageIcon:(UIImage *)messageIcon
@@ -434,8 +461,8 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   [self setupDesignDefaults];
   [self setupImagesAndBackground];
-  [self setupTitleLabel];
-  [self setupSubTitleLabel];
+  [self setupLabels];
+  [self setupButton];
 }
 
 - (void)setupLayout
@@ -541,27 +568,18 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupTitleSubtitleLabelsLayoutWidth
 {
-  CGFloat iconImageWidthAndPadding = 0.f;
-  if (_iconImage) iconImageWidthAndPadding = _iconImage.size.width + 15.f;
-
-  CGFloat prefferedLayoutWidth = self.superview.bounds.size.width - iconImageWidthAndPadding - 30.f;
+  CGFloat accessoryViewsAndPadding = 0.f;
+  if (_iconImage) accessoryViewsAndPadding = _iconImage.size.width + 15.f;
+  if (_button) accessoryViewsAndPadding += _button.bounds.size.width + 15.f;
+  
+  CGFloat prefferedLayoutWidth = self.superview.bounds.size.width - accessoryViewsAndPadding - 30.f;
 
   if (_titleSubtitleLabelsSizeToFit) {
-    [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [self.subtitleLabel setContentHuggingPriority:751 forAxis:UILayoutConstraintAxisHorizontal];
-
     // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
     CGSize titleOneLineSize = [_title sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.f]}];
     CGSize subtitleOneLineSize = [_subtitle sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12.f]}];
     CGFloat maxOccupiedLineWidth = (titleOneLineSize.width > subtitleOneLineSize.width) ? titleOneLineSize.width : subtitleOneLineSize.width;
     if (maxOccupiedLineWidth < prefferedLayoutWidth) prefferedLayoutWidth = maxOccupiedLineWidth;
-
-    if (!_title) {
-      [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    }
-    if (!_subtitle) {
-      [self.subtitleLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-    }
   }
   _titleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
   _subtitleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
@@ -570,6 +588,14 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)executeMessageViewCallBack
 {
   if (self.callback) self.callback();
+}
+
+- (void)setButton:(UIButton *)button
+{
+  if (button.superview) [button removeFromSuperview];
+  if (_button.superview) [_button removeFromSuperview];
+  _button = button;
+  [self setupButtonConstraints];
 }
 
 - (void)executeMessageViewButtonCallBack
@@ -594,6 +620,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.iconRelativeCornerRadius > 0) {
     self.iconImageView.layer.cornerRadius = self.iconRelativeCornerRadius * self.iconImageView.bounds.size.width;
   }
+  [self setupTitleSubtitleLabelsLayoutWidth];
 }
 
 - (void)setupDesignDefaults
@@ -619,6 +646,8 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.shadowOffset = CGSizeZero;
   _subtitleLabel.backgroundColor = nil;
 
+  _button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+  [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   _iconImageView.clipsToBounds = NO;
 }
 
@@ -671,6 +700,13 @@ static NSMutableDictionary *globalDesignDictionary;
                                                       resizingMode:UIImageResizingModeStretch];
     [self setupBackgroundImageViewWithImage:backgroundImage];
   }
+}
+
+- (void)setupLabels
+{
+  [self setupTitleLabel];
+  [self setupSubTitleLabel];
+  [self setupLabelConstraints];
 }
 
 - (void)setupTitleLabel
@@ -750,6 +786,141 @@ static NSMutableDictionary *globalDesignDictionary;
   if (subTitleShadowOffsetX && subTitleShadowOffsetY) {
     _subtitleLabel.shadowOffset = CGSizeMake([subTitleShadowOffsetX floatValue], [subTitleShadowOffsetY floatValue]);
   }
+}
+
+- (void)setupLabelConstraints
+{
+  NSLayoutRelation trailingToSuperViewRelation = NSLayoutRelationEqual;
+
+  if (_titleSubtitleLabelsSizeToFit) {
+    trailingToSuperViewRelation = NSLayoutRelationLessThanOrEqual;
+    [[self class] deActivateConstraints:@[_titleSubtitleContainerViewTrailingConstraint]
+                            inSuperview:self];
+    [[self class] deActivateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,_subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
+    _titleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:self.titleSubtitleContainerView
+                                                                attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.f constant:0];
+    _titleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                                attribute:NSLayoutAttributeTrailing
+                                                                relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                   toItem:self.titleSubtitleContainerView
+                                                                attribute:NSLayoutAttributeTrailing
+                                                               multiplier:1.f constant:0];
+    _subtitleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:self.titleSubtitleContainerView
+                                                                attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.f constant:0];
+    _subtitleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
+                                                                 attribute:NSLayoutAttributeTrailing
+                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                    toItem:self.titleSubtitleContainerView
+                                                                 attribute:NSLayoutAttributeTrailing
+                                                                multiplier:1.f constant:0];
+    [[self class] activateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint, _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
+  }
+}
+
+- (void)setupButton
+{
+  if (!_button) return;
+  CGFloat buttonTitleFontSize = [[_messageViewDesignDictionary valueForKey:@"buttonTitleFontSize"] floatValue];
+  NSString *buttonTitleFontName = [_messageViewDesignDictionary valueForKey:@"buttonTitleFontName"];
+  if (buttonTitleFontName) {
+    _button.titleLabel.font = [UIFont fontWithName:buttonTitleFontName size:buttonTitleFontSize];
+  } else if (buttonTitleFontSize) {
+    _button.titleLabel.font = [UIFont boldSystemFontOfSize:buttonTitleFontSize];
+  }
+
+  UIImage *buttonResizeableBackgroundImage = [[self class] bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"buttonResizeableBackgroundImage"]];
+  if (!buttonResizeableBackgroundImage) {
+    buttonResizeableBackgroundImage = [[self class] bundledImageNamed:@"NotificationButtonBackground.png"];
+  }
+  if (buttonResizeableBackgroundImage) {
+    UIImage *resizeableImage = [buttonResizeableBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(15.0, 12.0, 15.0, 11.0)];
+    [_button setBackgroundImage:resizeableImage forState:UIControlStateNormal];
+    _button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
+  }
+  
+  [_button setTitle:_buttonTitle forState:UIControlStateNormal];
+  UIColor *buttonTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleTextColor"]];
+  if (buttonTitleTextColor) {
+    [_button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
+  }
+  
+  UIColor *buttonTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleShadowColor"]];
+  if (buttonTitleShadowColor) {
+    [_button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
+  }
+  
+  CGSize buttonTitleShadowOffset = CGSizeZero;
+  if ([_messageViewDesignDictionary valueForKey:@"buttonTitleShadowOffsetX"]) {
+    buttonTitleShadowOffset.width = [[_messageViewDesignDictionary valueForKey:@"buttonTitleShadowOffsetX"] floatValue];
+  }
+  if ([_messageViewDesignDictionary valueForKey:@"buttonTitleShadowOffsetY"]) {
+    buttonTitleShadowOffset.height = [[_messageViewDesignDictionary valueForKey:@"buttonTitleShadowOffsetY"] floatValue];
+  }
+  if (buttonTitleShadowOffset.width != 0 || buttonTitleShadowOffset.height != 0) {
+    _button.titleLabel.shadowOffset = buttonTitleShadowOffset;
+  }
+  
+  [_button addTarget:self action:@selector(buttonTapped) forControlEvents:UIControlEventTouchUpInside];
+  [_button sizeToFit];
+  [self setupButtonConstraints];
+}
+
+- (void)setupButtonConstraints
+{
+  _button.translatesAutoresizingMaskIntoConstraints = NO;
+  NSLayoutConstraint *buttonViewCenterY = [NSLayoutConstraint constraintWithItem:_button
+                                                                       attribute:NSLayoutAttributeCenterY
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.titleSubtitleContainerView
+                                                                       attribute:NSLayoutAttributeCenterY
+                                                                      multiplier:1.f
+                                                                        constant:0.f];
+  NSLayoutConstraint *buttonViewLeading = [NSLayoutConstraint constraintWithItem:_button
+                                                                       attribute:NSLayoutAttributeLeading
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.titleSubtitleContainerView
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.f
+                                                                        constant:15.f];
+  NSLayoutConstraint *buttonViewTrailingOptional = [NSLayoutConstraint constraintWithItem:_button
+                                                                                attribute:NSLayoutAttributeTrailing
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:self
+                                                                                attribute:NSLayoutAttributeTrailing
+                                                                               multiplier:1.f
+                                                                                 constant:-15.f];
+  buttonViewTrailingOptional.priority = 749;
+  NSLayoutConstraint *buttonViewTrailing = [NSLayoutConstraint constraintWithItem:_button
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                        relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.f
+                                                                         constant:-15.f];
+  NSLayoutConstraint *buttonViewBottomSpacing = [NSLayoutConstraint constraintWithItem:_button
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                     multiplier:1.f
+                                                                       constant:-10.f];
+  NSLayoutConstraint *buttonViewTopSpacing = [NSLayoutConstraint constraintWithItem:_button
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.f
+                                                                       constant:10.f];
+  [self addSubview:_button];
+  [[self class] activateConstraints:@[buttonViewCenterY, buttonViewLeading, buttonViewTrailingOptional, buttonViewTrailing, buttonViewBottomSpacing, buttonViewTopSpacing] inSuperview:self];
 }
 
 - (void)setupIconImageView
@@ -854,8 +1025,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)layoutMessageForNavigationControllerPresentation
 {
-  self.titleSubtitleContainerViewCenterYConstraint.constant = 0.f;
-
+  _titleSubtitleContainerViewTopConstraint.constant = 10.f;
   UINavigationController *messageNavigationController;
 
   if ([self.viewController isKindOfClass:[UINavigationController class]]) {
@@ -885,15 +1055,12 @@ static NSMutableDictionary *globalDesignDictionary;
       /* Navigation bar hidden or being asked to present as nav bar overlay, so present above status bar and/or
        navigation bar */
       self.topToVCFinalConstant = [self customVerticalOffset];
-      self.titleSubtitleContainerViewCenterYConstraint.constant =
-        [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+      self.titleSubtitleContainerViewTopConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
       [self.viewController.view addSubview:self];
     }
-    [self setupTitleSubtitleLabelsLayoutWidth];
   } else {
     // Present from bottom
     [self.viewController.view addSubview:self];
-    [self setupTitleSubtitleLabelsLayoutWidth];
     [self layoutIfNeeded];
     CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
     if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
@@ -907,14 +1074,12 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)layoutMessageForStandardPresentation
 {
   [self.viewController.view addSubview:self];
-  [self setupTitleSubtitleLabelsLayoutWidth];
   [self layoutIfNeeded];
   if (self.messagePosition == RMessagePositionBottom) {
     self.topToVCFinalConstant = -self.bounds.size.height - [self customVerticalOffset];
   } else {
     self.topToVCFinalConstant = [self customVerticalOffset];
-    self.titleSubtitleContainerViewCenterYConstraint.constant =
-      [UIApplication sharedApplication].statusBarFrame.size.height / 2.f;
+    self.titleSubtitleContainerViewTopConstraint.constant = 10.f + [UIApplication sharedApplication].statusBarFrame.size.height;
   }
 }
 
@@ -978,6 +1143,11 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 #pragma mark - Misc methods
+
+- (void)buttonTapped
+{
+  if (self.buttonCallback) self.buttonCallback();
+}
 
 - (void)interfaceDidRotate
 {

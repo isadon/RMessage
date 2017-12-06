@@ -21,6 +21,7 @@
   [super viewDidLoad];
   [self.navigationController.navigationBar setTranslucent:YES];
   self.extendedLayoutIncludesOpaqueBars = YES;
+  //[[RMessageView appearance] setTitleSubtitleLabelsSizeToFit:YES];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -90,6 +91,7 @@
                                     callback:nil
                                  buttonTitle:NSLocalizedString(@"Update", nil)
                               buttonCallback:^{
+                                [RMessage dismissActiveNotification];
                                 [RMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
                                                                type:RMessageTypeSuccess
                                                      customTypeName:nil
@@ -267,10 +269,22 @@
 }
 */
 
-/*- (void)customizeMessageView:(RMessageView *)messageView
+- (void)customizeMessageView:(RMessageView *)messageView
 {
-  messageView.messageOpacity = 0.5f;
+  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 500)];
+  button.contentEdgeInsets = UIEdgeInsetsMake(250, 25, 250, 25);
+  [button setTitle:@"hey there" forState:UIControlStateNormal];
+  button.titleLabel.font = [UIFont boldSystemFontOfSize:12.f];
+  button.titleLabel.textColor = [UIColor whiteColor];
+  button.backgroundColor = [UIColor blueColor];
+  button.layer.cornerRadius = 4.f;
+  [button addTarget:self action:@selector(buttonTapped) forControlEvents:UIControlEventTouchUpInside];
+  [messageView setButton:button];
 }
-*/
+
+- (void)buttonTapped
+{
+  NSLog(@"button was tapped");
+}
 
 @end

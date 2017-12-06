@@ -38,6 +38,9 @@
 /** The displayed subtitle of this message */
 @property (nonatomic, readonly) NSString *subtitle;
 
+/** The displayed button of this message */
+@property (nonatomic, readonly) UIButton *button;
+
 /** The view controller this message is displayed in */
 @property (nonatomic, readonly) UIViewController *viewController;
 
@@ -140,6 +143,11 @@
 /** Use this method to load a custom design file on top of the base design file. Can be called
  multiple times to add designs from multiple files */
 + (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
+
+/** Pass in your own custom button if more customization is needed than provided in init methods.
+ When calling this method, normally via customizeMessageView, design file properties will be ignored
+ and a strong reference to the button will be made */
+- (void)setButton:(UIButton *)button;
 
 /** Execute the message view call back if set */
 - (void)executeMessageViewCallBack;

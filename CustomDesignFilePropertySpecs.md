@@ -21,6 +21,13 @@
 * **subTitleShadowColor**: Color of the subtitle shadow. String: [#000000, #FFFFFF].
 * **subTitleShadowOffsetX**: Amount of pt to offset in x direction subtitle shadow from subtitle text. Numeric.
 * **subTitleShadowOffsetY**: Amount of pt to offset in y direction subtitle shadow from subtitle text. Numeric.
+* **buttonTitleFontName**: Name of font to use for the button title text. String.
+* **buttonTitleFontSize**: Size of the button title font. Numeric: [0, Max depending on font used]
+* **buttonResizeableBackgroundImage**: Filename of image (in app bundle) to use as a resizeable background image for the button. String.
+* **buttonTitleTextColor**: Color of the button title text. String: [#000000, #FFFFFF].
+* **buttonTitleShadowColor**: Color of the button title shadow. String: [#000000, #FFFFFF].
+* **buttonTitleShadowOffsetX**: Amount of pt to offset in x direction the button title text shadow. Numeric.
+* **buttonTitleShadowOffsetY**: Amount of pt to offset in y direction the button title text shadow. Numeric.
 * **blurBackground**: Enable/disable blurring of the background behind the RMessage. Use in conjunction with
   backgroundColorAlpha. Numeric boolean [0, 1].
 
@@ -33,3 +40,6 @@ For example:
 "backgroundColor": "#FFFFFF",
 "opacity": 1.0
 ```
+
+**Note**: Design file button properties (properties starting with button*) will not take effect when a UIButton is passed in programmatically such as in customizeMessageView:.
+
