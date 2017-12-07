@@ -26,9 +26,6 @@ Welcome to RMessage! RMessage is a reworking of the original [TSMessages](https:
 * Removed the forcing of a specific design - TSMessages forced an iOS7 design or iOS6. Here there is no distinction - though the library is styled for iOS7 by default.
 * Much more im sure :).
 
-
-Note: Buttons within RMessage are not currently fully supported as in TSMessages but will be soon.
-
 # Description
 The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
 
@@ -63,8 +60,8 @@ To show notifications use the following code:
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
                                     type:RMessageTypeError
-                                    customTypeName:nil
-                                    callback:nil];
+                          customTypeName:nil
+                                callback:nil];
 
 
     // Add an icon image inside the message, appears on the left
@@ -73,7 +70,7 @@ To show notifications use the following code:
                                        subtitle:@"Please update the app"
                                           iconImage:iconUIImageHere
                                            type:RMessageTypeNormal
-                               customTypeName:nil
+                                 customTypeName:nil
                                        duration:RMessageDurationAutomatic
                                        callback:nil
                                     buttonTitle:@"Update"
@@ -89,8 +86,8 @@ To show notifications use the following code:
     [RMessage showNotificationWithTitle:@"Your Title"
                                 subtitle:@"A description"
                                     type:RMessageTypeCustom
-                                    customTypeName:@"alternate-error"
-                                    callback:nil];
+                          customTypeName:@"alternate-error"
+                                callback:nil];
 ```
 
 You can define a default view controller in which the notifications should be displayed:
@@ -119,35 +116,20 @@ You can customize message view elements using UIAppearance
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//If you want you can override some properties using UIAppearance
-[[RMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
-[[RMessageView appearance] setTitleTextColor:[UIColor redColor]];
-[[RMessageView appearance] setSubtitleFont:[UIFont boldSystemFontOfSize:10]];
-[[RMessageView appearance] setSubtitleTextColor:[UIColor greenColor]];
-[[RMessageView appearance] setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
-[[RMessageView appearance] setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
-[[RMessageView appearance] setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
-[[RMessageView appearance] setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
-//End of override
+  //If you want you can override some properties using UIAppearance
+  [[RMessageView appearance] setTitleFont:[UIFont boldSystemFontOfSize:6]];
+  [[RMessageView appearance] setTitleTextColor:[UIColor redColor]];
+  [[RMessageView appearance] setSubtitleFont:[UIFont boldSystemFontOfSize:10]];
+  [[RMessageView appearance] setSubtitleTextColor:[UIColor greenColor]];
+  [[RMessageView appearance] setErrorIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+  [[RMessageView appearance] setSuccessIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+  [[RMessageView appearance] setMessageIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+  [[RMessageView appearance] setWarningIcon:[UIImage imageNamed:@"NotificationButtonBackground"]];
+  //End of override
 
-return YES;
+  return YES;
 }
 ```
-
-The following arguments can be passed in programmatically when creating a new notification:
-
-* **viewController**: The view controller to show the notification in. This might be the navigation controller.
-* **title**: The title of the notification view
-* **subtitle**: The text that is displayed underneath the title (optional)
-* **iconImage**: A custom icon image that is used instead of the default one (optional)
-* **type**: The notification type (Message, Warning, Error, Success, Custom)
-* **duration**: The duration the notification should be displayed
-* **callback**: The block that should be executed, when the user dismissed the message by tapping on it or swiping it to the top.
-* **customTypeName**: When using a custom design that you have added specify the key to use from your design, otherwise set to nil if not using a custom design.
-
-Except the title and the notification type, all of the listed values are optional
-
-If you don't want a detailed description (the text underneath the title) you don't need to set one. The notification will automatically resize itself properly.
 
 ## Custom Design File Properties
 
