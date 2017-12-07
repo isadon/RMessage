@@ -131,15 +131,6 @@ static NSMutableDictionary *globalDesignDictionary;
   return (navController.navigationBarHidden || navController.navigationBar.isHidden);
 }
 
-+ (BOOL)compilingForHigherThanIosVersion:(CGFloat)version
-{
-#if version * 10000 <= __IPHONE_OS_VERSION_MAX_ALLOWED
-  return YES;
-#else
-  return NO;
-#endif
-}
-
 + (UIViewController *)defaultViewController
 {
   UIViewController *viewController = [UIViewController topMostController];
@@ -201,7 +192,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
-  if ([[self class] compilingForHigherThanIosVersion:8.f]) {
+  if (@available(iOS 8.0, *)) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = YES;
   } else {
     [superview addConstraints:constraints];
@@ -210,7 +201,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)deActivateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
-  if ([[self class] compilingForHigherThanIosVersion:8.f]) {
+  if (@available(iOS 8.0, *)) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = NO;
   } else {
     [superview removeConstraints:constraints];
@@ -1001,7 +992,8 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)layoutMessageForPresentation
 {
   _titleSubtitleContainerViewTopConstraint.constant = 10.f;
-  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarHidden ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
+  CGFloat statusBarHeight = statusBarHeight = [self.viewController prefersStatusBarHidden] ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
+
   UINavigationController *messageNavigationController;
   if ([self.viewController isKindOfClass:[UINavigationController class]]) {
     messageNavigationController = (UINavigationController *)self.viewController;
