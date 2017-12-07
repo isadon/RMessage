@@ -103,8 +103,10 @@ static NSMutableDictionary *globalDesignDictionary;
                                  code:0
                              userInfo:@{ NSLocalizedDescriptionKey: configFileErrorMessage }];
     }
-    globalDesignDictionary = [NSMutableDictionary
-      dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]];
+    globalDesignDictionary =
+      [NSMutableDictionary dictionaryWithDictionary: [NSJSONSerialization JSONObjectWithData:data
+                                        options:NSJSONReadingMutableContainers
+                                          error:nil]];
   }
   return nil;
 }
@@ -115,7 +117,9 @@ static NSMutableDictionary *globalDesignDictionary;
   NSString *path = [bundle pathForResource:filename ofType:@"json"];
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     NSDictionary *newDesignStyle =
-      [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:kNilOptions error:nil];
+      [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
+                                      options:NSJSONReadingMutableContainers
+                                        error:nil];
     [globalDesignDictionary addEntriesFromDictionary:newDesignStyle];
   } else {
     NSAssert(NO, @"Error loading design file with name %@", filename);
@@ -124,18 +128,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (BOOL)isNavigationBarHiddenForNavigationController:(UINavigationController *)navController
 {
-  if (navController.navigationBarHidden) {
-    return YES;
-  } else if (navController.navigationBar.isHidden) {
-    return YES;
-  } else {
-    return NO;
-  }
+  return (navController.navigationBarHidden || navController.navigationBar.isHidden);
 }
 
 + (BOOL)compilingForHigherThanIosVersion:(CGFloat)version
 {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= version * 10000
+#if version * 10000 <= __IPHONE_OS_VERSION_MAX_ALLOWED
   return YES;
 #else
   return NO;
@@ -160,19 +158,14 @@ static NSMutableDictionary *globalDesignDictionary;
  */
 + (BOOL)viewControllerEdgesExtendUnderTopBars:(UIViewController *)viewController
 {
-  BOOL vcAskedToExtendUnderTopBars = NO;
-
-  if (viewController.edgesForExtendedLayout == UIRectEdgeTop ||
-      viewController.edgesForExtendedLayout == UIRectEdgeAll) {
-    vcAskedToExtendUnderTopBars = YES;
-  } else {
-    vcAskedToExtendUnderTopBars = NO;
+  if (viewController.edgesForExtendedLayout != UIRectEdgeTop &&
+      viewController.edgesForExtendedLayout != UIRectEdgeAll) {
     return NO;
   }
 
   /* When a table view controller asks to extend under top bars, if the navigation bar is
    translucent iOS will not extend the edges of the table view controller under the top bars. */
-  if ([viewController isKindOfClass:[UITableViewController class]] && vcAskedToExtendUnderTopBars &&
+  if ([viewController isKindOfClass:[UITableViewController class]] &&
       !viewController.navigationController.navigationBar.translucent) {
     return NO;
   }
@@ -232,7 +225,7 @@ static NSMutableDictionary *globalDesignDictionary;
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
-                        duration:(CGFloat)duration
+                        duration:(NSTimeInterval)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)(void))callback
                      buttonTitle:(NSString *)buttonTitle
@@ -263,7 +256,7 @@ static NSMutableDictionary *globalDesignDictionary;
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
-                        duration:(CGFloat)duration
+                        duration:(NSTimeInterval)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)(void))callback
             presentingCompletion:(void (^)(void))presentingCompletionCallback
@@ -379,25 +372,20 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)updateCurrentIconIfNeeded
 {
-  UIImage *image = nil;
   switch (self.messageType) {
   case RMessageTypeNormal: {
-    image = _messageIcon;
     self.iconImageView.image = _messageIcon;
     break;
   }
   case RMessageTypeError: {
-    image = _errorIcon;
     self.iconImageView.image = _errorIcon;
     break;
   }
   case RMessageTypeSuccess: {
-    image = _successIcon;
     self.iconImageView.image = _successIcon;
     break;
   }
   case RMessageTypeWarning: {
-    image = _warningIcon;
     self.iconImageView.image = _warningIcon;
     break;
   }
@@ -572,17 +560,17 @@ static NSMutableDictionary *globalDesignDictionary;
   if (_iconImage) accessoryViewsAndPadding = _iconImage.size.width + 15.f;
   if (_button) accessoryViewsAndPadding += _button.bounds.size.width + 15.f;
 
-  CGFloat prefferedLayoutWidth = self.superview.bounds.size.width - accessoryViewsAndPadding - 30.f;
+  CGFloat preferredLayoutWidth = self.superview.bounds.size.width - accessoryViewsAndPadding - 30.f;
 
   if (_titleSubtitleLabelsSizeToFit) {
     // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
     CGSize titleOneLineSize = [_title sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:14.f]}];
     CGSize subtitleOneLineSize = [_subtitle sizeWithAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12.f]}];
     CGFloat maxOccupiedLineWidth = (titleOneLineSize.width > subtitleOneLineSize.width) ? titleOneLineSize.width : subtitleOneLineSize.width;
-    if (maxOccupiedLineWidth < prefferedLayoutWidth) prefferedLayoutWidth = maxOccupiedLineWidth;
+    if (maxOccupiedLineWidth < preferredLayoutWidth) preferredLayoutWidth = maxOccupiedLineWidth;
   }
-  _titleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
-  _subtitleLabel.preferredMaxLayoutWidth = prefferedLayoutWidth;
+  _titleLabel.preferredMaxLayoutWidth = preferredLayoutWidth;
+  _subtitleLabel.preferredMaxLayoutWidth = preferredLayoutWidth;
 }
 
 - (void)executeMessageViewCallBack
@@ -788,13 +776,11 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupLabelConstraints
 {
-  NSLayoutRelation trailingToSuperViewRelation = NSLayoutRelationEqual;
-
   if (_titleSubtitleLabelsSizeToFit) {
-    trailingToSuperViewRelation = NSLayoutRelationLessThanOrEqual;
     [[self class] deActivateConstraints:@[_titleSubtitleContainerViewTrailingConstraint]
                             inSuperview:self];
-    [[self class] deActivateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,_subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
+    [[self class] deActivateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
+      _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
     _titleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
                                                                 attribute:NSLayoutAttributeLeading
                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
@@ -819,7 +805,8 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                     toItem:self.titleSubtitleContainerView
                                                                  attribute:NSLayoutAttributeTrailing
                                                                 multiplier:1.f constant:0];
-    [[self class] activateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint, _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
+    [[self class] activateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
+      _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
   }
 }
 
@@ -1076,7 +1063,7 @@ static NSMutableDictionary *globalDesignDictionary;
       }
     } else {
       CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
-      if (messageNavigationController && !messageNavigationController.isToolbarHidden) {
+      if (!messageNavigationController.isToolbarHidden) {
         // If tool bar present animate above toolbar
         offset -= messageNavigationController.toolbar.bounds.size.height;
       }

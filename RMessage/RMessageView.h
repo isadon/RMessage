@@ -45,7 +45,7 @@
 @property (nonatomic, readonly) UIViewController *viewController;
 
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
-@property (nonatomic, assign) CGFloat duration;
+@property (nonatomic, assign) NSTimeInterval duration;
 
 /** The position of the message (top or bottom) */
 @property (nonatomic, assign) RMessagePosition messagePosition;
@@ -100,7 +100,7 @@
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
-                        duration:(CGFloat)duration
+                        duration:(NSTimeInterval)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)(void))callback
                      buttonTitle:(NSString *)buttonTitle
@@ -130,7 +130,7 @@
                        iconImage:(UIImage *)iconImage
                             type:(RMessageType)messageType
                   customTypeName:(NSString *)customTypeName
-                        duration:(CGFloat)duration
+                        duration:(NSTimeInterval)duration
                 inViewController:(UIViewController *)viewController
                         callback:(void (^)(void))callback
             presentingCompletion:(void (^)(void))presentingCompletionCallback
