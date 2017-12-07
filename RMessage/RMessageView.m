@@ -111,7 +111,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 {
-  [RMessageView setupGlobalDesignDictionary];
+  [[self class] setupGlobalDesignDictionary];
   NSString *path = [bundle pathForResource:filename ofType:@"json"];
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     NSDictionary *newDesignStyle =
@@ -180,7 +180,7 @@ static NSMutableDictionary *globalDesignDictionary;
   return YES;
 }
 
-- (UIColor *)colorForString:(NSString *)string
++ (UIColor *)colorForString:(NSString *)string
 {
   if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:1.f];
   return nil;
@@ -192,7 +192,7 @@ static NSMutableDictionary *globalDesignDictionary;
  @param string A hex string representation of a color.
  @return nil or a color.
  */
-- (UIColor *)colorForString:(NSString *)string alpha:(CGFloat)alpha
++ (UIColor *)colorForString:(NSString *)string alpha:(CGFloat)alpha
 {
   if (string) return [UIColor hx_colorWithHexRGBAString:string alpha:alpha];
   return nil;
@@ -208,7 +208,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
-  if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
+  if ([[self class] compilingForHigherThanIosVersion:8.f]) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = YES;
   } else {
     [superview addConstraints:constraints];
@@ -217,7 +217,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)deActivateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
-  if ([RMessageView compilingForHigherThanIosVersion:8.f]) {
+  if ([[self class] compilingForHigherThanIosVersion:8.f]) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = NO;
   } else {
     [superview removeConstraints:constraints];
@@ -280,7 +280,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _subtitle = subtitle;
     _iconImage = iconImage;
     _duration = duration;
-    viewController ? _viewController = viewController : (_viewController = [RMessageView defaultViewController]);
+    viewController ? _viewController = viewController : (_viewController = [[self class] defaultViewController]);
     _messagePosition = position;
     _callback = callback;
     _messageType = messageType;
@@ -408,7 +408,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (NSError *)setupDesignDictionariesWithMessageType:(RMessageType)messageType customTypeName:(NSString *)customTypeName
 {
-  [RMessageView setupGlobalDesignDictionary];
+  [[self class] setupGlobalDesignDictionary];
   NSString *messageTypeDesignString;
   switch (messageType) {
   case RMessageTypeNormal:
@@ -656,10 +656,10 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   UIColor *backgroundColor;
   if (_messageViewDesignDictionary[@"backgroundColor"] && _messageViewDesignDictionary[@"backgroundColorAlpha"]) {
-    backgroundColor = [self colorForString:_messageViewDesignDictionary[@"backgroundColor"]
+    backgroundColor = [[self class] colorForString:_messageViewDesignDictionary[@"backgroundColor"]
                                      alpha:[_messageViewDesignDictionary[@"backgroundColorAlpha"] floatValue]];
   } else if (_messageViewDesignDictionary[@"backgroundColor"]) {
-    backgroundColor = [self colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
+    backgroundColor = [[self class] colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
   }
 
   if (backgroundColor) self.backgroundColor = backgroundColor;
@@ -675,7 +675,7 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   if (!_iconImage && ((NSString *)[_messageViewDesignDictionary valueForKey:@"iconImage"]).length > 0) {
-    _iconImage = [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"iconImage"]];
+    _iconImage = [[self class] bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"iconImage"]];
     if (!_iconImage) {
       _iconImage = [UIImage imageNamed:[_messageViewDesignDictionary valueForKey:@"iconImage"]];
     }
@@ -695,7 +695,7 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   UIImage *backgroundImage =
-    [RMessageView bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundImage"]];
+    [[self class] bundledImageNamed:[_messageViewDesignDictionary valueForKey:@"backgroundImage"]];
   if (backgroundImage) {
     backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
                                                       resizingMode:UIImageResizingModeStretch];
@@ -723,11 +723,11 @@ static NSMutableDictionary *globalDesignDictionary;
   self.titleLabel.textAlignment =
     [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"titleTextAlignment"]];
 
-  UIColor *titleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
+  UIColor *titleTextColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"titleTextColor"]];
   _titleLabel.text = _title ? _title : @"";
   if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
-  UIColor *titleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
+  UIColor *titleShadowColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"titleShadowColor"]];
   if (titleShadowColor) _titleLabel.shadowColor = titleShadowColor;
   id titleShadowOffsetX = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetX"];
   id titleShadowOffsetY = [_messageViewDesignDictionary valueForKey:@"titleShadowOffsetY"];
@@ -758,9 +758,9 @@ static NSMutableDictionary *globalDesignDictionary;
   self.subtitleLabel.textAlignment =
     [self textAlignmentForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextAlignment"]];
 
-  UIColor *subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
+  UIColor *subTitleTextColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleTextColor"]];
   if (!subTitleTextColor) {
-    subTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
+    subTitleTextColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleTextColor"]];
   }
   if (!subTitleTextColor) {
     subTitleTextColor = _titleLabel.textColor;
@@ -770,9 +770,9 @@ static NSMutableDictionary *globalDesignDictionary;
   if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
 
   UIColor *subTitleShadowColor =
-    [self colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleShadowColor"]];
+    [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"subTitleShadowColor"]];
   if (!subTitleShadowColor) {
-    subTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleShadowColor"]];
+    subTitleShadowColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"subtitleShadowColor"]];
   }
 
   if (subTitleShadowColor) _subtitleLabel.shadowColor = subTitleShadowColor;
@@ -848,12 +848,12 @@ static NSMutableDictionary *globalDesignDictionary;
   }
   
   [_button setTitle:_buttonTitle forState:UIControlStateNormal];
-  UIColor *buttonTitleTextColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleTextColor"]];
+  UIColor *buttonTitleTextColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleTextColor"]];
   if (buttonTitleTextColor) {
     [_button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
   }
   
-  UIColor *buttonTitleShadowColor = [self colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleShadowColor"]];
+  UIColor *buttonTitleShadowColor = [[self class] colorForString:[_messageViewDesignDictionary valueForKey:@"buttonTitleShadowColor"]];
   if (buttonTitleShadowColor) {
     [_button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
   }
@@ -1028,7 +1028,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.messagePosition != RMessagePositionBottom) {
     if (messageNavigationController) {
       BOOL messageNavigationBarHidden =
-      [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
+      [[self class] isNavigationBarHiddenForNavigationController:messageNavigationController];
       
       if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
         // Present from below nav bar when presenting from the top and navigation bar is present
@@ -1059,7 +1059,7 @@ static NSMutableDictionary *globalDesignDictionary;
   
   if (messageNavigationController) {
     BOOL messageNavigationBarHidden =
-    [RMessageView isNavigationBarHiddenForNavigationController:messageNavigationController];
+    [[self class] isNavigationBarHiddenForNavigationController:messageNavigationController];
     
     if (self.messagePosition != RMessagePositionBottom) {
       if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
