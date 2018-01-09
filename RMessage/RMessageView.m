@@ -70,11 +70,9 @@ static NSMutableDictionary *globalDesignDictionary;
 /** Callback block called after the messageView finishes dismissing */
 @property (nonatomic, copy) void (^dismissCompletionCallback)(void);
 
-/** The starting constant value that should be set for the topToVCTopLayoutConstraint when animating */
-@property (nonatomic, assign) CGFloat topToVCStartConstant;
-
 /** The final constant value that should be set for the topToVCTopLayoutConstraint when animating */
-@property (nonatomic, assign) CGFloat topToVCFinalConstant;
+@property (nonatomic, strong) NSLayoutConstraint *topToVCFinalConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *topToVCStartingConstraint;
 
 @property (nonatomic, assign) CGFloat iconRelativeCornerRadius;
 @property (nonatomic, assign) RMessageType messageType;
@@ -449,30 +447,12 @@ static NSMutableDictionary *globalDesignDictionary;
   self.translatesAutoresizingMaskIntoConstraints = NO;
   if (!_title || !_subtitle) self.titleSubtitleVerticalSpacingConstraint.constant = 0;
 
-  // Add RMessage to superview and prepare the ending y position constants
+  // Add RMessage to superview and prepare the ending constraints
   [self layoutMessageForPresentation];
 
-  // Prepare the starting y position constants
-  if (self.messagePosition != RMessagePositionBottom) {
-    [self layoutIfNeeded];
-    self.topToVCStartConstant = -self.bounds.size.height;
-    self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:self.superview
-                                                                attribute:NSLayoutAttributeTop
-                                                               multiplier:1.f
-                                                                 constant:self.topToVCStartConstant];
-  } else {
-    self.topToVCStartConstant = 0;
-    self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:self.superview
-                                                                attribute:NSLayoutAttributeBottom
-                                                               multiplier:1.f
-                                                                 constant:0.f];
-  }
+  // Prepare the starting y position constraints
+  [self setupStartingAnimationConstraints];
+  [self setupFinalAnimationConstraints];
 
   NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                        attribute:NSLayoutAttributeCenterX
@@ -575,7 +555,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (_button.superview) [_button removeFromSuperview];
   _button = button;
   [self setupButtonConstraints];
-  [self setupFinalAnimationConstants];
+  [self setupFinalAnimationConstraints];
 }
 
 - (void)executeMessageViewButtonCallBack
@@ -1020,10 +1000,32 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   if (!self.superview) [self.viewController.view addSubview:self];
-  [self setupFinalAnimationConstants];
 }
 
-- (void)setupFinalAnimationConstants
+- (void)setupStartingAnimationConstraints
+{
+  [self layoutIfNeeded];
+  if (self.messagePosition != RMessagePositionBottom) {
+    self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.superview
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.f
+                                                                 constant:0.f];
+  } else {
+    self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.superview
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.f
+                                                                 constant:0.f];
+  }
+  self.topToVCStartingConstraint = self.topToVCLayoutConstraint;
+}
+
+- (void)setupFinalAnimationConstraints
 {
   [self layoutIfNeeded];
   UINavigationController *messageNavigationController;
@@ -1039,40 +1041,36 @@ static NSMutableDictionary *globalDesignDictionary;
 
     if (self.messagePosition != RMessagePositionBottom) {
       if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
-        /* If view controller edges dont extend under top bars (navigation bar in our case) we must not factor in the
-         navigation bar frame when animating RMessage's final position */
-        if ([[self class] viewControllerEdgesExtendUnderTopBars:messageNavigationController]) {
-          self.topToVCFinalConstant = [UIApplication sharedApplication].statusBarFrame.size.height +
-          messageNavigationController.navigationBar.bounds.size.height +
-          [self customVerticalOffset];
-        } else {
-          self.topToVCFinalConstant = [self customVerticalOffset];
-        }
+        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:messageNavigationController.navigationBar attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
       } else {
         /* Navigation bar hidden or being asked to present as nav bar overlay, so present above status bar and/or
          navigation bar */
-        self.topToVCFinalConstant = [self customVerticalOffset];
+        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem: self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
       }
+      self.topToVCFinalConstraint.constant = [self customVerticalOffset];
     } else {
-      CGFloat offset = -self.bounds.size.height - [self customVerticalOffset];
+      CGFloat offset = -[self customVerticalOffset];
       if (!messageNavigationController.isToolbarHidden) {
         // If tool bar present animate above toolbar
         offset -= messageNavigationController.toolbar.bounds.size.height;
       }
-      self.topToVCFinalConstant = offset;
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
+      self.topToVCFinalConstraint.constant = offset;
     }
   } else {
     if (self.messagePosition == RMessagePositionBottom) {
-      self.topToVCFinalConstant = -self.bounds.size.height - [self customVerticalOffset];
+      [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
     } else {
-      self.topToVCFinalConstant = [self customVerticalOffset];
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
     }
+    self.topToVCFinalConstraint.constant = - [self customVerticalOffset];
   }
 }
+
 - (void)animateMessage
 {
+  [self.superview layoutIfNeeded];
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.superview layoutIfNeeded];
     if (!self.shouldBlurBackground) self.alpha = 0.f;
     [UIView animateWithDuration:kRMessageAnimationDuration + 0.2f
                           delay:0.f
@@ -1081,12 +1079,14 @@ static NSMutableDictionary *globalDesignDictionary;
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
      UIViewAnimationOptionAllowUserInteraction
                      animations:^{
+                       self.topToVCLayoutConstraint.active = NO;
+                       self.topToVCLayoutConstraint = self.topToVCFinalConstraint;
+                       self.topToVCLayoutConstraint.active = YES;
                        self.isPresenting = YES;
                        if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
                          [self.delegate messageViewIsPresenting:self];
                        }
                        if (!self.shouldBlurBackground) self.alpha = self.messageOpacity;
-                       self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
                        [self.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
@@ -1108,13 +1108,17 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)dismissWithCompletion:(void (^)(void))completionBlock
 {
   self.messageIsFullyDisplayed = NO;
+
+  [self.superview layoutIfNeeded];
   dispatch_async(dispatch_get_main_queue(), ^{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
 
     [UIView animateWithDuration:kRMessageAnimationDuration
                      animations:^{
                        if (!self.shouldBlurBackground) self.alpha = 0.f;
-                       self.topToVCLayoutConstraint.constant = self.topToVCStartConstant;
+                       self.topToVCLayoutConstraint.active = NO;
+                       self.topToVCLayoutConstraint = self.topToVCStartingConstraint;
+                       self.topToVCLayoutConstraint.active = YES;
                        [self.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
@@ -1141,7 +1145,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
   // On completion of UI rotation recalculate positioning
   [self layoutMessageForPresentation];
-  self.topToVCLayoutConstraint.constant = self.topToVCFinalConstant;
+  [self setupFinalAnimationConstraints];
 }
 
 /**
