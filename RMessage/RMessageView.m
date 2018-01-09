@@ -974,12 +974,7 @@ static NSMutableDictionary *globalDesignDictionary;
   _titleSubtitleContainerViewTopConstraint.constant = 10.f;
   CGFloat statusBarHeight = statusBarHeight = [self.viewController prefersStatusBarHidden] ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
 
-  UINavigationController *messageNavigationController;
-  if ([self.viewController isKindOfClass:[UINavigationController class]]) {
-    messageNavigationController = (UINavigationController *)self.viewController;
-  } else if ([self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
-    messageNavigationController = (UINavigationController *)self.viewController.parentViewController;
-  }
+  UINavigationController *messageNavigationController = [self rootNavigationController];
 
   if (self.messagePosition != RMessagePositionBottom) {
     if (messageNavigationController) {
@@ -1028,12 +1023,8 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupFinalAnimationConstraints
 {
   [self layoutIfNeeded];
-  UINavigationController *messageNavigationController;
-  if ([self.viewController isKindOfClass:[UINavigationController class]]) {
-    messageNavigationController = (UINavigationController *)self.viewController;
-  } else if ([self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
-    messageNavigationController = (UINavigationController *)self.viewController.parentViewController;
-  }
+
+  UINavigationController *messageNavigationController = [self rootNavigationController];
 
   if (messageNavigationController) {
     BOOL messageNavigationBarHidden =
@@ -1133,6 +1124,16 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 #pragma mark - Misc methods
+
+- (UINavigationController *)rootNavigationController
+{
+  if ([self.viewController isKindOfClass:[UINavigationController class]]) {
+    return (UINavigationController *)self.viewController;
+  } else if ([self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
+    return (UINavigationController *)self.viewController.parentViewController;
+  }
+  return nil;
+}
 
 - (void)buttonTapped
 {
