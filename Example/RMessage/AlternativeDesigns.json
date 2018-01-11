@@ -9,5 +9,17 @@
         "titleFontSize": 14,
         "backgroundColor": "#008AFC",
         "opacity": 0.95
+    },
+    "alternate-warning": {
+        "iconImage": "smoke.png",
+        "backgroundColor": "#F36E54",
+        "titleTextColor": "#FFFFFF",
+        "opacity": 1.0
+    },
+    "alternate-neutral": {
+        "iconImage": "smoke.png",
+        "backgroundColor": "#FFFFFF",
+        "titleTextColor": "#03A9F4",
+        "opacity": 1.0
     }
 }

@@ -26,8 +26,8 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewCenterYConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *subtitleLabelTopOffsetConstraint;
 
-@property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 
 @property (nonatomic, strong) UIImage *iconImage;
@@ -734,6 +734,37 @@ static NSMutableDictionary *globalDesignDictionary;
   UITapGestureRecognizer *tapRecognizer =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapMessageView:)];
   [self addGestureRecognizer:tapRecognizer];
+}
+
+- (void)setDontDismissOnTap:(BOOL)dontDismissOnTap
+{
+    _dontDismissOnTap = dontDismissOnTap;
+    
+    if (_dontDismissOnTap) {
+        UITapGestureRecognizer *tapGR;
+        for (UIGestureRecognizer *gr in self.gestureRecognizers) {
+            if ([gr isKindOfClass:[UITapGestureRecognizer class]]) {
+                tapGR = (UITapGestureRecognizer *)gr;
+                break;
+            }
+        }
+        
+        if (tapGR) {
+            NSMutableArray *temp = [NSMutableArray arrayWithArray:self.gestureRecognizers];
+            [temp removeObject:tapGR];
+            self.gestureRecognizers = [NSArray arrayWithArray:temp];
+        }
+    }
+}
+
+- (void)setDontShowSubtitle:(BOOL)dontShowSubtitle
+{
+    _dontShowSubtitle = dontShowSubtitle;
+    
+    if (_dontShowSubtitle) {
+        self.subtitleLabelTopOffsetConstraint.constant = 0;
+        self.subtitleLabel.text = nil;
+    }
 }
 
 #pragma mark - Gesture Recognizers

@@ -64,6 +64,15 @@
 /** Is the message currently on screen, fully displayed? */
 @property (nonatomic, assign) BOOL messageIsFullyDisplayed;
 
+/** Icon image view can be customized by changing tint color, masking, etc. */
+@property (nonatomic, strong) UIImageView *iconImageView;
+
+/** If YES, then message can be dismissed only by swiping, not tapping */
+@property (nonatomic) BOOL dontDismissOnTap;
+
+/** If YES, then subtitle label text is set to nil and it's top space constraint is set to zero */
+@property (nonatomic) BOOL dontShowSubtitle;
+
 /** Customize RMessage using Appearance proxy */
 @property (nonatomic, strong) UIFont *titleFont UI_APPEARANCE_SELECTOR;
 @property (nonatomic, assign) NSTextAlignment titleAlignment UI_APPEARANCE_SELECTOR;

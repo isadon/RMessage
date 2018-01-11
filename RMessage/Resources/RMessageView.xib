@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -53,11 +53,12 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="subtitleLabel" destination="86Q-SR-N4H" id="b36-f7-jMs"/>
+                <outlet property="subtitleLabelTopOffsetConstraint" destination="sUB-xD-36O" id="FXU-VQ-ueT"/>
                 <outlet property="titleLabel" destination="bJU-tq-cfR" id="cQG-kC-CBc"/>
                 <outlet property="titleSubtitleContainerView" destination="49I-AE-5sP" id="gnK-Tn-Kb9"/>
                 <outlet property="titleSubtitleContainerViewCenterYConstraint" destination="XoR-Zr-h6e" id="nBn-eR-aks"/>
             </connections>
-            <point key="canvasLocation" x="337" y="450"/>
+            <point key="canvasLocation" x="-299" y="17"/>
         </view>
     </objects>
 </document>

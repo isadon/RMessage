@@ -10,6 +10,9 @@
 #import "RMessage.h"
 #import "RMessageView.h"
 
+NSString *const StyleWarning = @"alternate-warning";
+NSString *const StyleNeutral = @"alternate-neutral";
+
 @interface DemoViewController () <RMessageProtocol>
 
 @end
@@ -268,5 +271,54 @@
   messageView.messageOpacity = 0.5f;
 }
 */
+
+- (IBAction)didTapCustomWarning:(id)sender
+{
+    [RMessage setDelegate:self];
+    [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]];
+    [RMessage showNotificationWithTitle:@"Warning! You are sitting too much!"
+                               subtitle:nil
+                                   type:RMessageTypeCustom
+                         customTypeName:StyleWarning
+                               callback:^{
+                                   NSLog(@"Notification tapped.");
+                               }];
+}
+
+- (IBAction)didTapCustomNeutral:(id)sender
+{
+    [RMessage setDelegate:self];
+    [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]];
+    [RMessage showNotificationWithTitle:@"Something neutral happened."
+                               subtitle:nil
+                                   type:RMessageTypeCustom
+                         customTypeName:StyleNeutral
+                               callback:^{
+                                   NSLog(@"Notification tapped.");
+                               }];
+}
+
+#pragma mark - RMessageProtocol
+
+- (void)customizeMessageView:(RMessageView *)messageView
+{
+    messageView.dontDismissOnTap = NO;
+    messageView.dontShowSubtitle = YES;
+    
+    messageView.titleFont = [UIFont systemFontOfSize:15 weight:UIFontWeightLight];
+ 
+    if ([messageView.customTypeName isEqualToString:@"alternate-warning"]) {
+        messageView.iconImageView.layer.cornerRadius = messageView.iconImageView.frame.size.width / 2.0;
+        messageView.iconImageView.layer.masksToBounds = YES;
+        messageView.iconImageView.image = [messageView.iconImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        messageView.iconImageView.backgroundColor = [UIColor whiteColor];
+        messageView.iconImageView.tintColor = [UIColor colorWithRed:243.0/255.0 green:110.0/255.0 blue:84.0/255.0 alpha:1.0];
+    } else {
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, messageView.bounds.size.height - 1, width, 1)];
+        lineView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+        [messageView addSubview:lineView];
+    }
+}
 
 @end
