@@ -81,6 +81,10 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, assign) BOOL shouldBlurBackground;
 @property (nonatomic, assign) BOOL dismissingEnabled;
 
+/** The existence of this property is strictly to handle a UIAppearance bug where methods are
+ called multiple times when they need not be. See: http://www.openradar.me/28827675 */
+@property (nonatomic, assign) BOOL labelsHaveBeenSizedToFit;
+
 @end
 
 @implementation RMessageView
@@ -190,6 +194,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
+  if (!constraints || !superview) return;
   if (@available(iOS 8.0, *)) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = YES;
   } else {
@@ -199,6 +204,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (void)deActivateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
 {
+  if (!constraints || !superview) return;
   if (@available(iOS 8.0, *)) {
     for (NSLayoutConstraint *constraint in constraints) constraint.active = NO;
   } else {
@@ -331,8 +337,11 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setTitleSubtitleLabelsSizeToFit:(BOOL)titleSubtitleLabelsSizeToFit
 {
+  // Prevent re-setting of the property and re-execution of its logic if it already has previously been set
+  // Prevent changing of the property to NO after it has already been set to YES
+  if (!_labelsHaveBeenSizedToFit) return;
   _titleSubtitleLabelsSizeToFit = titleSubtitleLabelsSizeToFit;
-  [self setupLabelConstraints];
+  if (titleSubtitleLabelsSizeToFit) [self sizeTitleSubtitleLabelsToFit];
 }
 
 - (void)setMessageIcon:(UIImage *)messageIcon
@@ -665,7 +674,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   [self setupTitleLabel];
   [self setupSubTitleLabel];
-  [self setupLabelConstraints];
+  if (_titleSubtitleLabelsSizeToFit) [self sizeTitleSubtitleLabelsToFit];
 }
 
 - (void)setupTitleLabel
@@ -745,40 +754,48 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
-- (void)setupLabelConstraints
+- (void)sizeTitleSubtitleLabelsToFit
 {
-  if (_titleSubtitleLabelsSizeToFit) {
+  // Prevent execution of this function more than once to handle this beautiful UIAppearance bug
+  // that calls UI_APPEARANCE_SELECTOR methods more than once: http://www.openradar.me/28827675.
+  if (!_titleSubtitleLabelsSizeToFit || _labelsHaveBeenSizedToFit) {
+    return;
+  }
+  if (_titleSubtitleContainerViewTrailingConstraint) {
     [[self class] deActivateConstraints:@[_titleSubtitleContainerViewTrailingConstraint]
                             inSuperview:self];
-    [[self class] deActivateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
-      _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
-    _titleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
-                                                                attribute:NSLayoutAttributeLeading
-                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                   toItem:self.titleSubtitleContainerView
-                                                                attribute:NSLayoutAttributeLeading
-                                                               multiplier:1.f constant:0];
-    _titleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
-                                                                attribute:NSLayoutAttributeTrailing
-                                                                relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                   toItem:self.titleSubtitleContainerView
-                                                                attribute:NSLayoutAttributeTrailing
-                                                               multiplier:1.f constant:0];
-    _subtitleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
-                                                                attribute:NSLayoutAttributeLeading
-                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                   toItem:self.titleSubtitleContainerView
-                                                                attribute:NSLayoutAttributeLeading
-                                                               multiplier:1.f constant:0];
-    _subtitleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
-                                                                 attribute:NSLayoutAttributeTrailing
-                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                    toItem:self.titleSubtitleContainerView
-                                                                 attribute:NSLayoutAttributeTrailing
-                                                                multiplier:1.f constant:0];
-    [[self class] activateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
-      _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint] inSuperview:self.titleSubtitleContainerView];
   }
+  [[self class] deActivateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
+                                        _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint]
+                          inSuperview:self.titleSubtitleContainerView];
+  _titleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                              attribute:NSLayoutAttributeLeading
+                                                              relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                 toItem:self.titleSubtitleContainerView
+                                                              attribute:NSLayoutAttributeLeading
+                                                             multiplier:1.f constant:0];
+  _titleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.titleLabel
+                                                               attribute:NSLayoutAttributeTrailing
+                                                               relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                  toItem:self.titleSubtitleContainerView
+                                                               attribute:NSLayoutAttributeTrailing
+                                                              multiplier:1.f constant:0];
+  _subtitleLabelLeadingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
+                                                                 attribute:NSLayoutAttributeLeading
+                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                    toItem:self.titleSubtitleContainerView
+                                                                 attribute:NSLayoutAttributeLeading
+                                                                multiplier:1.f constant:0];
+  _subtitleLabelTrailingConstraint = [NSLayoutConstraint constraintWithItem:self.subtitleLabel
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                     toItem:self.titleSubtitleContainerView
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.f constant:0];
+  [[self class] activateConstraints:@[_titleLabelLeadingConstraint, _titleLabelTrailingConstraint,
+                                      _subtitleLabelLeadingConstraint, _subtitleLabelTrailingConstraint]
+                        inSuperview:self.titleSubtitleContainerView];
+  _labelsHaveBeenSizedToFit = YES;
 }
 
 - (void)setupButton
