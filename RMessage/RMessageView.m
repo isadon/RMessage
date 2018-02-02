@@ -339,7 +339,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   // Prevent re-setting of the property and re-execution of its logic if it already has previously been set
   // Prevent changing of the property to NO after it has already been set to YES
-  if (!_labelsHaveBeenSizedToFit) return;
+  if (_labelsHaveBeenSizedToFit) return;
   _titleSubtitleLabelsSizeToFit = titleSubtitleLabelsSizeToFit;
   if (titleSubtitleLabelsSizeToFit) [self sizeTitleSubtitleLabelsToFit];
 }
