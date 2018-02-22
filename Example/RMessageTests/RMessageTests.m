@@ -5,8 +5,8 @@
 //  Created by Adonis Peralta on 12/4/17.
 //
 
-#import <XCTest/XCTest.h>
 #import "RMessage.h"
+#import <XCTest/XCTest.h>
 
 @interface RMessageTests : XCTestCase
 
@@ -14,12 +14,13 @@
 
 @implementation RMessageTests
 
-- (void)setUp {
+- (void)setUp
+{
   [super setUp];
-  
 }
 
-- (void)tearDown {
+- (void)tearDown
+{
   [super tearDown];
 }
 
