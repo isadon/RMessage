@@ -410,8 +410,6 @@ static NSMutableDictionary *globalDesignDictionary;
     messageTypeDesignString = @"warning";
     break;
   case RMessageTypeCustom:
-    NSParameterAssert(customTypeName != nil);
-    NSParameterAssert(![customTypeName isEqualToString:@""]);
     if (!customTypeName || [customTypeName isEqualToString:@""]) {
       return
         [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
@@ -429,7 +427,6 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   _messageViewDesignDictionary = globalDesignDictionary[messageTypeDesignString];
-  NSParameterAssert(_messageViewDesignDictionary != nil);
   if (!_messageViewDesignDictionary) {
     return
       [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
