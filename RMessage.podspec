@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "RMessage"
-  s.version          = "2.1.5"
+  s.version          = "2.2.0"
   s.summary          = "Easy to use and customizable messages/notifications for iOS"
   s.description  = <<-DESC
                     This framework provides an easy to use class to show little notification views on the top of the screen.
