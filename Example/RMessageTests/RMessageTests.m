@@ -13,15 +13,34 @@
 @end
 
 @implementation RMessageTests
+{
+  UIApplication *app;
+}
 
 - (void)setUp
 {
   [super setUp];
+  app = [UIApplication sharedApplication];
 }
 
 - (void)tearDown
 {
+  app = nil;
   [super tearDown];
+}
+
+- (void)testMessageInit
+{
+  XCTAssertNotNil([RMessage sharedMessage]);
+}
+
+- (void)testQueuedMessages
+{
+  for (int i = 0; i < 6; i++) {
+    [RMessage showNotificationWithTitle:@"title" type:RMessageTypeError customTypeName:nil callback:nil];
+  }
+  NSArray *queuedMessages = [RMessage queuedMessages];
+  XCTAssert(queuedMessages.count == 6);
 }
 
 @end
