@@ -10,6 +10,8 @@
 		59E0F574518A0BBB34C54BA0 /* libPods-RMessageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */; };
 		7A0BF4C31C6AED7300F92A38 /* AlternativeDesigns.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */; };
 		7A5DD2911FD64CD30078493B /* RMessageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DD2901FD64CD30078493B /* RMessageUITests.m */; };
+		7A600412203F69AE007B9832 /* RMessageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A600411203F69AE007B9832 /* RMessageViewTests.m */; };
+		7A600414203F7117007B9832 /* CustomDesignFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A600413203F7117007B9832 /* CustomDesignFile.json */; };
 		7A8E69EF1FD5E59800CA418A /* RMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E69EE1FD5E59800CA418A /* RMessageTests.m */; };
 		7AD2C5BB1C16735F007C3580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BA1C16735F007C3580 /* main.m */; };
 		7AD2C5BE1C16735F007C3580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BD1C16735F007C3580 /* AppDelegate.m */; };
@@ -43,6 +45,8 @@
 		7A5DD28E1FD64CD30078493B /* RMessageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A5DD2901FD64CD30078493B /* RMessageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageUITests.m; sourceTree = "<group>"; };
 		7A5DD2921FD64CD30078493B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A600411203F69AE007B9832 /* RMessageViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageViewTests.m; sourceTree = "<group>"; };
+		7A600413203F7117007B9832 /* CustomDesignFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomDesignFile.json; sourceTree = "<group>"; };
 		7A8E69EC1FD5E59800CA418A /* RMessageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8E69EE1FD5E59800CA418A /* RMessageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageTests.m; sourceTree = "<group>"; };
 		7A8E69F01FD5E59800CA418A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +132,9 @@
 		7A8E69ED1FD5E59800CA418A /* RMessageTests */ = {
 			isa = PBXGroup;
 			children = (
+				7A600411203F69AE007B9832 /* RMessageViewTests.m */,
 				7A8E69EE1FD5E59800CA418A /* RMessageTests.m */,
+				7A600413203F7117007B9832 /* CustomDesignFile.json */,
 				7A8E69F01FD5E59800CA418A /* Info.plist */,
 			);
 			path = RMessageTests;
@@ -300,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A600414203F7117007B9832 /* CustomDesignFile.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A8E69EF1FD5E59800CA418A /* RMessageTests.m in Sources */,
+				7A600412203F69AE007B9832 /* RMessageViewTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
