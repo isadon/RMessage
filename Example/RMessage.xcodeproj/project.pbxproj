@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59E0F574518A0BBB34C54BA0 /* libPods-RMessageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */; };
 		7A0BF4C31C6AED7300F92A38 /* AlternativeDesigns.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */; };
+		7A5DD2911FD64CD30078493B /* RMessageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DD2901FD64CD30078493B /* RMessageUITests.m */; };
+		7A600412203F69AE007B9832 /* RMessageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A600411203F69AE007B9832 /* RMessageViewTests.m */; };
+		7A600414203F7117007B9832 /* CustomDesignFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A600413203F7117007B9832 /* CustomDesignFile.json */; };
+		7A8E69EF1FD5E59800CA418A /* RMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E69EE1FD5E59800CA418A /* RMessageTests.m */; };
 		7AD2C5BB1C16735F007C3580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BA1C16735F007C3580 /* main.m */; };
 		7AD2C5BE1C16735F007C3580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BD1C16735F007C3580 /* AppDelegate.m */; };
 		7AD2C5C41C16735F007C3580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2C5C21C16735F007C3580 /* Main.storyboard */; };
@@ -16,10 +21,35 @@
 		9EE78E97B955D2D1A0FEC74F /* libPods-RMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2348D3162BCD308122824EC5 /* libPods-RMessage.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7A5DD2931FD64CD30078493B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AD2C5AE1C16735E007C3580 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AD2C5B51C16735E007C3580;
+			remoteInfo = RMessage;
+		};
+		7A8E69F11FD5E59800CA418A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AD2C5AE1C16735E007C3580 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AD2C5B51C16735E007C3580;
+			remoteInfo = RMessage;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2348D3162BCD308122824EC5 /* libPods-RMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
 		7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesigns.json; sourceTree = "<group>"; };
+		7A5DD28E1FD64CD30078493B /* RMessageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A5DD2901FD64CD30078493B /* RMessageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageUITests.m; sourceTree = "<group>"; };
+		7A5DD2921FD64CD30078493B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A600411203F69AE007B9832 /* RMessageViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageViewTests.m; sourceTree = "<group>"; };
+		7A600413203F7117007B9832 /* CustomDesignFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomDesignFile.json; sourceTree = "<group>"; };
+		7A8E69EC1FD5E59800CA418A /* RMessageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A8E69EE1FD5E59800CA418A /* RMessageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageTests.m; sourceTree = "<group>"; };
+		7A8E69F01FD5E59800CA418A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD2C5B61C16735E007C3580 /* RMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD2C5BA1C16735F007C3580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7AD2C5BC1C16735F007C3580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -29,10 +59,28 @@
 		7AD2C5CA1C16735F007C3580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AD2C5D31C1673DF007C3580 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoViewController.h; path = ../DemoViewController.h; sourceTree = "<group>"; };
 		7AD2C5D41C1673DF007C3580 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoViewController.m; path = ../DemoViewController.m; sourceTree = "<group>"; };
+		8F59F34DDE6C1AEAFA87D765 /* Pods-RMessageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests.release.xcconfig"; sourceTree = "<group>"; };
+		9E10FBE0A8A15EF43773E888 /* Pods-RMessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7A5DD28B1FD64CD30078493B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A8E69E91FD5E59800CA418A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E0F574518A0BBB34C54BA0 /* libPods-RMessageTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AD2C5B31C16735E007C3580 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -48,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				2348D3162BCD308122824EC5 /* libPods-RMessage.a */,
+				BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -57,6 +106,8 @@
 			children = (
 				E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */,
 				4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */,
+				9E10FBE0A8A15EF43773E888 /* Pods-RMessageTests.debug.xcconfig */,
+				8F59F34DDE6C1AEAFA87D765 /* Pods-RMessageTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -69,10 +120,32 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		7A5DD28F1FD64CD30078493B /* RMessageUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7A5DD2901FD64CD30078493B /* RMessageUITests.m */,
+				7A5DD2921FD64CD30078493B /* Info.plist */,
+			);
+			path = RMessageUITests;
+			sourceTree = "<group>";
+		};
+		7A8E69ED1FD5E59800CA418A /* RMessageTests */ = {
+			isa = PBXGroup;
+			children = (
+				7A600411203F69AE007B9832 /* RMessageViewTests.m */,
+				7A8E69EE1FD5E59800CA418A /* RMessageTests.m */,
+				7A600413203F7117007B9832 /* CustomDesignFile.json */,
+				7A8E69F01FD5E59800CA418A /* Info.plist */,
+			);
+			path = RMessageTests;
+			sourceTree = "<group>";
+		};
 		7AD2C5AD1C16735E007C3580 = {
 			isa = PBXGroup;
 			children = (
 				7AD2C5B81C16735F007C3580 /* Demo */,
+				7A8E69ED1FD5E59800CA418A /* RMessageTests */,
+				7A5DD28F1FD64CD30078493B /* RMessageUITests */,
 				7AD2C5B71C16735E007C3580 /* Products */,
 				7410A5CE830B3A57D6337ADD /* Pods */,
 				466A8545BAD9F4E2078E4EB1 /* Frameworks */,
@@ -83,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				7AD2C5B61C16735E007C3580 /* RMessage.app */,
+				7A8E69EC1FD5E59800CA418A /* RMessageTests.xctest */,
+				7A5DD28E1FD64CD30078493B /* RMessageUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +190,45 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7A5DD28D1FD64CD30078493B /* RMessageUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A5DD2971FD64CD30078493B /* Build configuration list for PBXNativeTarget "RMessageUITests" */;
+			buildPhases = (
+				7A5DD28A1FD64CD30078493B /* Sources */,
+				7A5DD28B1FD64CD30078493B /* Frameworks */,
+				7A5DD28C1FD64CD30078493B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A5DD2941FD64CD30078493B /* PBXTargetDependency */,
+			);
+			name = RMessageUITests;
+			productName = RMessageUITests;
+			productReference = 7A5DD28E1FD64CD30078493B /* RMessageUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		7A8E69EB1FD5E59800CA418A /* RMessageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A8E69F51FD5E59800CA418A /* Build configuration list for PBXNativeTarget "RMessageTests" */;
+			buildPhases = (
+				76B95D0809774CD3632BBFD6 /* [CP] Check Pods Manifest.lock */,
+				7A8E69E81FD5E59800CA418A /* Sources */,
+				7A8E69E91FD5E59800CA418A /* Frameworks */,
+				7A8E69EA1FD5E59800CA418A /* Resources */,
+				301243953F08FD05C021CCEA /* [CP] Embed Pods Frameworks */,
+				6A1C070825AE4A1FECA881F5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7A8E69F21FD5E59800CA418A /* PBXTargetDependency */,
+			);
+			name = RMessageTests;
+			productName = RMessageTests;
+			productReference = 7A8E69EC1FD5E59800CA418A /* RMessageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7AD2C5B51C16735E007C3580 /* RMessage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AD2C5CD1C16735F007C3580 /* Build configuration list for PBXNativeTarget "RMessage" */;
@@ -142,8 +256,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Rendezvous Inc.";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
+					7A5DD28D1FD64CD30078493B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7AD2C5B51C16735E007C3580;
+					};
+					7A8E69EB1FD5E59800CA418A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+						TestTargetID = 7AD2C5B51C16735E007C3580;
+					};
 					7AD2C5B51C16735E007C3580 = {
 						CreatedOnToolsVersion = 7.1.1;
 						ProvisioningStyle = Manual;
@@ -164,11 +288,28 @@
 			projectRoot = "";
 			targets = (
 				7AD2C5B51C16735E007C3580 /* RMessage */,
+				7A8E69EB1FD5E59800CA418A /* RMessageTests */,
+				7A5DD28D1FD64CD30078493B /* RMessageUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7A5DD28C1FD64CD30078493B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A8E69EA1FD5E59800CA418A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A600414203F7117007B9832 /* CustomDesignFile.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AD2C5B41C16735E007C3580 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,7 +323,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */ = {
+		301243953F08FD05C021CCEA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -194,25 +335,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		791415B2244664DEAF7520C3 /* [CP] Check Pods Manifest.lock */ = {
+		5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-13/iOS/RevealServer.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F8A7C132FB881CE238B9622 /* [CP] Copy Pods Resources */ = {
+		6A1C070825AE4A1FECA881F5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -224,12 +368,92 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76B95D0809774CD3632BBFD6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RMessageTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		791415B2244664DEAF7520C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RMessage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F8A7C132FB881CE238B9622 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh",
+				"${PODS_ROOT}/../../RMessage/Resources/RMessageView.xib",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundErrorIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundErrorIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundSuccessIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundWarningIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundWarningIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationButtonBackground.png",
+				"${PODS_ROOT}/../../RMessage/Assets/NotificationButtonBackground@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/RMessageDefaultDesign.json",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7A5DD28A1FD64CD30078493B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A5DD2911FD64CD30078493B /* RMessageUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A8E69E81FD5E59800CA418A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A8E69EF1FD5E59800CA418A /* RMessageTests.m in Sources */,
+				7A600412203F69AE007B9832 /* RMessageViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AD2C5B21C16735E007C3580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +465,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A5DD2941FD64CD30078493B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AD2C5B51C16735E007C3580 /* RMessage */;
+			targetProxy = 7A5DD2931FD64CD30078493B /* PBXContainerItemProxy */;
+		};
+		7A8E69F21FD5E59800CA418A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AD2C5B51C16735E007C3580 /* RMessage */;
+			targetProxy = 7A8E69F11FD5E59800CA418A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7AD2C5C21C16735F007C3580 /* Main.storyboard */ = {
@@ -254,6 +491,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7A5DD2951FD64CD30078493B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RMessage;
+			};
+			name = Debug;
+		};
+		7A5DD2961FD64CD30078493B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RMessage;
+			};
+			name = Release;
+		};
+		7A8E69F31FD5E59800CA418A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E10FBE0A8A15EF43773E888 /* Pods-RMessageTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RMessageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
+			};
+			name = Debug;
+		};
+		7A8E69F41FD5E59800CA418A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F59F34DDE6C1AEAFA87D765 /* Pods-RMessageTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = RMessageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
+			};
+			name = Release;
+		};
 		7AD2C5CB1C16735F007C3580 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -298,7 +627,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -344,7 +673,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -358,10 +687,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -371,16 +703,37 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7A5DD2971FD64CD30078493B /* Build configuration list for PBXNativeTarget "RMessageUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A5DD2951FD64CD30078493B /* Debug */,
+				7A5DD2961FD64CD30078493B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7A8E69F51FD5E59800CA418A /* Build configuration list for PBXNativeTarget "RMessageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A8E69F31FD5E59800CA418A /* Debug */,
+				7A8E69F41FD5E59800CA418A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7AD2C5B11C16735E007C3580 /* Build configuration list for PBXProject "RMessage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

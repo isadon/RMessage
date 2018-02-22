@@ -1,0 +1,12 @@
+{
+  "custom": {
+    "backgroundColor": "#00C060",
+    "backgroundColorAlpha": 1.0,
+    "titleTextColor": "#FFFFFF",
+    "titleFontSize": 14,
+    "subTitleFontSize": 12,
+    "subTitleTextColor": "#FFFFFF",
+    "iconImage": "NotificationBackgroundSuccessIcon.png",
+    "blurBackground": 0
+  }
+}
