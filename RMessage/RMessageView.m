@@ -986,7 +986,7 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)layoutMessageForPresentation
 {
   _titleSubtitleContainerViewTopConstraint.constant = 10.f;
-  CGFloat statusBarHeight = statusBarHeight = [self.viewController prefersStatusBarHidden] ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height / 2.f);
+  CGFloat statusBarHeight = statusBarHeight = [self.viewController prefersStatusBarHidden] ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height);
 
   UINavigationController *messageNavigationController = [self rootNavigationController];
 
