@@ -263,6 +263,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].firstObject;
   if (self) {
+    self.accessibilityIdentifier = @"RMessageView";
     _delegate = delegate;
     _title = title;
     _subtitle = subtitle;

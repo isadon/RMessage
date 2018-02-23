@@ -46,7 +46,7 @@
   };
 
   [app.buttons[buttonName] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   int expectedMessagePosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -69,7 +69,7 @@
   };
 
   [app.buttons[@"Bottom"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"Bottom message failed to display");
@@ -88,7 +88,7 @@
     [app.buttons[@"Toggle NavBar"] tap];
   };
   [app.buttons[@"Endless"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   int expectedMessagePosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -201,7 +201,7 @@
 - (void)testMessageOverNavBar
 {
   [app.buttons[@"Over NavBar"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Over navBar message failed to display");
@@ -216,7 +216,7 @@
 - (void)testButtonMessageButtonPress
 {
   [app.buttons[@"Button"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Button message failed to display");
@@ -226,7 +226,7 @@
                                                                                   handler:nil];
   [app.buttons[@"Update"] tap];
 
-  XCUIElement *updateMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *updateMessage = app.otherElements[@"RMessageView"];
   messageDisplayed = [updateMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Update message failed to display");
 
@@ -241,7 +241,7 @@
 {
   [app.buttons[@"Endless"] tap];
 
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   int expectedMessagePosition = navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
@@ -265,7 +265,7 @@
 - (void)testTapToDismiss
 {
   [app.buttons[@"Error"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   int expectedMessagePosition = navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
