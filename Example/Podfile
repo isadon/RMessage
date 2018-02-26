@@ -1,13 +1,15 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target "RMessage" do
-  platform :ios, '9.0'
+  #Set platform to iOS 7 to Catch Property API available warnings in XCode
+  platform :ios, '7.0'
   pod 'HexColors', '~> 4.0'
   pod 'PPTopMostController', :git => 'https://github.com/donileo/PPTopMostController.git'
   pod 'RMessage', :path => '..' 
-  pod 'Reveal-SDK', :configurations => ['Debug']
+  pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 end
 
 target "RMessageTests" do
-  platform :ios, '9.0'
+  #Set platform to iOS 7 to Catch Property API available warnings in XCode
+  platform :ios, '7.0'
 end
