@@ -29,7 +29,7 @@
 * **buttonTitleShadowOffsetX**: Amount of pt to offset in x direction the button title text shadow. Numeric.
 * **buttonTitleShadowOffsetY**: Amount of pt to offset in y direction the button title text shadow. Numeric.
 * **blurBackground**: Enable/disable blurring of the background behind the RMessage. Use in conjunction with
-  backgroundColorAlpha. Numeric boolean [0, 1].
+  backgroundColorAlpha. Numeric boolean [0, 1]. **Does nothing on devices running iOS7 and below.**
 
 Property keys are always strings, values can be string or numeric. If specifying a numeric value don't encapsulate the numeric value in a string.
 [x,y] Signifies the range of values x to y that are allowed for the field.

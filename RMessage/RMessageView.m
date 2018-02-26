@@ -505,7 +505,11 @@ static NSMutableDictionary *globalDesignDictionary;
   [[self class]
     activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
-  if (self.shouldBlurBackground) [self setupBlurBackground];
+  if (self.shouldBlurBackground) {
+    if (@available(iOS 8.0, *)) {
+      [self setupBlurBackground];
+    }
+  }
 }
 
 - (void)setupBackgroundImageViewWithImage:(UIImage *)image
