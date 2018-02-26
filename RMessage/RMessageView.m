@@ -212,6 +212,26 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
++ (void)activateConstraint:(NSLayoutConstraint *)constraint inSuperview:(UIView *)superview
+{
+  if (!constraint || !superview) return;
+  if (@available(iOS 8.0, *)) {
+    constraint.active = YES;
+  } else {
+    [superview addConstraint:constraint];
+  }
+}
+
++ (void)deActivateConstraint:(NSLayoutConstraint *)constraint inSuperview:(UIView *)superview
+{
+  if (!constraint || !superview) return;
+  if (@available(iOS 8.0, *)) {
+    constraint.active = NO;
+  } else {
+    [superview removeConstraint:constraint];
+  }
+}
+
 #pragma mark - Instance Methods
 
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
@@ -1085,9 +1105,9 @@ static NSMutableDictionary *globalDesignDictionary;
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
      UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                       self.topToVCLayoutConstraint.active = NO;
+                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCFinalConstraint;
-                       self.topToVCLayoutConstraint.active = YES;
+                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.isPresenting = YES;
                        if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
                          [self.delegate messageViewIsPresenting:self];
@@ -1122,9 +1142,9 @@ static NSMutableDictionary *globalDesignDictionary;
     [UIView animateWithDuration:kRMessageAnimationDuration
                      animations:^{
                        if (!self.shouldBlurBackground) self.alpha = 0.f;
-                       self.topToVCLayoutConstraint.active = NO;
+                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCStartingConstraint;
-                       self.topToVCLayoutConstraint.active = YES;
+                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        [self.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {
