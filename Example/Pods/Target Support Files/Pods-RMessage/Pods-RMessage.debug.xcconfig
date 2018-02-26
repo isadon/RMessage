@@ -1,11 +1,10 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Reveal-SDK/RevealServer-13/iOS"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Reveal-iOS-SDK/Reveal-Framework-iOS-1.6.2"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/PPTopMostController" "${PODS_ROOT}/Headers/Public/RMessage" "${PODS_ROOT}/Headers/Public/Reveal-SDK"
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
-LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/HexColors" "$PODS_CONFIGURATION_BUILD_DIR/PPTopMostController" "$PODS_CONFIGURATION_BUILD_DIR/RMessage"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HexColors" -isystem "${PODS_ROOT}/Headers/Public/PPTopMostController" -isystem "${PODS_ROOT}/Headers/Public/RMessage" -isystem "${PODS_ROOT}/Headers/Public/Reveal-SDK"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"HexColors" -l"PPTopMostController" -l"RMessage" -l"z" -framework "CFNetwork" -framework "CoreGraphics" -framework "QuartzCore" -framework "RevealServer"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/PPTopMostController" "${PODS_ROOT}/Headers/Public/RMessage" "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HexColors" "${PODS_CONFIGURATION_BUILD_DIR}/PPTopMostController" "${PODS_CONFIGURATION_BUILD_DIR}/RMessage"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HexColors" -isystem "${PODS_ROOT}/Headers/Public/PPTopMostController" -isystem "${PODS_ROOT}/Headers/Public/RMessage" -isystem "${PODS_ROOT}/Headers/Public/Reveal-iOS-SDK"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"HexColors" -l"PPTopMostController" -l"RMessage" -l"z" -framework "CFNetwork" -framework "CoreGraphics" -framework "QuartzCore" -framework "Reveal"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
