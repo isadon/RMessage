@@ -1064,6 +1064,10 @@ static NSMutableDictionary *globalDesignDictionary;
   [self layoutIfNeeded];
 
   UINavigationController *messageNavigationController = [self rootNavigationController];
+ 
+  if ([self.superview.constraints containsObject:self.topToVCFinalConstraint]) {
+      [self.superview removeConstraint:self.topToVCFinalConstraint];
+  }
 
   if (messageNavigationController) {
     BOOL messageNavigationBarHidden =
@@ -1095,6 +1099,8 @@ static NSMutableDictionary *globalDesignDictionary;
     }
     self.topToVCFinalConstraint.constant = - [self customVerticalOffset];
   }
+    
+  [self.superview addConstraint:self.topToVCFinalConstraint];
 }
 
 - (void)animateMessage
