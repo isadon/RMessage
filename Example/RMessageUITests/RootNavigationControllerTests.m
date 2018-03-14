@@ -6,15 +6,16 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "UITestHelpers.h"
 
 // Check for message y position to hundredths place
 static const int kMsgYPositionScale = 2;
 
-@interface RMessageUITests : XCTestCase
+@interface RootNavigationControllerTests : XCTestCase
 
 @end
 
-@implementation RMessageUITests {
+@implementation RootNavigationControllerTests {
   XCUIApplication *app;
   XCUIElement *navBarElement;
   XCUIElement *windowElement;
@@ -37,15 +38,6 @@ static const int kMsgYPositionScale = 2;
 
   notHittablePredicate = [NSPredicate predicateWithFormat:@"hittable == FALSE"];
   hittablePredicate = [NSPredicate predicateWithFormat:@"hittable == TRUE"];
-}
-
-// Returns true or false if the floats are equal to each other after truncating all numbers
-// after the scale decimal places
-BOOL validateFloatsToScale(CGFloat f1, CGFloat f2, int scale) {
-  int truncFactor = pow(10, scale);
-  CGFloat tFloat1 = truncf(f1 * truncFactor) / truncFactor;
-  CGFloat tFloat2 = truncf(f2 * truncFactor) / truncFactor;
-  return tFloat1 == tFloat2;
 }
 
 - (void)showMessageFromTopByPressingButtonWithName:(NSString *)buttonName
