@@ -1039,6 +1039,10 @@ static NSMutableDictionary *globalDesignDictionary;
   [self layoutIfNeeded];
 
   UINavigationController *messageNavigationController = [self rootNavigationController];
+ 
+  if ([self.superview.constraints containsObject:self.topToVCFinalConstraint]) {
+      [self.superview removeConstraint:self.topToVCFinalConstraint];
+  }
 
   if (messageNavigationController) {
     BOOL messageNavigationBarHidden =
@@ -1064,12 +1068,14 @@ static NSMutableDictionary *globalDesignDictionary;
     }
   } else {
     if (self.messagePosition == RMessagePositionBottom) {
-      [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
     } else {
       self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
     }
     self.topToVCFinalConstraint.constant = - [self customVerticalOffset];
   }
+    
+  [self.superview addConstraint:self.topToVCFinalConstraint];
 }
 
 - (void)animateMessage
