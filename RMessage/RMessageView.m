@@ -212,6 +212,26 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
++ (void)activateConstraint:(NSLayoutConstraint *)constraint inSuperview:(UIView *)superview
+{
+  if (!constraint || !superview) return;
+  if (@available(iOS 8.0, *)) {
+    constraint.active = YES;
+  } else {
+    [superview addConstraint:constraint];
+  }
+}
+
++ (void)deActivateConstraint:(NSLayoutConstraint *)constraint inSuperview:(UIView *)superview
+{
+  if (!constraint || !superview) return;
+  if (@available(iOS 8.0, *)) {
+    constraint.active = NO;
+  } else {
+    [superview removeConstraint:constraint];
+  }
+}
+
 #pragma mark - Instance Methods
 
 - (instancetype)initWithDelegate:(id<RMessageViewProtocol>)delegate
@@ -263,6 +283,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].firstObject;
   if (self) {
+    self.accessibilityIdentifier = @"RMessageView";
     _delegate = delegate;
     _title = title;
     _subtitle = subtitle;
@@ -484,7 +505,11 @@ static NSMutableDictionary *globalDesignDictionary;
   [[self class]
     activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
-  if (self.shouldBlurBackground) [self setupBlurBackground];
+  if (self.shouldBlurBackground) {
+    if (@available(iOS 8.0, *)) {
+      [self setupBlurBackground];
+    }
+  }
 }
 
 - (void)setupBackgroundImageViewWithImage:(UIImage *)image
@@ -1064,7 +1089,7 @@ static NSMutableDictionary *globalDesignDictionary;
     }
   } else {
     if (self.messagePosition == RMessagePositionBottom) {
-      [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
     } else {
       self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
     }
@@ -1084,9 +1109,9 @@ static NSMutableDictionary *globalDesignDictionary;
                         options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState |
      UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                       self.topToVCLayoutConstraint.active = NO;
+                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCFinalConstraint;
-                       self.topToVCLayoutConstraint.active = YES;
+                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.isPresenting = YES;
                        if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
                          [self.delegate messageViewIsPresenting:self];
@@ -1121,9 +1146,9 @@ static NSMutableDictionary *globalDesignDictionary;
     [UIView animateWithDuration:kRMessageAnimationDuration
                      animations:^{
                        if (!self.shouldBlurBackground) self.alpha = 0.f;
-                       self.topToVCLayoutConstraint.active = NO;
+                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCStartingConstraint;
-                       self.topToVCLayoutConstraint.active = YES;
+                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        [self.superview layoutIfNeeded];
                      }
                      completion:^(BOOL finished) {

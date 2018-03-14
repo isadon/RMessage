@@ -7,6 +7,9 @@
 
 #import <XCTest/XCTest.h>
 
+// Check for message y position to hundredths place
+static const int kMsgYPositionScale = 2;
+
 @interface RMessageUITests : XCTestCase
 
 @end
@@ -36,6 +39,15 @@
   hittablePredicate = [NSPredicate predicateWithFormat:@"hittable == TRUE"];
 }
 
+// Returns true or false if the floats are equal to each other after truncating all numbers
+// after the scale decimal places
+BOOL validateFloatsToScale(CGFloat f1, CGFloat f2, int scale) {
+  int truncFactor = pow(10, scale);
+  CGFloat tFloat1 = truncf(f1 * truncFactor) / truncFactor;
+  CGFloat tFloat2 = truncf(f2 * truncFactor) / truncFactor;
+  return tFloat1 == tFloat2;
+}
+
 - (void)showMessageFromTopByPressingButtonWithName:(NSString *)buttonName
                                       hidingNavBar:(BOOL)hideNavBar
                                         timeToShow:(NSTimeInterval)displayTimeout
@@ -46,13 +58,16 @@
   };
 
   [app.buttons[buttonName] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMessagePosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
+  CGFloat expectedMsgYPosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
+
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"%@ message failed to display", buttonName);
-  XCTAssert(displayedMessage.frame.origin.y == expectedMessagePosition, "%@ message displayed in the wrong position",
-            buttonName);
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                            expectedMsgYPosition, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "%@ message displayed in the wrong position", buttonName);
 
   XCTestExpectation *expectation = [self expectationForPredicate:notHittablePredicate
                                              evaluatedWithObject:displayedMessage
@@ -69,12 +84,16 @@
   };
 
   [app.buttons[@"Bottom"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
+
+  CGFloat expectedMsgYPosition = mainWindowFrame.size.height - displayedMessage.frame.size.height;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"Bottom message failed to display");
-  XCTAssert(displayedMessage.frame.origin.y == mainWindowFrame.size.height - displayedMessage.frame.size.height,
-            "Bottom message displayed in the wrong position");
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                            expectedMsgYPosition, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "Bottom message displayed in the wrong position");
 
   XCTestExpectation *expectation = [self expectationForPredicate:notHittablePredicate
                                              evaluatedWithObject:displayedMessage
@@ -88,12 +107,15 @@
     [app.buttons[@"Toggle NavBar"] tap];
   };
   [app.buttons[@"Endless"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMessagePosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
+  int expectedMsgYPosition = hideNavBar ? 0 : navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"Endless message failed to display");
-  XCTAssert(displayedMessage.frame.origin.y == expectedMessagePosition, "Endless message displayed in the wrong position");
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                           expectedMsgYPosition, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "Endless message displayed in the wrong position");
   sleep(20);
   XCTAssert(displayedMessage.hittable, "Endless message no longer on screen");
 }
@@ -201,11 +223,14 @@
 - (void)testMessageOverNavBar
 {
   [app.buttons[@"Over NavBar"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Over navBar message failed to display");
-  XCTAssert(displayedMessage.frame.origin.y == 0, "Over navBar message displayed in the wrong position");
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                            0.f, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "Over navBar message displayed in the wrong position");
 
   XCTestExpectation *expectation = [self expectationForPredicate:notHittablePredicate
                                              evaluatedWithObject:displayedMessage
@@ -216,7 +241,7 @@
 - (void)testButtonMessageButtonPress
 {
   [app.buttons[@"Button"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Button message failed to display");
@@ -226,7 +251,7 @@
                                                                                   handler:nil];
   [app.buttons[@"Update"] tap];
 
-  XCUIElement *updateMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *updateMessage = app.otherElements[@"RMessageView"];
   messageDisplayed = [updateMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Update message failed to display");
 
@@ -241,12 +266,15 @@
 {
   [app.buttons[@"Endless"] tap];
 
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMessagePosition = navBarFrame.size.height + navBarFrame.origin.y;
+  int expectedMsgYPosition = navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Endless message failed to display");
-  XCTAssert(displayedMessage.frame.origin.y == expectedMessagePosition, "Endless message displayed in the wrong position");
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                            expectedMsgYPosition, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "Endless message displayed in the wrong position");
   sleep(20);
   XCTAssert(displayedMessage.hittable, "Endless message no longer on screen");
 
@@ -265,12 +293,15 @@
 - (void)testTapToDismiss
 {
   [app.buttons[@"Error"] tap];
-  XCUIElement *displayedMessage = app.otherElements[@"RMessage-View"];
+  XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMessagePosition = navBarFrame.size.height + navBarFrame.origin.y;
+  int expectedMsgYPosition = navBarFrame.size.height + navBarFrame.origin.y;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Error message failed to display");
-  XCTAssert(displayedMessage.frame.origin.y == expectedMessagePosition, "Error message displayed in the wrong position");
+
+  BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
+                                                            expectedMsgYPosition, kMsgYPositionScale);
+  XCTAssert(expectedMessagePositionValid, "Error message displayed in the wrong position");
 
   [displayedMessage tap];
   XCTestExpectation *expectation = [self expectationForPredicate:notHittablePredicate

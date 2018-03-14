@@ -45,8 +45,8 @@
 - (IBAction)didTapError:(id)sender
 {
   [RMessage
-    showNotificationWithTitle:NSLocalizedString(@"Something failed", nil)
-                     subtitle:NSLocalizedString(@"The internet connection seems to be down. Please check it!", nil)
+    showNotificationWithTitle:@"Something failed"
+                     subtitle:@"The internet connection seems to be down. Please check it!"
                          type:RMessageTypeError
                customTypeName:nil
                      callback:nil];
@@ -54,8 +54,8 @@
 
 - (IBAction)didTapWarning:(id)sender
 {
-  [RMessage showNotificationWithTitle:NSLocalizedString(@"Some random warning", nil)
-                             subtitle:NSLocalizedString(@"Look out! Something is happening there!", nil)
+  [RMessage showNotificationWithTitle:@"Some random warning"
+                             subtitle:@"Look out! Something is happening there!"
                                  type:RMessageTypeWarning
                        customTypeName:nil
                              callback:nil];
@@ -63,8 +63,8 @@
 
 - (IBAction)didTapMessage:(id)sender
 {
-  [RMessage showNotificationWithTitle:NSLocalizedString(@"Tell the user something", nil)
-                             subtitle:NSLocalizedString(@"This is a neutral notification!", nil)
+  [RMessage showNotificationWithTitle:@"Tell the user something"
+                             subtitle:@"This is a neutral notification!"
                                  type:RMessageTypeNormal
                        customTypeName:nil
                              callback:nil];
@@ -72,8 +72,8 @@
 
 - (IBAction)didTapSuccess:(id)sender
 {
-  [RMessage showNotificationWithTitle:NSLocalizedString(@"Success", nil)
-                             subtitle:NSLocalizedString(@"Some task was successfully completed!", nil)
+  [RMessage showNotificationWithTitle:@"Success"
+                             subtitle:@"Some task was successfully completed!"
                                  type:RMessageTypeSuccess
                        customTypeName:nil
                              callback:nil];
@@ -82,17 +82,17 @@
 - (IBAction)didTapButton:(id)sender
 {
   [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"New version available", nil)
-                                    subtitle:NSLocalizedString(@"Please update our app. We would be very thankful", nil)
+                                       title:@"New version available"
+                                    subtitle:@"Please update our app. We would be very thankful"
                                    iconImage:nil
                                         type:RMessageTypeNormal
                               customTypeName:nil
                                     duration:RMessageDurationAutomatic
                                     callback:nil
-                                 buttonTitle:NSLocalizedString(@"Update", nil)
+                                 buttonTitle:@"Update"
                               buttonCallback:^{
                                 [RMessage dismissActiveNotification];
-                                [RMessage showNotificationWithTitle:NSLocalizedString(@"Thanks for updating", nil)
+                                [RMessage showNotificationWithTitle:@"Thanks for updating"
                                                                type:RMessageTypeSuccess
                                                      customTypeName:nil
                                                            callback:nil];
@@ -104,8 +104,8 @@
 - (IBAction)didTapCustomImage:(id)sender
 {
   [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"Custom image", nil)
-                                    subtitle:NSLocalizedString(@"This uses an image you can define", nil)
+                                       title:@"Custom image"
+                                    subtitle:@"This uses an image you can define"
                                    iconImage:[UIImage imageNamed:@"NotificationButtonBackground.png"]
                                         type:RMessageTypeNormal
                               customTypeName:nil
@@ -120,11 +120,10 @@
 - (IBAction)didTapEndless:(id)sender
 {
   [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"Endless", nil)
-                                    subtitle:NSLocalizedString(@"This message can not be dismissed and will not be "
-                                                               @"hidden automatically. Tap the 'Dismiss' button "
-                                                               @"to dismiss the currently shown message",
-                                                               nil)
+                                       title:@"Endless"
+                                    subtitle:@"This message can not be dismissed and will not be "
+                                             @"hidden automatically. Tap the 'Dismiss' button "
+                                             @"to dismiss the currently shown message"
                                    iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
@@ -141,10 +140,9 @@
 - (IBAction)didTapLong:(id)sender
 {
   [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"Long", nil)
-                                    subtitle:NSLocalizedString(@"This message is displayed 10 seconds "
-                                                               @"instead of the calculated value",
-                                                               nil)
+                                       title:@"Long"
+                                    subtitle:@"This message is displayed 10 seconds "
+                                             @"instead of the calculated value"
                                    iconImage:nil
                                         type:RMessageTypeWarning
                               customTypeName:nil
@@ -161,8 +159,8 @@
 - (IBAction)didTapBottom:(id)sender
 {
   [RMessage showNotificationInViewController:self
-                                       title:NSLocalizedString(@"Hu!", nil)
-                                    subtitle:NSLocalizedString(@"I'm down here :)", nil)
+                                       title:@"Hi!"
+                                    subtitle:@"I'm down here :)"
                                    iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
@@ -177,21 +175,20 @@
 - (IBAction)didTapText:(id)sender
 {
   [RMessage
-    showNotificationWithTitle:NSLocalizedString(@"With 'Text' I meant a long text, so here it is", nil)
-                     subtitle:NSLocalizedString(@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed "
-                                                @"diam nonumy eirmod tempor invidunt ut labore et dolore magna "
-                                                @"aliquyam erat, sed diam voluptua. At vero eos et accusam et "
-                                                @"justo duo dolores et ea rebum. Stet clita kasd gubergren, no "
-                                                @"sea takimata sanctus.At vero eos et accusam et justo duo "
-                                                @"dolores et ea rebum. Stet clita kasd gubergren, no sea takimata "
-                                                @"sanctus.Lorem ipsum dolor sit amet, consetetur sadipscing "
-                                                @"elitr, sed diam nonumy eirmod tempor invidunt ut labore et "
-                                                @"dolore magna aliquyam erat, sed diam voluptua. At vero eos et "
-                                                @"accusam et justo duo dolores et ea rebum. Stet clita kasd "
-                                                @"gubergren, no sea takimata sanctus.At vero eos et accusam et "
-                                                @"justo duo dolores et ea rebum. Stet clita kasd gubergren, no "
-                                                @"sea takimata sanctus.",
-                                                nil)
+    showNotificationWithTitle:@"With 'Text' I meant a long text, so here it is"
+                     subtitle:@"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed "
+                              @"diam nonumy eirmod tempor invidunt ut labore et dolore magna "
+                              @"aliquyam erat, sed diam voluptua. At vero eos et accusam et "
+                              @"justo duo dolores et ea rebum. Stet clita kasd gubergren, no "
+                              @"sea takimata sanctus.At vero eos et accusam et justo duo "
+                              @"dolores et ea rebum. Stet clita kasd gubergren, no sea takimata "
+                              @"sanctus.Lorem ipsum dolor sit amet, consetetur sadipscing "
+                              @"elitr, sed diam nonumy eirmod tempor invidunt ut labore et "
+                              @"dolore magna aliquyam erat, sed diam voluptua. At vero eos et "
+                              @"accusam et justo duo dolores et ea rebum. Stet clita kasd "
+                              @"gubergren, no sea takimata sanctus.At vero eos et accusam et "
+                              @"justo duo dolores et ea rebum. Stet clita kasd gubergren, no "
+                              @"sea takimata sanctus."
                          type:RMessageTypeWarning
                customTypeName:nil
                      callback:nil];
@@ -201,11 +198,10 @@
 {
   // This is an example on how to apply a custom design
   [RMessage addDesignsFromFileWithName:@"AlternativeDesigns" inBundle:[NSBundle mainBundle]];
-  [RMessage showNotificationWithTitle:NSLocalizedString(@"Added custom design file", nil)
-                             subtitle:NSLocalizedString(@"This background is blue while the "
-                                                        @"subtitles are white. Yes this is still "
-                                                        @"an alternate error design :)",
-                                                        nil)
+  [RMessage showNotificationWithTitle:@"Added custom design file"
+                             subtitle:@"This background is blue while the "
+                                      @"subtitles are white. Yes this is still "
+                                      @"an alternate error design :)"
                                  type:RMessageTypeCustom
                        customTypeName:@"alternate-error"
                              callback:nil];
@@ -245,8 +241,8 @@
   }
 
   [RMessage showNotificationInViewController:self.navigationController
-                                       title:NSLocalizedString(@"Whoa!", nil)
-                                    subtitle:NSLocalizedString(@"Over the Navigation Bar!", nil)
+                                       title:@"Whoa!"
+                                    subtitle:@"Over the Navigation Bar!"
                                    iconImage:nil
                                         type:RMessageTypeSuccess
                               customTypeName:nil
