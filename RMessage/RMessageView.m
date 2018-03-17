@@ -28,6 +28,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleVerticalSpacingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTrailingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewTopConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleSubtitleContainerViewBottomConstraint;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleLabelLeadingConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *titleLabelTrailingConstraint;
@@ -1011,7 +1012,14 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)layoutMessageForPresentation
 {
   _titleSubtitleContainerViewTopConstraint.constant = 10.f;
-  CGFloat statusBarHeight = statusBarHeight = [self.viewController prefersStatusBarHidden] ? 0.f : ([UIApplication sharedApplication].statusBarFrame.size.height);
+
+  CGFloat statusBarHeight = self.viewController.prefersStatusBarHidden ? 0.f :
+  ([UIApplication sharedApplication].statusBarFrame.size.height);
+  CGFloat bottomOffset = 0.f;
+  if (@available(iOS 11.0, *)) {
+    statusBarHeight = self.viewController.view.safeAreaInsets.top - 10.f;
+    bottomOffset = self.viewController.view.safeAreaInsets.bottom - 10.f;
+  }
 
   UINavigationController *messageNavigationController = [self rootNavigationController];
 
@@ -1031,6 +1039,9 @@ static NSMutableDictionary *globalDesignDictionary;
     } else {
       self.titleSubtitleContainerViewTopConstraint.constant = 10.f + statusBarHeight;
     }
+  } else {
+    // Message position is RMessagePositionBottom
+    self.titleSubtitleContainerViewBottomConstraint.constant = 10.f + bottomOffset;
   }
 
   if (!self.superview) [self.viewController.view addSubview:self];

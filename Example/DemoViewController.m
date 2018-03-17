@@ -24,6 +24,12 @@
   //[[RMessageView appearance] setTitleSubtitleLabelsSizeToFit:YES];
 }
 
+// Uncomment to test hidden status bar functionality
+//- (BOOL)prefersStatusBarHidden
+//{
+//  return YES;
+//}
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
   [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
