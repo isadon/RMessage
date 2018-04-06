@@ -87,6 +87,11 @@ static NSMutableDictionary *globalDesignDictionary;
  called multiple times when they need not be. See: http://www.openradar.me/28827675 */
 @property (nonatomic, assign) BOOL labelsHaveBeenSizedToFit;
 
+/* The amount of vertical padding / height to add to RMessage's height so as to perform a spring animation without
+   visually showing an empty gap due to the spring animation overbounce. This value changes dynamically due to
+   iOS changing the overbounce dynamically according to view size. */
+@property (nonatomic, assign) CGFloat springAnimationPadding;
+
 @end
 
 @implementation RMessageView
@@ -312,6 +317,7 @@ static NSMutableDictionary *globalDesignDictionary;
     _dismissCompletionCallback = dismissCompletionCallback;
     _titleSubtitleLabelsSizeToFit = NO;
     _dismissingEnabled = dismissingEnabled;
+    _springAnimationPadding = 10.f;
 
     NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
     if (designError) return nil;
@@ -488,6 +494,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
   // Prepare the starting y position constraints
   [self setupStartingAnimationConstraints];
+  [self accommodateLayoutForSpringAnimationPadding];
   [self setupFinalAnimationConstraints];
 
   NSLayoutConstraint *centerXConstraint = [NSLayoutConstraint constraintWithItem:self
@@ -1072,13 +1079,11 @@ static NSMutableDictionary *globalDesignDictionary;
     // Message position is RMessagePositionBottom
     self.titleSubtitleContainerViewBottomConstraint.constant = 10.f + bottomOffset;
   }
-
   if (!self.superview) [self.viewController.view addSubview:self];
 }
 
 - (void)setupStartingAnimationConstraints
 {
-  [self layoutIfNeeded];
   if (self.messagePosition != RMessagePositionBottom) {
     self.topToVCLayoutConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                 attribute:NSLayoutAttributeBottom
@@ -1111,29 +1116,77 @@ static NSMutableDictionary *globalDesignDictionary;
 
     if (self.messagePosition != RMessagePositionBottom) {
       if (!messageNavigationBarHidden && self.messagePosition == RMessagePositionTop) {
-        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:messageNavigationController.navigationBar attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
+        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                   attribute:NSLayoutAttributeTop
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:messageNavigationController.navigationBar
+                                                                   attribute:NSLayoutAttributeBottom
+                                                                  multiplier:1.f
+                                                                    constant:-_springAnimationPadding];
       } else {
         /* Navigation bar hidden or being asked to present as nav bar overlay, so present above status bar and/or
          navigation bar */
-        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem: self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
+        self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                   attribute:NSLayoutAttributeTop
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem: self.superview
+                                                                   attribute:NSLayoutAttributeTop
+                                                                  multiplier:1.f
+                                                                    constant:-_springAnimationPadding];
       }
-      self.topToVCFinalConstraint.constant = [self customVerticalOffset];
+      self.topToVCFinalConstraint.constant += [self customVerticalOffset];
     } else {
       CGFloat offset = -[self customVerticalOffset];
       if (!messageNavigationController.isToolbarHidden) {
         // If tool bar present animate above toolbar
         offset -= messageNavigationController.toolbar.bounds.size.height;
       }
-      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
-      self.topToVCFinalConstraint.constant = offset;
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.superview
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.f
+                                                                  constant:_springAnimationPadding];
+      self.topToVCFinalConstraint.constant += offset;
     }
   } else {
     if (self.messagePosition == RMessagePositionBottom) {
-      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.f constant:0.f];
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.superview
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.f
+                                                                  constant:_springAnimationPadding];
     } else {
-      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.f constant:0.f];
+      self.topToVCFinalConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.superview
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.f
+                                                                  constant:-_springAnimationPadding];
     }
-    self.topToVCFinalConstraint.constant = - [self customVerticalOffset];
+    self.topToVCFinalConstraint.constant += - [self customVerticalOffset];
+  }
+}
+
+- (void)accommodateLayoutForSpringAnimationPadding
+{
+  [self.titleLabel sizeToFit];
+  [self.subtitleLabel sizeToFit];
+
+  // Base the spring animation padding on the estimated view height.
+  // Note: For some reason we can't get a good view bounds sizing in this method until after we set the two properties
+  // this method sets. Given the chicken/egg problem this presents we use an estimated view height for the padding
+  // which is fine for these purposes.
+  CGFloat estimatedHeight = self.titleLabel.bounds.size.height + self.subtitleLabel.bounds.size.height + 5.f + 20.f;
+  _springAnimationPadding = ceilf(estimatedHeight / 120) * 10;
+  if (self.messagePosition != RMessagePositionBottom) {
+    self.titleSubtitleContainerViewTopConstraint.constant += _springAnimationPadding;
+  } else {
+    self.titleSubtitleContainerViewBottomConstraint.constant += _springAnimationPadding;
   }
 }
 
