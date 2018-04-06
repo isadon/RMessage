@@ -5,6 +5,7 @@
   when blurBackground key is set to enabled. Numeric: [0, 1.0].
 * **opacity**: Opacity of the RMessage. Numeric: [0, 1.0].
 * **iconImage**: Filename of image (in app bundle) to use as an icon on the left side of the RMessage. String.
+* **iconImageTintColor**: Set icon image tint color for icon images defined to be template images in Xcode. Does nothing for icon images that are not template images. String: [#000000, #FFFFFF].
 * **iconImageRelativeCornerRadius**: Corner radius percentage relative to icon image to apply to icon image. For example 0.5 (use 50% of icon image width as corner radius) would mask the icon image to always be a circle. Numeric: [0, 1.0].
 * **backgroundImage**: Filename of image (in app bundle) to use as a background image for the RMessage. String.
 * **titleFontName**: Name of font to use for title text. String.

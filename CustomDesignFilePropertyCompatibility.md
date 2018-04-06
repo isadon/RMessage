@@ -4,6 +4,7 @@
 * **backgroundColorAlpha**: 2.1.3 - Latest
 * **opacity**: Initial Release - Latest
 * **iconImage**: Initial Release - Latest
+* **iconImageTintColor**: 2.3.0 - Latest
 * **iconImageRelativeCornerRadius**: 2.1.0 - Latest
 * **backgroundImage**: Initial Release - Latest
 * **titleFontName**: Initial Release - Latest
