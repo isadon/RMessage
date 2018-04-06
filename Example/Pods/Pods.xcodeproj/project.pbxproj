@@ -77,7 +77,6 @@
 		16294B65E0E6878402D1208B9612136C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		175B063B089E2471049C486382654F1E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		19F099D43D52E4B48157E0DF60AD7117 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+PPTopMostController.m"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
-		1B9BBAA82C32FE83B6DDD7029AE4401F /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
 		1F9E4D8674A895EC3328E6101F320DCF /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessageView.h; path = RMessage/RMessageView.h; sourceTree = "<group>"; };
 		2041A2B495A81800E501CFD8C63D2658 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PPTopMostController.m"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
 		20EC4BB0656706DD3CC177AF3BCDDE52 /* Pods-RMessageTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessageTests-dummy.m"; sourceTree = "<group>"; };
@@ -88,7 +87,6 @@
 		447048F95DA0ECC61808CE52F6447495 /* libPods-RMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RMessage.a"; path = "libPods-RMessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D2B1FA3B7B4D95E6C76FEDA84DA2E3B /* RMessage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.xcconfig; sourceTree = "<group>"; };
 		61AC6C65D027FBF198B49036ACF948FE /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PPTopMostControllerProtocol.h; path = "PPTopMostController-Files/PPTopMostControllerProtocol.h"; sourceTree = "<group>"; };
-		65D6941AEC2B1301F3BC55B541795914 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		681F1BFF659A588D766339504BC45575 /* Pods-RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessage-dummy.m"; sourceTree = "<group>"; };
 		6D334BD348008455873C8064A6CC95EC /* libPods-RMessageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RMessageTests.a"; path = "libPods-RMessageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,31 +99,25 @@
 		8BCD7F51BFC8F6856833F8D1C3119840 /* RMessage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = RMessage.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		937A81F80540FF14C9579F667BA667C5 /* Pods-RMessageTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessageTests-resources.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93A50E91247F8AB187526320DFA09140 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
-		97AD0012F4EC02F091CAB4F91ABAE418 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
-		98FB3CA4064F261F3D1C4FCD4A76BBFC /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
 		9F03B2E1559F918F66701D1DCC94FD19 /* Pods-RMessageTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessageTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A16C710ABDDFD77AB2AD45CFA833AB1F /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
 		A2C2D552F5426CCF30776154DEDAF3A3 /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRMessage.a; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F5C52683D3EAD531AE4BC6693C5944 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
 		A9AAADC31DAD7CEDAAE259E6D4F2DC9B /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
 		B826E6160AF25E1F534391FA301E1BE8 /* Pods-RMessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C25F04E3FD2A40CC8D8CEF87B2D2C3AD /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
+		C8CA64E4EACCD288F665241D9F0B2777 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
 		CCCDD131DFFA1EE3C8329464E6108B0F /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+PPTopMostController.h"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
 		D2ABE156F2A4E02646EA39419864AA19 /* Pods-RMessage-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessage-frameworks.sh"; sourceTree = "<group>"; };
+		D5817801C78EC5F4BF5798E243673F2E /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
 		D77002FF917B6FE5AEE27744FC964505 /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
 		D950FA16D074793BD85A5692EADBB03E /* Pods-RMessage-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessage-resources.sh"; sourceTree = "<group>"; };
-		DA4EF5AFCB9903B4794FC3E69F80489B /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
-		DAF7BDCB4BD081582A8A8A7269DA69A4 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
 		E014F38B46C156F40B8EAFCA14472DEB /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessage.h; path = RMessage/RMessage.h; sourceTree = "<group>"; };
 		E42C01489A2564AE0AC3F8FF9CE61333 /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessage.m; path = RMessage/RMessage.m; sourceTree = "<group>"; };
 		E4607776C611F5F7DD3F89E27824C079 /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessageView.m; path = RMessage/RMessageView.m; sourceTree = "<group>"; };
 		E81A244A5609BE82217426B27A6C641C /* Pods-RMessageTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessageTests-frameworks.sh"; sourceTree = "<group>"; };
-		EF90C33C0F9C5DE3F29FE64BE2CA4E4B /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
 		F0B5B3B7A5CDC706C612753FA76E274F /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
 		F1CDA411A790B6D44191E02F80DA4869 /* libPPTopMostController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPPTopMostController.a; path = libPPTopMostController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4714A417A44477241AB89E12F840D96 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
-		F69B4262C58C8769735C9141F626BBBB /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
 		FAAF4337A577CFDF926D934B52FA3BA9 /* PPTopMostController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPTopMostController-prefix.pch"; sourceTree = "<group>"; };
 		FBD3C98132824987DD75469A3C9E9F34 /* PPTopMostController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +166,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D0AF4C0BB50AC257242E00623D9403C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8CA64E4EACCD288F665241D9F0B2777 /* RMessageView.xib */,
+			);
+			name = Resources;
+			path = RMessage/Resources;
+			sourceTree = "<group>";
+		};
 		0FA35E62F9F228D2472E4C69ECB2E44D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +228,15 @@
 			path = "../Target Support Files/PPTopMostController";
 			sourceTree = "<group>";
 		};
+		4987663CFE8B757F87D654BD292B6D46 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D5817801C78EC5F4BF5798E243673F2E /* RMessageDefaultDesign.json */,
+			);
+			name = Assets;
+			path = RMessage/Assets;
+			sourceTree = "<group>";
+		};
 		5581646BEF3D65C166E808D902D9CC80 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,23 +244,6 @@
 				8D283D523026CB3FC5AD4603C618FE30 /* Pods-RMessageTests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		630EBBE81550D84CADE8F0AACAA98B4F /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				98FB3CA4064F261F3D1C4FCD4A76BBFC /* NotificationBackgroundErrorIcon.png */,
-				EF90C33C0F9C5DE3F29FE64BE2CA4E4B /* NotificationBackgroundErrorIcon@2x.png */,
-				97AD0012F4EC02F091CAB4F91ABAE418 /* NotificationBackgroundSuccessIcon.png */,
-				F69B4262C58C8769735C9141F626BBBB /* NotificationBackgroundSuccessIcon@2x.png */,
-				93A50E91247F8AB187526320DFA09140 /* NotificationBackgroundWarningIcon.png */,
-				1B9BBAA82C32FE83B6DDD7029AE4401F /* NotificationBackgroundWarningIcon@2x.png */,
-				DAF7BDCB4BD081582A8A8A7269DA69A4 /* NotificationButtonBackground.png */,
-				65D6941AEC2B1301F3BC55B541795914 /* NotificationButtonBackground@2x.png */,
-				A16C710ABDDFD77AB2AD45CFA833AB1F /* RMessageDefaultDesign.json */,
-			);
-			name = Assets;
-			path = RMessage/Assets;
 			sourceTree = "<group>";
 		};
 		79ED0FAAB6F1A391126FEBBE1EF6E0CD /* Support Files */ = {
@@ -262,15 +255,6 @@
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/RMessage";
-			sourceTree = "<group>";
-		};
-		7C1D7304F92DF8C987ED368155265DF6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DA4EF5AFCB9903B4794FC3E69F80489B /* RMessageView.xib */,
-			);
-			name = Resources;
-			path = RMessage/Resources;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -331,6 +315,15 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
+		B26D7C6591BB117CE3E1784C101481EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4987663CFE8B757F87D654BD292B6D46 /* Assets */,
+				0D0AF4C0BB50AC257242E00623D9403C /* Resources */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,7 +352,7 @@
 				1F9E4D8674A895EC3328E6101F320DCF /* RMessageView.h */,
 				E4607776C611F5F7DD3F89E27824C079 /* RMessageView.m */,
 				A2E531831E306413E1404246C007B33E /* Pod */,
-				D944F0583FF39AA8E35FBF68D43C4181 /* Resources */,
+				B26D7C6591BB117CE3E1784C101481EA /* Resources */,
 				79ED0FAAB6F1A391126FEBBE1EF6E0CD /* Support Files */,
 			);
 			name = RMessage;
@@ -372,15 +365,6 @@
 				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		D944F0583FF39AA8E35FBF68D43C4181 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				630EBBE81550D84CADE8F0AACAA98B4F /* Assets */,
-				7C1D7304F92DF8C987ED368155265DF6 /* Resources */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		F25D942FDDA9D45DC6E4FD4180C247DE /* PPTopMostController */ = {
