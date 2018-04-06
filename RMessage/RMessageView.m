@@ -921,6 +921,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupIconImageView
 {
+  if (_messageViewDesignDictionary[@"iconImageTintColor"] &&
+      [_messageViewDesignDictionary[@"iconImageTintColor"] isKindOfClass:[NSString class]]) {
+    self.iconImageView.tintColor = [[self class]
+                                    colorForString:_messageViewDesignDictionary[@"iconImageTintColor"]];
+  }
+
   self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
   self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
 
