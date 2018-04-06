@@ -9,6 +9,7 @@
 #import "RMessageView.h"
 #import "HexColors.h"
 #import "UIViewController+PPTopMostController.h"
+#import <sys/utsname.h>
 
 static NSString *const RDesignFileName = @"RMessageDefaultDesign";
 
@@ -231,6 +232,13 @@ static NSMutableDictionary *globalDesignDictionary;
   } else {
     [superview removeConstraint:constraint];
   }
+}
+
++ (NSString *)deviceName
+{
+  struct utsname systemInfo;
+  uname(&systemInfo);
+  return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - Instance Methods
@@ -1023,8 +1031,23 @@ static NSMutableDictionary *globalDesignDictionary;
   ([UIApplication sharedApplication].statusBarFrame.size.height);
   CGFloat bottomOffset = 0.f;
   if (@available(iOS 11.0, *)) {
-    statusBarHeight = self.viewController.view.safeAreaInsets.top - 10.f;
-    bottomOffset = self.viewController.view.safeAreaInsets.bottom - 10.f;
+    statusBarHeight = self.viewController.view.safeAreaInsets.top;
+    bottomOffset = self.viewController.view.safeAreaInsets.bottom;
+
+    // Tweak the position to reduce what looks like visual overpadding on all devices with a notch.
+    // Unfortunately because we can't tell what device is running in the simulator this visual tweak
+    // will not show for notch devices running in the simulator unless you add the @"x86_64" or @"x86_32"
+    // value during simulator testing of notch devices.
+//    NSArray *notchDevices = @[@"iPhone10,3", @"iPhone10,6", @"x86_64"];
+    NSArray *notchDevices = @[@"iPhone10,3", @"iPhone10,6"];
+    NSString *deviceName = [[self class] deviceName];
+    for (NSString *notchDevice in notchDevices) {
+      if ([notchDevice isEqualToString:deviceName]) {
+        statusBarHeight = self.viewController.view.safeAreaInsets.top - 10.f;
+        bottomOffset = self.viewController.view.safeAreaInsets.bottom - 10.f;
+        break;
+      }
+    }
   }
 
   UINavigationController *messageNavigationController = [self rootNavigationController];
