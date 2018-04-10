@@ -42,7 +42,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, strong) UIImage *iconImage;
 
 /** Contains the appropriate design dictionary for the specified message view type */
-@property (nonatomic, strong) NSDictionary *messageViewDesignDictionary;
+@property (nonatomic, strong) NSDictionary *designDictionary;
 
 /** The displayed title of this message */
 @property (nonatomic, strong) NSString *title;
@@ -462,8 +462,8 @@ static NSMutableDictionary *globalDesignDictionary;
     break;
   }
 
-  _messageViewDesignDictionary = globalDesignDictionary[messageTypeDesignString];
-  if (!_messageViewDesignDictionary) {
+  _designDictionary = globalDesignDictionary[messageTypeDesignString];
+  if (!_designDictionary) {
     return
       [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
                           code:0
@@ -661,36 +661,36 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupImagesAndBackground
 {
   UIColor *backgroundColor;
-  if (_messageViewDesignDictionary[@"backgroundColor"] && _messageViewDesignDictionary[@"backgroundColorAlpha"]) {
-    backgroundColor = [[self class] colorForString:_messageViewDesignDictionary[@"backgroundColor"]
-                                     alpha:[_messageViewDesignDictionary[@"backgroundColorAlpha"] floatValue]];
-  } else if (_messageViewDesignDictionary[@"backgroundColor"]) {
-    backgroundColor = [[self class] colorForString:_messageViewDesignDictionary[@"backgroundColor"]];
+  if (_designDictionary[@"backgroundColor"] && _designDictionary[@"backgroundColorAlpha"]) {
+    backgroundColor = [[self class] colorForString:_designDictionary[@"backgroundColor"]
+                                     alpha:[_designDictionary[@"backgroundColorAlpha"] floatValue]];
+  } else if (_designDictionary[@"backgroundColor"]) {
+    backgroundColor = [[self class] colorForString:_designDictionary[@"backgroundColor"]];
   }
 
   if (backgroundColor) self.backgroundColor = backgroundColor;
-  if (_messageViewDesignDictionary[@"opacity"]) {
-    self.messageOpacity = [_messageViewDesignDictionary[@"opacity"] floatValue];
+  if (_designDictionary[@"opacity"]) {
+    self.messageOpacity = [_designDictionary[@"opacity"] floatValue];
   }
 
-  if ([_messageViewDesignDictionary[@"blurBackground"] floatValue] == 1) {
+  if ([_designDictionary[@"blurBackground"] floatValue] == 1) {
     _shouldBlurBackground = YES;
     /* As per apple docs when using UIVisualEffectView and blurring the superview of the blur view
     must have an opacity of 1.f */
     self.messageOpacity = 1.f;
   }
 
-  if (!_iconImage && ([_messageViewDesignDictionary[@"iconImage"] length] > 0)) {
-    _iconImage = [[self class] bundledImageNamed:_messageViewDesignDictionary[@"iconImage"]];
+  if (!_iconImage && ([_designDictionary[@"iconImage"] length] > 0)) {
+    _iconImage = [[self class] bundledImageNamed:_designDictionary[@"iconImage"]];
     if (!_iconImage) {
-      _iconImage = [UIImage imageNamed:_messageViewDesignDictionary[@"iconImage"]];
+      _iconImage = [UIImage imageNamed:_designDictionary[@"iconImage"]];
     }
   }
 
   if (_iconImage) {
     _iconImageView = [[UIImageView alloc] initWithImage:_iconImage];
-    if (_messageViewDesignDictionary[@"iconImageRelativeCornerRadius"]) {
-      self.iconRelativeCornerRadius = [_messageViewDesignDictionary[@"iconImageRelativeCornerRadius"] floatValue];
+    if (_designDictionary[@"iconImageRelativeCornerRadius"]) {
+      self.iconRelativeCornerRadius = [_designDictionary[@"iconImageRelativeCornerRadius"] floatValue];
       _iconImageView.clipsToBounds = YES;
     } else {
       self.iconRelativeCornerRadius = 0.f;
@@ -700,7 +700,7 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   UIImage *backgroundImage =
-    [[self class] bundledImageNamed:_messageViewDesignDictionary[@"backgroundImage"]];
+    [[self class] bundledImageNamed:_designDictionary[@"backgroundImage"]];
   if (backgroundImage) {
     backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
                                                       resizingMode:UIImageResizingModeStretch];
@@ -717,24 +717,24 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupTitleLabel
 {
-  CGFloat titleFontSize = [_messageViewDesignDictionary[@"titleFontSize"] floatValue];
-  NSString *titleFontName = _messageViewDesignDictionary[@"titleFontName"];
+  CGFloat titleFontSize = [_designDictionary[@"titleFontSize"] floatValue];
+  NSString *titleFontName = _designDictionary[@"titleFontName"];
   if (titleFontName) {
     _titleLabel.font = [UIFont fontWithName:titleFontName size:titleFontSize];
   } else if (titleFontSize) {
     _titleLabel.font = [UIFont boldSystemFontOfSize:titleFontSize];
   }
 
-  self.titleLabel.textAlignment = [self textAlignmentForString:_messageViewDesignDictionary[@"titleTextAlignment"]];
+  self.titleLabel.textAlignment = [self textAlignmentForString:_designDictionary[@"titleTextAlignment"]];
 
-  UIColor *titleTextColor = [[self class] colorForString:_messageViewDesignDictionary[@"titleTextColor"]];
+  UIColor *titleTextColor = [[self class] colorForString:_designDictionary[@"titleTextColor"]];
   _titleLabel.text = _title ? _title : @"";
   if (titleTextColor) _titleLabel.textColor = titleTextColor;
 
-  UIColor *titleShadowColor = [[self class] colorForString:_messageViewDesignDictionary[@"titleShadowColor"]];
+  UIColor *titleShadowColor = [[self class] colorForString:_designDictionary[@"titleShadowColor"]];
   if (titleShadowColor) _titleLabel.shadowColor = titleShadowColor;
-  id titleShadowOffsetX = _messageViewDesignDictionary[@"titleShadowOffsetX"];
-  id titleShadowOffsetY = _messageViewDesignDictionary[@"titleShadowOffsetY"];
+  id titleShadowOffsetX = _designDictionary[@"titleShadowOffsetX"];
+  id titleShadowOffsetY = _designDictionary[@"titleShadowOffsetY"];
   if (titleShadowOffsetX && titleShadowOffsetY) {
     _titleLabel.shadowOffset = CGSizeMake([titleShadowOffsetX floatValue], [titleShadowOffsetY floatValue]);
   }
@@ -742,15 +742,15 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupSubTitleLabel
 {
-  id subTitleFontSizeValue = _messageViewDesignDictionary[@"subTitleFontSize"];
+  id subTitleFontSizeValue = _designDictionary[@"subTitleFontSize"];
   if (!subTitleFontSizeValue) {
-    subTitleFontSizeValue = _messageViewDesignDictionary[@"subtitleFontSize"];
+    subTitleFontSizeValue = _designDictionary[@"subtitleFontSize"];
   }
 
   CGFloat subTitleFontSize = [subTitleFontSizeValue floatValue];
-  NSString *subTitleFontName = _messageViewDesignDictionary[@"subTitleFontName"];
+  NSString *subTitleFontName = _designDictionary[@"subTitleFontName"];
   if (!subTitleFontName) {
-    subTitleFontName = _messageViewDesignDictionary[@"subtitleFontName"];
+    subTitleFontName = _designDictionary[@"subtitleFontName"];
   }
 
   if (subTitleFontName) {
@@ -760,11 +760,11 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   self.subtitleLabel.textAlignment =
-    [self textAlignmentForString:_messageViewDesignDictionary[@"subtitleTextAlignment"]];
+    [self textAlignmentForString:_designDictionary[@"subtitleTextAlignment"]];
 
-  UIColor *subTitleTextColor = [[self class] colorForString:_messageViewDesignDictionary[@"subTitleTextColor"]];
+  UIColor *subTitleTextColor = [[self class] colorForString:_designDictionary[@"subTitleTextColor"]];
   if (!subTitleTextColor) {
-    subTitleTextColor = [[self class] colorForString:_messageViewDesignDictionary[@"subtitleTextColor"]];
+    subTitleTextColor = [[self class] colorForString:_designDictionary[@"subtitleTextColor"]];
   }
   if (!subTitleTextColor) {
     subTitleTextColor = _titleLabel.textColor;
@@ -773,19 +773,19 @@ static NSMutableDictionary *globalDesignDictionary;
   _subtitleLabel.text = _subtitle ? _subtitle : @"";
   if (subTitleTextColor) _subtitleLabel.textColor = subTitleTextColor;
 
-  UIColor *subTitleShadowColor = [[self class] colorForString:_messageViewDesignDictionary[@"subTitleShadowColor"]];
+  UIColor *subTitleShadowColor = [[self class] colorForString:_designDictionary[@"subTitleShadowColor"]];
   if (!subTitleShadowColor) {
-    subTitleShadowColor = [[self class] colorForString:_messageViewDesignDictionary[@"subtitleShadowColor"]];
+    subTitleShadowColor = [[self class] colorForString:_designDictionary[@"subtitleShadowColor"]];
   }
 
   if (subTitleShadowColor) _subtitleLabel.shadowColor = subTitleShadowColor;
-  id subTitleShadowOffsetX = _messageViewDesignDictionary[@"subTitleShadowOffsetX"];
-  id subTitleShadowOffsetY = _messageViewDesignDictionary[@"subTitleShadowOffsetY"];
+  id subTitleShadowOffsetX = _designDictionary[@"subTitleShadowOffsetX"];
+  id subTitleShadowOffsetY = _designDictionary[@"subTitleShadowOffsetY"];
   if (!subTitleShadowOffsetX) {
-    subTitleShadowOffsetX = _messageViewDesignDictionary[@"subtitleShadowOffsetX"];
+    subTitleShadowOffsetX = _designDictionary[@"subtitleShadowOffsetX"];
   }
   if (!subTitleShadowOffsetY) {
-    subTitleShadowOffsetY = _messageViewDesignDictionary[@"subtitleShadowOffsetY"];
+    subTitleShadowOffsetY = _designDictionary[@"subtitleShadowOffsetY"];
   }
   if (subTitleShadowOffsetX && subTitleShadowOffsetY) {
     _subtitleLabel.shadowOffset = CGSizeMake([subTitleShadowOffsetX floatValue], [subTitleShadowOffsetY floatValue]);
@@ -839,15 +839,15 @@ static NSMutableDictionary *globalDesignDictionary;
 - (void)setupButton
 {
   if (!_button) return;
-  CGFloat buttonTitleFontSize = [_messageViewDesignDictionary[@"buttonTitleFontSize"] floatValue];
-  NSString *buttonTitleFontName = _messageViewDesignDictionary[@"buttonTitleFontName"];
+  CGFloat buttonTitleFontSize = [_designDictionary[@"buttonTitleFontSize"] floatValue];
+  NSString *buttonTitleFontName = _designDictionary[@"buttonTitleFontName"];
   if (buttonTitleFontName) {
     _button.titleLabel.font = [UIFont fontWithName:buttonTitleFontName size:buttonTitleFontSize];
   } else if (buttonTitleFontSize) {
     _button.titleLabel.font = [UIFont boldSystemFontOfSize:buttonTitleFontSize];
   }
 
-  UIImage *buttonResizeableBackgroundImage = [[self class] bundledImageNamed:_messageViewDesignDictionary[@"buttonResizeableBackgroundImage"]];
+  UIImage *buttonResizeableBackgroundImage = [[self class] bundledImageNamed:_designDictionary[@"buttonResizeableBackgroundImage"]];
   if (!buttonResizeableBackgroundImage) {
     buttonResizeableBackgroundImage = [[self class] bundledImageNamed:@"NotificationButtonBackground.png"];
   }
@@ -858,22 +858,22 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 
   [_button setTitle:_buttonTitle forState:UIControlStateNormal];
-  UIColor *buttonTitleTextColor = [[self class] colorForString:_messageViewDesignDictionary[@"buttonTitleTextColor"]];
+  UIColor *buttonTitleTextColor = [[self class] colorForString:_designDictionary[@"buttonTitleTextColor"]];
   if (buttonTitleTextColor) {
     [_button setTitleColor:buttonTitleTextColor forState:UIControlStateNormal];
   }
 
-  UIColor *buttonTitleShadowColor = [[self class] colorForString:_messageViewDesignDictionary[@"buttonTitleShadowColor"]];
+  UIColor *buttonTitleShadowColor = [[self class] colorForString:_designDictionary[@"buttonTitleShadowColor"]];
   if (buttonTitleShadowColor) {
     [_button setTitleShadowColor:buttonTitleShadowColor forState:UIControlStateNormal];
   }
 
   CGSize buttonTitleShadowOffset = CGSizeZero;
-  if (_messageViewDesignDictionary[@"buttonTitleShadowOffsetX"]) {
-    buttonTitleShadowOffset.width = [_messageViewDesignDictionary[@"buttonTitleShadowOffsetX"] floatValue];
+  if (_designDictionary[@"buttonTitleShadowOffsetX"]) {
+    buttonTitleShadowOffset.width = [_designDictionary[@"buttonTitleShadowOffsetX"] floatValue];
   }
-  if (_messageViewDesignDictionary[@"buttonTitleShadowOffsetY"]) {
-    buttonTitleShadowOffset.height = [_messageViewDesignDictionary[@"buttonTitleShadowOffsetY"] floatValue];
+  if (_designDictionary[@"buttonTitleShadowOffsetY"]) {
+    buttonTitleShadowOffset.height = [_designDictionary[@"buttonTitleShadowOffsetY"] floatValue];
   }
   if (buttonTitleShadowOffset.width != 0 || buttonTitleShadowOffset.height != 0) {
     _button.titleLabel.shadowOffset = buttonTitleShadowOffset;
@@ -936,10 +936,10 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupIconImageView
 {
-  if (_messageViewDesignDictionary[@"iconImageTintColor"] &&
-      [_messageViewDesignDictionary[@"iconImageTintColor"] isKindOfClass:[NSString class]]) {
+  if (_designDictionary[@"iconImageTintColor"] &&
+      [_designDictionary[@"iconImageTintColor"] isKindOfClass:[NSString class]]) {
     self.iconImageView.tintColor = [[self class]
-                                    colorForString:_messageViewDesignDictionary[@"iconImageTintColor"]];
+                                    colorForString:_designDictionary[@"iconImageTintColor"]];
   }
 
   self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
