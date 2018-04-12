@@ -3,6 +3,7 @@
 * **backgroundColor**: Initial Release - Latest
 * **backgroundColorAlpha**: 2.1.3 - Latest
 * **opacity**: Initial Release - Latest
+* **cornerRadius**: 2.3.0 - Latest
 * **iconImage**: Initial Release - Latest
 * **iconImageTintColor**: 2.3.0 - Latest
 * **iconImageRelativeCornerRadius**: 2.1.0 - Latest
@@ -29,6 +30,7 @@
 * **buttonTitleShadowOffsetX**: 2.2.0 - Latest
 * **buttonTitleShadowOffsetY**: 2.2.0 - Latest
 * **blurBackground**: 2.1.3 - Latest
+* **disableSpringAnimationPadding**: 2.3.0 - Latest
 
 ### Deprecated (Last Release Supported Shown)
 * **titleFontColor**: Replaced by titleTextColor. Last Supported Release: Initial Release
