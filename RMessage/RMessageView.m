@@ -76,6 +76,7 @@ static NSMutableDictionary *globalDesignDictionary;
 @property (nonatomic, strong) NSLayoutConstraint *topToVCFinalConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *topToVCStartingConstraint;
 
+@property (nonatomic, assign) CGFloat viewCornerRadius;
 @property (nonatomic, assign) CGFloat iconRelativeCornerRadius;
 @property (nonatomic, assign) RMessageType messageType;
 @property (nonatomic, copy) NSString *customTypeName;
@@ -86,6 +87,8 @@ static NSMutableDictionary *globalDesignDictionary;
 /** The existence of this property is strictly to handle a UIAppearance bug where methods are
  called multiple times when they need not be. See: http://www.openradar.me/28827675 */
 @property (nonatomic, assign) BOOL labelsHaveBeenSizedToFit;
+
+@property (nonatomic, assign) BOOL disableSpringAnimationPadding;
 
 /* The amount of vertical padding / height to add to RMessage's height so as to perform a spring animation without
    visually showing an empty gap due to the spring animation overbounce. This value changes dynamically due to
@@ -478,6 +481,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupDesign
 {
+  [self setupView];
   [self setupDesignDefaults];
   [self setupImagesAndBackground];
   [self setupLabels];
@@ -627,6 +631,10 @@ static NSMutableDictionary *globalDesignDictionary;
   if (self.iconRelativeCornerRadius > 0) {
     self.iconImageView.layer.cornerRadius = self.iconRelativeCornerRadius * self.iconImageView.bounds.size.width;
   }
+
+  if (self.viewCornerRadius >= 0) {
+    self.layer.cornerRadius = self.viewCornerRadius;
+  }
   [self setupTitleSubtitleLabelsLayoutWidth];
 }
 
@@ -656,6 +664,16 @@ static NSMutableDictionary *globalDesignDictionary;
   _button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
   [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   _iconImageView.clipsToBounds = NO;
+}
+
+- (void)setupView
+{
+  if (_designDictionary[@"cornerRadius"] && [_designDictionary[@"cornerRadius"] isKindOfClass:[NSNumber class]]) {
+    self.viewCornerRadius = [_designDictionary[@"cornerRadius"] floatValue];
+    if (self.viewCornerRadius > 0) {
+      self.clipsToBounds = YES;
+    }
+  }
 }
 
 - (void)setupImagesAndBackground
@@ -1174,6 +1192,16 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)accommodateLayoutForSpringAnimationPadding
 {
+  if (_designDictionary[@"disableSpringAnimationPadding"] &&
+      [_designDictionary[@"disableSpringAnimationPadding"] isKindOfClass:[NSNumber class]]) {
+    self.disableSpringAnimationPadding = [_designDictionary[@"disableSpringAnimationPadding"] boolValue];
+  }
+
+  if (self.disableSpringAnimationPadding) {
+    self.springAnimationPadding = 0.f;
+    return;
+  }
+
   [self.titleLabel sizeToFit];
   [self.subtitleLabel sizeToFit];
 

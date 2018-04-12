@@ -4,6 +4,7 @@
 * **backgroundColorAlpha**: Apply a transparency to the background color. Must be less than 1.0 but not 0 for blurring to work
   when blurBackground key is set to enabled. Numeric: [0, 1.0].
 * **opacity**: Opacity of the RMessage. Numeric: [0, 1.0].
+* **cornerRadius**: Apply a corner radius in points to the message view. Numeric: [0, Message vertical height / 2].
 * **iconImage**: Filename of image (in app bundle) to use as an icon on the left side of the RMessage. String.
 * **iconImageTintColor**: Set icon image tint color for icon images defined to be template images in Xcode. Does nothing for icon images that are not template images. String: [#000000, #FFFFFF].
 * **iconImageRelativeCornerRadius**: Corner radius percentage relative to icon image to apply to icon image. For example 0.5 (use 50% of icon image width as corner radius) would mask the icon image to always be a circle. Numeric: [0, 1.0].
@@ -31,6 +32,7 @@
 * **buttonTitleShadowOffsetY**: Amount of pt to offset in y direction the button title text shadow. Numeric.
 * **blurBackground**: Enable/disable blurring of the background behind the RMessage. Use in conjunction with
   backgroundColorAlpha. Numeric boolean [0, 1]. **Does nothing on devices running iOS7 and below.**
+* **disableSpringAnimationPadding**: Enable/disable an extra padding added to the view so as to prevent a visual gap from being displayed when the message is presented with the default spring animation. You most likely want to disable the extra padding when using the following properties: { cornerRadius }.
 
 Property keys are always strings, values can be string or numeric. If specifying a numeric value don't encapsulate the numeric value in a string.
 [x,y] Signifies the range of values x to y that are allowed for the field.
