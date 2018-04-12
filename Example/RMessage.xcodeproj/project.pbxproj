@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		59E0F574518A0BBB34C54BA0 /* libPods-RMessageTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */; };
 		7A0BF4C31C6AED7300F92A38 /* AlternativeDesigns.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */; };
-		7A5DD2911FD64CD30078493B /* RMessageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DD2901FD64CD30078493B /* RMessageUITests.m */; };
+		7A5DD2911FD64CD30078493B /* RootNavigationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5DD2901FD64CD30078493B /* RootNavigationControllerTests.m */; };
 		7A600412203F69AE007B9832 /* RMessageViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A600411203F69AE007B9832 /* RMessageViewTests.m */; };
 		7A600414203F7117007B9832 /* CustomDesignFile.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A600413203F7117007B9832 /* CustomDesignFile.json */; };
 		7A8E69EF1FD5E59800CA418A /* RMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E69EE1FD5E59800CA418A /* RMessageTests.m */; };
+		7AAC7C0D205986FF00462859 /* ViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAC7C0C205986FF00462859 /* ViewControllerTests.m */; };
+		7AAC7C1020598A9400462859 /* UITestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAC7C0F20598A9400462859 /* UITestHelpers.m */; };
 		7AD2C5BB1C16735F007C3580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BA1C16735F007C3580 /* main.m */; };
 		7AD2C5BE1C16735F007C3580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5BD1C16735F007C3580 /* AppDelegate.m */; };
 		7AD2C5C41C16735F007C3580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2C5C21C16735F007C3580 /* Main.storyboard */; };
@@ -43,13 +45,16 @@
 		4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
 		7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesigns.json; sourceTree = "<group>"; };
 		7A5DD28E1FD64CD30078493B /* RMessageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A5DD2901FD64CD30078493B /* RMessageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageUITests.m; sourceTree = "<group>"; };
+		7A5DD2901FD64CD30078493B /* RootNavigationControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootNavigationControllerTests.m; sourceTree = "<group>"; };
 		7A5DD2921FD64CD30078493B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A600411203F69AE007B9832 /* RMessageViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageViewTests.m; sourceTree = "<group>"; };
 		7A600413203F7117007B9832 /* CustomDesignFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomDesignFile.json; sourceTree = "<group>"; };
 		7A8E69EC1FD5E59800CA418A /* RMessageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8E69EE1FD5E59800CA418A /* RMessageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMessageTests.m; sourceTree = "<group>"; };
 		7A8E69F01FD5E59800CA418A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AAC7C0C205986FF00462859 /* ViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTests.m; sourceTree = "<group>"; };
+		7AAC7C0E20598A9400462859 /* UITestHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITestHelpers.h; sourceTree = "<group>"; };
+		7AAC7C0F20598A9400462859 /* UITestHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITestHelpers.m; sourceTree = "<group>"; };
 		7AD2C5B61C16735E007C3580 /* RMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD2C5BA1C16735F007C3580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7AD2C5BC1C16735F007C3580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,7 +128,10 @@
 		7A5DD28F1FD64CD30078493B /* RMessageUITests */ = {
 			isa = PBXGroup;
 			children = (
-				7A5DD2901FD64CD30078493B /* RMessageUITests.m */,
+				7AAC7C0E20598A9400462859 /* UITestHelpers.h */,
+				7AAC7C0F20598A9400462859 /* UITestHelpers.m */,
+				7A5DD2901FD64CD30078493B /* RootNavigationControllerTests.m */,
+				7AAC7C0C205986FF00462859 /* ViewControllerTests.m */,
 				7A5DD2921FD64CD30078493B /* Info.plist */,
 			);
 			path = RMessageUITests;
@@ -415,19 +423,25 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh",
 				"${PODS_ROOT}/../../RMessage/Resources/RMessageView.xib",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundErrorIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundErrorIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundSuccessIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundSuccessIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundWarningIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationBackgroundWarningIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationButtonBackground.png",
-				"${PODS_ROOT}/../../RMessage/Assets/NotificationButtonBackground@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/Contents.json",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/NotificationBackgroundErrorIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/NotificationBackgroundErrorIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/NotificationBackgroundSuccessIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/NotificationBackgroundSuccessIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/NotificationBackgroundWarningIcon.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/NotificationBackgroundWarningIcon@2x.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/Contents.json",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/NotificationButtonBackground.png",
+				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/NotificationButtonBackground@2x.png",
 				"${PODS_ROOT}/../../RMessage/Assets/RMessageDefaultDesign.json",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageView.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon.png",
@@ -450,7 +464,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A5DD2911FD64CD30078493B /* RMessageUITests.m in Sources */,
+				7AAC7C0D205986FF00462859 /* ViewControllerTests.m in Sources */,
+				7A5DD2911FD64CD30078493B /* RootNavigationControllerTests.m in Sources */,
+				7AAC7C1020598A9400462859 /* UITestHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

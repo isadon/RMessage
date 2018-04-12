@@ -2,7 +2,7 @@ PODS:
   - HexColors (4.0.0)
   - PPTopMostController (0.0.1)
   - Reveal-iOS-SDK (1.6.2)
-  - RMessage (2.2.1):
+  - RMessage (2.2.2):
     - HexColors (~> 4.0)
     - PPTopMostController
 
@@ -27,7 +27,7 @@ SPEC CHECKSUMS:
   HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  RMessage: f1e920df6c1f1e55930abd2179955724ec332e19
+  RMessage: 40b0ae64b8a9dff9593625783915478cc9881f87
 
 PODFILE CHECKSUM: 5211deb0d86fd992039b836d3b6181ca1ef136f3
 

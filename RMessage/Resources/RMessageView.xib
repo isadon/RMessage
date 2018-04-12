@@ -65,6 +65,7 @@
                 <outlet property="titleLabelLeadingConstraint" destination="VRO-Hp-HEg" id="sWP-AR-zAW"/>
                 <outlet property="titleLabelTrailingConstraint" destination="fhP-7h-mWV" id="V2F-nG-xMP"/>
                 <outlet property="titleSubtitleContainerView" destination="49I-AE-5sP" id="gnK-Tn-Kb9"/>
+                <outlet property="titleSubtitleContainerViewBottomConstraint" destination="4wR-Nf-WWj" id="CC6-wP-fKw"/>
                 <outlet property="titleSubtitleContainerViewTopConstraint" destination="ja8-gl-oz2" id="WOD-cL-cG9"/>
                 <outlet property="titleSubtitleContainerViewTrailingConstraint" destination="N4l-Ol-H0N" id="o4W-Zh-cRj"/>
                 <outlet property="titleSubtitleVerticalSpacingConstraint" destination="sUB-xD-36O" id="cv1-Ql-IMe"/>
