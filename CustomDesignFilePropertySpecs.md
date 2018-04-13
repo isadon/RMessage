@@ -32,7 +32,7 @@
 * **buttonTitleShadowOffsetY**: Amount of pt to offset in y direction the button title text shadow. Numeric.
 * **blurBackground**: Enable/disable blurring of the background behind the RMessage. Use in conjunction with
   backgroundColorAlpha. Numeric boolean [0, 1]. **Does nothing on devices running iOS7 and below.**
-* **disableSpringAnimationPadding**: Enable/disable an extra padding added to the view so as to prevent a visual gap from being displayed when the message is presented with the default spring animation. You most likely want to disable the extra padding when using the following properties: { cornerRadius }.
+* **disableSpringAnimationPadding**: Enable/disable an extra padding added to the view so as to prevent a visual gap from being displayed when the message is presented with the default spring animation. You most likely want to disable the extra padding when using the following properties: { cornerRadius }. Numeric boolean [0, 1]. **By default set to 0.**
 
 Property keys are always strings, values can be string or numeric. If specifying a numeric value don't encapsulate the numeric value in a string.
 [x,y] Signifies the range of values x to y that are allowed for the field.
