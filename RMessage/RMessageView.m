@@ -199,7 +199,11 @@ static NSMutableDictionary *globalDesignDictionary;
 + (UIImage *)bundledImageNamed:(NSString *)name
 {
   NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
-  return [[UIImage alloc] initWithContentsOfFile:imagePath];
+  UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
+  if (!image) {
+    image = [UIImage imageNamed:name];
+  }
+  return image
 }
 
 + (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
