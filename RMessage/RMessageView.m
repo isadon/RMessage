@@ -203,7 +203,7 @@ static NSMutableDictionary *globalDesignDictionary;
   if (!image) {
     image = [UIImage imageNamed:name];
   }
-  return image
+  return image;
 }
 
 + (void)activateConstraints:(NSArray *)constraints inSuperview:(UIView *)superview
