@@ -704,9 +704,6 @@ static NSMutableDictionary *globalDesignDictionary;
 
   if (!_iconImage && ([_designDictionary[@"iconImage"] length] > 0)) {
     _iconImage = [[self class] bundledImageNamed:_designDictionary[@"iconImage"]];
-    if (!_iconImage) {
-      _iconImage = [UIImage imageNamed:_designDictionary[@"iconImage"]];
-    }
   }
 
   if (_iconImage) {
