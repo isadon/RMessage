@@ -330,7 +330,6 @@ static NSMutableDictionary *globalDesignDictionary;
     if (designError) return nil;
 
     [self setupDesign];
-    [self setupLayout];
     [self setupGestureRecognizers];
   }
   return self;
@@ -610,7 +609,6 @@ static NSMutableDictionary *globalDesignDictionary;
   if (_button.superview) [_button removeFromSuperview];
   _button = button;
   [self setupButtonConstraints];
-  [self setupFinalAnimationConstraints];
 }
 
 - (void)executeMessageViewButtonCallBack
@@ -1221,6 +1219,7 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)animateMessage
 {
+  [self setupLayout];
   [self.superview layoutIfNeeded];
   dispatch_async(dispatch_get_main_queue(), ^{
     if (!self.shouldBlurBackground) self.alpha = 0.f;
@@ -1303,11 +1302,13 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)interfaceDidRotate
 {
-  if (self.isPresenting) [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
-
-  // On completion of UI rotation recalculate positioning
-  [self layoutMessageForPresentation];
-  [self setupFinalAnimationConstraints];
+  if (self.isPresenting && self.dismissingEnabled) {
+    // Cancel the previous dismissal restart dismissal clock
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:self];
+      [self performSelector:@selector(dismiss) withObject:self afterDelay:self.duration];
+    });
+  }
 }
 
 /**
