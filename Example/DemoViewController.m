@@ -265,6 +265,11 @@
   self.navigationController.navigationBarHidden = !self.navigationController.navigationBarHidden;
 }
 
+- (IBAction)didTapTimedMessage:(id)sender
+{
+  [self performSelector:@selector(didTapMessage:) withObject:nil afterDelay:3.0];
+}
+
 /*- (CGFloat)customVerticalOffsetForMessageView:(RMessageView *)messageView
 {
   return 88.f; // specify an additional offset here.

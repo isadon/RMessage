@@ -39,6 +39,11 @@ static int const kMsgYPositionScale = 2;
   hittablePredicate = [NSPredicate predicateWithFormat:@"hittable == TRUE"];
 }
 
+- (CGFloat)springAnimationPaddingForHeight:(CGFloat)height
+{
+  return ceilf(height / 120) * -10.f;
+}
+
 - (void)showMessageFromTopByPressingButtonWithName:(NSString *)buttonName
                                         timeToShow:(NSTimeInterval)displayTimeout
                                         timeToHide:(NSTimeInterval)dismissTimeout
@@ -47,7 +52,8 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[buttonName] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat expectedMsgYPosition = 0.f;
+  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat expectedMsgYPosition = springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"%@ message failed to display", buttonName);
@@ -69,7 +75,8 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Bottom"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat expectedMsgYPosition = mainWindowFrame.size.height - displayedMessage.frame.size.height;
+  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat expectedMsgYPosition = mainWindowFrame.size.height - displayedMessage.frame.size.height - springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"Bottom message failed to display");
@@ -90,7 +97,9 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Endless"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMsgYPosition = 0.f;
+  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat expectedMsgYPosition = springAnimationPadding;
+
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
   XCTAssert(messageDisplayed, @"Endless message failed to display");
 
@@ -103,22 +112,22 @@ static int const kMsgYPositionScale = 2;
 
 - (void)testErrorMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Error" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Error" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testNormalMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Message" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Message" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testWarningMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Warning" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Warning" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testSuccessMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Success" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Success" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testLongMessage
@@ -128,22 +137,22 @@ static int const kMsgYPositionScale = 2;
 
 - (void)testButtonMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Button" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Button" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testBottomMessage
 {
-  [self showBottomMessageWithTimeout:3.f timeToHide:5.f];
+  [self showBottomMessageWithTimeout:3.f timeToHide:8.f];
 }
 
 - (void)testCustomMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Custom design" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Custom design" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testImageMessage
 {
-  [self showMessageFromTopByPressingButtonWithName:@"Custom image" timeToShow:3.f timeToHide:5.f];
+  [self showMessageFromTopByPressingButtonWithName:@"Custom image" timeToShow:3.f timeToHide:8.f];
 }
 
 - (void)testEndlessMessage
@@ -183,7 +192,9 @@ static int const kMsgYPositionScale = 2;
 
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMsgYPosition = 0.f;
+  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat expectedMsgYPosition = springAnimationPadding;
+
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Endless message failed to display");
 
@@ -211,7 +222,9 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Error"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  int expectedMsgYPosition = 0.f;
+  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat expectedMsgYPosition = springAnimationPadding;
+
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Error message failed to display");
 
