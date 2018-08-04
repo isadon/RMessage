@@ -9,7 +9,6 @@
 #import "RMessageView.h"
 #import "HexColors.h"
 #import "UIViewController+PPTopMostController.h"
-#import <sys/utsname.h>
 
 static NSString *const RDesignFileName = @"RMessageDefaultDesign";
 
@@ -139,11 +138,6 @@ static NSMutableDictionary *globalDesignDictionary;
   }
 }
 
-+ (BOOL)isNavigationBarHiddenForNavigationController:(UINavigationController *)navController
-{
-  return (navController.navigationBarHidden || navController.navigationBar.isHidden);
-}
-
 + (UIViewController *)defaultViewController
 {
   UIViewController *viewController = [UIViewController topMostController];
@@ -151,30 +145,6 @@ static NSMutableDictionary *globalDesignDictionary;
     viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
   }
   return viewController;
-}
-
-/**
- Method which determines if viewController edges extend under top bars
- (navigation bars for example). There are various scenarios and even iOS bugs in which view
- controllers that ask to present under top bars don't truly do but this method hopes to properly
- catch all these bugs and scenarios and let its caller know.
- @return YES if viewController
- */
-+ (BOOL)viewControllerEdgesExtendUnderTopBars:(UIViewController *)viewController
-{
-  if (viewController.edgesForExtendedLayout != UIRectEdgeTop &&
-      viewController.edgesForExtendedLayout != UIRectEdgeAll) {
-    return NO;
-  }
-
-  /* When a table view controller asks to extend under top bars, if the navigation bar is
-   translucent iOS will not extend the edges of the table view controller under the top bars. */
-  if ([viewController isKindOfClass:[UITableViewController class]] &&
-      !viewController.navigationController.navigationBar.translucent) {
-    return NO;
-  }
-
-  return YES;
 }
 
 + (UIColor *)colorForString:(NSString *)string
@@ -211,7 +181,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   if (!constraints || !superview) return;
   if (@available(iOS 8.0, *)) {
-    for (NSLayoutConstraint *constraint in constraints) constraint.active = YES;
+    [NSLayoutConstraint activateConstraints:constraints];
   } else {
     [superview addConstraints:constraints];
   }
@@ -221,7 +191,7 @@ static NSMutableDictionary *globalDesignDictionary;
 {
   if (!constraints || !superview) return;
   if (@available(iOS 8.0, *)) {
-    for (NSLayoutConstraint *constraint in constraints) constraint.active = NO;
+    [NSLayoutConstraint deactivateConstraints:constraints];
   } else {
     [superview removeConstraints:constraints];
   }
@@ -245,13 +215,6 @@ static NSMutableDictionary *globalDesignDictionary;
   } else {
     [superview removeConstraint:constraint];
   }
-}
-
-+ (NSString *)deviceName
-{
-  struct utsname systemInfo;
-  uname(&systemInfo);
-  return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - Instance Methods
@@ -534,9 +497,7 @@ static NSMutableDictionary *globalDesignDictionary;
                           self.titleSubtitleContainerViewLayoutGuideConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
   if (self.shouldBlurBackground) {
-    if (@available(iOS 8.0, *)) {
-      [self setupBlurBackground];
-    }
+    [self setupBlurBackground];
   }
 }
 
@@ -587,24 +548,26 @@ static NSMutableDictionary *globalDesignDictionary;
 
 - (void)setupBlurBackground
 {
-  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-  UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-  blurView.translatesAutoresizingMaskIntoConstraints = NO;
-  [self insertSubview:blurView atIndex:0];
-  NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"blurBackgroundView": blurView
-                                                                    }];
-  NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:@{
-                                                                      @"blurBackgroundView": blurView
-                                                                    }];
-  [[self class] activateConstraints:hConstraints inSuperview:self];
-  [[self class] activateConstraints:vConstraints inSuperview:self];
+  if (@available(iOS 8.0, *)) {
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self insertSubview:blurView atIndex:0];
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[blurBackgroundView]-0-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:@{
+                                                                              @"blurBackgroundView": blurView
+                                                                              }];
+    NSArray *vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[blurBackgroundView]-0-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:@{
+                                                                              @"blurBackgroundView": blurView
+                                                                              }];
+    [[self class] activateConstraints:hConstraints inSuperview:self];
+    [[self class] activateConstraints:vConstraints inSuperview:self];
+  }
 }
 
 - (void)setupTitleSubtitleLabelsLayoutWidthWithSuperview:(nonnull UIView *)superview
@@ -1221,16 +1184,6 @@ static NSMutableDictionary *globalDesignDictionary;
 }
 
 #pragma mark - Misc methods
-
-- (UINavigationController *)rootNavigationController
-{
-  if ([self.viewController isKindOfClass:[UINavigationController class]]) {
-    return (UINavigationController *)self.viewController;
-  } else if ([self.viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
-    return (UINavigationController *)self.viewController.parentViewController;
-  }
-  return nil;
-}
 
 - (void)buttonTapped
 {
