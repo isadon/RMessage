@@ -1,0 +1,13 @@
+{
+  "commitish" : "6.0.0",
+  "iOS" : [
+    {
+      "name" : "HexColors",
+      "hash" : "7d3df540cbe95af9106f9c949aeb063e9216259fb03223a94a862b2d29b1dc86"
+    },
+    {
+      "name" : "HexColors",
+      "hash" : "7d3df540cbe95af9106f9c949aeb063e9216259fb03223a94a862b2d29b1dc86"
+    }
+  ]
+}

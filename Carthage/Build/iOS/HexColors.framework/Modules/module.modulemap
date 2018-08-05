@@ -1,0 +1,4 @@
+framework module HexColors {
+    header "HexColors-Swift.h"
+    requires objc
+}
