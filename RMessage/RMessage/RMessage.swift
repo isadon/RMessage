@@ -38,12 +38,9 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
 
   @IBOutlet private(set) var contentView: UIView!
 
-  var iconImageView: UIImageView?
-  var backgroundImageView: UIImageView?
-
-  var iconImage: UIImage?
-
-  let button: UIButton?
+  var leftView: UIView?
+  var rightView: UIView?
+  var backgroundView: UIView?
 
   @IBOutlet private(set) var titleLabel: UILabel!
   @IBOutlet private(set) var bodyLabel: UILabel!
@@ -106,21 +103,26 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
   /** Callback block called after the messageView finishes dismissing */
   let dismissCompletion: (() -> Void)?
 
+  var messageSpecIconImageViewSet = false
+
+  var messageSpecBackgroundImageViewSet = false
+
   var springAnimationPaddingCalculated = false
 
   // MARK: Instance Methods
 
   init?(
     spec: RMessageSpec, targetPosition: RMessagePosition = .top, title: String, body: String?,
-    viewController: UIViewController? = nil, button: UIButton? = nil, tapCompletion: (() -> Void)? = nil,
-    presentCompletion: (() -> Void)? = nil, dismissCompletion: (() -> Void)? = nil
+    viewController: UIViewController? = nil, leftView: UIView? = nil, rightView: UIView? = nil, backgroundView: UIView? = nil, tapCompletion: (() -> Void)? = nil, presentCompletion: (() -> Void)? = nil, dismissCompletion: (() -> Void)? = nil
   ) {
     self.spec = spec
     self.targetPosition = targetPosition
     self.tapCompletion = tapCompletion
     self.presentCompletion = presentCompletion
     self.dismissCompletion = dismissCompletion
-    self.button = button
+    self.leftView = leftView
+    self.rightView = rightView
+    self.backgroundView = backgroundView
     targetAlpha = spec.targetAlpha
 
     contentViewSafeAreaGuideConstraint = NSLayoutConstraint()
@@ -143,7 +145,6 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
   required init?(coder aDecoder: NSCoder) {
     spec = DefaultRMessageSpec()
     targetPosition = .top
-    button = nil
     tapCompletion = nil
     presentCompletion = nil
     dismissCompletion = nil

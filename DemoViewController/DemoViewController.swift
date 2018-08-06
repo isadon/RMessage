@@ -82,7 +82,7 @@ class DemoViewController: UIViewController, RControllerDelegate {
     rControl.showMessage(
       withSpec: normalSpec,
       title: "New version available",
-      body: "Please update our app. We would be very thankful", button: button
+      body: "Please update our app. We would be very thankful", rightView: button
     )
   }
 

@@ -66,12 +66,13 @@ class RController: RMessageDelegate {
   func showMessage(
     withSpec spec: RMessageSpec, atPosition targetPosition: RMessagePosition = .top,
     title: String, body: String? = nil, viewController: UIViewController? = nil,
-    button: UIButton? = nil, tapCompletion: (() -> Void)? = nil,
-    presentCompletion: (() -> Void)? = nil, dismissCompletion: (() -> Void)? = nil
+    leftView: UIView? = nil, rightView: UIView? = nil, backgroundView: UIView? = nil,
+    tapCompletion: (() -> Void)? = nil, presentCompletion: (() -> Void)? = nil,
+    dismissCompletion: (() -> Void)? = nil
   ) {
     guard let message = RMessage(
       spec: spec, targetPosition: targetPosition, title: title, body: body,
-      viewController: viewController, button: button, tapCompletion: tapCompletion,
+      viewController: viewController, leftView: leftView, rightView: rightView, backgroundView: backgroundView, tapCompletion: tapCompletion,
       presentCompletion: presentCompletion, dismissCompletion: dismissCompletion
     ) else {
       return

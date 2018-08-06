@@ -36,9 +36,6 @@ extension RMessage {
     bodyLabel.shadowColor = nil
     bodyLabel.shadowOffset = CGSize.zero
     bodyLabel.backgroundColor = nil
-
-    button?.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-    button?.setTitleColor(.black, for: .normal)
   }
 
   func setupLabelsDesign() {
@@ -58,8 +55,8 @@ extension RMessage {
 
   func sizeContentViewLabelsLayoutWidth(toSuperview superview: UIView) {
     var accessoryViewsAndPadding: CGFloat = 0
-    if let iconImage = iconImage { accessoryViewsAndPadding = iconImage.size.width + 15 }
-    if let button = button { accessoryViewsAndPadding += button.bounds.size.width + 15 }
+    if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
+    if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }
 
     var preferredLayoutWidth = CGFloat(superview.bounds.size.width - accessoryViewsAndPadding - 30)
 

@@ -11,84 +11,80 @@ import UIKit
 
 extension RMessage {
   func setupComponents() {
-    setupIconImageView()
-    setupButton()
-    setupBackgroundImageView()
-    setupBlurBackground()
+    setupLeftView()
+    setupRightView()
+    setupBackgroundView()
+    setupBlurBackgroundView()
+
+    // Instatiate left views and background views from iconImage and backgroundImage passed in through
+    // message spec. These will only be generated if the user does not programmatically pass in a leftView
+    // or background view.
+    if leftView == nil, spec.iconImage != nil { setupIconImageView() }
+    if backgroundView == nil, spec.backgroundImage != nil { setupBackgroundImageView() }
   }
 
-  func setupIconImageView() {
-    guard let iconImage = spec.iconImage else {
+  func setupLeftView() {
+    guard let leftView = leftView else {
       return
     }
 
-    self.iconImage = iconImage
-    iconImageView = UIImageView(image: iconImage)
+    leftView.translatesAutoresizingMaskIntoConstraints = false
 
-    iconImageView!.clipsToBounds = true
-    iconImageView!.tintColor = spec.iconImageTintColor
-    iconImageView!.contentMode = .scaleAspectFit
-    iconImageView!.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(leftView)
 
-    addSubview(iconImageView!)
-
-    iconImageView!.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    iconImageView!.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 15).isActive = true
-    iconImageView!.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -15).isActive = true
-    iconImageView!.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 10).isActive = true
-    iconImageView!.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10).isActive = true
+    leftView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    leftView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 15).isActive = true
+    leftView.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -15).isActive = true
+    leftView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 10).isActive = true
+    leftView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10).isActive = true
   }
 
-  func setupButton() {
-    guard let button = button else {
+  func setupRightView() {
+    guard let rightView = rightView else {
       return
     }
 
-    button.translatesAutoresizingMaskIntoConstraints = false
+    rightView.translatesAutoresizingMaskIntoConstraints = false
 
-    addSubview(button)
+    addSubview(rightView)
 
-    button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    button.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 15).isActive = true
-    let buttonTrailingOptConstraint = button.trailingAnchor.constraint(
+    rightView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    rightView.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 15).isActive = true
+    let rightViewTrailingOptConstraint = rightView.trailingAnchor.constraint(
       equalTo: contentView.trailingAnchor,
       constant: -15
     )
-    buttonTrailingOptConstraint.priority = UILayoutPriority(rawValue: 749)
-    buttonTrailingOptConstraint.isActive = true
+    rightViewTrailingOptConstraint.priority = UILayoutPriority(rawValue: 749)
+    rightViewTrailingOptConstraint.isActive = true
 
-    button.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -15).isActive = true
-    button.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10).isActive = true
-    button.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 10).isActive = true
+    rightView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -15).isActive = true
+    rightView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 10).isActive = true
+    rightView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10).isActive = true
   }
 
-  func setupBackgroundImageView() {
-    guard let backgroundImage = spec.backgroundImage else {
+  func setupBackgroundView() {
+    guard let backgroundView = backgroundView else {
       return
     }
-    assert(superview != nil, "RMessage instance must have a superview by this point!")
 
-    let resizeableImage = backgroundImage.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
-    backgroundImageView = UIImageView(image: resizeableImage)
-    backgroundImageView!.translatesAutoresizingMaskIntoConstraints = false
-    backgroundImageView!.contentMode = .scaleToFill
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
 
-    insertSubview(backgroundImageView!, at: 0)
+    insertSubview(backgroundView, at: 0)
 
     let hConstraints = NSLayoutConstraint.constraints(
-      withVisualFormat: "H:|-0-[backgroundImageView]-0-|",
+      withVisualFormat: "H:|-0-[backgroundView]-0-|",
       options: [], metrics: nil,
-      views: ["backgroundImageView": backgroundImageView!]
+      views: ["backgroundView": backgroundView]
     )
     let vConstraints = NSLayoutConstraint.constraints(
-      withVisualFormat: "V:|-0-[backgroundImageView]-0-|",
+      withVisualFormat: "V:|-0-[backgroundView]-0-|",
       options: [], metrics: nil,
-      views: ["backgroundImageView": backgroundImageView!]
+      views: ["backgroundView": backgroundView]
     )
     NSLayoutConstraint.activate([hConstraints, vConstraints].flatMap { $0 })
   }
 
-  func setupBlurBackground() {
+  func setupBlurBackgroundView() {
     guard spec.blurBackground == true else {
       return
     }
@@ -113,5 +109,40 @@ extension RMessage {
       metrics: nil, views: ["blurBackgroundView": blurView]
     )
     NSLayoutConstraint.activate([hConstraints, vConstraints].flatMap { $0 })
+  }
+
+  func setupIconImageView() {
+    guard let iconImage = spec.iconImage else {
+      return
+    }
+
+    assert(leftView == nil, "Background view must be nil, if user is programmatically passing in a leftView this function should not be called.")
+
+    let iconImageView = UIImageView(image: iconImage)
+
+    iconImageView.clipsToBounds = true
+    iconImageView.tintColor = spec.iconImageTintColor
+    iconImageView.contentMode = .scaleAspectFit
+    iconImageView.translatesAutoresizingMaskIntoConstraints = false
+
+    leftView = iconImageView
+    messageSpecIconImageViewSet = true
+    setupLeftView()
+  }
+
+  func setupBackgroundImageView() {
+    guard let backgroundImage = spec.backgroundImage else {
+      return
+    }
+    assert(backgroundView == nil, "Background view must be nil, if user is programmatically passing in a backgroundView this function should not be called.")
+
+    let resizeableImage = backgroundImage.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
+    let backgroundImageView = UIImageView(image: resizeableImage)
+    backgroundImageView.clipsToBounds = true
+    backgroundImageView.contentMode = .scaleToFill
+
+    backgroundView = backgroundImageView
+    messageSpecBackgroundImageViewSet = true
+    setupBackgroundView()
   }
 }

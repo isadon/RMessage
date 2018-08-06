@@ -37,8 +37,8 @@ extension RMessage {
 
   override func layoutSubviews() {
     super.layoutSubviews()
-    if let iconImageView = iconImageView, spec.iconImageRelativeCornerRadius > 0 {
-      iconImageView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * iconImageView.bounds.size.width
+    if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
+      leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
     }
 
     if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
