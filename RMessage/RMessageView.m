@@ -975,6 +975,13 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                      attribute:NSLayoutAttributeLeading
                                                                     multiplier:1.f
                                                                       constant:-15.f];
+  NSLayoutConstraint *imgViewTop = [NSLayoutConstraint constraintWithItem:self.iconImageView
+                                                                   attribute:NSLayoutAttributeTop
+                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                      toItem:self
+                                                                   attribute:NSLayoutAttributeTop
+                                                                  multiplier:1.f
+                                                                    constant:10.f];
   NSLayoutConstraint *imgViewBottom = [NSLayoutConstraint constraintWithItem:self.iconImageView
                                                                    attribute:NSLayoutAttributeBottom
                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
@@ -983,7 +990,8 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                   multiplier:1.f
                                                                     constant:-10.f];
   [self addSubview:self.iconImageView];
-  [[self class] activateConstraints:@[imgViewCenterY, imgViewLeading, imgViewTrailing, imgViewBottom] inSuperview:self];
+  [[self class] activateConstraints:@[imgViewCenterY, imgViewLeading, imgViewTrailing, imgViewTop, imgViewBottom]
+                        inSuperview:self];
 }
 
 - (void)setupGestureRecognizers
