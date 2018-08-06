@@ -224,6 +224,17 @@
                                     <action selector="didTapTimedMessage:" destination="h0s-uL-LZy" eventType="touchUpInside" id="1eW-k1-C9u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASO-hB-0yI">
+                                <rect key="frame" x="16" y="444" width="127" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Attributed Text">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapAttributed:" destination="h0s-uL-LZy" eventType="touchUpInside" id="oaB-RW-ZAJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="erR-CW-bXR"/>
@@ -425,6 +436,17 @@
                                 <state key="normal" title="Timed"/>
                                 <connections>
                                     <action selector="didTapTimedMessage:" destination="1kT-B0-h7w" eventType="touchUpInside" id="OWa-u5-nPC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lqm-Hl-Cmu">
+                                <rect key="frame" x="2" y="472" width="127" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Attributed Text">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapAttributed:" destination="1kT-B0-h7w" eventType="touchUpInside" id="ayz-GK-Gkx"/>
                                 </connections>
                             </button>
                         </subviews>

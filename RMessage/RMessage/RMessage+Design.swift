@@ -50,30 +50,68 @@ extension RMessage {
     bodyLabel.shadowColor = spec.bodyShadowColor
     bodyLabel.shadowOffset = spec.bodyShadowOffset
 
+    setupAttributedLabels()
     if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
   }
 
+  func setupAttributedLabels() {
+    guard let titleText = titleLabel?.text, let titleAttributes = spec.titleAttributes else {
+      return
+    }
+    let titleAttributedText = NSAttributedString(string: titleText, attributes: titleAttributes)
+    titleLabel?.attributedText = titleAttributedText
+
+    guard let bodyText = bodyLabel?.text, let bodyAttributes = spec.bodyAttributes else {
+      return
+    }
+    let bodyAttributedText = NSAttributedString(string: bodyText, attributes: bodyAttributes)
+    bodyLabel?.attributedText = bodyAttributedText
+  }
+
   func sizeContentViewLabelsLayoutWidth(toSuperview superview: UIView) {
+    guard let titleLabel = titleLabel, let bodyLabel = bodyLabel else {
+      return
+    }
     var accessoryViewsAndPadding: CGFloat = 0
     if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
     if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }
 
     var preferredLayoutWidth = CGFloat(superview.bounds.size.width - accessoryViewsAndPadding - 30)
 
-    if spec.titleBodyLabelsSizeToFit {
-      // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest
-      // label
-      let titleOneLineSize = titleLabel.text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 14)])
-      let bodyOneLineSize = bodyLabel.text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 12)])
-      if titleOneLineSize != nil && bodyOneLineSize != nil {
-        let maxOccupiedLineWidth =
-          (titleOneLineSize!.width > bodyOneLineSize!.width) ? titleOneLineSize!.width : bodyOneLineSize!.width
-        if maxOccupiedLineWidth < preferredLayoutWidth {
-          preferredLayoutWidth = maxOccupiedLineWidth
-        }
+    // Always set the preferredLayoutWidth before exit. Note that titleBodyLabelsSizeToFit changes
+    // preferredLayoutWidth further down below if it is true
+    defer {
+      titleLabel.preferredMaxLayoutWidth = preferredLayoutWidth
+      bodyLabel.preferredMaxLayoutWidth = preferredLayoutWidth
+    }
+
+    guard spec.titleBodyLabelsSizeToFit else {
+      return
+    }
+    // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
+    var titleOneLineSize: CGSize?
+    var bodyOneLineSize: CGSize?
+
+    if let titleAttributedText = titleLabel.attributedText {
+      titleOneLineSize = titleAttributedText.size()
+    }
+    if let titleText = titleLabel.text {
+      titleOneLineSize = titleText.size(withAttributes: [.font: spec.titleFont])
+    }
+
+    if let bodyAttributedText = bodyLabel.attributedText {
+      bodyOneLineSize = bodyAttributedText.size()
+    }
+    if let bodyText = titleLabel.text {
+      bodyOneLineSize = bodyText.size(withAttributes: [.font: spec.bodyFont])
+    }
+
+    if titleOneLineSize != nil && bodyOneLineSize != nil {
+      let maxOccupiedLineWidth =
+        (titleOneLineSize!.width > bodyOneLineSize!.width) ? titleOneLineSize!.width : bodyOneLineSize!.width
+      if maxOccupiedLineWidth < preferredLayoutWidth {
+        preferredLayoutWidth = maxOccupiedLineWidth
       }
     }
-    titleLabel.preferredMaxLayoutWidth = preferredLayoutWidth
-    bodyLabel.preferredMaxLayoutWidth = preferredLayoutWidth
   }
 }

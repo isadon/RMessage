@@ -18,11 +18,13 @@ protocol RMessageSpec {
   var iconImageTintColor: UIColor { get set }
   var iconImageRelativeCornerRadius: CGFloat { get set }
   var backgroundImage: UIImage? { get set }
+  var titleAttributes: [NSAttributedStringKey: Any]? { get set }
   var titleFont: UIFont { get set }
   var titleColor: UIColor { get set }
   var titleShadowColor: UIColor { get set }
   var titleShadowOffset: CGSize { get set }
   var titleTextAlignment: NSTextAlignment { get set }
+  var bodyAttributes: [NSAttributedStringKey: Any]? { get set }
   var bodyFont: UIFont { get set }
   var bodyColor: UIColor { get set }
   var bodyShadowColor: UIColor { get set }
@@ -44,11 +46,13 @@ struct DefaultRMessageSpec: RMessageSpec {
   var iconImageTintColor = UIColor.clear
   var iconImageRelativeCornerRadius = CGFloat(0)
   var backgroundImage: UIImage?
+  var titleAttributes: [NSAttributedStringKey: Any]?
   var titleFont = UIFont.boldSystemFont(ofSize: 14)
   var titleColor = UIColor.black
   var titleShadowColor = UIColor.clear
   var titleShadowOffset = CGSize.zero
   var titleTextAlignment = NSTextAlignment.left
+  var bodyAttributes: [NSAttributedStringKey: Any]?
   var bodyFont = UIFont.boldSystemFont(ofSize: 12)
   var bodyColor = UIColor.black
   var bodyShadowColor = UIColor.clear

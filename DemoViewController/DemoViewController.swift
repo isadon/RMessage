@@ -112,6 +112,26 @@ class DemoViewController: UIViewController, RControllerDelegate {
     )
   }
 
+  @IBAction private func didTapAttributed(_: Any) {
+    var attributedSpec = warningSpec
+    attributedSpec.titleAttributes = [.backgroundColor: UIColor.red, .foregroundColor: UIColor.white]
+    attributedSpec.bodyAttributes = [
+      .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
+      .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+    ]
+
+    rControl.showMessage(
+      withSpec: attributedSpec,
+      title: "Attributed for real",
+      body: """
+      Enjoy some attributed text:
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed \
+      diam nonumy eirmod tempor invidunt ut labore et dolore magna \
+      aliquyam erat, sed diam voluptua.
+      """
+    )
+  }
+
   @IBAction private func didTapLong(_: Any) {
     var durationSpec = warningSpec
     durationSpec.durationType = .custom
@@ -130,7 +150,6 @@ class DemoViewController: UIViewController, RControllerDelegate {
     rControl.showMessage(withSpec: successSpec, atPosition: .bottom, title: "Hi!", body: "I'm down here :)")
   }
 
-  //
   @IBAction private func didTapText(_: Any) {
     rControl.showMessage(
       withSpec: warningSpec,
