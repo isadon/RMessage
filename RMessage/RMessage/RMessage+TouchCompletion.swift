@@ -22,14 +22,14 @@ extension RMessage {
   @objc func didTapMessageView() {
     delegate?.messageViewTapped?(self)
     tapCompletion?()
-    if spec.durationType != .endless { dismiss() }
+    if spec.durationType != .endless && spec.durationType != .swipe { dismiss() }
   }
 
   /* called after the following gesture depending on message position during initialization
    UISwipeGestureRecognizerDirectionUp when message position set to Top,
    UISwipeGestureRecognizerDirectionDown when message position set to bottom */
-  @objc func didSwipeMessageView() {
-    delegate?.messageViewSwiped?(self)
-    if spec.durationType != .endless { dismiss() }
+  @objc func didSwipeMessage() {
+    delegate?.messageSwiped?(self)
+    if spec.durationType != .endless && spec.durationType != .tap { dismiss() }
   }
 }

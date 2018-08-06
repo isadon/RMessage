@@ -24,7 +24,7 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
     switch spec.durationType {
     case .automatic:
       return animationDuration + onScreenTime + Double(frame.size.height) * extraOnScreenTimePerPixel
-    case .endless:
+    case .tap, .swipe, .tapSwipe, .endless:
       return -1
     case .custom:
       return abs(spec.timeToDismiss)

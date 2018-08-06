@@ -198,6 +198,25 @@ class DemoViewController: UIViewController, RControllerDelegate {
     )
   }
 
+  @IBAction private func didTapTapOnlyDismissal(_: Any) {
+    var tapOnlySpec = normalSpec
+    tapOnlySpec.durationType = .tap
+    tapOnlySpec.backgroundColor = UIColor("#CF00F8")!
+    tapOnlySpec.titleColor = .white
+    tapOnlySpec.bodyColor = .white
+
+    rControl.showMessage(
+      withSpec: tapOnlySpec,
+      title: "Tap Tap",
+      body: """
+      This message can only be dismissed by tapping on it. Not swiping or anything else.
+      """,
+      tapCompletion: { print("tapped") },
+      presentCompletion: { print("presented") },
+      dismissCompletion: { print("dismissed") }
+    )
+  }
+
   @IBAction private func didTapDismissCurrentMessage(_: Any) {
     _ = rControl.dismissOnScreenMessageView()
   }

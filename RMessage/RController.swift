@@ -15,7 +15,7 @@ enum RMessagePosition {
 }
 
 enum RMessageDuration {
-  case automatic, endless, custom
+  case automatic, endless, tap, swipe, tapSwipe, custom
 }
 
 class RController: RMessageDelegate {

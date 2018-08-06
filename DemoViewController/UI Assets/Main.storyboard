@@ -235,6 +235,17 @@
                                     <action selector="didTapAttributed:" destination="h0s-uL-LZy" eventType="touchUpInside" id="oaB-RW-ZAJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxs-XZ-J4J">
+                                <rect key="frame" x="137" y="446" width="114" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Dismiss (Tap Only)">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapTapOnlyDismissal:" destination="h0s-uL-LZy" eventType="touchUpInside" id="SVf-Cm-970"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="erR-CW-bXR"/>
@@ -449,6 +460,17 @@
                                     <action selector="didTapAttributed:" destination="1kT-B0-h7w" eventType="touchUpInside" id="ayz-GK-Gkx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOW-PP-cas">
+                                <rect key="frame" x="140" y="445" width="114" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Dismiss (Tap Only)">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapTapOnlyDismissal:" destination="1kT-B0-h7w" eventType="touchUpInside" id="yDc-UF-RSx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ANL-ct-9z0"/>
@@ -458,7 +480,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L16-Ge-4Ka" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="566" y="396"/>
+            <point key="canvasLocation" x="565.60000000000002" y="395.35232383808096"/>
         </scene>
     </scenes>
     <resources>
