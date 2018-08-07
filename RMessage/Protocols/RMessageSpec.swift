@@ -35,7 +35,7 @@ protocol RMessageSpec {
   var disableSpringAnimationPadding: Bool { get set }
 }
 
-struct DefaultRMessageViewSpec: RMessageSpec {
+struct DefaultRMessageSpec: RMessageSpec {
   var backgroundColor = UIColor.white
   var targetAlpha = CGFloat(1)
   var cornerRadius = CGFloat(0)
@@ -64,7 +64,7 @@ struct DefaultRMessageViewSpec: RMessageSpec {
 // MARK: Implementation for the builtin message types
 
 let errorSpec: RMessageSpec = {
-  var errorSpec = DefaultRMessageViewSpec()
+  var errorSpec = DefaultRMessageSpec()
   errorSpec.backgroundColor = UIColor("#FF2D55") ?? UIColor.black
   errorSpec.titleColor = UIColor.white
   errorSpec.bodyColor = UIColor.white
@@ -73,7 +73,7 @@ let errorSpec: RMessageSpec = {
 }()
 
 let warningSpec: RMessageSpec = {
-  var warningSpec = DefaultRMessageViewSpec()
+  var warningSpec = DefaultRMessageSpec()
   warningSpec.backgroundColor = UIColor("#FFCC00") ?? UIColor.black
   warningSpec.titleColor = UIColor("#484638") ?? UIColor.white
   warningSpec.bodyColor = warningSpec.titleColor
@@ -82,7 +82,7 @@ let warningSpec: RMessageSpec = {
 }()
 
 let normalSpec: RMessageSpec = {
-  var normalSpec = DefaultRMessageViewSpec()
+  var normalSpec = DefaultRMessageSpec()
   normalSpec.backgroundColor = UIColor("#E8E8E8") ?? UIColor.black
   normalSpec.titleColor = UIColor("#727C83") ?? UIColor.white
   normalSpec.bodyColor = normalSpec.titleColor
@@ -90,7 +90,7 @@ let normalSpec: RMessageSpec = {
 }()
 
 let successSpec: RMessageSpec = {
-  var successSpec = DefaultRMessageViewSpec()
+  var successSpec = DefaultRMessageSpec()
   successSpec.backgroundColor = UIColor("#00C060") ?? UIColor.black
   successSpec.titleColor = UIColor.white
   successSpec.bodyColor = successSpec.titleColor

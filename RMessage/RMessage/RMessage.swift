@@ -141,7 +141,7 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
   }
 
   required init?(coder aDecoder: NSCoder) {
-    spec = DefaultRMessageViewSpec()
+    spec = DefaultRMessageSpec()
     targetPosition = .top
     button = nil
     tapCompletion = nil
