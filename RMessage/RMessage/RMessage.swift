@@ -116,9 +116,9 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     if let viewController = viewController {
       self.viewController = viewController
     }
-    setupDesign()
 
     setupComponents(withMessageSpec: spec)
+    setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
     setupGestureRecognizers()
   }
 
