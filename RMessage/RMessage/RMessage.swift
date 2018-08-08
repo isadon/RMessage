@@ -84,11 +84,9 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   /** Callback block called after the message finishes dismissing */
   private(set) var dismissCompletion: (() -> Void)?
 
-  var messageSpecIconImageViewSet = false
+  private var messageSpecIconImageViewSet = false
 
-  var messageSpecBackgroundImageViewSet = false
-
-  var springAnimationPaddingCalculated = false
+  private var messageSpecBackgroundImageViewSet = false
 
   // MARK: Instance Methods
 
@@ -171,6 +169,48 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
       setupBlurBackgroundView(inSuperview: self)
     }
   }
+
+  func setupLabelConstraintsToSizeToFit() {
+    assert(superview != nil, "RMessage instance must have a superview by this point!")
+    guard spec.titleBodyLabelsSizeToFit else {
+      return
+    }
+    if let trailingConstraint = contentViewTrailingConstraint {
+      trailingConstraint.isActive = false
+    }
+
+    NSLayoutConstraint.deactivate([
+      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+    ])
+
+    titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    NSLayoutConstraint.activate([
+      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+    ])
+  }
+
+  // MARK: - Respond to Layout Changes
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
+      leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
+    }
+
+    if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
+    if let superview = superview {
+      setPreferredLayoutWidth(
+        forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
+        sizingToFit: spec.titleBodyLabelsSizeToFit
+      )
+    }
+  }
+
   override func safeAreaInsetsDidChange() {
     animator.safeAreaInsetsDidChange?(forView: self)
   }
