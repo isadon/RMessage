@@ -32,26 +32,26 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   }
 
   /** The view controller this message is displayed in */
-  lazy var viewController: UIViewController = defaultViewControllerForPresentation()
+  private(set) lazy var viewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
 
-  @IBOutlet var containerView: UIView!
+  @IBOutlet private(set) var containerView: UIView!
 
   @IBOutlet private(set) var contentView: UIView!
 
-  var leftView: UIView?
-  var rightView: UIView?
-  var backgroundView: UIView?
+  private(set) var leftView: UIView?
+  private(set) var rightView: UIView?
+  private(set) var backgroundView: UIView?
 
   @IBOutlet private(set) var titleLabel: UILabel!
   @IBOutlet private(set) var bodyLabel: UILabel!
 
-  @IBOutlet var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
-  @IBOutlet var titleLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet var titleLabelTrailingConstraint: NSLayoutConstraint!
-  @IBOutlet var bodyLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet var bodyLabelTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleLabelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleLabelTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var bodyLabelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private var bodyLabelTrailingConstraint: NSLayoutConstraint!
 
-  @IBOutlet var contentViewTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var contentViewTrailingConstraint: NSLayoutConstraint!
 
   private lazy var animator: RMessageAnimator = {
     var animator = SlideAnimator(
@@ -70,19 +70,19 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   }()
 
   /** Is the message currently in the process of presenting, but not yet displayed? */
-  var isPresenting = false
+  private(set) var isPresenting = false
 
   /** Is the message currently on screen, fully displayed? */
-  var isFullyDisplayed = false
+  private(set) var isFullyDisplayed = false
 
-  /** Callback block called after the user taps on the messageView */
-  let tapCompletion: (() -> Void)?
+  /** Callback block called after the user taps on the message */
+  private(set) var tapCompletion: (() -> Void)?
 
-  /** Callback block called after the messageView finishes presenting */
-  let presentCompletion: (() -> Void)?
+  /** Callback block called after the message finishes presenting */
+  private(set) var presentCompletion: (() -> Void)?
 
-  /** Callback block called after the messageView finishes dismissing */
-  let dismissCompletion: (() -> Void)?
+  /** Callback block called after the message finishes dismissing */
+  private(set) var dismissCompletion: (() -> Void)?
 
   var messageSpecIconImageViewSet = false
 
@@ -131,7 +131,7 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     super.init(coder: aDecoder)
   }
 
-  func loadNib() {
+  private func loadNib() {
     Bundle(for: RMessage.self).loadNibNamed(String(describing: RMessage.self), owner: self, options: nil)
     containerView.translatesAutoresizingMaskIntoConstraints = false
 
