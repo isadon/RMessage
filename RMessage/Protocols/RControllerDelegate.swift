@@ -11,5 +11,5 @@ import UIKit
 
 @objc protocol RControllerDelegate: class {
   /// You can customize the given RMessage, like setting its alpha via (messageOpacity) or adding a subview
-  @objc optional func customize(messageView: RMessage)
+  @objc optional func customize(message: RMessage)
 }

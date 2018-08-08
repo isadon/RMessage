@@ -1,5 +1,5 @@
 //
-//  RMessageViewDelegate.swift
+//  RMessageDelegate.swift
 //  RMessage
 //
 //  Created by Adonis Peralta on 8/3/18.
@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 @objc protocol RMessageDelegate {
-  @objc optional func messageViewIsPresenting(_ message: RMessage)
-  @objc optional func messageViewDidPresent(_ message: RMessage)
-  @objc optional func messageViewDidDismiss(_ message: RMessage)
-  @objc optional func messageViewSwiped(_ message: RMessage)
-  @objc optional func messageViewTapped(_ message: RMessage)
+  @objc optional func messageIsPresenting(_ message: RMessage)
+  @objc optional func messageDidPresent(_ message: RMessage)
+  @objc optional func messageDidDismiss(_ message: RMessage)
+  @objc optional func messageSwiped(_ message: RMessage)
+  @objc optional func messageTapped(_ message: RMessage)
 }
