@@ -1,5 +1,5 @@
 //
-//  UIViewController+TopMostController.swift
+//  UIWindow+ViewController.swift
 //  RMessage
 //
 //  Created by Adonis Peralta on 8/3/18.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIWindow {
-  func topViewController(forViewController viewController: UIViewController) -> UIViewController {
+  static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
     if viewController.presentedViewController != nil {
       return topViewController(forViewController: viewController.presentedViewController!)
     } else if let navigationController = viewController as? UINavigationController,
@@ -23,10 +23,18 @@ extension UIWindow {
     return viewController
   }
 
-  func topViewController() -> UIViewController? {
-    guard let rootViewController = rootViewController else {
+  static func topViewController() -> UIViewController? {
+    guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
       return nil
     }
     return topViewController(forViewController: rootViewController)
+  }
+
+  static func defaultViewControllerForPresentation() -> UIViewController {
+    guard let defaultViewController = UIWindow.topViewController() else {
+      assert(false, "Key window should always have a root view controller")
+      return UIViewController()
+    }
+    return defaultViewController
   }
 }

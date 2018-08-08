@@ -11,16 +11,16 @@ import UIKit
 
 extension RMessage {
   func setupGestureRecognizers() {
-    let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeMessageView))
+    let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeMessage))
     gestureRecognizer.direction = (targetPosition == .bottom) ? .down : .up
     addGestureRecognizer(gestureRecognizer)
 
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMessageView))
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMessage))
     addGestureRecognizer(tapRecognizer)
   }
 
-  @objc func didTapMessageView() {
-    delegate?.messageViewTapped?(self)
+  @objc func didTapMessage() {
+    delegate?.messageTapped?(self)
     tapCompletion?()
     if spec.durationType != .endless && spec.durationType != .swipe { dismiss() }
   }

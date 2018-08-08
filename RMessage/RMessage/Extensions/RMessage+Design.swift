@@ -10,15 +10,25 @@ import Foundation
 import UIKit
 
 extension RMessage {
-  func setupDesign() {
-    setupDesignDefaults()
-    setupLabelsDesign()
+  func setupDesign(withMessageSpec spec: RMessageSpec, titleLabel: UILabel, bodyLabel: UILabel) {
+    setupDesign(messageSpec: spec)
+    setupDesign(forTitleLabel: titleLabel, messageSpec: spec)
+    setupDesign(forBodyLabel: bodyLabel, messageSpec: spec)
+    if let titleAttributes = spec.titleAttributes {
+      setup(attributedTitleLabel: titleLabel, withAttributes: titleAttributes)
+    }
+    if let bodyAttributes = spec.bodyAttributes {
+      setup(attributedTitleLabel: bodyLabel, withAttributes: bodyAttributes)
+    }
+    if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
   }
 
-  func setupDesignDefaults() {
+  fileprivate func setupDesign(messageSpec spec: RMessageSpec) {
     if spec.cornerRadius > 0 { clipsToBounds = true }
-
     backgroundColor = spec.backgroundColor
+  }
+
+  fileprivate func setupDesign(forTitleLabel titleLabel: UILabel, messageSpec spec: RMessageSpec) {
     titleLabel.numberOfLines = 0
     titleLabel.lineBreakMode = .byWordWrapping
     titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
@@ -27,7 +37,14 @@ extension RMessage {
     titleLabel.shadowColor = nil
     titleLabel.shadowOffset = CGSize.zero
     titleLabel.backgroundColor = nil
+    titleLabel.font = spec.titleFont
+    titleLabel.textAlignment = spec.titleTextAlignment
+    titleLabel.textColor = spec.titleColor
+    titleLabel.shadowColor = spec.titleShadowColor
+    titleLabel.shadowOffset = spec.titleShadowOffset
+  }
 
+  fileprivate func setupDesign(forBodyLabel bodyLabel: UILabel, messageSpec spec: RMessageSpec) {
     bodyLabel.numberOfLines = 0
     bodyLabel.lineBreakMode = .byWordWrapping
     bodyLabel.font = UIFont.boldSystemFont(ofSize: 12)
@@ -36,42 +53,33 @@ extension RMessage {
     bodyLabel.shadowColor = nil
     bodyLabel.shadowOffset = CGSize.zero
     bodyLabel.backgroundColor = nil
-  }
-
-  func setupLabelsDesign() {
-    titleLabel.font = spec.titleFont
-    titleLabel.textAlignment = spec.titleTextAlignment
-    titleLabel.textColor = spec.titleColor
-    titleLabel.shadowColor = spec.titleShadowColor
-    titleLabel.shadowOffset = spec.titleShadowOffset
     bodyLabel.font = spec.bodyFont
     bodyLabel.textAlignment = spec.bodyTextAlignment
     bodyLabel.textColor = spec.bodyColor
     bodyLabel.shadowColor = spec.bodyShadowColor
     bodyLabel.shadowOffset = spec.bodyShadowOffset
-
-    setupAttributedLabels()
-    if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
   }
 
-  func setupAttributedLabels() {
-    guard let titleText = titleLabel?.text, let titleAttributes = spec.titleAttributes else {
+  fileprivate func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+    guard let titleText = titleLabel.text else {
       return
     }
-    let titleAttributedText = NSAttributedString(string: titleText, attributes: titleAttributes)
-    titleLabel?.attributedText = titleAttributedText
-
-    guard let bodyText = bodyLabel?.text, let bodyAttributes = spec.bodyAttributes else {
-      return
-    }
-    let bodyAttributedText = NSAttributedString(string: bodyText, attributes: bodyAttributes)
-    bodyLabel?.attributedText = bodyAttributedText
+    let titleAttributedText = NSAttributedString(string: titleText, attributes: attrs)
+    titleLabel.attributedText = titleAttributedText
   }
 
-  func sizeContentViewLabelsLayoutWidth(toSuperview superview: UIView) {
-    guard let titleLabel = titleLabel, let bodyLabel = bodyLabel else {
+  fileprivate func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+    guard let bodyText = bodyLabel.text else {
       return
     }
+    let bodyAttributedText = NSAttributedString(string: bodyText, attributes: attrs)
+    bodyLabel.attributedText = bodyAttributedText
+  }
+
+  func setPreferredLayoutWidth(
+    forTitleLabel titleLabel: UILabel, bodyLabel: UILabel, inSuperview superview: UIView,
+    sizingToFit: Bool
+  ) {
     var accessoryViewsAndPadding: CGFloat = 0
     if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
     if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }
@@ -85,7 +93,7 @@ extension RMessage {
       bodyLabel.preferredMaxLayoutWidth = preferredLayoutWidth
     }
 
-    guard spec.titleBodyLabelsSizeToFit else {
+    guard sizingToFit else {
       return
     }
     // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
@@ -96,14 +104,14 @@ extension RMessage {
       titleOneLineSize = titleAttributedText.size()
     }
     if let titleText = titleLabel.text {
-      titleOneLineSize = titleText.size(withAttributes: [.font: spec.titleFont])
+      titleOneLineSize = titleText.size(withAttributes: [.font: titleLabel.font])
     }
 
     if let bodyAttributedText = bodyLabel.attributedText {
       bodyOneLineSize = bodyAttributedText.size()
     }
-    if let bodyText = titleLabel.text {
-      bodyOneLineSize = bodyText.size(withAttributes: [.font: spec.bodyFont])
+    if let bodyText = bodyLabel.text {
+      bodyOneLineSize = bodyText.size(withAttributes: [.font: bodyLabel.font])
     }
 
     if titleOneLineSize != nil && bodyOneLineSize != nil {

@@ -22,15 +22,15 @@ class RController: RMessageDelegate {
   var defaultViewController: UIViewController?
   private let mLock = NSLock(), nLock = NSLock()
 
-  /// By setting this delegate it's possible to set a custom offset for the message view
+  /// By setting this delegate it's possible to set a custom offset for the message
   weak var delegate: RControllerDelegate?
 
   // Protect access to this variable from data races
-  private(set) var isMessageViewOnScreen = false
+  private(set) var messageOnScreen = false
 
   /** Returns the currently queued array of RMessage */
   var queuedMessages: [RMessage] {
-    // Double check to make sure but I believe we can simply pass the array of RmessageView's here are arrays are value
+    // Double check to make sure but I believe we can simply pass the array of Rmessage's here are arrays are value
     // types
     return messages
   }
@@ -81,7 +81,7 @@ class RController: RMessageDelegate {
     prepareForPresentation(message: message)
   }
 
-  /** Prepares the message view to be displayed in the future. It is queued and then displayed in
+  /** Prepares the message to be displayed in the future. It is queued and then displayed in
    fadeInCurrentNotification. You don't have to use this method. */
   func prepareForPresentation(message: RMessage) {
     mLock.lock()
@@ -89,15 +89,15 @@ class RController: RMessageDelegate {
     mLock.unlock()
 
     nLock.lock()
-    if !isMessageViewOnScreen {
+    if !messageOnScreen {
       nLock.unlock()
-      presentQueuedMessageView()
+      presentQueuedMessage()
       return
     }
     nLock.unlock()
   }
 
-  private func presentQueuedMessageView() {
+  private func presentQueuedMessage() {
     mLock.lock()
 
     if messages.count == 0 {
@@ -105,10 +105,10 @@ class RController: RMessageDelegate {
       return
     }
 
-    if let messageView = messages.first {
+    if let message = messages.first {
       mLock.unlock()
-      delegate?.customize?(messageView: messageView)
-      messageView.present()
+      delegate?.customize?(message: message)
+      message.present()
     }
   }
 
@@ -118,7 +118,7 @@ class RController: RMessageDelegate {
    @return YES if the currently displayed notification was successfully dismissed. NO if no
    notification was currently displayed.
    */
-  func dismissOnScreenMessageView(withCompletion completion: (() -> Void)? = nil) -> Bool {
+  func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
     mLock.lock()
     defer { mLock.unlock() }
     if messages.count == 0 {
@@ -132,13 +132,13 @@ class RController: RMessageDelegate {
 
   // MARK: RMessageDelegate Methods
 
-  func messageViewIsPresenting(_: RMessage) {
+  func messageIsPresenting(_: RMessage) {
     nLock.lock()
-    isMessageViewOnScreen = true
+    messageOnScreen = true
     nLock.unlock()
   }
 
-  func messageViewDidDismiss(_: RMessage) {
+  func messageDidDismiss(_: RMessage) {
     mLock.lock()
     if messages.count > 0 {
       messages.remove(at: 0)
@@ -146,13 +146,13 @@ class RController: RMessageDelegate {
     mLock.unlock()
 
     nLock.lock()
-    isMessageViewOnScreen = false
+    messageOnScreen = false
     nLock.unlock()
 
     mLock.lock()
     if messages.count > 0 {
       mLock.unlock()
-      presentQueuedMessageView()
+      presentQueuedMessage()
       return
     }
     mLock.unlock()

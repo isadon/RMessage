@@ -218,7 +218,7 @@ class DemoViewController: UIViewController, RControllerDelegate {
   }
 
   @IBAction private func didTapDismissCurrentMessage(_: Any) {
-    _ = rControl.dismissOnScreenMessageView()
+    _ = rControl.dismissOnScreenMessage()
   }
 
   @IBAction private func didTapDismissModal(_: Any) {
@@ -281,7 +281,7 @@ class DemoViewController: UIViewController, RControllerDelegate {
   }
 
   @objc private func buttonPressed() {
-    _ = rControl.dismissOnScreenMessageView()
+    _ = rControl.dismissOnScreenMessage()
     rControl.showMessage(withSpec: successSpec, title: "Thanks for updating")
   }
 

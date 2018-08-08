@@ -10,20 +10,20 @@ import Foundation
 import HexColors
 import UIKit
 
-class RMessage: UIView, UIGestureRecognizerDelegate {
+class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   /* Animation constants */
-  let animationDuration = 0.3
-  let onScreenTime = 1.5
-  let extraOnScreenTimePerPixel = 0.04
+  private let animationDuration = 0.5
+  private let onScreenTime = 1.5
+  private let extraOnScreenTimePerPixel = 0.04
 
   weak var delegate: RMessageDelegate?
 
-  let spec: RMessageSpec
-  let targetPosition: RMessagePosition
+  private(set) var spec: RMessageSpec
+  private(set) var targetPosition: RMessagePosition
   var dimissTime: TimeInterval {
     switch spec.durationType {
     case .automatic:
-      return animationDuration + onScreenTime + Double(frame.size.height) * extraOnScreenTimePerPixel
+      return animationDuration + onScreenTime + Double(bounds.size.height) * extraOnScreenTimePerPixel
     case .tap, .swipe, .tapSwipe, .endless:
       return -1
     case .custom:
@@ -32,82 +32,61 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
   }
 
   /** The view controller this message is displayed in */
-  lazy var viewController: UIViewController = defaultViewControllerForPresentation()
+  private(set) lazy var viewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
 
-  @IBOutlet var containerView: UIView!
+  @IBOutlet private(set) var containerView: UIView!
 
   @IBOutlet private(set) var contentView: UIView!
 
-  var leftView: UIView?
-  var rightView: UIView?
-  var backgroundView: UIView?
+  private(set) var leftView: UIView?
+  private(set) var rightView: UIView?
+  private(set) var backgroundView: UIView?
 
   @IBOutlet private(set) var titleLabel: UILabel!
   @IBOutlet private(set) var bodyLabel: UILabel!
 
-  @IBOutlet var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
-  @IBOutlet var titleLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet var titleLabelTrailingConstraint: NSLayoutConstraint!
-  @IBOutlet var bodyLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet var bodyLabelTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleLabelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private var titleLabelTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var bodyLabelLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet private var bodyLabelTrailingConstraint: NSLayoutConstraint!
 
-  var contentViewSafeAreaGuideConstraint: NSLayoutConstraint
-  @IBOutlet var contentViewTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet private var contentViewTrailingConstraint: NSLayoutConstraint!
 
-  /** The final constant value that should be set for the topToVCTopLayoutConstraint when animating */
-  var topToVCFinalConstraint: NSLayoutConstraint?
-
-  lazy var topToVCStartingConstraint: NSLayoutConstraint = {
-    assert(superview != nil, "RMessage instance must have a superview by this point!")
-    return topToVCLayoutConstraint
+  private lazy var animator: RMessageAnimator = {
+    var animator = SlideAnimator(
+      targetPosition: targetPosition, view: self, superview: viewController.view,
+      contentView: contentView
+    )
+    animator.delegate = self
+    animator.disableAnimationPadding = spec.disableSpringAnimationPadding
+    animator.animationPresentDuration = animationDuration
+    animator.animationDismissDuration = animationDuration - 0.2
+    animator.animationStartAlpha = 0
+    /* As per apple docs when using UIVisualEffectView and blurring the superview of the blur view
+     must have an opacity of 1.f */
+    animator.animationEndAlpha = spec.blurBackground ? 1.0 : spec.targetAlpha
+    return animator
   }()
-
-  /** The vertical space between the message view top to its view controller top */
-  lazy var topToVCLayoutConstraint: NSLayoutConstraint = {
-    assert(superview != nil, "RMessage instance must have a superview by this point!")
-    if targetPosition != .bottom {
-      return NSLayoutConstraint(
-        item: self, attribute: .bottom, relatedBy: .equal,
-        toItem: superview!, attribute: .top, multiplier: 1, constant: 0
-      )
-    } else {
-      return NSLayoutConstraint(
-        item: self, attribute: .top, relatedBy: .equal, toItem: superview!,
-        attribute: .bottom, multiplier: 1, constant: 0
-      )
-    }
-  }()
-
-  /** The opacity of the message view. When customizing RMessage always set this value to the desired opacity instead of
-   the alpha property. ly the alpha property is changed during animations; this property allows RMessage to
-   always know the final alpha value. */
-  var targetAlpha = CGFloat(0.97)
-
-  /** The amount of vertical padding/height to add to RMessage's height so as to perform a spring animation without
-   visually showing an empty gap due to the spring animation overbounce. This value changes dynamically due to
-   iOS changing the overbounce dynamically according to view size. */
-  var springAnimationPadding = CGFloat(5.0)
 
   /** Is the message currently in the process of presenting, but not yet displayed? */
-  var isPresenting = false
+  private(set) var isPresenting = false
 
   /** Is the message currently on screen, fully displayed? */
-  var isFullyDisplayed = false
+  private(set) var isFullyDisplayed = false
 
-  /** Callback block called after the user taps on the messageView */
-  let tapCompletion: (() -> Void)?
+  /** Callback block called after the user taps on the message */
+  private(set) var tapCompletion: (() -> Void)?
 
-  /** Callback block called after the messageView finishes presenting */
-  let presentCompletion: (() -> Void)?
+  /** Callback block called after the message finishes presenting */
+  private(set) var presentCompletion: (() -> Void)?
 
-  /** Callback block called after the messageView finishes dismissing */
-  let dismissCompletion: (() -> Void)?
+  /** Callback block called after the message finishes dismissing */
+  private(set) var dismissCompletion: (() -> Void)?
 
-  var messageSpecIconImageViewSet = false
+  private var messageSpecIconImageViewSet = false
 
-  var messageSpecBackgroundImageViewSet = false
-
-  var springAnimationPaddingCalculated = false
+  private var messageSpecBackgroundImageViewSet = false
 
   // MARK: Instance Methods
 
@@ -123,9 +102,7 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
     self.leftView = leftView
     self.rightView = rightView
     self.backgroundView = backgroundView
-    targetAlpha = spec.targetAlpha
 
-    contentViewSafeAreaGuideConstraint = NSLayoutConstraint()
     super.init(frame: CGRect.zero)
 
     loadNib()
@@ -137,8 +114,9 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
     if let viewController = viewController {
       self.viewController = viewController
     }
-    setupComponents()
-    setupDesign()
+
+    setupComponents(withMessageSpec: spec)
+    setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
     setupGestureRecognizers()
   }
 
@@ -148,11 +126,10 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
     tapCompletion = nil
     presentCompletion = nil
     dismissCompletion = nil
-    contentViewSafeAreaGuideConstraint = NSLayoutConstraint()
     super.init(coder: aDecoder)
   }
 
-  func loadNib() {
+  private func loadNib() {
     Bundle(for: RMessage.self).loadNibNamed(String(describing: RMessage.self), owner: self, options: nil)
     containerView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -162,5 +139,141 @@ class RMessage: UIView, UIGestureRecognizerDelegate {
     containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+  }
+
+  func setupComponents(withMessageSpec spec: RMessageSpec) {
+    if let image = spec.iconImage, leftView == nil {
+      leftView = iconImageView(withImage: image, imageTintColor: spec.iconImageTintColor, superview: self)
+    }
+
+    // Let any left view passed in programmatically override any icon image view initiated via a message spec
+    if let leftView = leftView {
+      setup(leftView: leftView, inSuperview: self)
+    }
+
+    if let rightView = rightView {
+      setup(rightView: rightView, inSuperview: self)
+    }
+
+    if let backgroundImage = spec.backgroundImage, backgroundView == nil {
+      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
+    }
+
+    // Let any background view passed in programmatically override any background image view initiated
+    // via a message spec
+    if let backgroundView = backgroundView {
+      setup(backgroundView: backgroundView, inSuperview: self)
+    }
+
+    if spec.blurBackground {
+      setupBlurBackgroundView(inSuperview: self)
+    }
+  }
+
+  func setupLabelConstraintsToSizeToFit() {
+    assert(superview != nil, "RMessage instance must have a superview by this point!")
+    guard spec.titleBodyLabelsSizeToFit else {
+      return
+    }
+    if let trailingConstraint = contentViewTrailingConstraint {
+      trailingConstraint.isActive = false
+    }
+
+    NSLayoutConstraint.deactivate([
+      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+    ])
+
+    titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    NSLayoutConstraint.activate([
+      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+    ])
+  }
+
+  // MARK: - Respond to Layout Changes
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
+      leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
+    }
+
+    if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
+    if let superview = superview {
+      setPreferredLayoutWidth(
+        forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
+        sizingToFit: spec.titleBodyLabelsSizeToFit
+      )
+    }
+  }
+
+  override func safeAreaInsetsDidChange() {
+    animator.safeAreaInsetsDidChange?(forView: self)
+  }
+
+  func interfaceDidRotate() {
+    if isPresenting && spec.durationType != .endless {
+      // Cancel the previous dismissal and restart dismissal clock
+      DispatchQueue.main.async {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.dismiss), object: nil)
+        self.perform(#selector(self.dismiss), with: nil, afterDelay: self.dimissTime)
+      }
+    }
+  }
+
+  /** Present the message */
+  func present(withCompletion completion: (() -> Void)? = nil) {
+    animator.present(withCompletion: completion)
+    if spec.durationType == .automatic {
+      perform(#selector(animator.dismiss), with: nil, afterDelay: dimissTime)
+    }
+  }
+
+  @objc func dismiss(withCompletion completion: (() -> Void)? = nil) {
+    NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(animator.dismiss), object: nil)
+    animator.dismiss(withCompletion: completion)
+  }
+
+  // MARK: - RMessageAnimatorDelegate Methods
+
+  func animatorWillLayout(animator _: RMessageAnimator) {
+    if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
+  }
+
+  func animatorDidLayout(animator _: RMessageAnimator) {
+    // Pass in the expected superview since we don't have one yet
+    // Allow the labels to size themselves by telling them their layout width
+    guard let superview = superview else {
+      return
+    }
+    setPreferredLayoutWidth(
+      forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
+      sizingToFit: spec.titleBodyLabelsSizeToFit
+    )
+  }
+
+  func animationBlockForPresentation(animator _: RMessageAnimator) {
+    isPresenting = true
+    delegate?.messageIsPresenting?(self)
+  }
+
+  func animatorDidPresent(animator _: RMessageAnimator) {
+    isPresenting = false
+    isFullyDisplayed = true
+    delegate?.messageDidPresent?(self)
+    presentCompletion?()
+  }
+
+  func animatorDidDismiss(animator _: RMessageAnimator) {
+    delegate?.messageDidDismiss?(self)
+    dismissCompletion?()
+  }
+
+  func animatorWillAnimateDismissal(animator _: RMessageAnimator) {
+    isFullyDisplayed = false
   }
 }
