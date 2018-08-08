@@ -11,7 +11,7 @@
 		7A2DD593211929E500025ADE /* RMessageAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD592211929E500025ADE /* RMessageAnimator.swift */; };
 		7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD59421192A6B00025ADE /* SlideAnimator.swift */; };
 		7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */; };
-		7A7AB90C2115191C00A9D5C1 /* UIViewController+TopMostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIViewController+TopMostController.swift */; };
+		7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */; };
 		7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38423211386C600DA8076 /* AppDelegate.swift */; };
 		7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38425211386C600DA8076 /* DemoViewController.swift */; };
 		7AB3842B211386C700DA8076 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AB3842A211386C700DA8076 /* Assets.xcassets */; };
@@ -26,10 +26,6 @@
 		7AB3847721138F7500DA8076 /* RControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847621138F7500DA8076 /* RControllerDelegate.swift */; };
 		7AB3DA8221150CFC0061F5B4 /* RMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3DA8121150CFC0061F5B4 /* RMessageDelegate.swift */; };
 		7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D73211805D900543F68 /* RMessage+Design.swift */; };
-		7AE10D762118071F00543F68 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D752118071F00543F68 /* Helpers.swift */; };
-		7AE10D78211808B300543F68 /* RMessage+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D77211808B300543F68 /* RMessage+Layout.swift */; };
-		7AE10D7A211809C900543F68 /* RMessage+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D79211809C900543F68 /* RMessage+Constraints.swift */; };
-		7AE10D7C21180AFC00543F68 /* RMessage+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7B21180AFC00543F68 /* RMessage+Presentation.swift */; };
 		7AE10D7E21180CBF00543F68 /* RMessage+TouchCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */; };
 		7AFB50E3211842D700137DB8 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */; };
 /* End PBXBuildFile section */
@@ -57,7 +53,7 @@
 		7A2DD59421192A6B00025ADE /* SlideAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
 		7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageSpec.swift; sourceTree = "<group>"; };
-		7A7AB90B2115191C00A9D5C1 /* UIViewController+TopMostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+TopMostController.swift"; sourceTree = "<group>"; };
+		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
 		7AB38420211386C600DA8076 /* RMessageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB38423211386C600DA8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB38425211386C600DA8076 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -78,10 +74,6 @@
 		7AB3847621138F7500DA8076 /* RControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RControllerDelegate.swift; sourceTree = "<group>"; };
 		7AB3DA8121150CFC0061F5B4 /* RMessageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageDelegate.swift; sourceTree = "<group>"; };
 		7AE10D73211805D900543F68 /* RMessage+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Design.swift"; sourceTree = "<group>"; };
-		7AE10D752118071F00543F68 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		7AE10D77211808B300543F68 /* RMessage+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Layout.swift"; sourceTree = "<group>"; };
-		7AE10D79211809C900543F68 /* RMessage+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Constraints.swift"; sourceTree = "<group>"; };
-		7AE10D7B21180AFC00543F68 /* RMessage+Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Presentation.swift"; sourceTree = "<group>"; };
 		7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+TouchCompletion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +108,7 @@
 			children = (
 				7A03FC4121180EB50002EBCF /* RMessage+Components.swift */,
 				7AE10D73211805D900543F68 /* RMessage+Design.swift */,
+				7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -139,7 +132,7 @@
 		7A7AB90A2115191C00A9D5C1 /* General Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7A7AB90B2115191C00A9D5C1 /* UIViewController+TopMostController.swift */,
+				7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */,
 			);
 			path = "General Extensions";
 			sourceTree = "<group>";
@@ -248,15 +241,9 @@
 		7AE10D72211805BE00543F68 /* RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				7A03FC4121180EB50002EBCF /* RMessage+Components.swift */,
-				7AE10D79211809C900543F68 /* RMessage+Constraints.swift */,
-				7AE10D77211808B300543F68 /* RMessage+Layout.swift */,
-				7AE10D7B21180AFC00543F68 /* RMessage+Presentation.swift */,
-				7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */,
 				7A3E9711211A218C00A18027 /* Animators */,
 				7A0A7C4D211A5619005472B4 /* Extensions */,
 				7AB3847421138E9900DA8076 /* RMessage.swift */,
-				7AE10D752118071F00543F68 /* Helpers.swift */,
 			);
 			path = RMessage;
 			sourceTree = "<group>";
@@ -448,22 +435,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB3847321138E8D00DA8076 /* RController.swift in Sources */,
-				7AE10D7A211809C900543F68 /* RMessage+Constraints.swift in Sources */,
 				7AE10D7E21180CBF00543F68 /* RMessage+TouchCompletion.swift in Sources */,
 				7A2DD593211929E500025ADE /* RMessageAnimator.swift in Sources */,
 				7AB3847721138F7500DA8076 /* RControllerDelegate.swift in Sources */,
 				7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */,
-				7AE10D762118071F00543F68 /* Helpers.swift in Sources */,
 				7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */,
 				7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */,
-				7AE10D78211808B300543F68 /* RMessage+Layout.swift in Sources */,
 				7AB3DA8221150CFC0061F5B4 /* RMessageDelegate.swift in Sources */,
-				7AE10D7C21180AFC00543F68 /* RMessage+Presentation.swift in Sources */,
 				7AB3847521138E9900DA8076 /* RMessage.swift in Sources */,
 				7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */,
 				7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */,
 				7A03FC4221180EB50002EBCF /* RMessage+Components.swift in Sources */,
-				7A7AB90C2115191C00A9D5C1 /* UIViewController+TopMostController.swift in Sources */,
+				7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
