@@ -116,8 +116,9 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     if let viewController = viewController {
       self.viewController = viewController
     }
-    setupComponents()
     setupDesign()
+
+    setupComponents(withMessageSpec: spec)
     setupGestureRecognizers()
   }
 
@@ -140,6 +141,35 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+  }
+
+  func setupComponents(withMessageSpec spec: RMessageSpec) {
+    if let image = spec.iconImage, leftView == nil {
+      leftView = iconImageView(withImage: image, imageTintColor: spec.iconImageTintColor, superview: self)
+    }
+
+    // Let any left view passed in programmatically override any icon image view initiated via a message spec
+    if let leftView = leftView {
+      setup(leftView: leftView, inSuperview: self)
+    }
+
+    if let rightView = rightView {
+      setup(rightView: rightView, inSuperview: self)
+    }
+
+    if let backgroundImage = spec.backgroundImage, backgroundView == nil {
+      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
+    }
+
+    // Let any background view passed in programmatically override any background image view initiated
+    // via a message spec
+    if let backgroundView = backgroundView {
+      setup(backgroundView: backgroundView, inSuperview: self)
+    }
+
+    if spec.blurBackground {
+      setupBlurBackgroundView(inSuperview: self)
+    }
   }
   override func safeAreaInsetsDidChange() {
     animator.safeAreaInsetsDidChange?(forView: self)
