@@ -134,7 +134,7 @@ class DemoViewController: UIViewController, RControllerDelegate {
 
   @IBAction private func didTapLong(_: Any) {
     var durationSpec = warningSpec
-    durationSpec.durationType = .custom
+    durationSpec.durationType = .timed
     durationSpec.timeToDismiss = 10.0
 
     rControl.showMessage(
