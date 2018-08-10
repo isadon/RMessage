@@ -26,7 +26,7 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
       return animationDuration + onScreenTime + Double(bounds.size.height) * extraOnScreenTimePerPixel
     case .tap, .swipe, .tapSwipe, .endless:
       return -1
-    case .custom:
+    case .timed:
       return abs(spec.timeToDismiss)
     }
   }
@@ -197,7 +197,7 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   /** Present the message */
   func present(withCompletion completion: (() -> Void)? = nil) {
     animator.present(withCompletion: completion)
-    if spec.durationType == .automatic || spec.durationType == .custom {
+    if spec.durationType == .automatic || spec.durationType == .timed {
       perform(#selector(animator.dismiss), with: nil, afterDelay: dimissTime)
     }
   }
@@ -229,7 +229,7 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   }
 
   func interfaceDidRotate() {
-    guard isPresenting && (spec.durationType == .automatic || spec.durationType == .custom) else {
+    guard isPresenting && (spec.durationType == .automatic || spec.durationType == .timed) else {
       return
     }
     // Cancel the previous dismissal and restart dismissal clock
