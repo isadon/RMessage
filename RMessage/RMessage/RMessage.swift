@@ -194,6 +194,19 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     ])
   }
 
+  /** Present the message */
+  func present(withCompletion completion: (() -> Void)? = nil) {
+    animator.present(withCompletion: completion)
+    if spec.durationType == .automatic || spec.durationType == .custom {
+      perform(#selector(animator.dismiss), with: nil, afterDelay: dimissTime)
+    }
+  }
+
+  @objc func dismiss(withCompletion completion: (() -> Void)? = nil) {
+    NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(animator.dismiss), object: nil)
+    animator.dismiss(withCompletion: completion)
+  }
+
   // MARK: - Respond to Layout Changes
 
   override func layoutSubviews() {
@@ -216,26 +229,14 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   }
 
   func interfaceDidRotate() {
-    if isPresenting && spec.durationType != .endless {
-      // Cancel the previous dismissal and restart dismissal clock
-      DispatchQueue.main.async {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.dismiss), object: nil)
-        self.perform(#selector(self.dismiss), with: nil, afterDelay: self.dimissTime)
-      }
+    guard isPresenting && (spec.durationType == .automatic || spec.durationType == .custom) else {
+      return
     }
-  }
-
-  /** Present the message */
-  func present(withCompletion completion: (() -> Void)? = nil) {
-    animator.present(withCompletion: completion)
-    if spec.durationType == .automatic {
-      perform(#selector(animator.dismiss), with: nil, afterDelay: dimissTime)
+    // Cancel the previous dismissal and restart dismissal clock
+    DispatchQueue.main.async {
+      NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.animator.dismiss), object: nil)
+      self.perform(#selector(self.animator.dismiss), with: nil, afterDelay: self.dimissTime)
     }
-  }
-
-  @objc func dismiss(withCompletion completion: (() -> Void)? = nil) {
-    NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(animator.dismiss), object: nil)
-    animator.dismiss(withCompletion: completion)
   }
 
   // MARK: - RMessageAnimatorDelegate Methods
