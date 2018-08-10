@@ -10,15 +10,25 @@ import Foundation
 import UIKit
 
 @objc protocol RMessageAnimator {
-  /// Tells the animator to present the view with its animation.
+  /// Ask the animator to present the view with animation. This call may or may not succeed depending on whether
+  /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
+  /// In cases when the animator refuses to present this method returns false, otherwise it returns true.
   ///
-  /// - Parameter completion: A code block to be run after the animation finishes presenting.
-  @objc func present(withCompletion completion: (() -> Void)?)
+  /// - Note: Your implementation of this method must allow for this method to be called multiple times by ignoring
+  /// subsequent requests.
+  /// - Parameter completion: A completion closure to execute after presentation is complete.
+  /// - Returns: A boolean value indicating if the animator executed your instruction to present.
+  @objc func present(withCompletion completion: (() -> Void)?) -> Bool
 
-  /// Tells the animator to dismiss the view with its animation.
+  /// Ask the animator to dismiss the view with animation. This call may or may not succeed depending on whether
+  /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
+  /// In cases when the animator refuses to dismiss this method returns false, otherwise it returns true.
   ///
-  /// - Parameter completion: A code block to be run after the animation finishes dismissing.
-  @objc func dismiss(withCompletion completion: (() -> Void)?)
+  /// - Note: Your implementation of this method must allow for this method to be called multiple times by ignoring
+  /// subsequent requests.
+  /// - Parameter completion: A completion closure to execute after presentation is complete.
+  /// - Returns: A boolean value indicating if the animator executed your instruction to dismiss.
+  @objc func dismiss(withCompletion completion: (() -> Void)?) -> Bool
 
   /// Notifies the animator that the views' superview safe area did change.
   ///
@@ -55,10 +65,20 @@ import UIKit
   /// - Parameter animator: The animator instance.
   @objc optional func animatorWillAnimatePresentation(animator: RMessageAnimator)
 
-  /// Notifies the animator delegate that the animator will soon animate the dismissal.
+  /// Notifies the animator delegate that the animator is animating the presentation of the view.
+  ///
+  /// - Parameter animator: The animator instance.
+  @objc optional func animatorIsAnimatingPresentation(animator: RMessageAnimator)
+
+  /// Notifies the animator delegate that the animator will soon animate the dismissal of the view.
   ///
   /// - Parameter animator: The animator instance.
   @objc optional func animatorWillAnimateDismissal(animator: RMessageAnimator)
+
+  /// Notifies the animator delegate that the animator is animating the dismissal of the view.
+  ///
+  /// - Parameter animator: The animator instance.
+  @objc optional func animatorIsAnimatingDismissal(animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator has fully presented the view.
   ///

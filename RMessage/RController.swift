@@ -124,7 +124,7 @@ class RController: RMessageDelegate {
     if messages.count == 0 {
       return false
     }
-    if let currentMessage = messages.first, currentMessage.isFullyDisplayed {
+    if let currentMessage = messages.first, currentMessage.screenStatus == .presenting {
       currentMessage.dismiss(withCompletion: completion)
     }
     return true

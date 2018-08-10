@@ -69,11 +69,28 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     return animator
   }()
 
-  /** Is the message currently in the process of presenting, but not yet displayed? */
-  private(set) var isPresenting = false
+  /// The current presentation status of the message
+  enum PresentationStatus {
+    /// The message will soon present though is not on screen yet.
+    case willPresent
 
-  /** Is the message currently on screen, fully displayed? */
-  private(set) var isFullyDisplayed = false
+    /// The message is on screen and presenting.
+    case presenting
+
+    /// The message is on screen but will soon dismiss.
+    case willDismiss
+
+    /// The message has started dismissing.
+    case dismissing
+  }
+
+  private(set) var screenStatus: PresentationStatus = .willPresent
+
+  /** Did the message already present */
+  private(set) var didPresent = false
+
+  /** Did the message already present */
+  private(set) var didDismiss = false
 
   /** Callback block called after the user taps on the message */
   private(set) var tapCompletion: (() -> Void)?
@@ -196,15 +213,19 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
 
   /** Present the message */
   func present(withCompletion completion: (() -> Void)? = nil) {
-    animator.present(withCompletion: completion)
+    guard animator.present(withCompletion: completion) else {
+      return
+    }
     if spec.durationType == .automatic || spec.durationType == .timed {
       perform(#selector(animator.dismiss), with: nil, afterDelay: dimissTime)
     }
   }
 
   @objc func dismiss(withCompletion completion: (() -> Void)? = nil) {
+    guard animator.dismiss(withCompletion: completion) else {
+      return
+    }
     NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(animator.dismiss), object: nil)
-    animator.dismiss(withCompletion: completion)
   }
 
   // MARK: - Respond to Layout Changes
@@ -229,7 +250,7 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
   }
 
   func interfaceDidRotate() {
-    guard isPresenting && (spec.durationType == .automatic || spec.durationType == .timed) else {
+    guard screenStatus == .presenting && (spec.durationType == .automatic || spec.durationType == .timed) else {
       return
     }
     // Cancel the previous dismissal and restart dismissal clock
@@ -257,24 +278,35 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     )
   }
 
-  func animationBlockForPresentation(animator _: RMessageAnimator) {
-    isPresenting = true
+  func animatorWillAnimatePresentation(animator _: RMessageAnimator) {
+    screenStatus = .willPresent
+    delegate?.messageWillPresent?(self)
+  }
+
+  func animatorIsAnimatingPresentation(animator _: RMessageAnimator) {
+    screenStatus = .presenting
     delegate?.messageIsPresenting?(self)
   }
 
   func animatorDidPresent(animator _: RMessageAnimator) {
-    isPresenting = false
-    isFullyDisplayed = true
+    didPresent = true
     delegate?.messageDidPresent?(self)
     presentCompletion?()
   }
 
-  func animatorDidDismiss(animator _: RMessageAnimator) {
-    delegate?.messageDidDismiss?(self)
-    dismissCompletion?()
+  func animatorWillAnimateDismissal(animator _: RMessageAnimator) {
+    screenStatus = .willDismiss
+    delegate?.messageWillDismiss?(self)
   }
 
-  func animatorWillAnimateDismissal(animator _: RMessageAnimator) {
-    isFullyDisplayed = false
+  func animatorIsAnimatingDismissal(animator _: RMessageAnimator) {
+    screenStatus = .dismissing
+    delegate?.messageIsDismissing?(self)
+  }
+
+  func animatorDidDismiss(animator _: RMessageAnimator) {
+    didDismiss = true
+    delegate?.messageDidDismiss?(self)
+    dismissCompletion?()
   }
 }
