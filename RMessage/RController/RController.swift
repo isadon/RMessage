@@ -20,7 +20,7 @@ enum RMessageDuration {
 
 class RController: RMessageDelegate {
   var defaultViewController: UIViewController?
-  private let mLock = NSLock(), nLock = NSLock()
+  let queue: OperationQueue
 
   /// By setting this delegate it's possible to set a custom offset for the message
   weak var delegate: RControllerDelegate?
@@ -28,20 +28,10 @@ class RController: RMessageDelegate {
   // Protect access to this variable from data races
   private(set) var messageOnScreen = false
 
-  /** Returns the currently queued array of RMessage */
-  var queuedMessages: [RMessage] {
-    // Double check to make sure but I believe we can simply pass the array of Rmessage's here are arrays are value
-    // types
-    return messages
-  }
-
-  // Protect access to this variable from data races
-  private var messages: [RMessage]
-
   init() {
-    mLock.lock()
-    defer { mLock.unlock() }
-    messages = [RMessage]()
+    queue = OperationQueue()
+    // Make it a serial queue
+    queue.maxConcurrentOperationCount = 1
   }
 
   /**
@@ -77,39 +67,9 @@ class RController: RMessageDelegate {
     ) else {
       return
     }
-    message.delegate = self
-    prepareForPresentation(message: message)
-  }
-
-  /** Prepares the message to be displayed in the future. It is queued and then displayed in
-   fadeInCurrentNotification. You don't have to use this method. */
-  func prepareForPresentation(message: RMessage) {
-    mLock.lock()
-    messages.append(message)
-    mLock.unlock()
-
-    nLock.lock()
-    if !messageOnScreen {
-      nLock.unlock()
-      presentQueuedMessage()
-      return
-    }
-    nLock.unlock()
-  }
-
-  private func presentQueuedMessage() {
-    mLock.lock()
-
-    if messages.count == 0 {
-      mLock.unlock()
-      return
-    }
-
-    if let message = messages.first {
-      mLock.unlock()
-      delegate?.customize?(message: message)
-      message.present()
-    }
+    delegate?.customize?(message: message)
+    let presentOp = RMOperation(message: message)
+    queue.addOperation(presentOp)
   }
 
   /**
@@ -119,56 +79,21 @@ class RController: RMessageDelegate {
    notification was currently displayed.
    */
   func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
-    mLock.lock()
-    defer { mLock.unlock() }
-    if messages.count == 0 {
-      return false
-    }
-    if let currentMessage = messages.first, currentMessage.screenStatus == .presenting {
-      currentMessage.dismiss(withCompletion: completion)
+    if let operation = queue.operations.first as? RMOperation {
+      operation.message.dismiss(withCompletion: completion)
     }
     return true
   }
 
   // MARK: RMessageDelegate Methods
 
-  func messageIsPresenting(_: RMessage) {
-    nLock.lock()
-    messageOnScreen = true
-    nLock.unlock()
-  }
-
-  func messageDidDismiss(_: RMessage) {
-    mLock.lock()
-    if messages.count > 0 {
-      messages.remove(at: 0)
-    }
-    mLock.unlock()
-
-    nLock.lock()
-    messageOnScreen = false
-    nLock.unlock()
-
-    mLock.lock()
-    if messages.count > 0 {
-      mLock.unlock()
-      presentQueuedMessage()
-      return
-    }
-    mLock.unlock()
-  }
-
   /**
    Call this method to notify any presenting or on screen messages that the interface has rotated.
    Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
    */
   func interfaceDidRotate() {
-    mLock.lock()
-    if messages.count == 0 {
-      mLock.unlock()
-      return
+    if let operation = queue.operations.first as? RMOperation, operation.message.screenStatus == .presenting {
+      operation.message.interfaceDidRotate()
     }
-    messages.first?.interfaceDidRotate()
-    mLock.unlock()
   }
 }
