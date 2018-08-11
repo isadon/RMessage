@@ -60,7 +60,7 @@ class RMOperation: Operation, RMessageDelegate {
 
   // MARK: - RMessageDelegate methods
 
-  func messageDidDismiss(_ message: RMessage) {
+  func messageDidDismiss(_: RMessage) {
     finish()
   }
 

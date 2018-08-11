@@ -84,7 +84,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
     super.init()
   }
 
-  func present(withCompletion completion: (() -> Void)?) ->  Bool {
+  func present(withCompletion completion: (() -> Void)?) -> Bool {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
     // 2. If already presented or have not yet dismissed
@@ -146,7 +146,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
   /** Dismiss the view with a completion block */
   @objc func animateDismissal(withCompletion completion: (() -> Void)?) {
     assert(view.superview != nil, "view instance must have a superview by this point!")
-    self.isDismissing = true
+    isDismissing = true
     DispatchQueue.main.async {
       self.view.superview!.layoutIfNeeded()
       // For now lets be safe and not call this code inside the animation block. Though there may be some slight timing
