@@ -28,12 +28,12 @@ import UIKit
   /// subsequent requests.
   /// - Parameter completion: A completion closure to execute after presentation is complete.
   /// - Returns: A boolean value indicating if the animator executed your instruction to dismiss.
-  @objc func dismiss(withCompletion completion: (() -> Void)?) -> Bool
+  func dismiss(withCompletion completion: (() -> Void)?) -> Bool
 
   /// Notifies the animator that the views' superview safe area did change.
   ///
   /// - Parameter view: The view whose safe area changed.
-  @objc optional func safeAreaInsetsDidChange(forView view: UIView)
+  @optional func safeAreaInsetsDidChange(forView view: UIView)
 }
 
 @objc protocol RMessageAnimatorDelegate {

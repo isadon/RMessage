@@ -12,6 +12,7 @@
 		7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD59421192A6B00025ADE /* SlideAnimator.swift */; };
 		7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */; };
 		7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */; };
+		7A7F96C7211ECBD600107868 /* RMPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C6211ECBD600107868 /* RMPresenter.swift */; };
 		7A7F96CA211F44AC00107868 /* RMPresentationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C9211F44AC00107868 /* RMPresentationOptions.swift */; };
 		7A7F96CC211F4F4800107868 /* RMAnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */; };
 		7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38423211386C600DA8076 /* AppDelegate.swift */; };
@@ -29,7 +30,7 @@
 		7AB3DA8221150CFC0061F5B4 /* RMPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */; };
 		7AC67917211CF8F00096B3B4 /* RMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC67916211CF8F00096B3B4 /* RMOperation.swift */; };
 		7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D73211805D900543F68 /* RMessage+Design.swift */; };
-		7AE10D7E21180CBF00543F68 /* RMessage+TouchCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */; };
+		7AE10D7E21180CBF00543F68 /* RMPresenter+TouchCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */; };
 		7AFB50E3211842D700137DB8 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageSpec.swift; sourceTree = "<group>"; };
 		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
+		7A7F96C6211ECBD600107868 /* RMPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenter.swift; sourceTree = "<group>"; };
 		7A7F96C9211F44AC00107868 /* RMPresentationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresentationOptions.swift; sourceTree = "<group>"; };
 		7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimationOptions.swift; sourceTree = "<group>"; };
 		7AB38420211386C600DA8076 /* RMessageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +82,7 @@
 		7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenterDelegate.swift; sourceTree = "<group>"; };
 		7AC67916211CF8F00096B3B4 /* RMOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMOperation.swift; sourceTree = "<group>"; };
 		7AE10D73211805D900543F68 /* RMessage+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Design.swift"; sourceTree = "<group>"; };
-		7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+TouchCompletion.swift"; sourceTree = "<group>"; };
+		7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMPresenter+TouchCompletion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +116,6 @@
 			children = (
 				7A03FC4121180EB50002EBCF /* RMessage+Components.swift */,
 				7AE10D73211805D900543F68 /* RMessage+Design.swift */,
-				7AE10D7D21180CBF00543F68 /* RMessage+TouchCompletion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -147,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */,
+				7A7F96C6211ECBD600107868 /* RMPresenter.swift */,
+				7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */,
 			);
 			path = RPresenter;
 			sourceTree = "<group>";
@@ -460,7 +463,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB3847321138E8D00DA8076 /* RController.swift in Sources */,
-				7AE10D7E21180CBF00543F68 /* RMessage+TouchCompletion.swift in Sources */,
+				7AE10D7E21180CBF00543F68 /* RMPresenter+TouchCompletion.swift in Sources */,
+				7A7F96C7211ECBD600107868 /* RMPresenter.swift in Sources */,
 				7A2DD593211929E500025ADE /* RMessageAnimator.swift in Sources */,
 				7AB3847721138F7500DA8076 /* RControllerDelegate.swift in Sources */,
 				7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */,

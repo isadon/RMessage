@@ -1,5 +1,5 @@
 //
-//  RMessage+TouchCompletion.swift
+//  RMPresenter+TouchCompletion.swift
 //  RMessageDemo
 //
 //  Created by Adonis Peralta on 8/6/18.
@@ -9,27 +9,27 @@
 import Foundation
 import UIKit
 
-extension RMessage {
+extension RMPresenter {
   func setupGestureRecognizers() {
     let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeMessage))
     gestureRecognizer.direction = (targetPosition == .bottom) ? .down : .up
-    addGestureRecognizer(gestureRecognizer)
+    message.addGestureRecognizer(gestureRecognizer)
 
     let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapMessage))
-    addGestureRecognizer(tapRecognizer)
+    message.addGestureRecognizer(tapRecognizer)
   }
 
   @objc func didTapMessage() {
-    delegate?.messageTapped?(self)
+    delegate?.messageTapped?(forPresenter: self, message: message)
     tapCompletion?()
-    if spec.durationType != .endless && spec.durationType != .swipe { dismiss() }
+    if message.spec.durationType != .endless && message.spec.durationType != .swipe { dismiss() }
   }
 
   /* called after the following gesture depending on message position during initialization
    UISwipeGestureRecognizerDirectionUp when message position set to Top,
    UISwipeGestureRecognizerDirectionDown when message position set to bottom */
   @objc func didSwipeMessage() {
-    delegate?.messageSwiped?(self)
-    if spec.durationType != .endless && spec.durationType != .tap { dismiss() }
+    delegate?.messageSwiped?(forPresenter: self, message: message)
+    if message.spec.durationType != .endless && message.spec.durationType != .tap { dismiss() }
   }
 }
