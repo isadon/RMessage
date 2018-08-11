@@ -18,7 +18,7 @@ private enum Constants {
 /// Implements an animator that slides the message from the top to target position or
 /// bottom to target position. This animator handles the layout of its managed view in the managed
 /// view's superview.
-class SlideAnimator: NSObject, RMessageAnimator {
+class SlideAnimator: NSObject, RMAnimator {
   weak var delegate: RMessageAnimatorDelegate?
 
   // MARK: - Start the customizable animation properties

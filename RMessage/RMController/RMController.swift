@@ -18,14 +18,14 @@ enum RMessageDuration {
   case automatic, endless, tap, swipe, tapSwipe, timed
 }
 
-class RController: RMPresenterDelegate {
+class RMController: RMPresenterDelegate {
   /** The view controller this message is displayed in */
   lazy var presentationViewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
 
   let queue: OperationQueue
 
   /// By setting this delegate it's possible to set a custom offset for the message
-  weak var delegate: RControllerDelegate?
+  weak var delegate: RMControllerDelegate?
 
   // Protect access to this variable from data races
   private(set) var messageOnScreen = false
@@ -69,7 +69,7 @@ class RController: RMPresenterDelegate {
       return
     }
 
-    let presentOpts = RMPresentationOptionsDefault()
+    let presentOpts = RMPresenterOptionsDefault()
     let animOpts = RMAnimationOptionsDefault()
 
     var presentVC: UIViewController
@@ -91,7 +91,7 @@ class RController: RMPresenterDelegate {
     )
 
     delegate?.customize?(message: message)
-    let presentOp = RMOperation(message: message, presenter: presenter)
+    let presentOp = RMShowOperation(message: message, presenter: presenter)
     queue.addOperation(presentOp)
   }
 
@@ -102,7 +102,7 @@ class RController: RMPresenterDelegate {
    notification was currently displayed.
    */
   func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
-    if let operation = queue.operations.first as? RMOperation {
+    if let operation = queue.operations.first as? RMShowOperation {
       operation.presenter.dismiss(withCompletion: completion)
     }
     return true
@@ -115,7 +115,7 @@ class RController: RMPresenterDelegate {
    Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
    */
   func interfaceDidRotate() {
-    if let operation = queue.operations.first as? RMOperation, operation.presenter.screenStatus == .presenting {
+    if let operation = queue.operations.first as? RMShowOperation, operation.presenter.screenStatus == .presenting {
       operation.presenter.interfaceDidRotate()
     }
   }

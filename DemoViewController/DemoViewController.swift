@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DemoViewController: UIViewController, RControllerDelegate {
+class DemoViewController: UIViewController, RMControllerDelegate {
   // override var prefersStatusBarHidden = true
-  private let rControl = RController()
+  private let rControl = RMController()
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationController?.navigationBar.isTranslucent = true
