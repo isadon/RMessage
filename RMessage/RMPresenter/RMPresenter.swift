@@ -15,8 +15,8 @@ import UIKit
   private(set) var message: RMessage
   var targetPosition: RMessagePosition
 
-  private let animator: RMessageAnimator
-  private(set) var presentationOpts: RMPresentationOptions
+  private let animator: RMAnimator
+  private(set) var presentationOpts: RMPresenterOptions
   private(set) var animationOpts: RMAnimationOptions
 
   var dimissTime: TimeInterval {
@@ -63,8 +63,8 @@ import UIKit
   private(set) var dismissCompletion: (() -> Void)?
 
   init(
-    message: RMessage, targetPosition: RMessagePosition, animator: RMessageAnimator,
-    presentationOptions presentOpts: RMPresentationOptions,
+    message: RMessage, targetPosition: RMessagePosition, animator: RMAnimator,
+    presentationOptions presentOpts: RMPresenterOptions,
     animationOptions animationOpts: RMAnimationOptions,
     tapCompletion _: (() -> Void)? = nil, presentCompletion _: (() -> Void)? = nil, dismissCompletion _: (() -> Void)? = nil
   ) {
@@ -135,33 +135,33 @@ import UIKit
 
   // MARK: - RMessageAnimatorDelegate Methods
 
-  func animatorWillAnimatePresentation(_: RMessageAnimator) {
+  func animatorWillAnimatePresentation(_: RMAnimator) {
     screenStatus = .willPresent
     delegate?.presenterWillPresent?(self, message: message)
   }
 
-  func animatorIsAnimatingPresentation(_: RMessageAnimator) {
+  func animatorIsAnimatingPresentation(_: RMAnimator) {
     screenStatus = .presenting
     delegate?.presenterIsPresenting?(self, message: message)
   }
 
-  func animatorDidPresent(_: RMessageAnimator) {
+  func animatorDidPresent(_: RMAnimator) {
     didPresent = true
     delegate?.presenterDidPresent?(self, message: message)
     presentCompletion?()
   }
 
-  func animatorWillAnimateDismissal(_: RMessageAnimator) {
+  func animatorWillAnimateDismissal(_: RMAnimator) {
     screenStatus = .willDismiss
     delegate?.presenterWillDismiss?(self, message: message)
   }
 
-  func animatorIsAnimatingDismissal(_: RMessageAnimator) {
+  func animatorIsAnimatingDismissal(_: RMAnimator) {
     screenStatus = .dismissing
     delegate?.presenterIsDismissing?(self, message: message)
   }
 
-  func animatorDidDismiss(_: RMessageAnimator) {
+  func animatorDidDismiss(_: RMAnimator) {
     didDismiss = true
     delegate?.presenterDidDismiss?(self, message: message)
     dismissCompletion?()

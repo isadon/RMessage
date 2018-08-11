@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RMOperation: Operation, RMPresenterDelegate {
+class RMShowOperation: Operation, RMPresenterDelegate {
   override var isAsynchronous: Bool {
     return true
   }
