@@ -1,5 +1,5 @@
 //
-//  RMessage+Setup.swift
+//  RMessage+Design.swift
 //  RMessageDemo
 //
 //  Created by Adonis Peralta on 8/6/18.

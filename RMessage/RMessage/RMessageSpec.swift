@@ -1,5 +1,5 @@
 //
-//  RMVDesignSpec.swift
+//  RMessageSpec.swift
 //  RMessage
 //
 //  Created by Adonis Peralta on 8/3/18.

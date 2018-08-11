@@ -1,5 +1,5 @@
 //
-//  TopBottomAnimator.swift
+//  SlideAnimator.swift
 //  RMessageDemo
 //
 //  Created by Adonis Peralta on 8/6/18.
