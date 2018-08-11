@@ -39,54 +39,54 @@ import UIKit
 @objc protocol RMessageAnimatorDelegate {
   /// Notifies the animator delegate the animator will soon start to layout the view it manages.
   /// - Parameter animator: The animator instance doing the layout.
-  @objc optional func animatorWillLayout(animator: RMessageAnimator)
+  @objc optional func animatorWillLayout(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate the animator did layout the view it manages.
   /// - Parameter animator: The animator instance doing the layout.
-  @objc optional func animatorDidLayout(animator: RMessageAnimator)
+  @objc optional func animatorDidLayout(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator did add the view to its superview.
   ///
   /// - Parameter animator: The animator instance doing the layout.
-  @objc optional func animatorDidAddToSuperview(animator: RMessageAnimator)
+  @objc optional func animatorDidAddToSuperview(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate to perform any animation changes for the presentation of the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animationBlockForPresentation(animator: RMessageAnimator)
+  @objc optional func animationBlockForPresentation(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate to perform any animation changes for the dismissal of the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animationBlockForDismissal(animator: RMessageAnimator)
+  @objc optional func animationBlockForDismissal(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator will soon animate the presentation.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorWillAnimatePresentation(animator: RMessageAnimator)
+  @objc optional func animatorWillAnimatePresentation(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator is animating the presentation of the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorIsAnimatingPresentation(animator: RMessageAnimator)
+  @objc optional func animatorIsAnimatingPresentation(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator will soon animate the dismissal of the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorWillAnimateDismissal(animator: RMessageAnimator)
+  @objc optional func animatorWillAnimateDismissal(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator is animating the dismissal of the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorIsAnimatingDismissal(animator: RMessageAnimator)
+  @objc optional func animatorIsAnimatingDismissal(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator has fully presented the view.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorDidPresent(animator: RMessageAnimator)
+  @objc optional func animatorDidPresent(_ animator: RMessageAnimator)
 
   /// Notifies the animator delegate that the animator has dismissed the view from the screen.
   ///
   /// - Parameter animator: The animator instance.
-  @objc optional func animatorDidDismiss(animator: RMessageAnimator)
+  @objc optional func animatorDidDismiss(_ animator: RMessageAnimator)
 }

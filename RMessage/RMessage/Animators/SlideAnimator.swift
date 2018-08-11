@@ -94,7 +94,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
     layoutView()
     setupFinalAnimationConstraints()
     setupStartingAnimationConstraints()
-    delegate?.animatorWillAnimatePresentation?(animator: self)
+    delegate?.animatorWillAnimatePresentation?(self)
     animatePresentation(withCompletion: completion)
     return true
   }
@@ -106,7 +106,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
     guard !isDismissing && hasDismissed && hasPresented else {
       return false
     }
-    delegate?.animatorWillAnimateDismissal?(animator: self)
+    delegate?.animatorWillAnimateDismissal?(self)
     animateDismissal(withCompletion: completion)
     return true
   }
@@ -120,7 +120,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
       self.view.alpha = self.animationStartAlpha
       // For now lets be safe and not call this code inside the animation block. Though there may be some slight timing
       // issue in notifying exactly when the animator is animating it should be fine.
-      self.delegate?.animatorIsAnimatingPresentation?(animator: self)
+      self.delegate?.animatorIsAnimatingPresentation?(self)
       UIView.animate(
         withDuration: self.animationPresentDuration, delay: 0,
         usingSpringWithDamping: 0.7,
@@ -130,13 +130,13 @@ class SlideAnimator: NSObject, RMessageAnimator {
           self.viewTopConstraint.isActive = false
           self.viewTopConstraint = self.viewTopEndConstraint!
           self.viewTopConstraint.isActive = true
-          self.delegate?.animationBlockForPresentation?(animator: self)
+          self.delegate?.animationBlockForPresentation?(self)
           self.view.alpha = self.animationEndAlpha
           self.view.superview!.layoutIfNeeded()
         }, completion: { finished in
           self.isPresenting = false
           self.hasPresented = true
-          self.delegate?.animatorDidPresent?(animator: self)
+          self.delegate?.animatorDidPresent?(self)
           if finished { completion?() }
         }
       )
@@ -151,12 +151,12 @@ class SlideAnimator: NSObject, RMessageAnimator {
       self.view.superview!.layoutIfNeeded()
       // For now lets be safe and not call this code inside the animation block. Though there may be some slight timing
       // issue in notifying exactly when the animator is animating it should be fine.
-      self.delegate?.animatorIsAnimatingDismissal?(animator: self)
+      self.delegate?.animatorIsAnimatingDismissal?(self)
       UIView.animate(withDuration: self.animationDismissDuration, animations: {
         self.viewTopConstraint.isActive = false
         self.viewTopConstraint = self.viewTopStartConstraint
         self.viewTopConstraint.isActive = true
-        self.delegate?.animationBlockForDismissal?(animator: self)
+        self.delegate?.animationBlockForDismissal?(self)
         self.view.alpha = self.animationStartAlpha
         self.view.superview!.layoutIfNeeded()
       }, completion: { finished in
@@ -164,7 +164,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
         self.hasPresented = false
         self.hasDismissed = true
         self.view.removeFromSuperview()
-        self.delegate?.animatorDidDismiss?(animator: self)
+        self.delegate?.animatorDidDismiss?(self)
         if finished { completion?() }
       })
     }
@@ -192,14 +192,14 @@ class SlideAnimator: NSObject, RMessageAnimator {
     // Add RMessage to superview and prepare the ending constraints
     if view.superview == nil { superview.addSubview(view) }
 
-    delegate?.animatorDidAddToSuperview?(animator: self)
+    delegate?.animatorDidAddToSuperview?(self)
 
     view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor).isActive = true
     view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor).isActive = true
     view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor).isActive = true
     contentViewSafeAreaGuideConstraint?.isActive = true
 
-    delegate?.animatorDidLayout?(animator: self)
+    delegate?.animatorDidLayout?(self)
 
     calculateSpringAnimationPadding()
   }
