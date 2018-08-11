@@ -262,11 +262,11 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
 
   // MARK: - RMessageAnimatorDelegate Methods
 
-  func animatorWillLayout(animator _: RMessageAnimator) {
+  func animatorWillLayout(_: RMessageAnimator) {
     if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
   }
 
-  func animatorDidLayout(animator _: RMessageAnimator) {
+  func animatorDidLayout(_: RMessageAnimator) {
     // Pass in the expected superview since we don't have one yet
     // Allow the labels to size themselves by telling them their layout width
     guard let superview = superview else {
@@ -278,33 +278,33 @@ class RMessage: UIView, RMessageAnimatorDelegate, UIGestureRecognizerDelegate {
     )
   }
 
-  func animatorWillAnimatePresentation(animator _: RMessageAnimator) {
+  func animatorWillAnimatePresentation(_: RMessageAnimator) {
     screenStatus = .willPresent
     delegate?.messageWillPresent?(self)
   }
 
-  func animatorIsAnimatingPresentation(animator _: RMessageAnimator) {
+  func animatorIsAnimatingPresentation(_: RMessageAnimator) {
     screenStatus = .presenting
     delegate?.messageIsPresenting?(self)
   }
 
-  func animatorDidPresent(animator _: RMessageAnimator) {
+  func animatorDidPresent(_: RMessageAnimator) {
     didPresent = true
     delegate?.messageDidPresent?(self)
     presentCompletion?()
   }
 
-  func animatorWillAnimateDismissal(animator _: RMessageAnimator) {
+  func animatorWillAnimateDismissal(_: RMessageAnimator) {
     screenStatus = .willDismiss
     delegate?.messageWillDismiss?(self)
   }
 
-  func animatorIsAnimatingDismissal(animator _: RMessageAnimator) {
+  func animatorIsAnimatingDismissal(_: RMessageAnimator) {
     screenStatus = .dismissing
     delegate?.messageIsDismissing?(self)
   }
 
-  func animatorDidDismiss(animator _: RMessageAnimator) {
+  func animatorDidDismiss(_: RMessageAnimator) {
     didDismiss = true
     delegate?.messageDidDismiss?(self)
     dismissCompletion?()
