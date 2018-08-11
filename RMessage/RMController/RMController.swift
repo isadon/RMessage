@@ -10,14 +10,6 @@ import Foundation
 import HexColors
 import UIKit
 
-enum RMessagePosition {
-  case top, bottom, navBarOverlay
-}
-
-enum RMessageDuration {
-  case automatic, endless, tap, swipe, tapSwipe, timed
-}
-
 class RMController: RMPresenterDelegate {
   /** The view controller this message is displayed in */
   lazy var presentationViewController: UIViewController = UIWindow.defaultViewControllerForPresentation()

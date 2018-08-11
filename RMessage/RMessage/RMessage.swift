@@ -10,6 +10,14 @@ import Foundation
 import HexColors
 import UIKit
 
+enum RMessagePosition {
+  case top, bottom, navBarOverlay
+}
+
+enum RMessageDuration {
+  case automatic, endless, tap, swipe, tapSwipe, timed
+}
+
 class RMessage: UIView, RMessageAnimatorDelegate {
   private(set) var spec: RMessageSpec
 
