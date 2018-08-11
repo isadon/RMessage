@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RMOperation: Operation, RMessageDelegate {
+class RMOperation: Operation, RMPresenterDelegate {
   override var isAsynchronous: Bool {
     return true
   }
@@ -36,9 +36,11 @@ class RMOperation: Operation, RMessageDelegate {
   private var context = 0
 
   let message: RMessage
+  let presenter: RMPresenter
 
-  init(message: RMessage) {
+  init(message: RMessage, presenter: RMPresenter) {
     self.message = message
+    self.presenter = presenter
     super.init()
   }
 
@@ -50,17 +52,17 @@ class RMOperation: Operation, RMessageDelegate {
 
     // Always make sure to set the message delegate to self in main as this is the only time when we can actually
     // be the delegate (when this Operation instance has exclusive access to display the message)
-    message.delegate = self
+    presenter.delegate = self
 
     DispatchQueue.main.async {
       self.isExecuting = true
-      self.message.present()
+      self.presenter.present()
     }
   }
 
   // MARK: - RMessageDelegate methods
 
-  func messageDidDismiss(_: RMessage) {
+  func presenterDidDismiss(_: RMPresenter, message _: RMessage) {
     finish()
   }
 

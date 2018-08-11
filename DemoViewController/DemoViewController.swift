@@ -23,7 +23,7 @@ class DemoViewController: UIViewController, RControllerDelegate {
     /* Normally we would set the default view controller and delegate in viewDidLoad
      but since we are using this view controller for our modal view also it is important to properly
      re-set the variables once the modal dismisses. */
-    rControl.defaultViewController = self
+    rControl.presentationViewController = self
     rControl.delegate = self
   }
 

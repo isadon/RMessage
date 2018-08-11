@@ -10,6 +10,15 @@ import Foundation
 import UIKit
 
 @objc protocol RMessageAnimator {
+  /// The delegate of the animator.
+  var delegate: RMessageAnimatorDelegate? { get set }
+
+  /// The duration of the presentation animation.
+  var presentationDuration: Double { get set }
+
+  /// The duration of the dismissal animation.
+  var dismissalDuration: Double { get set }
+
   /// Ask the animator to present the view with animation. This call may or may not succeed depending on whether
   /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
   /// In cases when the animator refuses to present this method returns false, otherwise it returns true.
@@ -18,7 +27,7 @@ import UIKit
   /// subsequent requests.
   /// - Parameter completion: A completion closure to execute after presentation is complete.
   /// - Returns: A boolean value indicating if the animator executed your instruction to present.
-  @objc func present(withCompletion completion: (() -> Void)?) -> Bool
+  func present(withCompletion completion: (() -> Void)?) -> Bool
 
   /// Ask the animator to dismiss the view with animation. This call may or may not succeed depending on whether
   /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
@@ -28,12 +37,7 @@ import UIKit
   /// subsequent requests.
   /// - Parameter completion: A completion closure to execute after presentation is complete.
   /// - Returns: A boolean value indicating if the animator executed your instruction to dismiss.
-  @objc func dismiss(withCompletion completion: (() -> Void)?) -> Bool
-
-  /// Notifies the animator that the views' superview safe area did change.
-  ///
-  /// - Parameter view: The view whose safe area changed.
-  @objc optional func safeAreaInsetsDidChange(forView view: UIView)
+  func dismiss(withCompletion completion: (() -> Void)?) -> Bool
 }
 
 @objc protocol RMessageAnimatorDelegate {

@@ -18,8 +18,10 @@ enum RMessageDuration {
   case automatic, endless, tap, swipe, tapSwipe, timed
 }
 
-class RController: RMessageDelegate {
-  var defaultViewController: UIViewController?
+class RController: RMPresenterDelegate {
+  /** The view controller this message is displayed in */
+  lazy var presentationViewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
+
   let queue: OperationQueue
 
   /// By setting this delegate it's possible to set a custom offset for the message
@@ -61,14 +63,35 @@ class RController: RMessageDelegate {
     dismissCompletion: (() -> Void)? = nil
   ) {
     guard let message = RMessage(
-      spec: spec, targetPosition: targetPosition, title: title, body: body,
-      viewController: viewController, leftView: leftView, rightView: rightView, backgroundView: backgroundView, tapCompletion: tapCompletion,
-      presentCompletion: presentCompletion, dismissCompletion: dismissCompletion
+      spec: spec, title: title, body: body,
+      leftView: leftView, rightView: rightView, backgroundView: backgroundView
     ) else {
       return
     }
+
+    let presentOpts = RMPresentationOptionsDefault()
+    let animOpts = RMAnimationOptionsDefault()
+
+    var presentVC: UIViewController
+    if let viewController = viewController {
+      presentVC = viewController
+    } else {
+      presentVC = presentationViewController
+    }
+
+    let animator = SlideAnimator(
+      targetPosition: targetPosition, view: message,
+      superview: presentVC.view, contentView: message.contentView
+    )
+    let presenter = RMPresenter(
+      message: message, targetPosition: targetPosition, animator: animator,
+      presentationOptions: presentOpts, animationOptions: animOpts,
+      tapCompletion: tapCompletion, presentCompletion: presentCompletion,
+      dismissCompletion: dismissCompletion
+    )
+
     delegate?.customize?(message: message)
-    let presentOp = RMOperation(message: message)
+    let presentOp = RMOperation(message: message, presenter: presenter)
     queue.addOperation(presentOp)
   }
 
@@ -80,7 +103,7 @@ class RController: RMessageDelegate {
    */
   func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
     if let operation = queue.operations.first as? RMOperation {
-      operation.message.dismiss(withCompletion: completion)
+      operation.presenter.dismiss(withCompletion: completion)
     }
     return true
   }
@@ -92,8 +115,8 @@ class RController: RMessageDelegate {
    Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
    */
   func interfaceDidRotate() {
-    if let operation = queue.operations.first as? RMOperation, operation.message.screenStatus == .presenting {
-      operation.message.interfaceDidRotate()
+    if let operation = queue.operations.first as? RMOperation, operation.presenter.screenStatus == .presenting {
+      operation.presenter.interfaceDidRotate()
     }
   }
 }

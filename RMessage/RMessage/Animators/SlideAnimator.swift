@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+private enum Constants {
+  enum KVC {
+    static let safeAreaInsets = "view.safeAreaInsets"
+  }
+}
+
 /// Implements an animator that slides the message from the top to target position or
 /// bottom to target position. This animator handles the layout of its managed view in the managed
 /// view's superview.
@@ -18,10 +24,10 @@ class SlideAnimator: NSObject, RMessageAnimator {
   // MARK: - Start the customizable animation properties
 
   /// The amount of time to perform the presentation animation in.
-  var animationPresentDuration = 0.5
+  var presentationDuration = 0.5
 
   /// The amount of time to perform the dismiss animation in.
-  var animationDismissDuration = 0.3
+  var dismissalDuration = 0.3
 
   /// The alpha value the view should have prior to starting animations.
   var animationStartAlpha: CGFloat = 0
@@ -38,7 +44,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
   var disableAnimationPadding = false
 
   private let superview: UIView
-  private let view: UIView
+  @objc private let view: UIView
   private let contentView: UIView
 
   private let targetPosition: RMessagePosition
@@ -76,12 +82,17 @@ class SlideAnimator: NSObject, RMessageAnimator {
   private var hasPresented = false
   private var hasDismissed = true
 
+  private var kvcContext = 0
+
   init(targetPosition: RMessagePosition, view: UIView, superview: UIView, contentView: UIView) {
     self.targetPosition = targetPosition
     self.superview = superview
     self.contentView = contentView
     self.view = view
     super.init()
+
+    // Sign up to be notified for when the safe area of our view changes
+    addObserver(self, forKeyPath: Constants.KVC.safeAreaInsets, options: [.new], context: &kvcContext)
   }
 
   func present(withCompletion completion: (() -> Void)?) -> Bool {
@@ -122,7 +133,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
       // issue in notifying exactly when the animator is animating it should be fine.
       self.delegate?.animatorIsAnimatingPresentation?(self)
       UIView.animate(
-        withDuration: self.animationPresentDuration, delay: 0,
+        withDuration: self.presentationDuration, delay: 0,
         usingSpringWithDamping: 0.7,
         initialSpringVelocity: 0,
         options: [.curveEaseInOut, .beginFromCurrentState, .allowUserInteraction],
@@ -152,7 +163,7 @@ class SlideAnimator: NSObject, RMessageAnimator {
       // For now lets be safe and not call this code inside the animation block. Though there may be some slight timing
       // issue in notifying exactly when the animator is animating it should be fine.
       self.delegate?.animatorIsAnimatingDismissal?(self)
-      UIView.animate(withDuration: self.animationDismissDuration, animations: {
+      UIView.animate(withDuration: self.dismissalDuration, animations: {
         self.viewTopConstraint.isActive = false
         self.viewTopConstraint = self.viewTopStartConstraint
         self.viewTopConstraint.isActive = true
@@ -171,6 +182,15 @@ class SlideAnimator: NSObject, RMessageAnimator {
   }
 
   // MARK: - View notifications
+
+  override func observeValue(
+    forKeyPath keyPath: String?, of _: Any?, change _: [NSKeyValueChangeKey: Any]?,
+    context _: UnsafeMutableRawPointer?
+  ) {
+    if keyPath == Constants.KVC.safeAreaInsets {
+      safeAreaInsetsDidChange(forView: view)
+    }
+  }
 
   func safeAreaInsetsDidChange(forView view: UIView) {
     var constant = CGFloat(0)
@@ -284,5 +304,9 @@ class SlideAnimator: NSObject, RMessageAnimator {
     // to truly calculate the height of the view.
     springAnimationPadding = CGFloat(ceilf(Float(view.bounds.size.height) / 120.0) * 5)
     springAnimationPaddingCalculated = true
+  }
+
+  deinit {
+    removeObserver(self, forKeyPath: Constants.KVC.safeAreaInsets)
   }
 }
