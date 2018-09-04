@@ -14,7 +14,7 @@ class RMController: RMPresenterDelegate {
   /** The view controller this message is displayed in */
   lazy var presentationViewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
 
-  let queue: OperationQueue
+  private let queue: OperationQueue
 
   /// By setting this delegate it's possible to set a custom offset for the message
   weak var delegate: RMControllerDelegate?
@@ -98,6 +98,10 @@ class RMController: RMPresenterDelegate {
       operation.presenter.dismiss(withCompletion: completion)
     }
     return true
+  }
+
+  func cancelPendingDisplayMessages() {
+    queue.cancelAllOperations()
   }
 
   // MARK: RMessageDelegate Methods
