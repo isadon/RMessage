@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 extension UIWindow {
+  /// Returns the top view controller in the window going up from the passed in view controller.
+  ///
+  /// - Parameter viewController: The view controller from which to start traversing.
+  /// - Returns: The top view controller in the window.
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
     if viewController.presentingViewController != nil {
       return topViewController(forViewController: viewController.presentingViewController!)
@@ -23,6 +27,9 @@ extension UIWindow {
     return viewController
   }
 
+  /// Returns the top view controller in the window going up from the root view controller of the window.
+  ///
+  /// - Returns: The top view controller in the window.
   static func topViewController() -> UIViewController? {
     guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
       return nil

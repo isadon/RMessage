@@ -19,6 +19,7 @@ private enum Constants {
 /// bottom to target position. This animator handles the layout of its managed view in the managed
 /// view's superview.
 class SlideAnimator: NSObject, RMAnimator {
+  /// Animator delegate.
   weak var delegate: RMessageAnimatorDelegate?
 
   // MARK: - Start the customizable animation properties
@@ -95,6 +96,14 @@ class SlideAnimator: NSObject, RMAnimator {
     addObserver(self, forKeyPath: Constants.KVC.safeAreaInsets, options: [.new], context: &kvcContext)
   }
 
+  /// Ask the animator to present the view with animation. This call may or may not succeed depending on whether
+  /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
+  /// In cases when the animator refuses to present this method returns false, otherwise it returns true.
+  ///
+  /// - Note: Your implementation of this method must allow for this method to be called multiple times by ignoring
+  /// subsequent requests.
+  /// - Parameter completion: A completion closure to execute after presentation is complete.
+  /// - Returns: A boolean value indicating if the animator executed your instruction to present.
   func present(withCompletion completion: (() -> Void)?) -> Bool {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
@@ -110,6 +119,14 @@ class SlideAnimator: NSObject, RMAnimator {
     return true
   }
 
+  /// Ask the animator to dismiss the view with animation. This call may or may not succeed depending on whether
+  /// the animator was already previously asked to animate or where in the presentation cycle the animator is.
+  /// In cases when the animator refuses to dismiss this method returns false, otherwise it returns true.
+  ///
+  /// - Note: Your implementation of this method must allow for this method to be called multiple times by ignoring
+  /// subsequent requests.
+  /// - Parameter completion: A completion closure to execute after presentation is complete.
+  /// - Returns: A boolean value indicating if the animator executed your instruction to dismiss.
   func dismiss(withCompletion completion: (() -> Void)?) -> Bool {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing

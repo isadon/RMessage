@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 @objc protocol RMControllerDelegate: class {
-  /// You can customize the given RMessage, like setting its alpha via (messageOpacity) or adding a subview
+  /// Implement this function to have a chance in further customizing a message prior to presentation.
+  ///
+  /// - Parameter message: The message to customize.
   @objc optional func customize(message: RMessage)
 }

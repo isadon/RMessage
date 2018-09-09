@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 
 @objc class RMPresenter: NSObject, RMessageAnimatorDelegate {
+  /// Delegate of the presenter object.
   weak var delegate: RMPresenterDelegate?
 
+  /// The target position to which the message should be presented.
   private(set) var targetPosition: RMessagePosition
 
+  /// The amount of time the message will be presented before being dismissed. Only applies when the *durationType* is
+  /// .automatic.
   var dimissTime: TimeInterval {
     switch message.spec.durationType {
     case .automatic:
@@ -34,6 +38,7 @@ import UIKit
   private(set) var message: RMessage
   private(set) var animationOpts: RMAnimationOptions
 
+  /// Value type representing the current presentation status of the message.
   enum PresentationStatus {
     /// The message will soon present though is not on screen yet.
     case willPresent
@@ -48,6 +53,7 @@ import UIKit
     case dismissing
   }
 
+  /// The current screen status of the message.
   private(set) var screenStatus: PresentationStatus = .willPresent
 
   /** Callback block called after the user taps on the message */
@@ -88,7 +94,9 @@ import UIKit
     }
   }
 
-  /** Present the message */
+  /// Present the message with the animator specified in instantation.
+  ///
+  /// - Parameter completion: A callback to be called on completion of the presentation.
   func present(withCompletion completion: (() -> Void)? = nil) {
     guard animator.present(withCompletion: completion) else {
       return
@@ -98,6 +106,9 @@ import UIKit
     }
   }
 
+  /// Dismiss the message with the animator specified in instantation.
+  ///
+  /// - Parameter completion: A callback to be called on completion of the dismissal.
   func dismiss(withCompletion completion: (() -> Void)? = nil) {
     guard animator.dismiss(withCompletion: completion) else {
       return
@@ -115,6 +126,8 @@ import UIKit
 
   // MARK: - Respond to window events
 
+  /// Call this method to have the presenter perform any required changes necessary to account for the interface
+  /// being rotated.
   func interfaceDidRotate() {
     guard screenStatus == .presenting &&
       (message.spec.durationType == .automatic || message.spec.durationType == .timed) else {
