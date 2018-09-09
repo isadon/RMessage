@@ -54,6 +54,7 @@
 		7A03FC4121180EB50002EBCF /* RMessage+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Components.swift"; sourceTree = "<group>"; };
 		7A2DD592211929E500025ADE /* RMAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimator.swift; sourceTree = "<group>"; };
 		7A2DD59421192A6B00025ADE /* SlideAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
+		7A310C3B2144D52500D7F1C6 /* RevealServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RevealServer.framework; path = Demo/RevealServer.framework; sourceTree = "<group>"; };
 		7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageSpec.swift; sourceTree = "<group>"; };
 		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		7A5EDAC1211432FD00C2BFE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A310C3B2144D52500D7F1C6 /* RevealServer.framework */,
 				7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */,
 			);
 			name = Frameworks;
@@ -164,7 +166,7 @@
 		7AB38417211386C600DA8076 = {
 			isa = PBXGroup;
 			children = (
-				7AB38422211386C600DA8076 /* DemoViewController */,
+				7AB38422211386C600DA8076 /* Demo */,
 				7AB38452211387C600DA8076 /* RMessage */,
 				7AB38437211386C700DA8076 /* Tests */,
 				7AB38442211386C700DA8076 /* UITests */,
@@ -183,7 +185,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7AB38422211386C600DA8076 /* DemoViewController */ = {
+		7AB38422211386C600DA8076 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				7AB38423211386C600DA8076 /* AppDelegate.swift */,
@@ -191,7 +193,7 @@
 				7AB38451211386EA00DA8076 /* UI Assets */,
 				7AB3842F211386C700DA8076 /* Info.plist */,
 			);
-			path = DemoViewController;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		7AB38437211386C700DA8076 /* Tests */ = {
@@ -350,7 +352,6 @@
 					7AB38433211386C700DA8076 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
-						TestTargetID = 7AB3841F211386C600DA8076;
 					};
 					7AB3843E211386C700DA8076 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -646,19 +647,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(SRCROOT)/DemoViewController",
+					"$(PROJECT_DIR)/Demo",
 				);
-				INFOPLIST_FILE = DemoViewController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-weak_framework",
-					RevealServer,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -678,9 +675,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(SRCROOT)/DemoViewController",
+					"$(PROJECT_DIR)/Demo",
 				);
-				INFOPLIST_FILE = DemoViewController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -698,10 +695,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -709,10 +706,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
 			};
 			name = Debug;
 		};
@@ -720,10 +717,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -731,9 +728,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
 			};
 			name = Release;
 		};
@@ -742,8 +739,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -751,10 +749,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RMessage;
+				TEST_TARGET_NAME = RMessageDemo;
 			};
 			name = Debug;
 		};
@@ -763,8 +763,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -772,9 +773,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RMessage;
+				TEST_TARGET_NAME = RMessageDemo;
 			};
 			name = Release;
 		};
