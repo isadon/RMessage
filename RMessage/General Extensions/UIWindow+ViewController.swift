@@ -11,8 +11,8 @@ import UIKit
 
 extension UIWindow {
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
-    if viewController.presentedViewController != nil {
-      return topViewController(forViewController: viewController.presentedViewController!)
+    if viewController.presentingViewController != nil {
+      return topViewController(forViewController: viewController.presentingViewController!)
     } else if let navigationController = viewController as? UINavigationController,
       let visibleVCInNavigationVC = navigationController.visibleViewController {
       return topViewController(forViewController: visibleVCInNavigationVC)
@@ -28,13 +28,5 @@ extension UIWindow {
       return nil
     }
     return topViewController(forViewController: rootViewController)
-  }
-
-  static func defaultViewControllerForPresentation() -> UIViewController {
-    guard let defaultViewController = UIWindow.topViewController() else {
-      assert(false, "Key window should always have a root view controller")
-      return UIViewController()
-    }
-    return defaultViewController
   }
 }

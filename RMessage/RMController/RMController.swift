@@ -12,7 +12,7 @@ import UIKit
 
 class RMController: RMPresenterDelegate {
   /** The view controller this message is displayed in */
-  lazy var presentationViewController: UIViewController = UIWindow.defaultViewControllerForPresentation()
+  lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
 
   private let queue: OperationQueue
 
@@ -64,16 +64,21 @@ class RMController: RMPresenterDelegate {
     let presentOpts = RMPresenterOptionsDefault()
     let animOpts = RMAnimationOptionsDefault()
 
-    var presentVC: UIViewController
+    var presentVC: UIViewController?
     if let viewController = viewController {
       presentVC = viewController
     } else {
       presentVC = presentationViewController
     }
 
+    // Make sure we have a presentation view controller for the message
+    guard let presentationVC = presentVC else {
+      return
+    }
+
     let animator = SlideAnimator(
       targetPosition: targetPosition, view: message,
-      superview: presentVC.view, contentView: message.contentView
+      superview: presentationVC.view, contentView: message.contentView
     )
     let presenter = RMPresenter(
       message: message, targetPosition: targetPosition, animator: animator,
