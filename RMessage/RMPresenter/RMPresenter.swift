@@ -17,7 +17,7 @@ import UIKit
   var dimissTime: TimeInterval {
     switch message.spec.durationType {
     case .automatic:
-      return animator.presentationDuration + animator.dismissalDuration + presentationOpts.onScreenTime + Double(message.bounds.size.height) * presentationOpts.extraOnScreenTimePerPixel
+      return animator.presentationDuration + animator.dismissalDuration + 1.5 + Double(message.bounds.size.height) * 0.04
     case .tap, .swipe, .tapSwipe, .endless:
       return -1
     case .timed:
@@ -32,7 +32,6 @@ import UIKit
   private(set) var didDismiss = false
 
   private(set) var message: RMessage
-  private(set) var presentationOpts: RMPresenterOptions
   private(set) var animationOpts: RMAnimationOptions
 
   enum PresentationStatus {
@@ -64,14 +63,12 @@ import UIKit
 
   init(
     message: RMessage, targetPosition: RMessagePosition, animator: RMAnimator,
-    presentationOptions presentOpts: RMPresenterOptions,
     animationOptions animationOpts: RMAnimationOptions,
     tapCompletion _: (() -> Void)? = nil, presentCompletion _: (() -> Void)? = nil, dismissCompletion _: (() -> Void)? = nil
   ) {
     self.message = message
     self.targetPosition = targetPosition
     self.animator = animator
-    presentationOpts = presentOpts
     self.animationOpts = animationOpts
     super.init()
     setupAnimator()

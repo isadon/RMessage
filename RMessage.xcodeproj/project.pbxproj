@@ -13,7 +13,6 @@
 		7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */; };
 		7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */; };
 		7A7F96C7211ECBD600107868 /* RMPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C6211ECBD600107868 /* RMPresenter.swift */; };
-		7A7F96CA211F44AC00107868 /* RMPresenterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */; };
 		7A7F96CC211F4F4800107868 /* RMAnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */; };
 		7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38423211386C600DA8076 /* AppDelegate.swift */; };
 		7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38425211386C600DA8076 /* DemoViewController.swift */; };
@@ -59,7 +58,6 @@
 		7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageSpec.swift; sourceTree = "<group>"; };
 		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
 		7A7F96C6211ECBD600107868 /* RMPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenter.swift; sourceTree = "<group>"; };
-		7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenterOptions.swift; sourceTree = "<group>"; };
 		7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimationOptions.swift; sourceTree = "<group>"; };
 		7AB38420211386C600DA8076 /* RMessageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB38423211386C600DA8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 		7A7F96C8211F35E900107868 /* RMPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */,
 				7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */,
 				7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */,
 				7A7F96C6211ECBD600107868 /* RMPresenter.swift */,
@@ -471,7 +468,6 @@
 				7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */,
 				7A7F96CC211F4F4800107868 /* RMAnimationOptions.swift in Sources */,
 				7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */,
-				7A7F96CA211F44AC00107868 /* RMPresenterOptions.swift in Sources */,
 				7AB3DA8221150CFC0061F5B4 /* RMPresenterDelegate.swift in Sources */,
 				7AB3847521138E9900DA8076 /* RMessage.swift in Sources */,
 				7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */,

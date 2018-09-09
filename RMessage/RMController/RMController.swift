@@ -61,7 +61,6 @@ class RMController: RMPresenterDelegate {
       return
     }
 
-    let presentOpts = DefaultRMPresenterOptions()
     let animOpts = DefaultRMAnimationOptions()
 
     var presentVC: UIViewController?
@@ -82,8 +81,7 @@ class RMController: RMPresenterDelegate {
     )
     let presenter = RMPresenter(
       message: message, targetPosition: targetPosition, animator: animator,
-      presentationOptions: presentOpts, animationOptions: animOpts,
-      tapCompletion: tapCompletion, presentCompletion: presentCompletion,
+      animationOptions: animOpts, tapCompletion: tapCompletion, presentCompletion: presentCompletion,
       dismissCompletion: dismissCompletion
     )
 
