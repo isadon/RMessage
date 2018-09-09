@@ -6,6 +6,8 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
+import HexColors
+import RMessage
 import UIKit
 
 class DemoViewController: UIViewController, RMControllerDelegate {
