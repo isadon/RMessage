@@ -15,7 +15,7 @@ import UIKit
  - **bottom**: Position describing the bottom of the window.
  - **navBarOverlay**: Position describing the top of the window but overlaying any present navigation bars.
  */
-enum RMessagePosition {
+public enum RMessagePosition {
   case top, bottom, navBarOverlay
 }
 
@@ -29,11 +29,11 @@ enum RMessagePosition {
  - **timed**: Duration specifying that the message will dismiss after some duration specified by the *timeToDismiss*
  property.
  */
-enum RMessageDuration {
+public enum RMessageDuration {
   case automatic, endless, tap, swipe, tapSwipe, timed
 }
 
-protocol RMessageSpec {
+public protocol RMessageSpec {
   /// Background color for the message.
   var backgroundColor: UIColor { get set }
 
@@ -122,55 +122,55 @@ protocol RMessageSpec {
 }
 
 /// Default RMessage specs and stylings from which to construct messages.
-struct DefaultRMessageSpec: RMessageSpec {
-  var backgroundColor = UIColor.white
-  var targetAlpha = CGFloat(1)
-  var cornerRadius = CGFloat(0)
-  var verticalOffset = CGFloat(0)
-  var iconImage: UIImage?
-  var iconImageTintColor = UIColor.clear
-  var iconImageRelativeCornerRadius = CGFloat(0)
-  var backgroundImage: UIImage?
-  var titleAttributes: [NSAttributedStringKey: Any]?
-  var titleFont = UIFont.boldSystemFont(ofSize: 14)
-  var titleColor = UIColor.black
-  var titleShadowColor = UIColor.clear
-  var titleShadowOffset = CGSize.zero
-  var titleTextAlignment = NSTextAlignment.left
-  var bodyAttributes: [NSAttributedStringKey: Any]?
-  var bodyFont = UIFont.boldSystemFont(ofSize: 12)
-  var bodyColor = UIColor.black
-  var bodyShadowColor = UIColor.clear
-  var bodyShadowOffset = CGSize.zero
-  var bodyTextAlignment = NSTextAlignment.left
-  var durationType = RMessageDuration.automatic
-  var timeToDismiss = TimeInterval(-1.0)
-  var blurBackground = false
-  var titleBodyLabelsSizeToFit = false
-  var disableSpringAnimationPadding = false
+public struct DefaultRMessageSpec: RMessageSpec {
+  public var backgroundColor = UIColor.white
+  public var targetAlpha = CGFloat(1)
+  public var cornerRadius = CGFloat(0)
+  public var verticalOffset = CGFloat(0)
+  public var iconImage: UIImage?
+  public var iconImageTintColor = UIColor.clear
+  public var iconImageRelativeCornerRadius = CGFloat(0)
+  public var backgroundImage: UIImage?
+  public var titleAttributes: [NSAttributedStringKey: Any]?
+  public var titleFont = UIFont.boldSystemFont(ofSize: 14)
+  public var titleColor = UIColor.black
+  public var titleShadowColor = UIColor.clear
+  public var titleShadowOffset = CGSize.zero
+  public var titleTextAlignment = NSTextAlignment.left
+  public var bodyAttributes: [NSAttributedStringKey: Any]?
+  public var bodyFont = UIFont.boldSystemFont(ofSize: 12)
+  public var bodyColor = UIColor.black
+  public var bodyShadowColor = UIColor.clear
+  public var bodyShadowOffset = CGSize.zero
+  public var bodyTextAlignment = NSTextAlignment.left
+  public var durationType = RMessageDuration.automatic
+  public var timeToDismiss = TimeInterval(-1.0)
+  public var blurBackground = false
+  public var titleBodyLabelsSizeToFit = false
+  public var disableSpringAnimationPadding = false
 }
 
 // MARK: Implementation for the builtin message types
 
-let errorSpec: RMessageSpec = {
+public let errorSpec: RMessageSpec = {
   var errorSpec = DefaultRMessageSpec()
   errorSpec.backgroundColor = UIColor("#FF2D55") ?? UIColor.black
   errorSpec.titleColor = UIColor.white
   errorSpec.bodyColor = UIColor.white
-  errorSpec.iconImage = UIImage(named: "ErrorMessageIcon.png")
+  errorSpec.iconImage = UIImage(named: "ErrorMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return errorSpec
 }()
 
-let warningSpec: RMessageSpec = {
+public let warningSpec: RMessageSpec = {
   var warningSpec = DefaultRMessageSpec()
   warningSpec.backgroundColor = UIColor("#FFCC00") ?? UIColor.black
   warningSpec.titleColor = UIColor("#484638") ?? UIColor.white
   warningSpec.bodyColor = warningSpec.titleColor
-  warningSpec.iconImage = UIImage(named: "WarningMessageIcon.png")
+  warningSpec.iconImage = UIImage(named: "WarningMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return warningSpec
 }()
 
-let normalSpec: RMessageSpec = {
+public let normalSpec: RMessageSpec = {
   var normalSpec = DefaultRMessageSpec()
   normalSpec.backgroundColor = UIColor("#E8E8E8") ?? UIColor.black
   normalSpec.titleColor = UIColor("#727C83") ?? UIColor.white
@@ -178,11 +178,11 @@ let normalSpec: RMessageSpec = {
   return normalSpec
 }()
 
-let successSpec: RMessageSpec = {
+public let successSpec: RMessageSpec = {
   var successSpec = DefaultRMessageSpec()
   successSpec.backgroundColor = UIColor("#00C060") ?? UIColor.black
   successSpec.titleColor = UIColor.white
   successSpec.bodyColor = successSpec.titleColor
-  successSpec.iconImage = UIImage(named: "SuccessMessageIcon.png")
+  successSpec.iconImage = UIImage(named: "SuccessMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return successSpec
 }()

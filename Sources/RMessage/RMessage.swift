@@ -10,7 +10,7 @@ import Foundation
 import HexColors
 import UIKit
 
-class RMessage: UIView, RMessageAnimatorDelegate {
+public class RMessage: UIView, RMessageAnimatorDelegate {
   private(set) var spec: RMessageSpec
 
   @IBOutlet private(set) var containerView: UIView!
@@ -60,7 +60,7 @@ class RMessage: UIView, RMessageAnimatorDelegate {
     setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
   }
 
-  required init?(coder aDecoder: NSCoder) {
+  public required init?(coder aDecoder: NSCoder) {
     spec = DefaultRMessageSpec()
     super.init(coder: aDecoder)
   }
@@ -132,7 +132,7 @@ class RMessage: UIView, RMessageAnimatorDelegate {
 
   // MARK: - Respond to Layout Changes
 
-  override func layoutSubviews() {
+  public override func layoutSubviews() {
     super.layoutSubviews()
 
     if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
