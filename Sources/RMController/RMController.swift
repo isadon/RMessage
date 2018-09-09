@@ -22,6 +22,10 @@ public class RMController: RMPresenterDelegate {
 
   private let queue: OperationQueue
 
+  public var queueCount: Int {
+    return queue.operationCount
+  }
+
   public init() {
     queue = OperationQueue()
     // Make it a serial queue
