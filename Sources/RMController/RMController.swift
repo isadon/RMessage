@@ -10,19 +10,19 @@ import Foundation
 import HexColors
 import UIKit
 
-class RMController: RMPresenterDelegate {
+public class RMController: RMPresenterDelegate {
   /// The view controller this message is displayed in.
-  lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
+  public lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
 
   /// Delegate of the RMController object.
-  weak var delegate: RMControllerDelegate?
+  public weak var delegate: RMControllerDelegate?
 
   // Protect access to this variable from data races
   private(set) var messageOnScreen = false
 
   private let queue: OperationQueue
 
-  init() {
+  public init() {
     queue = OperationQueue()
     // Make it a serial queue
     queue.maxConcurrentOperationCount = 1
@@ -42,7 +42,7 @@ class RMController: RMPresenterDelegate {
   ///   - tapCompletion: A callback to be called when the message is tapped.
   ///   - presentCompletion: A callback to be called when the message is presented.
   ///   - dismissCompletion: A callback to be called when the message is dismissed.
-  func showMessage(
+  public func showMessage(
     withSpec spec: RMessageSpec, atPosition targetPosition: RMessagePosition = .top,
     title: String, body: String? = nil, viewController: UIViewController? = nil,
     leftView: UIView? = nil, rightView: UIView? = nil, backgroundView: UIView? = nil,
@@ -91,14 +91,14 @@ class RMController: RMPresenterDelegate {
    @return YES if the currently displayed notification was successfully dismissed. NO if no
    notification was currently displayed.
    */
-  func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
+  public func dismissOnScreenMessage(withCompletion completion: (() -> Void)? = nil) -> Bool {
     if let operation = queue.operations.first as? RMShowOperation {
       operation.presenter.dismiss(withCompletion: completion)
     }
     return true
   }
 
-  func cancelPendingDisplayMessages() {
+  public func cancelPendingDisplayMessages() {
     queue.cancelAllOperations()
   }
 
@@ -108,7 +108,7 @@ class RMController: RMPresenterDelegate {
    Call this method to notify any presenting or on screen messages that the interface has rotated.
    Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
    */
-  func interfaceDidRotate() {
+  public func interfaceDidRotate() {
     if let operation = queue.operations.first as? RMShowOperation, operation.presenter.screenStatus == .presenting {
       operation.presenter.interfaceDidRotate()
     }

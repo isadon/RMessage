@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@objc protocol RMControllerDelegate: class {
+@objc public protocol RMControllerDelegate: class {
   /// Implement this function to have a chance in further customizing a message prior to presentation.
   ///
   /// - Parameter message: The message to customize.
