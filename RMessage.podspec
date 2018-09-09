@@ -9,26 +9,23 @@
 
 Pod::Spec.new do |s|
   s.name             = "RMessage"
-  s.version          = "2.3.2"
-  s.summary          = "Easy to use and customizable messages/notifications for iOS"
-  s.description  = <<-DESC
-                    This framework provides an easy to use class to show little notification views on the top of the screen.
-The notification moves from the top of the screen underneath the navigation bar and stays there for a few seconds, depending on the length of the displayed text. To dismiss a notification before the time runs out, the user can swipe it to the top or just tap it.
-There are 4 different types already set up for you: Success, Error, Warning, Message, Custom.
-                   DESC
-  s.homepage     = "https://github.com/donileo/RMessage"
-
+  s.version          = "3.0.0"
   s.license          = 'MIT'
+  s.summary          = "Easy to use and customizable messages/notifications for iOS"
+  s.homepage         = "https://github.com/donileo/RMessage"
+  s.description      = <<-DESC
+This framework provides an easy to use class to show small customizable notification views on to the screen.
+The notification animates on to the screen to your target position, top, bottom, etc and then dismisses according to various options, automatic, on tap, on swipe, never etc.
+There are 4 different types already set up for you: Success, Error, Warning, Message, Custom. Give it a try!
+DESC
   s.author           = { "Adonis Peralta" => "donileo@gmail.com" }
-  s.source           = { :git => "https://github.com/donileo/RMessage.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/donileo'
 
-  s.platform     = :ios, '7.0'
+  s.source           = { :git => "https://github.com/donileo/RMessage.git", :tag => s.version.to_s }
+  s.platform     = :ios, '11.0'
+  s.swift_version = "4.1"
   s.requires_arc = true
-
-  s.source_files = 'RMessage/**/*.{h,m}'
-  s.resources = ['RMessage/Resources/**/*.xib', 'RMessage/Assets/**/*.{png,jpg,json}']
-  s.public_header_files = 'RMessage/*.h'
-  s.dependency 'HexColors', '~> 4.0'
-  s.dependency 'PPTopMostController'
+  s.source_files = 'Sources/**/*.{swift}'
+  s.resources = ['Sources/Resources/**/*.xib', 'Sources/Assets/**/*.{png,jpg,jpeg,json,pdf}']
+  s.dependency 'HexColors', '~> 6.0'
 end
