@@ -10,7 +10,7 @@ import Foundation
 import HexColors
 import UIKit
 
-public class RMController: RMPresenterDelegate {
+public class RMController: NSObject, RMPresenterDelegate {
   /// The view controller this message is displayed in.
   public lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
 
@@ -26,7 +26,7 @@ public class RMController: RMPresenterDelegate {
     return queue.operationCount
   }
 
-  public init() {
+  public override init() {
     queue = OperationQueue()
     // Make it a serial queue
     queue.maxConcurrentOperationCount = 1
@@ -84,7 +84,7 @@ public class RMController: RMPresenterDelegate {
       dismissCompletion: dismissCompletion
     )
 
-    delegate?.customize?(message: message)
+    delegate?.customize?(message: message, controller: self)
     let presentOp = RMShowOperation(message: message, presenter: presenter)
     queue.addOperation(presentOp)
   }

@@ -13,5 +13,5 @@ import UIKit
   /// Implement this function to have a chance in further customizing a message prior to presentation.
   ///
   /// - Parameter message: The message to customize.
-  @objc optional func customize(message: RMessage)
+  @objc optional func customize(message: RMessage, controller: RMController)
 }
