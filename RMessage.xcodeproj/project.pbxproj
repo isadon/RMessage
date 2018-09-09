@@ -166,8 +166,8 @@
 			children = (
 				7AB38422211386C600DA8076 /* DemoViewController */,
 				7AB38452211387C600DA8076 /* RMessage */,
-				7AB38437211386C700DA8076 /* RMessageTests */,
-				7AB38442211386C700DA8076 /* RMessageUITests */,
+				7AB38437211386C700DA8076 /* Tests */,
+				7AB38442211386C700DA8076 /* UITests */,
 				7AB38421211386C600DA8076 /* Products */,
 				7A5EDAC1211432FD00C2BFE3 /* Frameworks */,
 			);
@@ -194,22 +194,22 @@
 			path = DemoViewController;
 			sourceTree = "<group>";
 		};
-		7AB38437211386C700DA8076 /* RMessageTests */ = {
+		7AB38437211386C700DA8076 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				7AB38438211386C700DA8076 /* RMessageTests.swift */,
 				7AB3843A211386C700DA8076 /* Info.plist */,
 			);
-			path = RMessageTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		7AB38442211386C700DA8076 /* RMessageUITests */ = {
+		7AB38442211386C700DA8076 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				7AB38443211386C700DA8076 /* RMessageUITests.swift */,
 				7AB38445211386C700DA8076 /* Info.plist */,
 			);
-			path = RMessageUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		7AB38451211386EA00DA8076 /* UI Assets */ = {
@@ -233,7 +233,8 @@
 				7AB3845F2113887800DA8076 /* Assets */,
 				7AB3845D2113887800DA8076 /* Resources */,
 			);
-			path = RMessage;
+			name = RMessage;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		7AB3845D2113887800DA8076 /* Resources */ = {
