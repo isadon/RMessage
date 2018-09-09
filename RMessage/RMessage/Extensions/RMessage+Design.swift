@@ -23,12 +23,12 @@ extension RMessage {
     if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
   }
 
-  fileprivate func setupDesign(messageSpec spec: RMessageSpec) {
+  private func setupDesign(messageSpec spec: RMessageSpec) {
     if spec.cornerRadius > 0 { clipsToBounds = true }
     backgroundColor = spec.backgroundColor
   }
 
-  fileprivate func setupDesign(forTitleLabel titleLabel: UILabel, messageSpec spec: RMessageSpec) {
+  private func setupDesign(forTitleLabel titleLabel: UILabel, messageSpec spec: RMessageSpec) {
     titleLabel.numberOfLines = 0
     titleLabel.lineBreakMode = .byWordWrapping
     titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
@@ -44,7 +44,7 @@ extension RMessage {
     titleLabel.shadowOffset = spec.titleShadowOffset
   }
 
-  fileprivate func setupDesign(forBodyLabel bodyLabel: UILabel, messageSpec spec: RMessageSpec) {
+  private func setupDesign(forBodyLabel bodyLabel: UILabel, messageSpec spec: RMessageSpec) {
     bodyLabel.numberOfLines = 0
     bodyLabel.lineBreakMode = .byWordWrapping
     bodyLabel.font = UIFont.boldSystemFont(ofSize: 12)
@@ -60,7 +60,7 @@ extension RMessage {
     bodyLabel.shadowOffset = spec.bodyShadowOffset
   }
 
-  fileprivate func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
     guard let titleText = titleLabel.text else {
       return
     }
@@ -68,7 +68,7 @@ extension RMessage {
     titleLabel.attributedText = titleAttributedText
   }
 
-  fileprivate func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
     guard let bodyText = bodyLabel.text else {
       return
     }

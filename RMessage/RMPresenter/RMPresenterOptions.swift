@@ -13,7 +13,7 @@ protocol RMPresenterOptions {
   var extraOnScreenTimePerPixel: Double { get set }
 }
 
-struct RMPresenterOptionsDefault: RMPresenterOptions {
+struct DefaultRMPresenterOptions: RMPresenterOptions {
   var onScreenTime = 1.5
   var extraOnScreenTimePerPixel = 0.04
 }

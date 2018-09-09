@@ -13,7 +13,7 @@ protocol RMAnimationOptions {
   var dismissalDuration: Double { get set }
 }
 
-struct RMAnimationOptionsDefault: RMAnimationOptions {
+struct DefaultRMAnimationOptions: RMAnimationOptions {
   var presentationDuration = 0.5
   var dismissalDuration = 0.3
 }

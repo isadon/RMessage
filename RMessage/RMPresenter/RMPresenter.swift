@@ -12,12 +12,7 @@ import UIKit
 @objc class RMPresenter: NSObject, RMessageAnimatorDelegate {
   weak var delegate: RMPresenterDelegate?
 
-  private(set) var message: RMessage
-  var targetPosition: RMessagePosition
-
-  private let animator: RMAnimator
-  private(set) var presentationOpts: RMPresenterOptions
-  private(set) var animationOpts: RMAnimationOptions
+  private(set) var targetPosition: RMessagePosition
 
   var dimissTime: TimeInterval {
     switch message.spec.durationType {
@@ -36,7 +31,10 @@ import UIKit
   /** Did the message already present */
   private(set) var didDismiss = false
 
-  /// The current presentation status of the message
+  private(set) var message: RMessage
+  private(set) var presentationOpts: RMPresenterOptions
+  private(set) var animationOpts: RMAnimationOptions
+
   enum PresentationStatus {
     /// The message will soon present though is not on screen yet.
     case willPresent
@@ -62,6 +60,8 @@ import UIKit
   /** Callback block called after the message finishes dismissing */
   private(set) var dismissCompletion: (() -> Void)?
 
+  private let animator: RMAnimator
+
   init(
     message: RMessage, targetPosition: RMessagePosition, animator: RMAnimator,
     presentationOptions presentOpts: RMPresenterOptions,
@@ -78,7 +78,7 @@ import UIKit
     setupGestureRecognizers()
   }
 
-  func setupAnimator() {
+  private func setupAnimator() {
     animator.delegate = self
     if let animator = animator as? SlideAnimator {
       animator.disableAnimationPadding = message.spec.disableSpringAnimationPadding

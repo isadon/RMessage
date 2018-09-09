@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum RMessagePosition {
+  case top, bottom, navBarOverlay
+}
+enum RMessageDuration {
+  case automatic, endless, tap, swipe, tapSwipe, timed
+}
 protocol RMessageSpec {
   var backgroundColor: UIColor { get set }
   var targetAlpha: CGFloat { get set }

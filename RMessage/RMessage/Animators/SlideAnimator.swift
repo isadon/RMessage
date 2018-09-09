@@ -122,7 +122,7 @@ class SlideAnimator: NSObject, RMAnimator {
     return true
   }
 
-  func animatePresentation(withCompletion completion: (() -> Void)?) {
+  private func animatePresentation(withCompletion completion: (() -> Void)?) {
     assert(view.superview != nil, "view must have superview by this point")
     isPresenting = true
     viewTopConstraint.isActive = true
@@ -155,7 +155,7 @@ class SlideAnimator: NSObject, RMAnimator {
   }
 
   /** Dismiss the view with a completion block */
-  @objc func animateDismissal(withCompletion completion: (() -> Void)?) {
+  private func animateDismissal(withCompletion completion: (() -> Void)?) {
     assert(view.superview != nil, "view instance must have a superview by this point!")
     isDismissing = true
     DispatchQueue.main.async {
@@ -192,7 +192,7 @@ class SlideAnimator: NSObject, RMAnimator {
     }
   }
 
-  func safeAreaInsetsDidChange(forView view: UIView) {
+  private func safeAreaInsetsDidChange(forView view: UIView) {
     var constant = CGFloat(0)
     if targetPosition == .bottom {
       constant = springAnimationPadding + view.safeAreaInsets.bottom
@@ -224,7 +224,7 @@ class SlideAnimator: NSObject, RMAnimator {
     calculateSpringAnimationPadding()
   }
 
-  func setupContentViewLayoutGuideConstraint() {
+  private func setupContentViewLayoutGuideConstraint() {
     // Install a constraint that guarantees the title subtitle container view is properly spaced from the top layout
     // guide when animating from top or the bottom layout guide when animating from bottom
     let safeAreaLayoutGuide = superview.safeAreaLayoutGuide
@@ -243,7 +243,7 @@ class SlideAnimator: NSObject, RMAnimator {
     contentViewSafeAreaGuideConstraint?.priority = UILayoutPriority(rawValue: 749)
   }
 
-  func setupStartingAnimationConstraints() {
+  private func setupStartingAnimationConstraints() {
     assert(view.superview != nil, "instance must have a superview by this point")
     guard let superview = view.superview else {
       return
@@ -257,7 +257,7 @@ class SlideAnimator: NSObject, RMAnimator {
     viewTopStartConstraint = viewTopConstraint
   }
 
-  func setupFinalAnimationConstraints() {
+  private func setupFinalAnimationConstraints() {
     assert(springAnimationPaddingCalculated, "spring animation padding must have been calculated by now!")
     assert(view.superview != nil, "instance must have a superview by this point")
     guard let superview = view.superview else {
@@ -290,7 +290,7 @@ class SlideAnimator: NSObject, RMAnimator {
 
   // Calculate the padding after the view has had a chance to perform its own custom layout changes via the delegate
   // call to animatorWillLayout, animatorDidLayout
-  func calculateSpringAnimationPadding() {
+  private func calculateSpringAnimationPadding() {
     if disableAnimationPadding {
       springAnimationPadding = CGFloat(0)
       springAnimationPaddingCalculated = true

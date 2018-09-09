@@ -10,14 +10,6 @@ import Foundation
 import HexColors
 import UIKit
 
-enum RMessagePosition {
-  case top, bottom, navBarOverlay
-}
-
-enum RMessageDuration {
-  case automatic, endless, tap, swipe, tapSwipe, timed
-}
-
 class RMessage: UIView, RMessageAnimatorDelegate {
   private(set) var spec: RMessageSpec
 
@@ -85,7 +77,7 @@ class RMessage: UIView, RMessageAnimatorDelegate {
     containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
   }
 
-  func setupComponents(withMessageSpec spec: RMessageSpec) {
+  private func setupComponents(withMessageSpec spec: RMessageSpec) {
     if let image = spec.iconImage, leftView == nil {
       leftView = iconImageView(withImage: image, imageTintColor: spec.iconImageTintColor, superview: self)
     }

@@ -14,13 +14,13 @@ class RMController: RMPresenterDelegate {
   /** The view controller this message is displayed in */
   lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
 
-  private let queue: OperationQueue
-
   /// By setting this delegate it's possible to set a custom offset for the message
   weak var delegate: RMControllerDelegate?
 
   // Protect access to this variable from data races
   private(set) var messageOnScreen = false
+
+  private let queue: OperationQueue
 
   init() {
     queue = OperationQueue()
@@ -61,8 +61,8 @@ class RMController: RMPresenterDelegate {
       return
     }
 
-    let presentOpts = RMPresenterOptionsDefault()
-    let animOpts = RMAnimationOptionsDefault()
+    let presentOpts = DefaultRMPresenterOptions()
+    let animOpts = DefaultRMAnimationOptions()
 
     var presentVC: UIViewController?
     if let viewController = viewController {
