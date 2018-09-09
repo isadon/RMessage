@@ -1,6 +1,5 @@
 //
 //  RMPresenter+TouchCompletion.swift
-//  RMessageDemo
 //
 //  Created by Adonis Peralta on 8/6/18.
 //  Copyright © 2018 None. All rights reserved.

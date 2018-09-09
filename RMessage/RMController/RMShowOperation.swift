@@ -1,6 +1,5 @@
 //
 //  RMShowOperation.swift
-//  RMessageDemo
 //
 //  Created by Adonis Peralta on 8/9/18.
 //  Copyright © 2018 None. All rights reserved.
