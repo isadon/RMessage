@@ -7,34 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A03FC4221180EB50002EBCF /* RMessage+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03FC4121180EB50002EBCF /* RMessage+Components.swift */; };
-		7A2DD593211929E500025ADE /* RMAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD592211929E500025ADE /* RMAnimator.swift */; };
-		7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD59421192A6B00025ADE /* SlideAnimator.swift */; };
-		7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */; };
-		7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */; };
-		7A7F96C7211ECBD600107868 /* RMPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C6211ECBD600107868 /* RMPresenter.swift */; };
-		7A7F96CA211F44AC00107868 /* RMPresenterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */; };
-		7A7F96CC211F4F4800107868 /* RMAnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */; };
+		7A43CAF12144E8A300A2A0D1 /* RMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A71D40E2144DA8E0050BD01 /* RMessage.framework */; };
+		7A43CAF22144E8A300A2A0D1 /* RMessage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A71D40E2144DA8E0050BD01 /* RMessage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7A7045AF21450EFF0086370D /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7045AE21450EFF0086370D /* TestHelpers.swift */; };
+		7A7045B021450EFF0086370D /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7045AE21450EFF0086370D /* TestHelpers.swift */; };
+		7A71D4122144DA8E0050BD01 /* RMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A71D4102144DA8E0050BD01 /* RMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A71D41B2144DBDB0050BD01 /* UIWindow+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */; };
+		7A71D41C2144DBDB0050BD01 /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD59421192A6B00025ADE /* SlideAnimator.swift */; };
+		7A71D41D2144DBDB0050BD01 /* RMessage+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A03FC4121180EB50002EBCF /* RMessage+Components.swift */; };
+		7A71D41E2144DBDB0050BD01 /* RMessage+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D73211805D900543F68 /* RMessage+Design.swift */; };
+		7A71D41F2144DBDB0050BD01 /* RMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */; };
+		7A71D4202144DBDB0050BD01 /* RMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847421138E9900DA8076 /* RMessage.swift */; };
+		7A71D4212144DBDB0050BD01 /* RMAnimationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */; };
+		7A71D4222144DBDB0050BD01 /* RMAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2DD592211929E500025ADE /* RMAnimator.swift */; };
+		7A71D4232144DBDB0050BD01 /* RMPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */; };
+		7A71D4242144DBDB0050BD01 /* RMPresenter+TouchCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */; };
+		7A71D4252144DBDB0050BD01 /* RMPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F96C6211ECBD600107868 /* RMPresenter.swift */; };
+		7A71D4262144DBDB0050BD01 /* RMShowOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC67916211CF8F00096B3B4 /* RMShowOperation.swift */; };
+		7A71D4272144DBDB0050BD01 /* RMControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847621138F7500DA8076 /* RMControllerDelegate.swift */; };
+		7A71D4282144DBDB0050BD01 /* RMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847221138E8D00DA8076 /* RMController.swift */; };
+		7A71D42D2144E0E30050BD01 /* RMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB3845E2113887800DA8076 /* RMessage.xib */; };
+		7A71D42E2144E0EA0050BD01 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AB384612113887800DA8076 /* Icons.xcassets */; };
 		7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38423211386C600DA8076 /* AppDelegate.swift */; };
 		7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38425211386C600DA8076 /* DemoViewController.swift */; };
 		7AB3842B211386C700DA8076 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AB3842A211386C700DA8076 /* Assets.xcassets */; };
 		7AB3842E211386C700DA8076 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB3842C211386C700DA8076 /* LaunchScreen.storyboard */; };
 		7AB38439211386C700DA8076 /* RMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38438211386C700DA8076 /* RMessageTests.swift */; };
-		7AB38444211386C700DA8076 /* RMessageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38443211386C700DA8076 /* RMessageUITests.swift */; };
+		7AB38444211386C700DA8076 /* NavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38443211386C700DA8076 /* NavigationControllerTests.swift */; };
 		7AB384562113883700DA8076 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB384552113883700DA8076 /* Main.storyboard */; };
-		7AB384622113887900DA8076 /* RMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AB3845E2113887800DA8076 /* RMessage.xib */; };
-		7AB384642113887900DA8076 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AB384612113887800DA8076 /* Icons.xcassets */; };
-		7AB3847321138E8D00DA8076 /* RMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847221138E8D00DA8076 /* RMController.swift */; };
-		7AB3847521138E9900DA8076 /* RMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847421138E9900DA8076 /* RMessage.swift */; };
-		7AB3847721138F7500DA8076 /* RMControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3847621138F7500DA8076 /* RMControllerDelegate.swift */; };
-		7AB3DA8221150CFC0061F5B4 /* RMPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */; };
-		7AC67917211CF8F00096B3B4 /* RMShowOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC67916211CF8F00096B3B4 /* RMShowOperation.swift */; };
-		7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D73211805D900543F68 /* RMessage+Design.swift */; };
-		7AE10D7E21180CBF00543F68 /* RMPresenter+TouchCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */; };
-		7AFB50E3211842D700137DB8 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */; };
+		7ADB44922144EAD1009C5782 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E69052144E9C9007D0F50 /* HexColors.framework */; };
+		7ADB44932144EAF1009C5782 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E69052144E9C9007D0F50 /* HexColors.framework */; };
+		7ADB44952144EFA9009C5782 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB44942144EFA9009C5782 /* ViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7A43CAF32144E8A300A2A0D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AB38418211386C600DA8076 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A71D40D2144DA8E0050BD01;
+			remoteInfo = RMessage;
+		};
 		7AB38435211386C700DA8076 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7AB38418211386C600DA8076 /* Project object */;
@@ -51,16 +64,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7A43CAF52144E8A300A2A0D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A43CAF22144E8A300A2A0D1 /* RMessage.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7A03FC4121180EB50002EBCF /* RMessage+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Components.swift"; sourceTree = "<group>"; };
 		7A2DD592211929E500025ADE /* RMAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimator.swift; sourceTree = "<group>"; };
 		7A2DD59421192A6B00025ADE /* SlideAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
-		7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7A5EDAC62114401500C2BFE3 /* RMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageSpec.swift; sourceTree = "<group>"; };
+		7A7045AE21450EFF0086370D /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		7A71D40E2144DA8E0050BD01 /* RMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A71D4102144DA8E0050BD01 /* RMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
+		7A71D4112144DA8E0050BD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
 		7A7F96C6211ECBD600107868 /* RMPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenter.swift; sourceTree = "<group>"; };
-		7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenterOptions.swift; sourceTree = "<group>"; };
 		7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimationOptions.swift; sourceTree = "<group>"; };
+		7A8E69052144E9C9007D0F50 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7AB38420211386C600DA8076 /* RMessageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB38423211386C600DA8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB38425211386C600DA8076 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +101,7 @@
 		7AB38438211386C700DA8076 /* RMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageTests.swift; sourceTree = "<group>"; };
 		7AB3843A211386C700DA8076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AB3843F211386C700DA8076 /* RMessageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMessageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AB38443211386C700DA8076 /* RMessageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMessageUITests.swift; sourceTree = "<group>"; };
+		7AB38443211386C700DA8076 /* NavigationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerTests.swift; sourceTree = "<group>"; };
 		7AB38445211386C700DA8076 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AB384552113883700DA8076 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7AB3845E2113887800DA8076 /* RMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMessage.xib; sourceTree = "<group>"; };
@@ -81,16 +111,26 @@
 		7AB3847621138F7500DA8076 /* RMControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMControllerDelegate.swift; sourceTree = "<group>"; };
 		7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenterDelegate.swift; sourceTree = "<group>"; };
 		7AC67916211CF8F00096B3B4 /* RMShowOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMShowOperation.swift; sourceTree = "<group>"; };
+		7ADB44942144EFA9009C5782 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		7AE10D73211805D900543F68 /* RMessage+Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMessage+Design.swift"; sourceTree = "<group>"; };
 		7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMPresenter+TouchCompletion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7A71D40A2144DA8E0050BD01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7ADB44922144EAD1009C5782 /* HexColors.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB3841D211386C600DA8076 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AFB50E3211842D700137DB8 /* HexColors.framework in Frameworks */,
+				7ADB44932144EAF1009C5782 /* HexColors.framework in Frameworks */,
+				7A43CAF12144E8A300A2A0D1 /* RMessage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,12 +168,20 @@
 			path = Animators;
 			sourceTree = "<group>";
 		};
-		7A5EDAC1211432FD00C2BFE3 /* Frameworks */ = {
+		7A71D40F2144DA8E0050BD01 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7A5EDAC2211432FD00C2BFE3 /* HexColors.framework */,
+				7AB3845F2113887800DA8076 /* Assets */,
+				7AB3845D2113887800DA8076 /* Resources */,
+				7A7AB90A2115191C00A9D5C1 /* General Extensions */,
+				7AE10D72211805BE00543F68 /* RMessage */,
+				7A7F96CD211F93DE00107868 /* RMAnimator */,
+				7A7F96C8211F35E900107868 /* RMPresenter */,
+				7AC67915211CF8B30096B3B4 /* RMController */,
+				7A71D4102144DA8E0050BD01 /* RMessage.h */,
+				7A71D4112144DA8E0050BD01 /* Info.plist */,
 			);
-			name = Frameworks;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		7A7AB90A2115191C00A9D5C1 /* General Extensions */ = {
@@ -147,7 +195,6 @@
 		7A7F96C8211F35E900107868 /* RMPresenter */ = {
 			isa = PBXGroup;
 			children = (
-				7A7F96C9211F44AC00107868 /* RMPresenterOptions.swift */,
 				7AB3DA8121150CFC0061F5B4 /* RMPresenterDelegate.swift */,
 				7AE10D7D21180CBF00543F68 /* RMPresenter+TouchCompletion.swift */,
 				7A7F96C6211ECBD600107868 /* RMPresenter.swift */,
@@ -164,15 +211,23 @@
 			path = RMAnimator;
 			sourceTree = "<group>";
 		};
+		7A8E69042144E9C9007D0F50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A8E69052144E9C9007D0F50 /* HexColors.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7AB38417211386C600DA8076 = {
 			isa = PBXGroup;
 			children = (
-				7AB38422211386C600DA8076 /* DemoViewController */,
-				7AB38452211387C600DA8076 /* RMessage */,
-				7AB38437211386C700DA8076 /* RMessageTests */,
-				7AB38442211386C700DA8076 /* RMessageUITests */,
+				7AB38422211386C600DA8076 /* Demo */,
+				7AB38437211386C700DA8076 /* Tests */,
+				7AB38442211386C700DA8076 /* UITests */,
+				7A71D40F2144DA8E0050BD01 /* Sources */,
 				7AB38421211386C600DA8076 /* Products */,
-				7A5EDAC1211432FD00C2BFE3 /* Frameworks */,
+				7A8E69042144E9C9007D0F50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,11 +237,12 @@
 				7AB38420211386C600DA8076 /* RMessageDemo.app */,
 				7AB38434211386C700DA8076 /* RMessageTests.xctest */,
 				7AB3843F211386C700DA8076 /* RMessageUITests.xctest */,
+				7A71D40E2144DA8E0050BD01 /* RMessage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7AB38422211386C600DA8076 /* DemoViewController */ = {
+		7AB38422211386C600DA8076 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				7AB38423211386C600DA8076 /* AppDelegate.swift */,
@@ -194,25 +250,27 @@
 				7AB38451211386EA00DA8076 /* UI Assets */,
 				7AB3842F211386C700DA8076 /* Info.plist */,
 			);
-			path = DemoViewController;
+			path = Demo;
 			sourceTree = "<group>";
 		};
-		7AB38437211386C700DA8076 /* RMessageTests */ = {
+		7AB38437211386C700DA8076 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				7AB38438211386C700DA8076 /* RMessageTests.swift */,
 				7AB3843A211386C700DA8076 /* Info.plist */,
 			);
-			path = RMessageTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		7AB38442211386C700DA8076 /* RMessageUITests */ = {
+		7AB38442211386C700DA8076 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				7AB38443211386C700DA8076 /* RMessageUITests.swift */,
+				7A7045AE21450EFF0086370D /* TestHelpers.swift */,
+				7ADB44942144EFA9009C5782 /* ViewControllerTests.swift */,
+				7AB38443211386C700DA8076 /* NavigationControllerTests.swift */,
 				7AB38445211386C700DA8076 /* Info.plist */,
 			);
-			path = RMessageUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		7AB38451211386EA00DA8076 /* UI Assets */ = {
@@ -223,20 +281,6 @@
 				7AB3842C211386C700DA8076 /* LaunchScreen.storyboard */,
 			);
 			path = "UI Assets";
-			sourceTree = "<group>";
-		};
-		7AB38452211387C600DA8076 /* RMessage */ = {
-			isa = PBXGroup;
-			children = (
-				7A7AB90A2115191C00A9D5C1 /* General Extensions */,
-				7AE10D72211805BE00543F68 /* RMessage */,
-				7A7F96CD211F93DE00107868 /* RMAnimator */,
-				7A7F96C8211F35E900107868 /* RMPresenter */,
-				7AC67915211CF8B30096B3B4 /* RMController */,
-				7AB3845F2113887800DA8076 /* Assets */,
-				7AB3845D2113887800DA8076 /* Resources */,
-			);
-			path = RMessage;
 			sourceTree = "<group>";
 		};
 		7AB3845D2113887800DA8076 /* Resources */ = {
@@ -278,7 +322,37 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		7A71D40B2144DA8E0050BD01 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A71D4122144DA8E0050BD01 /* RMessage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		7A71D40D2144DA8E0050BD01 /* RMessage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7A71D4172144DA8E0050BD01 /* Build configuration list for PBXNativeTarget "RMessage" */;
+			buildPhases = (
+				7A71D4092144DA8E0050BD01 /* Sources */,
+				7A71D40A2144DA8E0050BD01 /* Frameworks */,
+				7A71D40B2144DA8E0050BD01 /* Headers */,
+				7A71D40C2144DA8E0050BD01 /* Resources */,
+				7A43CAF62144E8EF00A2A0D1 /* Carthage: Copy-Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RMessage;
+			productName = RMessage;
+			productReference = 7A71D40E2144DA8E0050BD01 /* RMessage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		7AB3841F211386C600DA8076 /* RMessageDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AB38448211386C700DA8076 /* Build configuration list for PBXNativeTarget "RMessageDemo" */;
@@ -289,10 +363,12 @@
 				7A62940D2116C2E900A7323B /* Integrate Reveal Server */,
 				7A5EDAC42114330300C2BFE3 /* Carthage: Copy-Frameworks */,
 				7A5EDAC52114335500C2BFE3 /* Carthage: Warn about outdated Deps */,
+				7A43CAF52144E8A300A2A0D1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7A43CAF42144E8A300A2A0D1 /* PBXTargetDependency */,
 			);
 			name = RMessageDemo;
 			productName = RMessage;
@@ -345,6 +421,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = None;
 				TargetAttributes = {
+					7A71D40D2144DA8E0050BD01 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
 					7AB3841F211386C600DA8076 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
@@ -352,7 +431,6 @@
 					7AB38433211386C700DA8076 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
-						TestTargetID = 7AB3841F211386C600DA8076;
 					};
 					7AB3843E211386C700DA8076 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -377,11 +455,21 @@
 				7AB3841F211386C600DA8076 /* RMessageDemo */,
 				7AB38433211386C700DA8076 /* RMessageTests */,
 				7AB3843E211386C700DA8076 /* RMessageUITests */,
+				7A71D40D2144DA8E0050BD01 /* RMessage */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7A71D40C2144DA8E0050BD01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A71D42E2144E0EA0050BD01 /* Icons.xcassets in Resources */,
+				7A71D42D2144E0E30050BD01 /* RMessage.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB3841E211386C600DA8076 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,8 +477,6 @@
 				7AB384562113883700DA8076 /* Main.storyboard in Resources */,
 				7AB3842E211386C700DA8076 /* LaunchScreen.storyboard in Resources */,
 				7AB3842B211386C700DA8076 /* Assets.xcassets in Resources */,
-				7AB384642113887900DA8076 /* Icons.xcassets in Resources */,
-				7AB384622113887900DA8076 /* RMessage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +497,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7A43CAF62144E8EF00A2A0D1 /* Carthage: Copy-Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/HexColors.framework",
+			);
+			name = "Carthage: Copy-Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HexColors.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		7A5EDAC42114330300C2BFE3 /* Carthage: Copy-Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,27 +560,33 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7A71D4092144DA8E0050BD01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A71D4202144DBDB0050BD01 /* RMessage.swift in Sources */,
+				7A71D4262144DBDB0050BD01 /* RMShowOperation.swift in Sources */,
+				7A71D4282144DBDB0050BD01 /* RMController.swift in Sources */,
+				7A71D41E2144DBDB0050BD01 /* RMessage+Design.swift in Sources */,
+				7A71D41C2144DBDB0050BD01 /* SlideAnimator.swift in Sources */,
+				7A71D41F2144DBDB0050BD01 /* RMessageSpec.swift in Sources */,
+				7A71D4212144DBDB0050BD01 /* RMAnimationOptions.swift in Sources */,
+				7A71D4222144DBDB0050BD01 /* RMAnimator.swift in Sources */,
+				7A71D41D2144DBDB0050BD01 /* RMessage+Components.swift in Sources */,
+				7A71D4242144DBDB0050BD01 /* RMPresenter+TouchCompletion.swift in Sources */,
+				7A71D41B2144DBDB0050BD01 /* UIWindow+ViewController.swift in Sources */,
+				7A71D4252144DBDB0050BD01 /* RMPresenter.swift in Sources */,
+				7A71D4232144DBDB0050BD01 /* RMPresenterDelegate.swift in Sources */,
+				7A71D4272144DBDB0050BD01 /* RMControllerDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7AB3841C211386C600DA8076 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AB3847321138E8D00DA8076 /* RMController.swift in Sources */,
-				7AE10D7E21180CBF00543F68 /* RMPresenter+TouchCompletion.swift in Sources */,
-				7A7F96C7211ECBD600107868 /* RMPresenter.swift in Sources */,
-				7A2DD593211929E500025ADE /* RMAnimator.swift in Sources */,
-				7AB3847721138F7500DA8076 /* RMControllerDelegate.swift in Sources */,
 				7AB38426211386C600DA8076 /* DemoViewController.swift in Sources */,
-				7A2DD59521192A6B00025ADE /* SlideAnimator.swift in Sources */,
-				7A7F96CC211F4F4800107868 /* RMAnimationOptions.swift in Sources */,
-				7A5EDAC72114401500C2BFE3 /* RMessageSpec.swift in Sources */,
-				7A7F96CA211F44AC00107868 /* RMPresenterOptions.swift in Sources */,
-				7AB3DA8221150CFC0061F5B4 /* RMPresenterDelegate.swift in Sources */,
-				7AB3847521138E9900DA8076 /* RMessage.swift in Sources */,
-				7AE10D74211805D900543F68 /* RMessage+Design.swift in Sources */,
-				7AC67917211CF8F00096B3B4 /* RMShowOperation.swift in Sources */,
 				7AB38424211386C600DA8076 /* AppDelegate.swift in Sources */,
-				7A03FC4221180EB50002EBCF /* RMessage+Components.swift in Sources */,
-				7A7AB90C2115191C00A9D5C1 /* UIWindow+ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AB38439211386C700DA8076 /* RMessageTests.swift in Sources */,
+				7A7045AF21450EFF0086370D /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,13 +603,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AB38444211386C700DA8076 /* RMessageUITests.swift in Sources */,
+				7ADB44952144EFA9009C5782 /* ViewControllerTests.swift in Sources */,
+				7AB38444211386C700DA8076 /* NavigationControllerTests.swift in Sources */,
+				7A7045B021450EFF0086370D /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7A43CAF42144E8A300A2A0D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A71D40D2144DA8E0050BD01 /* RMessage */;
+			targetProxy = 7A43CAF32144E8A300A2A0D1 /* PBXContainerItemProxy */;
+		};
 		7AB38436211386C700DA8076 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7AB3841F211386C600DA8076 /* RMessageDemo */;
@@ -525,6 +641,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7A71D4182144DA8E0050BD01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.donileo.RMessage;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7A71D4192144DA8E0050BD01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.donileo.RMessage;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		7AB38446211386C700DA8076 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -642,6 +826,7 @@
 		7AB38449211386C700DA8076 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -649,19 +834,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(SRCROOT)/DemoViewController",
+					"$(PROJECT_DIR)/Demo",
 				);
-				INFOPLIST_FILE = DemoViewController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-weak_framework",
-					RevealServer,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -674,6 +855,7 @@
 		7AB3844A211386C700DA8076 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -681,9 +863,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(SRCROOT)/DemoViewController",
+					"$(PROJECT_DIR)/Demo",
 				);
-				INFOPLIST_FILE = DemoViewController/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -701,10 +883,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,10 +894,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
 			};
 			name = Debug;
 		};
@@ -723,10 +905,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,9 +916,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RMessage.app/RMessage";
 			};
 			name = Release;
 		};
@@ -745,8 +927,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -754,10 +937,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RMessage;
+				TEST_TARGET_NAME = RMessageDemo;
 			};
 			name = Debug;
 		};
@@ -766,8 +951,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RMessageUITests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -775,15 +961,26 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RMessage;
+				TEST_TARGET_NAME = RMessageDemo;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7A71D4172144DA8E0050BD01 /* Build configuration list for PBXNativeTarget "RMessage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A71D4182144DA8E0050BD01 /* Debug */,
+				7A71D4192144DA8E0050BD01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7AB3841B211386C600DA8076 /* Build configuration list for PBXProject "RMessage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
