@@ -69,12 +69,15 @@ import UIKit
   init(
     message: RMessage, targetPosition: RMessagePosition, animator: RMAnimator,
     animationOptions animationOpts: RMAnimationOptions,
-    tapCompletion _: (() -> Void)? = nil, presentCompletion _: (() -> Void)? = nil, dismissCompletion _: (() -> Void)? = nil
+    tapCompletion: (() -> Void)? = nil, presentCompletion: (() -> Void)? = nil, dismissCompletion: (() -> Void)? = nil
   ) {
     self.message = message
     self.targetPosition = targetPosition
     self.animator = animator
     self.animationOpts = animationOpts
+    self.tapCompletion = tapCompletion
+    self.presentCompletion = presentCompletion
+    self.dismissCompletion = dismissCompletion
     super.init()
     setupAnimator()
     setupGestureRecognizers()
