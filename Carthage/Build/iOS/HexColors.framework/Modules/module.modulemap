@@ -1,4 +1,4 @@
 framework module HexColors {
-    header "HexColors-Swift.h"
-    requires objc
+  header "HexColors-Swift.h"
+  requires objc
 }
