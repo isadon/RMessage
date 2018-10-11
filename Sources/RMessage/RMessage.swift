@@ -115,19 +115,23 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
       trailingConstraint.isActive = false
     }
 
-    NSLayoutConstraint.deactivate([
-      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-    ])
+    NSLayoutConstraint.deactivate(
+      [
+        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+      ]
+    )
 
     titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
     titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
     bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
     bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
-    NSLayoutConstraint.activate([
-      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-    ])
+    NSLayoutConstraint.activate(
+      [
+        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+      ]
+    )
   }
 
   // MARK: - Respond to Layout Changes

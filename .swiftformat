@@ -20,8 +20,9 @@
 --patternlet inline
 --ranges spaced
 --self remove
---semicolons inline
+--closingparen balanced
 --stripunusedargs always
+--semicolons inline
 --trimwhitespace always
 --wraparguments beforefirst
 --wrapcollections beforefirst

@@ -19,16 +19,6 @@ extension RMessage {
     return iconImageView
   }
 
-  func iconImageView(withImage image: UIImage, imageTintColor: UIColor?, superview: UIView, contentView _: UIView) -> UIView {
-    let iconImageView = UIImageView(image: image)
-
-    iconImageView.clipsToBounds = true
-    iconImageView.tintColor = imageTintColor
-    iconImageView.contentMode = .scaleAspectFit
-    setup(leftView: iconImageView, inSuperview: superview)
-    return iconImageView
-  }
-
   func setup(leftView view: UIView, inSuperview superview: UIView) {
     view.translatesAutoresizingMaskIntoConstraints = false
 

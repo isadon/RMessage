@@ -179,21 +179,23 @@ class SlideAnimator: NSObject, RMAnimator {
       // For now lets be safe and not call this code inside the animation block. Though there may be some slight timing
       // issue in notifying exactly when the animator is animating it should be fine.
       self.delegate?.animatorIsAnimatingDismissal?(self)
-      UIView.animate(withDuration: self.dismissalDuration, animations: {
-        self.viewTopConstraint.isActive = false
-        self.viewTopConstraint = self.viewTopStartConstraint
-        self.viewTopConstraint.isActive = true
-        self.delegate?.animationBlockForDismissal?(self)
-        self.view.alpha = self.animationStartAlpha
-        self.view.superview!.layoutIfNeeded()
-      }, completion: { finished in
-        self.isDismissing = false
-        self.hasPresented = false
-        self.hasDismissed = true
-        self.view.removeFromSuperview()
-        self.delegate?.animatorDidDismiss?(self)
-        if finished { completion?() }
-      })
+      UIView.animate(
+        withDuration: self.dismissalDuration, animations: {
+          self.viewTopConstraint.isActive = false
+          self.viewTopConstraint = self.viewTopStartConstraint
+          self.viewTopConstraint.isActive = true
+          self.delegate?.animationBlockForDismissal?(self)
+          self.view.alpha = self.animationStartAlpha
+          self.view.superview!.layoutIfNeeded()
+        }, completion: { finished in
+          self.isDismissing = false
+          self.hasPresented = false
+          self.hasDismissed = true
+          self.view.removeFromSuperview()
+          self.delegate?.animatorDidDismiss?(self)
+          if finished { completion?() }
+        }
+      )
     }
   }
 
