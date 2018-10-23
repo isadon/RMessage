@@ -493,8 +493,7 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                        multiplier:1.f
                                                                         constant:0.f];
   [[self class]
-    activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint,
-                          self.titleSubtitleContainerViewLayoutGuideConstraint, self.topToVCLayoutConstraint]
+    activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
   if (self.shouldBlurBackground) {
     [self setupBlurBackground];
@@ -522,7 +521,6 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                                        multiplier:1.f
                                                                                          constant:-10.f];
   }
-  self.titleSubtitleContainerViewLayoutGuideConstraint.priority = 749;
 }
 - (void)setupBackgroundImageViewWithImage:(UIImage *)image
 {
@@ -1140,7 +1138,7 @@ static NSMutableDictionary *globalDesignDictionary;
                      animations:^{
                        [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCFinalConstraint;
-                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
+                       [[self class] activateConstraints:@[self.topToVCLayoutConstraint, self.titleSubtitleContainerViewLayoutGuideConstraint] inSuperview:self.superview];
                        self.isPresenting = YES;
                        if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
                          [self.delegate messageViewIsPresenting:self];
@@ -1175,7 +1173,7 @@ static NSMutableDictionary *globalDesignDictionary;
     [UIView animateWithDuration:kRMessageAnimationDuration
                      animations:^{
                        if (!self.shouldBlurBackground) self.alpha = 0.f;
-                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
+                       [[self class] deActivateConstraints:@[self.topToVCLayoutConstraint, self.titleSubtitleContainerViewLayoutGuideConstraint] inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCStartingConstraint;
                        [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        [self.superview layoutIfNeeded];
