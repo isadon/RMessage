@@ -504,11 +504,23 @@ static NSMutableDictionary *globalDesignDictionary;
   // Install a constraint that guarantees the title subtitle container view is properly spaced from the top layout guide
   // when animating from top or the bottom layout guide when animating from bottom
   if (self.messagePosition != RMessagePositionBottom) {
+    // BugFix: https://github.com/donileo/RMessage/issues/53
+    // Issue: UITableViewControllers in iOS versions below 11 offset the entire
+    // topLayoutGuide downward when the automaticallyAdjustsScrollViewInsets property
+    // is set (which it is by default). This causes the topLayoutGuide bottom which
+    // normally is located at the bottom of any top bars to now be offset
+    // (height of top bar) pts below the bottom of the bar. This is not expected
+    //  behavior (most likely a bug) and causes RMessage to improperly size itself.
+    NSLayoutAttribute layoutAttribute = NSLayoutAttributeBottom;
+    if (!@available(iOS 11.0, *) && self.viewController.automaticallyAdjustsScrollViewInsets &&
+        [self.viewController.view isKindOfClass:[UIScrollView class]]) {
+      layoutAttribute = NSLayoutAttributeTop;
+    }
     self.titleSubtitleContainerViewLayoutGuideConstraint = [NSLayoutConstraint constraintWithItem:self.titleSubtitleContainerView
                                                                                         attribute:NSLayoutAttributeTop
                                                                                         relatedBy:NSLayoutRelationEqual
                                                                                            toItem:self.viewController.topLayoutGuide
-                                                                                        attribute:NSLayoutAttributeBottom
+                                                                                        attribute:layoutAttribute
                                                                                        multiplier:1.f
                                                                                          constant:10.f];
 
