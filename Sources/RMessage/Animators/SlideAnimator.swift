@@ -49,25 +49,12 @@ class SlideAnimator: NSObject, RMAnimator {
 
   private let targetPosition: RMessagePosition
 
-  /** The vertical space between the message top to its view controller top */
-  private lazy var viewTopConstraint: NSLayoutConstraint = {
-    if targetPosition != .bottom {
-      return NSLayoutConstraint(
-        item: view, attribute: .bottom, relatedBy: .equal,
-        toItem: superview, attribute: .top, multiplier: 1, constant: 0
-      )
-    } else {
-      return NSLayoutConstraint(
-        item: view, attribute: .top, relatedBy: .equal, toItem: superview,
-        attribute: .bottom, multiplier: 1, constant: 0
-      )
-    }
-  }()
+  /** The starting animation constraint for the view */
+  private var viewStartConstraint: NSLayoutConstraint?
 
-  private lazy var viewTopStartConstraint = viewTopConstraint
+  /** The ending animation constraint for the view */
+  private var viewEndConstraint: NSLayoutConstraint?
 
-  /** The final constant value that should be set for the topToVCTopLayoutConstraint when animating */
-  private var viewTopEndConstraint: NSLayoutConstraint?
   private var contentViewSafeAreaGuideConstraint: NSLayoutConstraint?
 
   /** The amount of vertical padding/height to add to RMessage's height so as to perform a spring animation without
@@ -140,8 +127,9 @@ class SlideAnimator: NSObject, RMAnimator {
 
   private func animatePresentation(withCompletion completion: (() -> Void)?) {
     assert(view.superview != nil, "view must have superview by this point")
+    guard let viewStartConstraint = viewStartConstraint, let viewEndConstraint = viewEndConstraint else { return }
     isPresenting = true
-    viewTopConstraint.isActive = true
+    viewStartConstraint.isActive = true
     DispatchQueue.main.async {
       self.view.superview!.layoutIfNeeded()
       self.view.alpha = self.animationStartAlpha
@@ -154,9 +142,8 @@ class SlideAnimator: NSObject, RMAnimator {
         initialSpringVelocity: 0,
         options: [.curveEaseInOut, .beginFromCurrentState, .allowUserInteraction],
         animations: {
-          self.viewTopConstraint.isActive = false
-          self.viewTopConstraint = self.viewTopEndConstraint!
-          self.viewTopConstraint.isActive = true
+          viewStartConstraint.isActive = false
+          viewEndConstraint.isActive = true
           self.delegate?.animationBlockForPresentation?(self)
           self.view.alpha = self.animationEndAlpha
           self.view.superview!.layoutIfNeeded()
@@ -173,6 +160,7 @@ class SlideAnimator: NSObject, RMAnimator {
   /** Dismiss the view with a completion block */
   private func animateDismissal(withCompletion completion: (() -> Void)?) {
     assert(view.superview != nil, "view instance must have a superview by this point!")
+    guard let viewStartConstraint = viewStartConstraint, let viewEndConstraint = viewEndConstraint else { return }
     isDismissing = true
     DispatchQueue.main.async {
       self.view.superview!.layoutIfNeeded()
@@ -181,9 +169,8 @@ class SlideAnimator: NSObject, RMAnimator {
       self.delegate?.animatorIsAnimatingDismissal?(self)
       UIView.animate(
         withDuration: self.dismissalDuration, animations: {
-          self.viewTopConstraint.isActive = false
-          self.viewTopConstraint = self.viewTopStartConstraint
-          self.viewTopConstraint.isActive = true
+          viewEndConstraint.isActive = false
+          viewStartConstraint.isActive = true
           self.delegate?.animationBlockForDismissal?(self)
           self.view.alpha = self.animationStartAlpha
           self.view.superview!.layoutIfNeeded()
@@ -217,7 +204,7 @@ class SlideAnimator: NSObject, RMAnimator {
     } else {
       constant = -springAnimationPadding - view.safeAreaInsets.top
     }
-    viewTopEndConstraint?.constant = constant
+    viewEndConstraint?.constant = constant
   }
 
   // MARK: - Layout
@@ -268,11 +255,10 @@ class SlideAnimator: NSObject, RMAnimator {
     }
 
     if targetPosition != .bottom {
-      viewTopConstraint = view.bottomAnchor.constraint(equalTo: superview.topAnchor)
+      viewStartConstraint = view.bottomAnchor.constraint(equalTo: superview.topAnchor)
     } else {
-      viewTopConstraint = view.topAnchor.constraint(equalTo: superview.bottomAnchor)
+      viewStartConstraint = view.topAnchor.constraint(equalTo: superview.bottomAnchor)
     }
-    viewTopStartConstraint = viewTopConstraint
   }
 
   private func setupFinalAnimationConstraints() {
@@ -297,13 +283,13 @@ class SlideAnimator: NSObject, RMAnimator {
       constant = -springAnimationPadding - superview.safeAreaInsets.top
     }
 
-    viewTopEndConstraint = NSLayoutConstraint(
+    viewEndConstraint = NSLayoutConstraint(
       item: view, attribute: viewAttribute, relatedBy: .equal,
       toItem: superview.safeAreaLayoutGuide,
       attribute: layoutGuideAttribute, multiplier: 1,
       constant: constant
     )
-    viewTopEndConstraint?.constant += verticalOffset
+    viewEndConstraint?.constant += verticalOffset
   }
 
   // Calculate the padding after the view has had a chance to perform its own custom layout changes via the delegate
