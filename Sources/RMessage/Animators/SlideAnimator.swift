@@ -144,6 +144,7 @@ class SlideAnimator: NSObject, RMAnimator {
         animations: {
           viewStartConstraint.isActive = false
           viewEndConstraint.isActive = true
+          self.contentViewSafeAreaGuideConstraint?.isActive = true
           self.delegate?.animationBlockForPresentation?(self)
           self.view.alpha = self.animationEndAlpha
           self.view.superview!.layoutIfNeeded()
@@ -170,6 +171,7 @@ class SlideAnimator: NSObject, RMAnimator {
       UIView.animate(
         withDuration: self.dismissalDuration, animations: {
           viewEndConstraint.isActive = false
+          self.contentViewSafeAreaGuideConstraint?.isActive = false
           viewStartConstraint.isActive = true
           self.delegate?.animationBlockForDismissal?(self)
           self.view.alpha = self.animationStartAlpha
@@ -222,10 +224,8 @@ class SlideAnimator: NSObject, RMAnimator {
     view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor).isActive = true
     view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor).isActive = true
     view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor).isActive = true
-    contentViewSafeAreaGuideConstraint?.isActive = true
 
     delegate?.animatorDidLayout?(self)
-
     calculateSpringAnimationPadding()
   }
 
@@ -245,7 +245,6 @@ class SlideAnimator: NSObject, RMAnimator {
         constant: -10
       )
     }
-    contentViewSafeAreaGuideConstraint?.priority = UILayoutPriority(rawValue: 749)
   }
 
   private func setupStartingAnimationConstraints() {
