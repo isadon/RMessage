@@ -40,11 +40,6 @@ static const int kMsgYPositionScale = 2;
   hittablePredicate = [NSPredicate predicateWithFormat:@"hittable == TRUE"];
 }
 
-- (CGFloat)springAnimationPaddingForHeight:(CGFloat)height
-{
-  return ceilf(height / 120) * -10.f;
-}
-
 - (void)showMessageFromTopByPressingButtonWithName:(NSString *)buttonName
                                       hidingNavBar:(BOOL)hideNavBar
                                         timeToShow:(NSTimeInterval)displayTimeout
@@ -57,7 +52,7 @@ static const int kMsgYPositionScale = 2;
   [app.buttons[buttonName] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = hideNavBar ? springAnimationPadding : navBarFrame.size.height + navBarFrame.origin.y + springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -84,7 +79,7 @@ static const int kMsgYPositionScale = 2;
   [app.buttons[@"Bottom"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = mainWindowFrame.size.height - displayedMessage.frame.size.height - springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -108,7 +103,7 @@ static const int kMsgYPositionScale = 2;
   [app.buttons[@"Endless"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = hideNavBar ? springAnimationPadding : navBarFrame.size.height + navBarFrame.origin.y + springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -229,7 +224,7 @@ static const int kMsgYPositionScale = 2;
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
   XCTAssert(messageDisplayed, @"Over navBar message failed to display");
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   BOOL expectedMessagePositionValid = validateFloatsToScale(displayedMessage.frame.origin.y,
                                                             springAnimationPadding, kMsgYPositionScale);
   XCTAssert(expectedMessagePositionValid, "Over navBar message displayed in the wrong position");
@@ -270,7 +265,7 @@ static const int kMsgYPositionScale = 2;
 
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = navBarFrame.size.height + navBarFrame.origin.y + springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
@@ -299,7 +294,7 @@ static const int kMsgYPositionScale = 2;
   [app.buttons[@"Error"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = navBarFrame.size.height + navBarFrame.origin.y + springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];

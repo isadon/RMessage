@@ -13,3 +13,10 @@ target "RMessageTests" do
   #Set platform to iOS 7 to Catch Property API available warnings in XCode
   platform :ios, '7.0'
 end
+
+target "RMessageUITests" do
+  #Set platform to iOS 7 to Catch Property API available warnings in XCode
+  platform :ios, '7.0'
+end
+
+

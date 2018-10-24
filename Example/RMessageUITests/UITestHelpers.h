@@ -10,5 +10,6 @@
 @interface UITestHelpers : NSObject
 
 BOOL validateFloatsToScale(CGFloat f1, CGFloat f2, int scale);
++(CGFloat)springAnimationPaddingForHeight:(CGFloat)height;
 
 @end
