@@ -148,41 +148,43 @@ public struct DefaultRMessageSpec: RMessageSpec {
   public var blurBackground = false
   public var titleBodyLabelsSizeToFit = false
   public var disableSpringAnimationPadding = false
+
+  public init() {}
 }
 
 // MARK: Implementation for the builtin message types
 
-public let errorSpec: RMessageSpec = {
+public var errorSpec: RMessageSpec {
   var errorSpec = DefaultRMessageSpec()
   errorSpec.backgroundColor = UIColor("#FF2D55") ?? UIColor.black
   errorSpec.titleColor = UIColor.white
   errorSpec.bodyColor = UIColor.white
   errorSpec.iconImage = UIImage(named: "ErrorMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return errorSpec
-}()
+}
 
-public let warningSpec: RMessageSpec = {
+public var warningSpec: RMessageSpec {
   var warningSpec = DefaultRMessageSpec()
   warningSpec.backgroundColor = UIColor("#FFCC00") ?? UIColor.black
   warningSpec.titleColor = UIColor("#484638") ?? UIColor.white
   warningSpec.bodyColor = warningSpec.titleColor
   warningSpec.iconImage = UIImage(named: "WarningMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return warningSpec
-}()
+}
 
-public let normalSpec: RMessageSpec = {
+public var normalSpec: RMessageSpec {
   var normalSpec = DefaultRMessageSpec()
   normalSpec.backgroundColor = UIColor("#E8E8E8") ?? UIColor.black
   normalSpec.titleColor = UIColor("#727C83") ?? UIColor.white
   normalSpec.bodyColor = normalSpec.titleColor
   return normalSpec
-}()
+}
 
-public let successSpec: RMessageSpec = {
+public var successSpec: RMessageSpec {
   var successSpec = DefaultRMessageSpec()
   successSpec.backgroundColor = UIColor("#00C060") ?? UIColor.black
   successSpec.titleColor = UIColor.white
   successSpec.bodyColor = successSpec.titleColor
   successSpec.iconImage = UIImage(named: "SuccessMessageIcon.png", in: Bundle(for: RMessage.self), compatibleWith: nil)
   return successSpec
-}()
+}
