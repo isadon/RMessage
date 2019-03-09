@@ -277,6 +277,20 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     perform(#selector(didTapMessage(_:)), with: nil, afterDelay: 3.0)
   }
 
+  @IBAction func whilstAlertTapped(_: Any) {
+    let alert = UIAlertController(title: "An Alert", message: "Something is going on", preferredStyle: .alert)
+
+    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+
+    alert.addAction(action)
+
+    present(alert, animated: true, completion: nil)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+      self.rControl.showMessage(withSpec: normalSpec, title: "Showing whilst an alert is visible")
+    }
+  }
+
   @objc func buttonTapped() {
     print("button was tapped")
   }
