@@ -15,15 +15,16 @@ extension UIWindow {
   /// - Parameter viewController: The view controller from which to start traversing.
   /// - Returns: The top view controller in the window.
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
-    if viewController.presentingViewController != nil {
-      return topViewController(forViewController: viewController.presentingViewController!)
+    if let presented = viewController.presentedViewController {
+      return topViewController(forViewController: presented)
     } else if let navigationController = viewController as? UINavigationController,
-      let visibleVCInNavigationVC = navigationController.visibleViewController {
-      return topViewController(forViewController: visibleVCInNavigationVC)
+      let topVCInNavigationVC = navigationController.topViewController {
+      return topViewController(forViewController: topVCInNavigationVC)
     } else if let tabBarController = viewController as? UITabBarController,
       let selectedVCInTabBarVC = tabBarController.selectedViewController {
       return topViewController(forViewController: selectedVCInTabBarVC)
     }
+    
     return viewController
   }
 
