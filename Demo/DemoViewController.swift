@@ -25,7 +25,6 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     /* Normally we would set the default view controller and delegate in viewDidLoad
      but since we are using this view controller for our modal view also it is important to properly
      re-set the variables once the modal dismisses. */
-    rControl.presentationViewController = self
     rControl.delegate = self
   }
 
@@ -276,6 +275,18 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapTimedMessage(_: Any) {
     perform(#selector(didTapMessage(_:)), with: nil, afterDelay: 3.0)
+  }
+
+  @IBAction func whilstAlertTapped(_: Any) {
+    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+    let alert = UIAlertController(title: "Alert!", message: "Something is going on.", preferredStyle: .alert)
+    alert.addAction(action)
+
+    present(alert, animated: true, completion: nil)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+      self.rControl.showMessage(withSpec: normalSpec, title: "Showing whilst an alert is visible")
+    }
   }
 
   @objc func buttonTapped() {

@@ -184,6 +184,10 @@ class NavigationControllerTests: XCTestCase {
     showMessageFromTopByPressingButton(withName: "Custom image", hidingNavBar: false, timeToShow: 3.0, timeToHide: 8.0)
   }
 
+  func testWhilstAlertIsShown() {
+    showMessageFromTopByPressingButton(withName: "Whilst Alert", hidingNavBar: false, timeToShow: 3.0, timeToHide: 8.0)
+  }
+
   func testEndlessMessageNoNavBar() {
     showEndlessMessage(hidingNavBar: false, withTimeout: 3.0)
   }

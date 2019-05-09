@@ -12,7 +12,7 @@ import UIKit
 
 public class RMController: NSObject, RMPresenterDelegate {
   /// The view controller this message is displayed in.
-  public lazy var presentationViewController: UIViewController? = UIWindow.topViewController()
+  public var presentationViewController: UIViewController?
 
   /// Delegate of the RMController object.
   public weak var delegate: RMControllerDelegate?
@@ -62,12 +62,7 @@ public class RMController: NSObject, RMPresenterDelegate {
 
     let animOpts = DefaultRMAnimationOptions()
 
-    var presentVC: UIViewController?
-    if let viewController = viewController {
-      presentVC = viewController
-    } else {
-      presentVC = presentationViewController
-    }
+    let presentVC = viewController ?? presentationViewController ?? UIWindow.topViewController()
 
     // Make sure we have a presentation view controller for the message
     guard let presentationVC = presentVC else {
