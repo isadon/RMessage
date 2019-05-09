@@ -67,14 +67,16 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
   private func loadNib() {
     Bundle(for: RMessage.self).loadNibNamed(String(describing: RMessage.self), owner: self, options: nil)
-    containerView.translatesAutoresizingMaskIntoConstraints = false
 
     addSubview(containerView)
+    containerView.translatesAutoresizingMaskIntoConstraints = false
 
-    containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    NSLayoutConstraint.activate([
+      containerView.topAnchor.constraint(equalTo: topAnchor),
+      containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      containerView.trailingAnchor.constraint(equalTo: trailingAnchor)
+      ])
   }
 
   private func setupComponents(withMessageSpec spec: RMessageSpec) {
@@ -111,21 +113,20 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     guard spec.titleBodyLabelsSizeToFit else {
       return
     }
-    if let trailingConstraint = contentViewTrailingConstraint {
-      trailingConstraint.isActive = false
-    }
 
     NSLayoutConstraint.deactivate(
       [
+        contentViewTrailingConstraint,
         titleLabelLeadingConstraint, titleLabelTrailingConstraint,
         bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-      ]
+        ].compactMap { $0 }
     )
 
     titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
     titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
     bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
     bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+
     NSLayoutConstraint.activate(
       [
         titleLabelLeadingConstraint, titleLabelTrailingConstraint,
@@ -146,11 +147,12 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     }
 
     if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
-    if let superview = superview {
-      setPreferredLayoutWidth(
-        forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
-        sizingToFit: spec.titleBodyLabelsSizeToFit
-      )
-    }
+
+    guard let superview = superview else { return }
+
+    setPreferredLayoutWidth(
+      forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
+      sizingToFit: spec.titleBodyLabelsSizeToFit
+    )
   }
 }

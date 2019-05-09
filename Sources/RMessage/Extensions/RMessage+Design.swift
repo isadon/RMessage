@@ -13,12 +13,15 @@ extension RMessage {
     setupDesign(messageSpec: spec)
     setupDesign(forTitleLabel: titleLabel, messageSpec: spec)
     setupDesign(forBodyLabel: bodyLabel, messageSpec: spec)
+
     if let titleAttributes = spec.titleAttributes {
       setup(attributedTitleLabel: titleLabel, withAttributes: titleAttributes)
     }
+
     if let bodyAttributes = spec.bodyAttributes {
       setup(attributedTitleLabel: bodyLabel, withAttributes: bodyAttributes)
     }
+
     if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
   }
 
@@ -60,25 +63,24 @@ extension RMessage {
   }
 
   private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
-    guard let titleText = titleLabel.text else {
-      return
-    }
+    guard let titleText = titleLabel.text else { return }
+
     let titleAttributedText = NSAttributedString(string: titleText, attributes: attrs)
     titleLabel.attributedText = titleAttributedText
   }
 
   private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
-    guard let bodyText = bodyLabel.text else {
-      return
-    }
+    guard let bodyText = bodyLabel.text else { return }
+
     let bodyAttributedText = NSAttributedString(string: bodyText, attributes: attrs)
     bodyLabel.attributedText = bodyAttributedText
   }
 
-  func setPreferredLayoutWidth(
-    forTitleLabel titleLabel: UILabel, bodyLabel: UILabel, inSuperview superview: UIView,
-    sizingToFit: Bool
-  ) {
+  func setPreferredLayoutWidth(forTitleLabel titleLabel: UILabel,
+                               bodyLabel: UILabel,
+                               inSuperview superview: UIView,
+                               sizingToFit: Bool) {
+
     var accessoryViewsAndPadding: CGFloat = 0
     if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
     if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }
@@ -92,33 +94,35 @@ extension RMessage {
       bodyLabel.preferredMaxLayoutWidth = preferredLayoutWidth
     }
 
-    guard sizingToFit else {
-      return
-    }
+    guard sizingToFit else { return }
+
     // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
-    var titleOneLineSize: CGSize?
-    var bodyOneLineSize: CGSize?
+    let titleOneLineSize: CGSize
+    let bodyOneLineSize: CGSize
 
     if let titleAttributedText = titleLabel.attributedText {
       titleOneLineSize = titleAttributedText.size()
-    }
-    if let titleText = titleLabel.text {
+    } else if let titleText = titleLabel.text {
       titleOneLineSize = titleText.size(withAttributes: [.font: titleLabel.font])
+    } else {
+      titleOneLineSize = .zero
     }
 
     if let bodyAttributedText = bodyLabel.attributedText {
       bodyOneLineSize = bodyAttributedText.size()
-    }
-    if let bodyText = bodyLabel.text {
+    } else if let bodyText = bodyLabel.text {
       bodyOneLineSize = bodyText.size(withAttributes: [.font: bodyLabel.font])
+    } else {
+      bodyOneLineSize = .zero
     }
 
-    if titleOneLineSize != nil && bodyOneLineSize != nil {
-      let maxOccupiedLineWidth =
-        (titleOneLineSize!.width > bodyOneLineSize!.width) ? titleOneLineSize!.width : bodyOneLineSize!.width
-      if maxOccupiedLineWidth < preferredLayoutWidth {
-        preferredLayoutWidth = maxOccupiedLineWidth
-      }
+    guard titleOneLineSize != .zero, bodyOneLineSize != .zero else { return }
+
+    let maxOccupiedLineWidth =
+      (titleOneLineSize.width > bodyOneLineSize.width) ? titleOneLineSize.width : bodyOneLineSize.width
+
+    if maxOccupiedLineWidth < preferredLayoutWidth {
+      preferredLayoutWidth = maxOccupiedLineWidth
     }
   }
 }
