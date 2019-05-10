@@ -17,7 +17,7 @@ extension UIWindow {
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
 
     if let navController = viewController as? UINavigationController,
-      let navTopVC = navController.visibleViewController, !navTopVC.isKind(of: UIAlertController.self) {
+      let navTopVC = navController.topViewController, !navTopVC.isKind(of: UIAlertController.self) {
 
       return topViewController(forViewController: navTopVC)
     }
