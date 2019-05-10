@@ -13,8 +13,10 @@ import UIKit
 class DemoViewController: UIViewController, RMControllerDelegate {
   // override var prefersStatusBarHidden = true
   private let rControl = RMController()
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
     navigationController?.navigationBar.isTranslucent = true
     extendedLayoutIncludesOpaqueBars = true
     // RMessageController.appearance.setTitleSubtitleLabelsSizeToFit = true
@@ -22,15 +24,16 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+
     /* Normally we would set the default view controller and delegate in viewDidLoad
      but since we are using this view controller for our modal view also it is important to properly
      re-set the variables once the modal dismisses. */
-    rControl.presentationViewController = self
     rControl.delegate = self
   }
 
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
+
     coordinator.animate(alongsideTransition: nil) { _ in
       self.rControl.interfaceDidRotate()
     }
@@ -72,11 +75,13 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     let button = UIButton(type: .custom)
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     button.setTitle("Update", for: .normal)
+
     if let buttonResizeableImage =
       UIImage(named: "TestButtonBackground")?.resizableImage(withCapInsets: UIEdgeInsetsMake(15, 12, 15, 11)) {
       button.setBackgroundImage(buttonResizeableImage, for: .normal)
       button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
     }
+
     button.setTitleColor(.black, for: .normal)
     button.sizeToFit()
     button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
@@ -91,6 +96,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   @IBAction private func didTapCustomImage(_: Any) {
     var iconSpec = normalSpec
     iconSpec.iconImage = UIImage(named: "TestButtonBackground.png")
+
     rControl.showMessage(
       withSpec: iconSpec,
       title: "Custom image",
@@ -101,6 +107,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   @IBAction private func didTapEndless(_: Any) {
     var endlessSpec = successSpec
     endlessSpec.durationType = .endless
+
     rControl.showMessage(
       withSpec: endlessSpec,
       title: "Endless",
@@ -174,13 +181,13 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     )
   }
 
-  //
   @IBAction private func didTapCustomDesign(_: Any) {
-    let button = UIButton(type: .custom)
     guard let buttonBackgroundImage = UIImage(named: "TestButtonBackground.png") else {
       print("Unable to find button background image 'NotificationButtonBackground.png' in the app bundle")
       return
     }
+
+    let button = UIButton(type: .custom)
     button.setTitleColor(UIColor("#FF0040")!, for: .normal)
     button.setImage(buttonBackgroundImage, for: .normal)
     button.sizeToFit()
@@ -228,16 +235,13 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapToggleNavigationBar(_: Any) {
-    guard let navigationController = navigationController else {
-      return
-    }
+    guard let navigationController = navigationController else { return }
     navigationController.setNavigationBarHidden(!navigationController.isNavigationBarHidden, animated: true)
   }
 
   @IBAction private func didTapToggleNavigationBarAlpha(_: Any) {
-    guard let navigationController = navigationController else {
-      return
-    }
+    guard let navigationController = navigationController else { return }
+
     let alpha = navigationController.navigationBar.alpha
     navigationController.navigationBar.alpha = (alpha == 1) ? 0.5 : 1
   }
@@ -250,13 +254,9 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapNavBarOverlay(_: Any) {
-    guard let navigationController = navigationController else {
-      return
-    }
+    guard let navigationController = navigationController else { return }
 
-    if navigationController.isNavigationBarHidden {
-      navigationController.isNavigationBarHidden = false
-    }
+    navigationController.isNavigationBarHidden = false
 
     rControl.showMessage(
       withSpec: successSpec,
@@ -268,18 +268,24 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapNavbarHidden(_: Any) {
-    guard let navigationController = navigationController else {
-      return
-    }
+    guard let navigationController = navigationController else { return }
     navigationController.isNavigationBarHidden = !navigationController.isNavigationBarHidden
   }
 
   @IBAction private func didTapTimedMessage(_: Any) {
-    perform(#selector(didTapMessage(_:)), with: nil, afterDelay: 3.0)
+    perform(#selector(didTapMessage), with: nil, afterDelay: 3.0)
   }
 
-  @objc func buttonTapped() {
-    print("button was tapped")
+  @IBAction func whilstAlertTapped(_: Any) {
+    let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+    let alert = UIAlertController(title: "Alert!", message: "Something is going on.", preferredStyle: .alert)
+    alert.addAction(action)
+
+    present(alert, animated: true, completion: nil)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+      self.rControl.showMessage(withSpec: normalSpec, title: "Showing whilst an alert is visible")
+    }
   }
 
   @objc private func buttonPressed() {
@@ -299,4 +305,8 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   //    button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
   //    message.layer.cornerRadius = 20
   //  }
+
+//  @objc func buttonTapped() {
+//    print("button was tapped")
+//  }
 }

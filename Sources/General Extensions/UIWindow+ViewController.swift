@@ -15,15 +15,23 @@ extension UIWindow {
   /// - Parameter viewController: The view controller from which to start traversing.
   /// - Returns: The top view controller in the window.
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
-    if viewController.presentingViewController != nil {
-      return topViewController(forViewController: viewController.presentingViewController!)
-    } else if let navigationController = viewController as? UINavigationController,
-      let visibleVCInNavigationVC = navigationController.visibleViewController {
-      return topViewController(forViewController: visibleVCInNavigationVC)
-    } else if let tabBarController = viewController as? UITabBarController,
-      let selectedVCInTabBarVC = tabBarController.selectedViewController {
-      return topViewController(forViewController: selectedVCInTabBarVC)
+
+    if let navController = viewController as? UINavigationController,
+      let navTopVC = navController.topViewController, !navTopVC.isKind(of: UIAlertController.self) {
+
+      return topViewController(forViewController: navTopVC)
     }
+
+    if let presented = viewController.presentedViewController, !presented.isKind(of: UIAlertController.self) {
+      return topViewController(forViewController: presented)
+    }
+
+    if let tabBarController = viewController as? UITabBarController,
+      let selectedTabBarVC = tabBarController.selectedViewController {
+
+      return topViewController(forViewController: selectedTabBarVC)
+    }
+
     return viewController
   }
 
@@ -31,9 +39,8 @@ extension UIWindow {
   ///
   /// - Returns: The top view controller in the window.
   static func topViewController() -> UIViewController? {
-    guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-      return nil
-    }
+    guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else { return nil }
+
     return topViewController(forViewController: rootViewController)
   }
 }
