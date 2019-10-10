@@ -64,7 +64,7 @@ public protocol RMessageSpec {
 
   /// Attributes to apply to the title text to style as an attributed string. Styles applied with this property
   /// override stylings applied by other properties in the RMessageSpec.
-  var titleAttributes: [NSAttributedStringKey: Any]? { get set }
+  var titleAttributes: [NSAttributedString.Key: Any]? { get set }
 
   /// Font to apply to the title text.
   var titleFont: UIFont { get set }
@@ -83,7 +83,7 @@ public protocol RMessageSpec {
 
   /// Attributes to apply to the body text to style as an attributed string. Styles applied with this property
   /// override stylings applied by other properties in the RMessageSpec.
-  var bodyAttributes: [NSAttributedStringKey: Any]? { get set }
+  var bodyAttributes: [NSAttributedString.Key: Any]? { get set }
 
   /// Font to apply to the body text.
   var bodyFont: UIFont { get set }
@@ -131,13 +131,13 @@ public struct DefaultRMessageSpec: RMessageSpec {
   public var iconImageTintColor = UIColor.clear
   public var iconImageRelativeCornerRadius = CGFloat(0)
   public var backgroundImage: UIImage?
-  public var titleAttributes: [NSAttributedStringKey: Any]?
+  public var titleAttributes: [NSAttributedString.Key: Any]?
   public var titleFont = UIFont.boldSystemFont(ofSize: 14)
   public var titleColor = UIColor.black
   public var titleShadowColor = UIColor.clear
   public var titleShadowOffset = CGSize.zero
   public var titleTextAlignment = NSTextAlignment.left
-  public var bodyAttributes: [NSAttributedStringKey: Any]?
+  public var bodyAttributes: [NSAttributedString.Key: Any]?
   public var bodyFont = UIFont.boldSystemFont(ofSize: 12)
   public var bodyColor = UIColor.black
   public var bodyShadowColor = UIColor.clear

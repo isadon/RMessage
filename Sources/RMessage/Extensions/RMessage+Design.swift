@@ -62,14 +62,14 @@ extension RMessage {
     bodyLabel.shadowOffset = spec.bodyShadowOffset
   }
 
-  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
     guard let titleText = titleLabel.text else { return }
 
     let titleAttributedText = NSAttributedString(string: titleText, attributes: attrs)
     titleLabel.attributedText = titleAttributedText
   }
 
-  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
     guard let bodyText = bodyLabel.text else { return }
 
     let bodyAttributedText = NSAttributedString(string: bodyText, attributes: attrs)
