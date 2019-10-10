@@ -23,7 +23,7 @@ DESC
 
   s.source           = { :git => "https://github.com/donileo/RMessage.git", :tag => s.version.to_s }
   s.platform     = :ios, '11.0'
-  s.swift_version = "4.1"
+  s.swift_version = "4.2"
   s.requires_arc = true
   s.source_files = 'Sources/**/*.{swift}'
   s.resources = ['Sources/Resources/**/*.xib', 'Sources/Assets/**/*.{png,jpg,jpeg,json,pdf}']
