@@ -77,9 +77,9 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     button.setTitle("Update", for: .normal)
 
     if let buttonResizeableImage =
-      UIImage(named: "TestButtonBackground")?.resizableImage(withCapInsets: UIEdgeInsetsMake(15, 12, 15, 11)) {
+      UIImage(named: "TestButtonBackground")?.resizableImage(withCapInsets: UIEdgeInsets.init(top: 15, left: 12, bottom: 15, right: 11)) {
       button.setBackgroundImage(buttonResizeableImage, for: .normal)
-      button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
+      button.contentEdgeInsets = UIEdgeInsets.init(top: 0.0, left: 5.0, bottom: 0.0, right: 5.0)
     }
 
     button.setTitleColor(.black, for: .normal)
@@ -126,7 +126,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     attributedSpec.titleAttributes = [.backgroundColor: UIColor.red, .foregroundColor: UIColor.white]
     attributedSpec.bodyAttributes = [
       .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
-      .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+      .underlineStyle: NSUnderlineStyle.single.rawValue,
     ]
 
     rControl.showMessage(

@@ -290,8 +290,8 @@ class SlideAnimator: NSObject, RMAnimator {
       return
     }
 
-    var viewAttribute: NSLayoutAttribute
-    var layoutGuideAttribute: NSLayoutAttribute
+    var viewAttribute: NSLayoutConstraint.Attribute
+    var layoutGuideAttribute: NSLayoutConstraint.Attribute
     var constant = CGFloat(0)
 
     view.layoutIfNeeded()

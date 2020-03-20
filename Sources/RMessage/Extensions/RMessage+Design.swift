@@ -62,14 +62,14 @@ extension RMessage {
     bodyLabel.shadowOffset = spec.bodyShadowOffset
   }
 
-  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
     guard let titleText = titleLabel.text else { return }
 
     let titleAttributedText = NSAttributedString(string: titleText, attributes: attrs)
     titleLabel.attributedText = titleAttributedText
   }
 
-  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedStringKey: Any]) {
+  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
     guard let bodyText = bodyLabel.text else { return }
 
     let bodyAttributedText = NSAttributedString(string: bodyText, attributes: attrs)
@@ -103,7 +103,8 @@ extension RMessage {
     if let titleAttributedText = titleLabel.attributedText {
       titleOneLineSize = titleAttributedText.size()
     } else if let titleText = titleLabel.text {
-      titleOneLineSize = titleText.size(withAttributes: [.font: titleLabel.font])
+      let titleFont = titleLabel.font ?? UIFont.systemFont(ofSize: 12)
+      titleOneLineSize = titleText.size(withAttributes: [.font: titleFont])
     } else {
       titleOneLineSize = .zero
     }
@@ -111,7 +112,8 @@ extension RMessage {
     if let bodyAttributedText = bodyLabel.attributedText {
       bodyOneLineSize = bodyAttributedText.size()
     } else if let bodyText = bodyLabel.text {
-      bodyOneLineSize = bodyText.size(withAttributes: [.font: bodyLabel.font])
+      let bodyFont = titleLabel.font ?? UIFont.systemFont(ofSize: 14)
+      bodyOneLineSize = bodyText.size(withAttributes: [.font: bodyFont])
     } else {
       bodyOneLineSize = .zero
     }
