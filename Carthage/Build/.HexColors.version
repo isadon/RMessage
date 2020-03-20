@@ -2,13 +2,13 @@
   "Mac" : [
     {
       "name" : "HexColors",
-      "hash" : "15d40aece99a706c37e05bd437b50b2c6bccb75457621c387970e0193397a844",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "74f42831995f51b4b3880cad956168eb69934eb4aeb7275d0811828440da214e",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     },
     {
       "name" : "HexColors",
-      "hash" : "15d40aece99a706c37e05bd437b50b2c6bccb75457621c387970e0193397a844",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "74f42831995f51b4b3880cad956168eb69934eb4aeb7275d0811828440da214e",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ],
   "watchOS" : [
@@ -21,13 +21,13 @@
   "iOS" : [
     {
       "name" : "HexColors",
-      "hash" : "fa53c0807828c70b59fb5fc6f8f14b10eebfa1ec522ddb1e40906e7cf5bc3579",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "d17ab00dcfe1cd79012e2e11894b3524e37f68b905ec4046a97f85c1dd299172",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     },
     {
       "name" : "HexColors",
-      "hash" : "fa53c0807828c70b59fb5fc6f8f14b10eebfa1ec522ddb1e40906e7cf5bc3579",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "d17ab00dcfe1cd79012e2e11894b3524e37f68b905ec4046a97f85c1dd299172",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }
