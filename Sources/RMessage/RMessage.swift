@@ -11,6 +11,8 @@ import HexColors
 import UIKit
 
 public class RMessage: UIView, RMessageAnimatorDelegate {
+  static let bundle = Bundle(for: RMessage.self)
+
   private(set) var spec: RMessageSpec
 
   @IBOutlet private(set) var containerView: UIView!
@@ -49,7 +51,12 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     super.init(frame: CGRect.zero)
 
-    loadNib()
+    guard RMessage.bundle.loadNibNamed("RMessage", owner: self, options: nil) != nil else {
+      assertionFailure("Error loading the RMessage nib file for the RMessage class")
+      return
+    }
+
+    layoutViews()
 
     titleLabel.text = title
     bodyLabel.text = body
@@ -65,9 +72,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     super.init(coder: aDecoder)
   }
 
-  private func loadNib() {
-    Bundle(for: RMessage.self).loadNibNamed(String(describing: RMessage.self), owner: self, options: nil)
-
+  private func layoutViews() {
     addSubview(containerView)
     containerView.translatesAutoresizingMaskIntoConstraints = false
 

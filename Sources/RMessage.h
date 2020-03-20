@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double RMessageVersionNumber;
 FOUNDATION_EXPORT const unsigned char RMessageVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <RMessage/PublicHeader.h>
-
-

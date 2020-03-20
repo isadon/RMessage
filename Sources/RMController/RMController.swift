@@ -73,6 +73,7 @@ public class RMController: NSObject, RMPresenterDelegate {
       targetPosition: targetPosition, view: message,
       superview: presentationVC.view, contentView: message.contentView
     )
+
     let presenter = RMPresenter(
       message: message, targetPosition: targetPosition, animator: animator,
       animationOptions: animOpts, tapCompletion: tapCompletion, presentCompletion: presentCompletion,
