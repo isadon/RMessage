@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1140"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A71D40D2144DA8E0050BD01"
-               BuildableName = "RMessage.framework"
-               BlueprintName = "RMessage"
+               BlueprintIdentifier = "7AB3841F211386C600DA8076"
+               BuildableName = "RMessageDemo.app"
+               BlueprintName = "RMessageDemo"
                ReferencedContainer = "container:RMessage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7AB38433211386C700DA8076"
+               BuildableName = "RMessageTests.xctest"
+               BlueprintName = "RMessageTests"
+               ReferencedContainer = "container:RMessage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7AB3843E211386C700DA8076"
+               BuildableName = "RMessageUITests.xctest"
+               BlueprintName = "RMessageUITests"
+               ReferencedContainer = "container:RMessage.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -40,15 +60,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7A71D40D2144DA8E0050BD01"
-            BuildableName = "RMessage.framework"
-            BlueprintName = "RMessage"
+            BlueprintIdentifier = "7AB3841F211386C600DA8076"
+            BuildableName = "RMessageDemo.app"
+            BlueprintName = "RMessageDemo"
             ReferencedContainer = "container:RMessage.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -56,15 +77,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7A71D40D2144DA8E0050BD01"
-            BuildableName = "RMessage.framework"
-            BlueprintName = "RMessage"
+            BlueprintIdentifier = "7AB3841F211386C600DA8076"
+            BuildableName = "RMessageDemo.app"
+            BlueprintName = "RMessageDemo"
             ReferencedContainer = "container:RMessage.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
