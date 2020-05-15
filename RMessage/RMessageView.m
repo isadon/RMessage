@@ -20,6 +20,10 @@ static double const kRMessageExtraDisplayTimePerPixel = 0.04f;
 /** Contains the global design dictionary specified in the entire design RDesignFile */
 static NSMutableDictionary *globalDesignDictionary;
 
+/** Static var for the RMessage bundle, mostly for internal use as access should be through
+ [self class] RMessageBundle] */
+static NSBundle *RMessageBundle = nil;
+
 @interface RMessageView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
@@ -101,10 +105,28 @@ static NSMutableDictionary *globalDesignDictionary;
 
 #pragma mark - Class Methods
 
++ (NSBundle *)RMessageBundle
+{
+  if (RMessageBundle != nil) return RMessageBundle;
+
+  // Get the bundle containing the binary with the current class.
+  // If frameworks are used, this is the frameworks bundle (.framework),
+  // if static libraries are used, this is the main app bundle (.app).
+  NSBundle *appBundle = [NSBundle mainBundle];
+
+  // Get the URL to the resource bundle within the bundle
+  // of the current class.
+  NSURL *resourceBundleURL = [appBundle URLForResource:@"RMessage" withExtension:@"bundle"];
+  if (!resourceBundleURL) return nil;
+
+  RMessageBundle = [NSBundle bundleWithURL:resourceBundleURL];
+  return RMessageBundle;
+}
+
 + (NSError *)setupGlobalDesignDictionary
 {
   if (!globalDesignDictionary) {
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:RDesignFileName ofType:@"json"];
+    NSString *path = [[[self class] RMessageBundle] pathForResource:RDesignFileName ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSAssert(data != nil, @"Could not read RMessage config file from main bundle with name %@.json", RDesignFileName);
     if (!data) {
@@ -169,11 +191,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (UIImage *)bundledImageNamed:(NSString *)name
 {
-  NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
+  // So... Apparently iOS won't load images in xcassets unless they are part of the main app bundle which we can't guarantee
+  // since if RMessage is built for a framework it will not but if built statically it will. This is something
+  // dependent on how users of RMessage integrate it. Given that and RMessage's 2.x.x desire to maintain compatibility
+  // with iOS 7 we will need to forego the use of xcassets completely so that we can grab the images.
+  NSString *imagePath = [[[self class] RMessageBundle] pathForResource:name ofType:nil];
   UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
-  if (!image) {
-    image = [UIImage imageNamed:name];
-  }
   return image;
 }
 
@@ -266,36 +289,38 @@ static NSMutableDictionary *globalDesignDictionary;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].firstObject;
-  if (self) {
-    self.accessibilityIdentifier = @"RMessageView";
-    _delegate = delegate;
-    _title = title;
-    _subtitle = subtitle;
-    _iconImage = iconImage;
-    _duration = duration;
-    viewController ? _viewController = viewController : (_viewController = [[self class] defaultViewController]);
-    _messagePosition = position;
-    _callback = callback;
-    _messageType = messageType;
-    _customTypeName = customTypeName;
-    if ([buttonTitle length] > 0) {
-      _button = [UIButton buttonWithType:UIButtonTypeCustom];
-      _buttonTitle = buttonTitle;
-      _buttonCallback = buttonCallback;
-    }
-    _presentingCompletionCallback = presentingCompletionCallback;
-    _dismissCompletionCallback = dismissCompletionCallback;
-    _titleSubtitleLabelsSizeToFit = NO;
-    _dismissingEnabled = dismissingEnabled;
-    _springAnimationPadding = 5.f;
+  self = [[[self class] RMessageBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil].firstObject;
 
-    NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
-    if (designError) return nil;
+  if (!self) return nil;
 
-    [self setupDesign];
-    [self setupGestureRecognizers];
+  self.accessibilityIdentifier = @"RMessageView";
+  _delegate = delegate;
+  _title = title;
+  _subtitle = subtitle;
+  _iconImage = iconImage;
+  _duration = duration;
+  viewController ? _viewController = viewController : (_viewController = [[self class] defaultViewController]);
+  _messagePosition = position;
+  _callback = callback;
+  _messageType = messageType;
+  _customTypeName = customTypeName;
+  if ([buttonTitle length] > 0) {
+    _button = [UIButton buttonWithType:UIButtonTypeCustom];
+    _buttonTitle = buttonTitle;
+    _buttonCallback = buttonCallback;
   }
+  _presentingCompletionCallback = presentingCompletionCallback;
+  _dismissCompletionCallback = dismissCompletionCallback;
+  _titleSubtitleLabelsSizeToFit = NO;
+  _dismissingEnabled = dismissingEnabled;
+  _springAnimationPadding = 5.f;
+
+  NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
+  if (designError) return nil;
+
+  [self setupDesign];
+  [self setupGestureRecognizers];
+
   return self;
 }
 
