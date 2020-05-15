@@ -13,7 +13,7 @@ DEPENDENCIES:
   - RMessage (from `..`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - HexColors
     - Reveal-iOS-SDK
 
@@ -32,8 +32,8 @@ SPEC CHECKSUMS:
   HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   PPTopMostController: ca6c8fd33abd2895d57d86bfe27ae7425b44eea8
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  RMessage: e37f6271561958871cdb83681f16d54cdc9a33d9
+  RMessage: a4edd25b83ce5702c668d9d460ba58c4fe8b109b
 
 PODFILE CHECKSUM: 8f78b89d097e538acdc2d6f0891bda4fc8f56694
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1

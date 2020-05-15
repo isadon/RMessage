@@ -18,10 +18,12 @@
   },
   "requires_arc": true,
   "source_files": "RMessage/**/*.{h,m}",
-  "resources": [
-    "RMessage/Resources/**/*.xib",
-    "RMessage/Assets/**/*.{png,jpg,json}"
-  ],
+  "resource_bundles": {
+    "RMessage": [
+      "RMessage/Xibs/**/*.xib",
+      "RMessage/Assets/**/*.{png,jpg,json}"
+    ]
+  },
   "public_header_files": "RMessage/*.h",
   "dependencies": {
     "HexColors": [
