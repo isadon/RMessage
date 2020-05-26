@@ -19,4 +19,8 @@ BOOL validateFloatsToScale(CGFloat f1, CGFloat f2, int scale) {
   return tFloat1 == tFloat2;
 }
 
++(CGFloat)springAnimationPaddingForHeight:(CGFloat)height
+{
+  return ceilf(height / 120) * -5.f;
+}
 @end

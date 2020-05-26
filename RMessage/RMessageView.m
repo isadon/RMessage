@@ -20,6 +20,10 @@ static double const kRMessageExtraDisplayTimePerPixel = 0.04f;
 /** Contains the global design dictionary specified in the entire design RDesignFile */
 static NSMutableDictionary *globalDesignDictionary;
 
+/** Static var for the RMessage bundle, mostly for internal use as access should be through
+ [self class] RMessageBundle] */
+static NSBundle *RMessageBundle = nil;
+
 @interface RMessageView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
@@ -101,10 +105,28 @@ static NSMutableDictionary *globalDesignDictionary;
 
 #pragma mark - Class Methods
 
++ (NSBundle *)RMessageBundle
+{
+  if (RMessageBundle != nil) return RMessageBundle;
+
+  // Get the bundle containing the binary with the current class.
+  // If frameworks are used, this is the frameworks bundle (.framework),
+  // if static libraries are used, this is the main app bundle (.app).
+  NSBundle *appBundle = [NSBundle mainBundle];
+
+  // Get the URL to the resource bundle within the bundle
+  // of the current class.
+  NSURL *resourceBundleURL = [appBundle URLForResource:@"RMessage" withExtension:@"bundle"];
+  if (!resourceBundleURL) return nil;
+
+  RMessageBundle = [NSBundle bundleWithURL:resourceBundleURL];
+  return RMessageBundle;
+}
+
 + (NSError *)setupGlobalDesignDictionary
 {
   if (!globalDesignDictionary) {
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:RDesignFileName ofType:@"json"];
+    NSString *path = [[[self class] RMessageBundle] pathForResource:RDesignFileName ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     NSAssert(data != nil, @"Could not read RMessage config file from main bundle with name %@.json", RDesignFileName);
     if (!data) {
@@ -169,11 +191,12 @@ static NSMutableDictionary *globalDesignDictionary;
 
 + (UIImage *)bundledImageNamed:(NSString *)name
 {
-  NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:nil];
+  // So... Apparently iOS won't load images in xcassets unless they are part of the main app bundle which we can't guarantee
+  // since if RMessage is built for a framework it will not but if built statically it will. This is something
+  // dependent on how users of RMessage integrate it. Given that and RMessage's 2.x.x desire to maintain compatibility
+  // with iOS 7 we will need to forego the use of xcassets completely so that we can grab the images.
+  NSString *imagePath = [[[self class] RMessageBundle] pathForResource:name ofType:nil];
   UIImage *image = [[UIImage alloc] initWithContentsOfFile:imagePath];
-  if (!image) {
-    image = [UIImage imageNamed:name];
-  }
   return image;
 }
 
@@ -266,36 +289,38 @@ static NSMutableDictionary *globalDesignDictionary;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  self = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].firstObject;
-  if (self) {
-    self.accessibilityIdentifier = @"RMessageView";
-    _delegate = delegate;
-    _title = title;
-    _subtitle = subtitle;
-    _iconImage = iconImage;
-    _duration = duration;
-    viewController ? _viewController = viewController : (_viewController = [[self class] defaultViewController]);
-    _messagePosition = position;
-    _callback = callback;
-    _messageType = messageType;
-    _customTypeName = customTypeName;
-    if ([buttonTitle length] > 0) {
-      _button = [UIButton buttonWithType:UIButtonTypeCustom];
-      _buttonTitle = buttonTitle;
-      _buttonCallback = buttonCallback;
-    }
-    _presentingCompletionCallback = presentingCompletionCallback;
-    _dismissCompletionCallback = dismissCompletionCallback;
-    _titleSubtitleLabelsSizeToFit = NO;
-    _dismissingEnabled = dismissingEnabled;
-    _springAnimationPadding = 5.f;
+  self = [[[self class] RMessageBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil].firstObject;
 
-    NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
-    if (designError) return nil;
+  if (!self) return nil;
 
-    [self setupDesign];
-    [self setupGestureRecognizers];
+  self.accessibilityIdentifier = @"RMessageView";
+  _delegate = delegate;
+  _title = title;
+  _subtitle = subtitle;
+  _iconImage = iconImage;
+  _duration = duration;
+  viewController ? _viewController = viewController : (_viewController = [[self class] defaultViewController]);
+  _messagePosition = position;
+  _callback = callback;
+  _messageType = messageType;
+  _customTypeName = customTypeName;
+  if ([buttonTitle length] > 0) {
+    _button = [UIButton buttonWithType:UIButtonTypeCustom];
+    _buttonTitle = buttonTitle;
+    _buttonCallback = buttonCallback;
   }
+  _presentingCompletionCallback = presentingCompletionCallback;
+  _dismissCompletionCallback = dismissCompletionCallback;
+  _titleSubtitleLabelsSizeToFit = NO;
+  _dismissingEnabled = dismissingEnabled;
+  _springAnimationPadding = 5.f;
+
+  NSError *designError = [self setupDesignDictionariesWithMessageType:_messageType customTypeName:customTypeName];
+  if (designError) return nil;
+
+  [self setupDesign];
+  [self setupGestureRecognizers];
+
   return self;
 }
 
@@ -493,8 +518,7 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                        multiplier:1.f
                                                                         constant:0.f];
   [[self class]
-    activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint,
-                          self.titleSubtitleContainerViewLayoutGuideConstraint, self.topToVCLayoutConstraint]
+    activateConstraints:@[centerXConstraint, leadingConstraint, trailingConstraint, self.topToVCLayoutConstraint]
             inSuperview:self.superview];
   if (self.shouldBlurBackground) {
     [self setupBlurBackground];
@@ -505,11 +529,23 @@ static NSMutableDictionary *globalDesignDictionary;
   // Install a constraint that guarantees the title subtitle container view is properly spaced from the top layout guide
   // when animating from top or the bottom layout guide when animating from bottom
   if (self.messagePosition != RMessagePositionBottom) {
+    // BugFix: https://github.com/donileo/RMessage/issues/53
+    // Issue: UITableViewControllers in iOS versions below 11 offset the entire
+    // topLayoutGuide downward when the automaticallyAdjustsScrollViewInsets property
+    // is set (which it is by default). This causes the topLayoutGuide bottom which
+    // normally is located at the bottom of any top bars to now be offset
+    // (height of top bar) pts below the bottom of the bar. This is not expected
+    //  behavior (most likely a bug) and causes RMessage to improperly size itself.
+    NSLayoutAttribute layoutAttribute = NSLayoutAttributeBottom;
+    if (!@available(iOS 11.0, *) && self.viewController.automaticallyAdjustsScrollViewInsets &&
+        [self.viewController.view isKindOfClass:[UIScrollView class]]) {
+      layoutAttribute = NSLayoutAttributeTop;
+    }
     self.titleSubtitleContainerViewLayoutGuideConstraint = [NSLayoutConstraint constraintWithItem:self.titleSubtitleContainerView
                                                                                         attribute:NSLayoutAttributeTop
                                                                                         relatedBy:NSLayoutRelationEqual
                                                                                            toItem:self.viewController.topLayoutGuide
-                                                                                        attribute:NSLayoutAttributeBottom
+                                                                                        attribute:layoutAttribute
                                                                                        multiplier:1.f
                                                                                          constant:10.f];
 
@@ -522,7 +558,6 @@ static NSMutableDictionary *globalDesignDictionary;
                                                                                        multiplier:1.f
                                                                                          constant:-10.f];
   }
-  self.titleSubtitleContainerViewLayoutGuideConstraint.priority = 749;
 }
 - (void)setupBackgroundImageViewWithImage:(UIImage *)image
 {
@@ -1140,7 +1175,7 @@ static NSMutableDictionary *globalDesignDictionary;
                      animations:^{
                        [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCFinalConstraint;
-                       [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
+                       [[self class] activateConstraints:@[self.topToVCLayoutConstraint, self.titleSubtitleContainerViewLayoutGuideConstraint] inSuperview:self.superview];
                        self.isPresenting = YES;
                        if ([self.delegate respondsToSelector:@selector(messageViewIsPresenting:)]) {
                          [self.delegate messageViewIsPresenting:self];
@@ -1175,7 +1210,7 @@ static NSMutableDictionary *globalDesignDictionary;
     [UIView animateWithDuration:kRMessageAnimationDuration
                      animations:^{
                        if (!self.shouldBlurBackground) self.alpha = 0.f;
-                       [[self class] deActivateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
+                       [[self class] deActivateConstraints:@[self.topToVCLayoutConstraint, self.titleSubtitleContainerViewLayoutGuideConstraint] inSuperview:self.superview];
                        self.topToVCLayoutConstraint = self.topToVCStartingConstraint;
                        [[self class] activateConstraint:self.topToVCLayoutConstraint inSuperview:self.superview];
                        [self.superview layoutIfNeeded];

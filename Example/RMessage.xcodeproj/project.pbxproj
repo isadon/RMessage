@@ -21,6 +21,7 @@
 		7AD2C5C61C16735F007C3580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AD2C5C51C16735F007C3580 /* Assets.xcassets */; };
 		7AD2C5D51C1673DF007C3580 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD2C5D41C1673DF007C3580 /* DemoViewController.m */; };
 		9EE78E97B955D2D1A0FEC74F /* libPods-RMessage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2348D3162BCD308122824EC5 /* libPods-RMessage.a */; };
+		D6923C6B191BD368D2AF2B28 /* libPods-RMessageUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F95A3DA8BDAEB5B1A348DE77 /* libPods-RMessageUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11E1F066F1DE9E06FA40CCCE /* Pods-RMessageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2348D3162BCD308122824EC5 /* libPods-RMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
 		7A0BF4C01C6AEAA500F92A38 /* AlternativeDesigns.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AlternativeDesigns.json; sourceTree = "<group>"; };
@@ -65,9 +67,11 @@
 		7AD2C5D31C1673DF007C3580 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoViewController.h; path = ../DemoViewController.h; sourceTree = "<group>"; };
 		7AD2C5D41C1673DF007C3580 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoViewController.m; path = ../DemoViewController.m; sourceTree = "<group>"; };
 		8F59F34DDE6C1AEAFA87D765 /* Pods-RMessageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests.release.xcconfig"; sourceTree = "<group>"; };
+		907F4FF90C5260395D92044F /* Pods-RMessageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9E10FBE0A8A15EF43773E888 /* Pods-RMessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E03F1015EC133BF785555F27 /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RMessage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RMessage/Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
+		F95A3DA8BDAEB5B1A348DE77 /* libPods-RMessageUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RMessageUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6923C6B191BD368D2AF2B28 /* libPods-RMessageUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +107,7 @@
 			children = (
 				2348D3162BCD308122824EC5 /* libPods-RMessage.a */,
 				BDC46BE241E93B7667AA86D7 /* libPods-RMessageTests.a */,
+				F95A3DA8BDAEB5B1A348DE77 /* libPods-RMessageUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,6 +119,8 @@
 				4135927AB055678894BC42E1 /* Pods-RMessage.release.xcconfig */,
 				9E10FBE0A8A15EF43773E888 /* Pods-RMessageTests.debug.xcconfig */,
 				8F59F34DDE6C1AEAFA87D765 /* Pods-RMessageTests.release.xcconfig */,
+				11E1F066F1DE9E06FA40CCCE /* Pods-RMessageUITests.debug.xcconfig */,
+				907F4FF90C5260395D92044F /* Pods-RMessageUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -202,6 +210,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7A5DD2971FD64CD30078493B /* Build configuration list for PBXNativeTarget "RMessageUITests" */;
 			buildPhases = (
+				11F1A888C5BA77679108F699 /* [CP] Check Pods Manifest.lock */,
 				7A5DD28A1FD64CD30078493B /* Sources */,
 				7A5DD28B1FD64CD30078493B /* Frameworks */,
 				7A5DD28C1FD64CD30078493B /* Resources */,
@@ -224,8 +233,6 @@
 				7A8E69E81FD5E59800CA418A /* Sources */,
 				7A8E69E91FD5E59800CA418A /* Frameworks */,
 				7A8E69EA1FD5E59800CA418A /* Resources */,
-				301243953F08FD05C021CCEA /* [CP] Embed Pods Frameworks */,
-				6A1C070825AE4A1FECA881F5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,7 +252,6 @@
 				7AD2C5B21C16735E007C3580 /* Sources */,
 				7AD2C5B31C16735E007C3580 /* Frameworks */,
 				7AD2C5B41C16735E007C3580 /* Resources */,
-				5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */,
 				8F8A7C132FB881CE238B9622 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -263,7 +269,7 @@
 		7AD2C5AE1C16735E007C3580 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					7A5DD28D1FD64CD30078493B = {
@@ -331,52 +337,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		301243953F08FD05C021CCEA /* [CP] Embed Pods Frameworks */ = {
+		11F1A888C5BA77679108F699 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RMessageUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5B4A40946FB8D7E2805C4015 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-13/iOS/RevealServer.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6A1C070825AE4A1FECA881F5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessageTests/Pods-RMessageTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		76B95D0809774CD3632BBFD6 /* [CP] Check Pods Manifest.lock */ = {
@@ -421,40 +397,16 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh",
-				"${PODS_ROOT}/../../RMessage/Resources/RMessageView.xib",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/Contents.json",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/Contents.json",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/NotificationBackgroundErrorIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundErrorIcon.imageset/NotificationBackgroundErrorIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/Contents.json",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/NotificationBackgroundSuccessIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundSuccessIcon.imageset/NotificationBackgroundSuccessIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/Contents.json",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/NotificationBackgroundWarningIcon.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationBackgroundWarningIcon.imageset/NotificationBackgroundWarningIcon@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/Contents.json",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/NotificationButtonBackground.png",
-				"${PODS_ROOT}/../../RMessage/Assets/Icons.xcassets/NotificationButtonBackground.imageset/NotificationButtonBackground@2x.png",
-				"${PODS_ROOT}/../../RMessage/Assets/RMessageDefaultDesign.json",
+				"${PODS_ROOT}/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RMessage/RMessage.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageView.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundErrorIcon@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundSuccessIcon@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationBackgroundWarningIcon@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NotificationButtonBackground@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessageDefaultDesign.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RMessage.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RMessage/Pods-RMessage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -518,6 +470,7 @@
 /* Begin XCBuildConfiguration section */
 		7A5DD2951FD64CD30078493B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11E1F066F1DE9E06FA40CCCE /* Pods-RMessageUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -539,6 +492,7 @@
 		};
 		7A5DD2961FD64CD30078493B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 907F4FF90C5260395D92044F /* Pods-RMessageUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -620,12 +574,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -672,12 +628,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -715,6 +673,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -731,6 +690,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RMessage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.testdomain.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

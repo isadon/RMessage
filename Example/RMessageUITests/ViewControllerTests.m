@@ -39,11 +39,6 @@ static int const kMsgYPositionScale = 2;
   hittablePredicate = [NSPredicate predicateWithFormat:@"hittable == TRUE"];
 }
 
-- (CGFloat)springAnimationPaddingForHeight:(CGFloat)height
-{
-  return ceilf(height / 120) * -10.f;
-}
-
 - (void)showMessageFromTopByPressingButtonWithName:(NSString *)buttonName
                                         timeToShow:(NSTimeInterval)displayTimeout
                                         timeToHide:(NSTimeInterval)dismissTimeout
@@ -52,7 +47,7 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[buttonName] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -75,7 +70,7 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Bottom"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = mainWindowFrame.size.height - displayedMessage.frame.size.height - springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -97,7 +92,7 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Endless"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:displayTimeout];
@@ -192,7 +187,7 @@ static int const kMsgYPositionScale = 2;
 
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
@@ -222,7 +217,7 @@ static int const kMsgYPositionScale = 2;
   [app.buttons[@"Error"] tap];
   XCUIElement *displayedMessage = app.otherElements[@"RMessageView"];
 
-  CGFloat springAnimationPadding = [self springAnimationPaddingForHeight:displayedMessage.frame.size.height];
+  CGFloat springAnimationPadding = [UITestHelpers springAnimationPaddingForHeight:displayedMessage.frame.size.height];
   CGFloat expectedMsgYPosition = springAnimationPadding;
 
   BOOL messageDisplayed = [displayedMessage waitForExistenceWithTimeout:3.f];
