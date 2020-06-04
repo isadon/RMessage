@@ -8,7 +8,6 @@
 
 #import "DemoViewController.h"
 #import "RMessage.h"
-#import "RMessageView.h"
 
 @interface DemoViewController () <RMessageProtocol>
 
