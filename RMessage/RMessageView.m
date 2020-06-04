@@ -25,8 +25,8 @@ static NSBundle *_resourceBundle;
 
 @interface RMessageView () <UIGestureRecognizerDelegate>
 
-@property (class, nonatomic, strong, readonly) NSBundle *classBundle;
-@property (class, nonatomic, strong, readonly) NSBundle *resourceBundle;
+@property (nonatomic, strong, readonly) NSBundle *classBundle;
+@property (nonatomic, strong, readonly) NSBundle *resourceBundle;
 
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
