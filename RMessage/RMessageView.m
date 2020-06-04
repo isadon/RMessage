@@ -20,11 +20,13 @@ static double const kRMessageExtraDisplayTimePerPixel = 0.04f;
 /** Contains the global design dictionary specified in the entire design RDesignFile */
 static NSMutableDictionary *globalDesignDictionary;
 
-/** Static var for the RMessage bundle, mostly for internal use as access should be through
- [self class] RMessageBundle] */
-static NSBundle *RMessageBundle = nil;
+static NSBundle *_classBundle;
+static NSBundle *_resourceBundle;
 
 @interface RMessageView () <UIGestureRecognizerDelegate>
+
+@property (class, nonatomic, strong, readonly) NSBundle *classBundle;
+@property (class, nonatomic, strong, readonly) NSBundle *resourceBundle;
 
 @property (nonatomic, weak) IBOutlet UIView *titleSubtitleContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -105,35 +107,40 @@ static NSBundle *RMessageBundle = nil;
 
 #pragma mark - Class Methods
 
-+ (NSBundle *)RMessageBundle
+/// Framework / Class bundle.
++ (NSBundle *)classBundle
 {
-  if (RMessageBundle != nil) return RMessageBundle;
+  if (_classBundle != nil) return _classBundle;
 
-  // Get the bundle containing the binary with the current class.
-  // If frameworks are used, this is the frameworks bundle (.framework),
-  // if static libraries are used, this is the main app bundle (.app).
-  NSBundle *appBundle = [NSBundle mainBundle];
+  // Get the class / framework bundle (returns correctly regardless of whether use_frameworks! was used for cocoapods or not)
+  _classBundle = [NSBundle bundleForClass:[self class]];
+  return _classBundle;
+}
 
-  // Get the URL to the resource bundle within the bundle
-  // of the current class.
-  NSURL *resourceBundleURL = [appBundle URLForResource:@"RMessage" withExtension:@"bundle"];
+/// Resources bundle for the framework / class bundle.
++ (NSBundle *)resourceBundle
+{
+  if (_resourceBundle != nil) return _resourceBundle;
+
+  // Get the URL to the resource bundle within the bundle of the class.
+  NSURL *resourceBundleURL = [[self class].classBundle URLForResource:@"RMessage" withExtension:@"bundle"];
   if (!resourceBundleURL) return nil;
 
-  RMessageBundle = [NSBundle bundleWithURL:resourceBundleURL];
-  return RMessageBundle;
+  _resourceBundle = [NSBundle bundleWithURL:resourceBundleURL];
+  return _resourceBundle;
 }
 
 + (NSError *)setupGlobalDesignDictionary
 {
   if (!globalDesignDictionary) {
-    NSString *path = [[[self class] RMessageBundle] pathForResource:RDesignFileName ofType:@"json"];
+    NSString *path = [[self class].resourceBundle pathForResource:RDesignFileName ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:path];
-    NSAssert(data != nil, @"Could not read RMessage config file from main bundle with name %@.json", RDesignFileName);
+    NSAssert(data != nil, @"Could not read config file: %@.json from resource bundle.", RDesignFileName);
     if (!data) {
       NSString *configFileErrorMessage = [NSString stringWithFormat:@"There seems to be an error"
                                           @"with the %@ configuration file",
                                           RDesignFileName];
-      return [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
+      return [NSError errorWithDomain:[self class].classBundle.bundleIdentifier
                                  code:0
                              userInfo:@{ NSLocalizedDescriptionKey: configFileErrorMessage }];
     }
@@ -148,7 +155,9 @@ static NSBundle *RMessageBundle = nil;
 + (void)addDesignsFromFileWithName:(NSString *)filename inBundle:(NSBundle *)bundle;
 {
   [[self class] setupGlobalDesignDictionary];
+
   NSString *path = [bundle pathForResource:filename ofType:@"json"];
+
   if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
     NSDictionary *newDesignStyle =
     [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path]
@@ -156,7 +165,7 @@ static NSBundle *RMessageBundle = nil;
                                       error:nil];
     [globalDesignDictionary addEntriesFromDictionary:newDesignStyle];
   } else {
-    NSAssert(NO, @"Error loading design file with name %@", filename);
+    NSAssert(NO, @"File with name %@ not found in given bundle", filename);
   }
 }
 
@@ -188,19 +197,22 @@ static NSBundle *RMessageBundle = nil;
 }
 
 #pragma mark - Get Image From Resource Bundle
+
+//+ (NSString *)frameworkBundledFilePathForFilename:(NSString *)filename
+//{
+//  return [[self class].frameworkBundle pathForResource:filename ofType:nil];
+//}
+
 + (NSString *)bundledFilePathForFilename:(NSString *)filename {
-  // Try the app bundle first when looking for the path, then try RMessage's bundle
+  // Try the app bundle first when looking for the path.
   NSString *filePath = [[NSBundle mainBundle] pathForResource:filename ofType:nil];
+
+  // If none found then try RMessage's resources bundle.
   if (!filePath) {
-    filePath = [[[self class] RMessageBundle] pathForResource:filename ofType:nil];
+    filePath = [[self class].resourceBundle pathForResource:filename ofType:nil];
   }
 
   return filePath;
-}
-
-+ (NSString *)frameworkBundledFilePathForFilename:(NSString *)filename
-{
-  return [[[self class] RMessageBundle] pathForResource:filename ofType:nil];
 }
 
 + (UIImage *)bundledImageNamed:(NSString *)filename
@@ -211,19 +223,6 @@ static NSBundle *RMessageBundle = nil;
   // with iOS 7 we will need to forego the use of xcassets completely so that we can grab the images.
 
   NSString *filePath = [[self class] bundledFilePathForFilename:filename];
-  UIImage *image = [[UIImage alloc] initWithContentsOfFile:filePath];
-  return image;
-}
-
-+ (UIImage *)frameworkBundledImageNamed:(NSString *)filename
-{
-  // So... Apparently iOS won't load images in xcassets unless they are part of the main app bundle which we can't guarantee
-  // since if RMessage is built for a framework it will not but if built statically it will. This is something
-  // dependent on how users of RMessage integrate it. Given that and RMessage's 2.x.x desire to maintain compatibility
-  // with iOS 7 we will need to forego the use of xcassets completely so that we can grab the images.
-
-  // Try the app bundle first when looking for the file, then try RMessage's bundle
-  NSString *filePath = [[self class] frameworkBundledFilePathForFilename: filename];
   UIImage *image = [[UIImage alloc] initWithContentsOfFile:filePath];
   return image;
 }
@@ -317,7 +316,7 @@ static NSBundle *RMessageBundle = nil;
                       atPosition:(RMessagePosition)position
             canBeDismissedByUser:(BOOL)dismissingEnabled
 {
-  self = [[[self class] RMessageBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil].firstObject;
+  self = [[self class].resourceBundle loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil].firstObject;
 
   if (!self) return nil;
 
@@ -471,7 +470,7 @@ static NSBundle *RMessageBundle = nil;
     case RMessageTypeCustom:
       if (!customTypeName || [customTypeName isEqualToString:@""]) {
         return
-        [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
+        [NSError errorWithDomain:[self class].classBundle.bundleIdentifier
                             code:0
                         userInfo:@{
                           NSLocalizedDescriptionKey: @"When specifying a type RMessageTypeCustom make sure to pass in "
@@ -488,7 +487,7 @@ static NSBundle *RMessageBundle = nil;
   _designDictionary = globalDesignDictionary[messageTypeDesignString];
   if (!_designDictionary) {
     return
-    [NSError errorWithDomain:[NSBundle bundleForClass:[self class]].bundleIdentifier
+    [NSError errorWithDomain:[self class].classBundle.bundleIdentifier
                         code:0
                     userInfo:@{
                       NSLocalizedDescriptionKey: @"When specifying a type RMessageTypeCustom make sure to pass in a "
@@ -769,8 +768,7 @@ static NSBundle *RMessageBundle = nil;
     [self setupIconImageView];
   }
 
-  UIImage *backgroundImage =
-  [[self class] bundledImageNamed:_designDictionary[@"backgroundImage"]];
+  UIImage *backgroundImage = [[self class] bundledImageNamed:_designDictionary[@"backgroundImage"]];
 
   if (backgroundImage) {
     backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)
@@ -922,7 +920,7 @@ static NSBundle *RMessageBundle = nil;
   [[self class] bundledImageNamed:_designDictionary[@"buttonResizeableBackgroundImage"]];
 
   if (!buttonResizeableBackgroundImage) {
-    buttonResizeableBackgroundImage = [[self class] frameworkBundledImageNamed:@"NotificationButtonBackground.png"];
+    buttonResizeableBackgroundImage = [[self class] bundledImageNamed:@"NotificationButtonBackground.png"];
   }
 
   if (buttonResizeableBackgroundImage) {
