@@ -1,0 +1,6 @@
+framework module PPTopMostController {
+  umbrella header "PPTopMostController-umbrella.h"
+
+  export *
+  module * { export * }
+}
