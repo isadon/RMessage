@@ -19,262 +19,340 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		06F308CD2B9A39305C3FCD24B9461552 /* NotificationBackgroundErrorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60800EB80B90D73D6FE49CB905DDFCB1 /* NotificationBackgroundErrorIcon@2x.png */; };
-		12185BE971A6BF036988133DE22F4980 /* NotificationBackgroundSuccessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F924A90748EED26DBB98B02F1D8ABA /* NotificationBackgroundSuccessIcon.png */; };
-		131F2CFE3012266DC2B4351CA4D7D96C /* PPTopMostControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 0482E240DCB3892B8F0442FCB29D7403 /* PPTopMostControllerProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1ADBCE51E07496AAFF4CF77DF306BF8A /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 990E040135B78E783DE5C15714CFF3F3 /* NotificationBackgroundWarningIcon.png */; };
-		299FB0A1D911B32CB6A7C2EBA2BB720E /* PPTopMostController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AEFEC1D6A995EC7FB180EE41983841 /* PPTopMostController-dummy.m */; };
-		464FD11C1F46BCA1D30C53250EA3FE01 /* Pods-RMessageTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7E7F2D63194E24C5DE0C4038FFDAEC /* Pods-RMessageTests-dummy.m */; };
-		490CC38B2840607343331C55D9B4F69F /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 002C105B0BCCD9CA641FEEE8DC38E831 /* NotificationBackgroundWarningIcon@2x.png */; };
-		498D39704FD0A63DCF160431A274C432 /* NotificationBackgroundErrorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E4A306558F0063AB77A74E7080E1273 /* NotificationBackgroundErrorIcon.png */; };
-		4EC17FCA9D33F0EC3C942253C9F5D15F /* RMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6BA115DC9F33AC5A55CF106143E8F09 /* RMessageView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		57AE44449F7691A4EFCADC9DFAC54A23 /* Pods-RMessageUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 540C4FAFBC43FB52E7FA39481DB2896F /* Pods-RMessageUITests-dummy.m */; };
-		5B9147866007FFA0BC8BE496FCFA70B8 /* UIViewController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0C30E0BB81FC359E12995F22BEA80F /* UIViewController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		602FBDD88135952B06C2D15C6D84946D /* UITabBarController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = D570FF41686E02AFB7C928B7951727F3 /* UITabBarController+PPTopMostController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		692F9EA07BC269DFE806294C88ACBA73 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E505E5BF47B2CA97A197B3B3C930A8A8 /* NotificationButtonBackground.png */; };
-		73BFADE78B5B3594EF2A01AB6D92F998 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44812E48823B4405DE6E3C109FB70172 /* RMessageView.xib */; };
-		7BC37502C62E87DDA8B3239E15F8DC30 /* Pods-RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7433050912932F7B0B21DFE5F7BC3AEC /* Pods-RMessage-dummy.m */; };
-		8128995C85D8B8196D4DF8369FFE2BBD /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A0B2BD00C1E798DC15C596EAA261D /* RMessage.m */; };
-		82B7592D7BA250272E804B19ECE5E4D3 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4A421507AA6AE9FC7ECD5EC76F4A39 /* RMessageView.m */; };
-		8A9A42C92DD95D42A719853E4B51E368 /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = FDC5FDBD9C6F69AEA003DBAB53A68EA4 /* HexColors.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		950F5989F17EA8A29CB7A3F3C42EE6ED /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FDE29216DCB2968B3CB945D700015497 /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9FB692F9D05738042A644A2CB9560ABF /* NotificationBackgroundSuccessIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF1D1315D397415D2D0790D002A995A4 /* NotificationBackgroundSuccessIcon@2x.png */; };
-		AB4DDD35F1BA2100E03E1B97BC8E6C03 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B35CC9D6832A9433AEE10703F9E06A8C /* HexColors-dummy.m */; };
-		BB9008A2BAB5C4D1EDD4E77DFFDEF3AB /* UINavigationController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = E46A320B91A1CA10C1A439E09EDE7C48 /* UINavigationController+PPTopMostController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BC027220BF4543F44AF44C17763A611B /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = F7D90EEECBB19EFA923C3FCB8F72D72E /* RMessageDefaultDesign.json */; };
-		BD0AA820EF6DD0DCBF52ED3B4D7EB0F4 /* UIViewController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = 16F2AD3A2E7269F4CE5A7D1B5411C8D3 /* UIViewController+PPTopMostController.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D1B6268A5ABE735EBBF8C6AB95BCBEBD /* UITabBarController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8A5A3038404BF0DF7991F58A96055F /* UITabBarController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D39EAC819B53BE5894CC7D321812AB50 /* UINavigationController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE2E1E7A5E0B2BB62653B7DBB1F21075 /* UINavigationController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E0337DD2BADEAEBAE5A5F703ED1C1738 /* RMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7310EE8CFF0E0B683F86FB91FA1602D4 /* RMessage.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E3860C848298915753B6E5A34DFDE347 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34C364ABAA1CF6F9A7F98F875A9BAD8C /* NotificationButtonBackground@2x.png */; };
-		E3A26E837015FAFCEE8A4551879F8A0E /* RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2191854340FE3883516513FC53CB1 /* RMessage-dummy.m */; };
+		0119FEAEA1A778A9EA8C387E9C2E0F8F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		053305D9A2B2D6FBE6BF23572EED51CA /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 111D93804D5DC815DB94DE834BDB2DE8 /* HexColors-dummy.m */; };
+		06C14B9EBD2334B5E465CEFFDBC3E88D /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061B583699AA55FFDEBBAAE767F692AC /* NotificationBackgroundWarningIcon@2x.png */; };
+		0D9428C8C4104345B01C85FF95B3B1EC /* UITabBarController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F2281AB083B0A552FCB362D020A479 /* UITabBarController+PPTopMostController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F732D96100549D2D5A21ABF0155B0AA /* HexColors-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C33CD745DCF2D26AB26D187CB0C239 /* HexColors-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1AC3D91AD9CE54DD7048F077309F25C0 /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BE18A6CCD490BED39AA64BFDF968FB2 /* HexColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27303B7209CE2EBAAB041619AB21303A /* UIViewController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A21B233E27147613499175E275C5509 /* UIViewController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2C4962BD8015FE5894E1915230305867 /* Pods-RMessageTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9236FA37671635F1E33CE9671FA42936 /* Pods-RMessageTests-dummy.m */; };
+		2E891D5888494EE43843C79FDDC02FCB /* RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3642B1A8CDA1E0B7529A7655B643F03A /* RMessage-dummy.m */; };
+		3AEFCE4AC78977A1DDAEFD349B12F263 /* NotificationBackgroundSuccessIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4215219F981D002C252732F7F60CEC4 /* NotificationBackgroundSuccessIcon@2x.png */; };
+		3EBC1DDED5FE8CB9CE6C6AE4A2E60C63 /* NotificationBackgroundErrorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B116772897A931F9BF9A873AF02FE14 /* NotificationBackgroundErrorIcon@2x.png */; };
+		3F13640FEFF7DF2988C2D2AF6B659F77 /* Pods-RMessageTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 80EB3DCE4412B7CCE8035F75194DC3D8 /* Pods-RMessageTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		405A7A1FEEA2FA29569FA497A9D9D5FD /* PPTopMostController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57D7B0A71AA75AD1C78D68063E5751F4 /* PPTopMostController.framework */; };
+		408FC3D3914D69E7F838641F26CD0DD0 /* UINavigationController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = DAD54A3608AF719AE93819755EAC4BC1 /* UINavigationController+PPTopMostController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		443936558E4BC1FCAC6C277A82215E40 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFFA7E9EC99251CDED1BDA643670CCE /* RMessageView.xib */; };
+		447A041FB36D9894087E57820FFACEFC /* Pods-RMessage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 151AFD21F3201BD915ED1EF7C74A2B7C /* Pods-RMessage-dummy.m */; };
+		501803705D226A4794309BAEC7AF1F98 /* PPTopMostController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E25A5093E5E8F1BABC172CCB4A7506D /* PPTopMostController-dummy.m */; };
+		50910D653059C41F1121C4A3B2239FEB /* UITabBarController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2B70B9F0AFDC9F2514E06D6917E43B /* UITabBarController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5289B857EE2CD313755D2988CF787E27 /* UIViewController+PPTopMostController.h in Headers */ = {isa = PBXBuildFile; fileRef = A1D09DF3852E32165522194114F8898F /* UIViewController+PPTopMostController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59214E37DC1C0BD79368095636CA0827 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		5A1738591180ED4E4D6976A16643CB4A /* Pods-RMessage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 79877CA025F8A76B97FA71217CE1C5EF /* Pods-RMessage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D4E68D313BE75B963445A189EDFA645 /* NotificationBackgroundSuccessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 092DED565882E8137F11C231A098BBC1 /* NotificationBackgroundSuccessIcon.png */; };
+		617BD717DD89C62C9647694EF5E37C3E /* RMessage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A33FB1F06642BF14FC7FF3F3A2DA63E /* RMessage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		623FDB858111815264442681B7897A85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		6AC53CAC91CE6D44E2C3E6816833CC11 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F99AC962622E1DD36367D0F9DDD362E /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6C7A187FE8167944C65794891E714E3D /* RMessage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EC7149820F48A7C09F6321DE8B89A2CE /* RMessage.bundle */; };
+		71A5BB1D830ACCC99165A5D7DB39D141 /* UINavigationController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DE805D1DCBC5E8CED51C2CF62E0101 /* UINavigationController+PPTopMostController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7F7ABE9B6E4224D215B15FC081D721E7 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E2D6385FBA1D47ADBA9FF8BF3E803 /* HexColors.framework */; };
+		82DB407F9BDAEC92C40C295B8D1C3A4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		8A330B2771C00A42D670B640E2491CDE /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB996DFCDC1BC205A383C4D8E958C08 /* NotificationButtonBackground.png */; };
+		8A9693B84ECCEAFC33F96EAA0FCCE365 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		8DE22AC68EF2E335F3BB7FC10C1B532D /* PPTopMostControllerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 27B80C62D4D0CFB07FCCD9DC105B3A2A /* PPTopMostControllerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EECE6EA829AE06D3F48C1C947CF433B /* RMessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F24E93BBD9C2E2AD7CC6B11013F8EF2 /* RMessageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		97DBA3A1F8914958976B4D7071AB72B3 /* NotificationBackgroundErrorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 482ECA3F93615DFBDFEAA78EB32AAC53 /* NotificationBackgroundErrorIcon.png */; };
+		994115F370550B2C4CB37E6F878BDDFF /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03A1707E72EFE562A0872BB11AF82377 /* NotificationButtonBackground@2x.png */; };
+		ADE5969B05EEE800184425FBB1809DE2 /* Pods-RMessageUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 79781CA0C58AA3FBDD7B035C0E30836E /* Pods-RMessageUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFA1ACC96AD0A6ED33230DF62296B9F3 /* Pods-RMessageUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 560EE402A039BE3DB4F1C149681CE990 /* Pods-RMessageUITests-dummy.m */; };
+		B0732B676B5EB6F3B75C60B493A954F3 /* RMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6DA8F5DFBF976717CE4A7EB70EC988 /* RMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4B1BB6979666635A2D398BFFE67BC12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */; };
+		BF58040738E24F96E53E430E5E3B23DE /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A7D5733077A10897285EC094066267 /* RMessage.m */; };
+		C9EB96F901CDB24E1F14BF5CF03E0B59 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9480254FBB5D74E751926B684F7C2921 /* RMessageView.m */; };
+		CCFA5333643AA118570323CCCD8CD453 /* PPTopMostController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DBAC59C646C880C2028449169153A597 /* PPTopMostController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9BD238BF487872468D8A91444709D58 /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = DC1D8D601CCAB509C6E2F6A198770C8C /* RMessageDefaultDesign.json */; };
+		F195B82ACFD0EE5DBB93CB26C67F0CEA /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 429DA22596C7B14FEA067685D22F6772 /* NotificationBackgroundWarningIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		20CCA5656D16346418EEE06452426658 /* PBXContainerItemProxy */ = {
+		33286BE1579B28635AF6CD78E5A43FA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55D38D35ABCC6A6C56D9E2649165ED52;
+			remoteInfo = PPTopMostController;
+		};
+		35C8040BBBE1F5B95811F202C1F53B24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7BE256EA2521B526245D404FF5E841F;
+			remoteInfo = HexColors;
+		};
+		530F7E9F2C1E0431C3EFBC3932B4DBE3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C011176D5EA51C19A2753796A30DD938;
 			remoteInfo = "RMessage-RMessage";
 		};
-		478F2904EFDDD2F230888CD836BFC815 /* PBXContainerItemProxy */ = {
+		614072ADECACCD5D96400F07D46882E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DB660A18A33275B0B2A1C2A90BB1D93F;
 			remoteInfo = "Reveal-iOS-SDK";
 		};
-		82C3545F8592E572077A9A67828C1B33 /* PBXContainerItemProxy */ = {
+		6397ADCEDDFFD0535460ADF5D0B98980 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7BE256EA2521B526245D404FF5E841F;
+			remoteInfo = HexColors;
+		};
+		768CB0A5857A61092F45B9E52A0CB35C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 55D38D35ABCC6A6C56D9E2649165ED52;
 			remoteInfo = PPTopMostController;
 		};
-		8E3ED55C764C9614AC1DF123816D9424 /* PBXContainerItemProxy */ = {
+		C930C5C1A5E3D4708B11027E2F274C9E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9EE7A34880B9382E4499E5611FECB220;
 			remoteInfo = RMessage;
 		};
-		9AD5BC7F72A021516826D834B5E61260 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7BE256EA2521B526245D404FF5E841F;
-			remoteInfo = HexColors;
-		};
-		9E86CC07A39E85D365CE532C554975A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A7BE256EA2521B526245D404FF5E841F;
-			remoteInfo = HexColors;
-		};
-		9F27875199F316F5BACD2FDF519CE846 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55D38D35ABCC6A6C56D9E2649165ED52;
-			remoteInfo = PPTopMostController;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002C105B0BCCD9CA641FEEE8DC38E831 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
-		0482E240DCB3892B8F0442FCB29D7403 /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PPTopMostControllerProtocol.h; path = "PPTopMostController-Files/PPTopMostControllerProtocol.h"; sourceTree = "<group>"; };
-		0D7E7F2D63194E24C5DE0C4038FFDAEC /* Pods-RMessageTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessageTests-dummy.m"; sourceTree = "<group>"; };
-		0EB2191854340FE3883516513FC53CB1 /* RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMessage-dummy.m"; sourceTree = "<group>"; };
-		125D8B5EE1B57564BABE2AC579B4D245 /* HexColors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.release.xcconfig; sourceTree = "<group>"; };
-		16F2AD3A2E7269F4CE5A7D1B5411C8D3 /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PPTopMostController.h"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
+		019E756868D69D0C01CE34FCC32BDBF7 /* Pods-RMessageUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageUITests-Info.plist"; sourceTree = "<group>"; };
+		03A1707E72EFE562A0872BB11AF82377 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		048E2D6385FBA1D47ADBA9FF8BF3E803 /* HexColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HexColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		058914ED2B0A5BE9EBC4676B35CCFF12 /* HexColors-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HexColors-Info.plist"; sourceTree = "<group>"; };
+		061B583699AA55FFDEBBAAE767F692AC /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
+		092DED565882E8137F11C231A098BBC1 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		0B116772897A931F9BF9A873AF02FE14 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		0DB996DFCDC1BC205A383C4D8E958C08 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
+		111D93804D5DC815DB94DE834BDB2DE8 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
+		151AFD21F3201BD915ED1EF7C74A2B7C /* Pods-RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessage-dummy.m"; sourceTree = "<group>"; };
 		17C65AF7179AA96863E7B92DED2D14D7 /* Reveal-iOS-SDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Reveal-iOS-SDK.release.xcconfig"; sourceTree = "<group>"; };
-		1E4A306558F0063AB77A74E7080E1273 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
-		1F8A5A3038404BF0DF7991F58A96055F /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITabBarController+PPTopMostController.m"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
-		28B367AEEB0E8C2799203B8F33F56DC7 /* RMessage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = RMessage.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		2AE0D0322D1B09C9BFF462E147EEBFAF /* libPods-RMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RMessage.a"; path = "libPods-RMessage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		34C364ABAA1CF6F9A7F98F875A9BAD8C /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
-		4294A0D44CEA64ED30B8509EB4EEA6AC /* Pods-RMessageTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		4467BB79FE51AEEFA72B2CF56B5253E7 /* PPTopMostController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.release.xcconfig; sourceTree = "<group>"; };
-		44812E48823B4405DE6E3C109FB70172 /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
-		48A466536330E7C8F88DA8A57A393846 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		492B46DEE5310AA44D9BB06E65F0D80F /* Pods-RMessageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		4D291C7EFCF863610D2D87DF3FE19943 /* Pods-RMessage-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessage-acknowledgements.plist"; sourceTree = "<group>"; };
-		50DC6F5D3C57BAA2C82FED2ED24F3FD0 /* HexColors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.debug.xcconfig; sourceTree = "<group>"; };
-		540C4FAFBC43FB52E7FA39481DB2896F /* Pods-RMessageUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessageUITests-dummy.m"; sourceTree = "<group>"; };
-		60800EB80B90D73D6FE49CB905DDFCB1 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
-		67F75C0820B1772298F4D47B077F13B0 /* Pods-RMessage-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessage-acknowledgements.markdown"; sourceTree = "<group>"; };
-		6D3A0B2BD00C1E798DC15C596EAA261D /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessage.m; path = RMessage/RMessage.m; sourceTree = "<group>"; };
-		71F924A90748EED26DBB98B02F1D8ABA /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
-		7310EE8CFF0E0B683F86FB91FA1602D4 /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessage.h; path = RMessage/RMessage.h; sourceTree = "<group>"; };
-		7350B247CE345D198416FCCE17761066 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libHexColors.a; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7433050912932F7B0B21DFE5F7BC3AEC /* Pods-RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessage-dummy.m"; sourceTree = "<group>"; };
-		7A07F54F15D91EF3D75323CDE2E8C6FD /* libPods-RMessageTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RMessageTests.a"; path = "libPods-RMessageTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* libRMessage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRMessage.a; path = libRMessage.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		906FBF530BD84CE1F4592F58E99CC2B5 /* Pods-RMessageUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9112354F73BA79D3B540977E1CBF3067 /* RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.release.xcconfig; sourceTree = "<group>"; };
-		94189E02CD2AE09DBB54CCF6153275D3 /* ResourceBundle-RMessage-RMessage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-RMessage-RMessage-Info.plist"; sourceTree = "<group>"; };
-		990E040135B78E783DE5C15714CFF3F3 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		27B80C62D4D0CFB07FCCD9DC105B3A2A /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PPTopMostControllerProtocol.h; path = "PPTopMostController-Files/PPTopMostControllerProtocol.h"; sourceTree = "<group>"; };
+		2941B49760C10E21FAC076F66E21F4E6 /* PPTopMostController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPTopMostController-prefix.pch"; sourceTree = "<group>"; };
+		29D1B76E2D400097FB73D609251D04C9 /* Pods-RMessage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RMessage.modulemap"; sourceTree = "<group>"; };
+		2AE0D0322D1B09C9BFF462E147EEBFAF /* Pods_RMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_RMessage.framework; path = "Pods-RMessage.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3642B1A8CDA1E0B7529A7655B643F03A /* RMessage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMessage-dummy.m"; sourceTree = "<group>"; };
+		3A42EB50F4A8ACB25C42BEF042C300F1 /* RMessage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = RMessage.modulemap; sourceTree = "<group>"; };
+		3C6DA8F5DFBF976717CE4A7EB70EC988 /* RMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessage.h; path = RMessage/RMessage.h; sourceTree = "<group>"; };
+		40381F470C0A60AFD8A4ED3705CFD494 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		429DA22596C7B14FEA067685D22F6772 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		449EEB33E098C85FF6A105417B8871BC /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
+		46B54B61C235911D48CA2EEF4E4DAE1D /* Pods-RMessage-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessage-frameworks.sh"; sourceTree = "<group>"; };
+		482ECA3F93615DFBDFEAA78EB32AAC53 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		4BE18A6CCD490BED39AA64BFDF968FB2 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
+		4EB6647D76C0BFE60981E3CEAD129188 /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
+		560EE402A039BE3DB4F1C149681CE990 /* Pods-RMessageUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessageUITests-dummy.m"; sourceTree = "<group>"; };
+		57D7B0A71AA75AD1C78D68063E5751F4 /* PPTopMostController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PPTopMostController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68F2281AB083B0A552FCB362D020A479 /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBarController+PPTopMostController.h"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
+		6B8DE6B28C52D80127DAAED02E9B96CD /* RMessage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "RMessage-Info.plist"; sourceTree = "<group>"; };
+		6E25A5093E5E8F1BABC172CCB4A7506D /* PPTopMostController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PPTopMostController-dummy.m"; sourceTree = "<group>"; };
+		6EE155916A3CBD815EA53B9559CC9B6A /* PPTopMostController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PPTopMostController-Info.plist"; sourceTree = "<group>"; };
+		732F737F387D8BA0678B6DB96C10A827 /* Pods-RMessageTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		7350B247CE345D198416FCCE17761066 /* HexColors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HexColors.framework; path = HexColors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79781CA0C58AA3FBDD7B035C0E30836E /* Pods-RMessageUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RMessageUITests-umbrella.h"; sourceTree = "<group>"; };
+		79877CA025F8A76B97FA71217CE1C5EF /* Pods-RMessage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RMessage-umbrella.h"; sourceTree = "<group>"; };
+		7A07F54F15D91EF3D75323CDE2E8C6FD /* Pods_RMessageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_RMessageTests.framework; path = "Pods-RMessageTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A33FB1F06642BF14FC7FF3F3A2DA63E /* RMessage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-umbrella.h"; sourceTree = "<group>"; };
+		7B4BC8FE6CC3243412FDC2E9BAF6B1CA /* ResourceBundle-RMessage-RMessage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-RMessage-RMessage-Info.plist"; sourceTree = "<group>"; };
+		7F04F0B2FDDCE3E110BD7537DE6BB631 /* RMessage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = RMessage.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		80EB3DCE4412B7CCE8035F75194DC3D8 /* Pods-RMessageTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RMessageTests-umbrella.h"; sourceTree = "<group>"; };
+		8194C4FF72CAE3750AA47A08D0408F89 /* Pods-RMessage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessage-Info.plist"; sourceTree = "<group>"; };
+		82C33CD745DCF2D26AB26D187CB0C239 /* HexColors-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-umbrella.h"; sourceTree = "<group>"; };
+		8A21B233E27147613499175E275C5509 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PPTopMostController.m"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
+		8CFFA7E9EC99251CDED1BDA643670CCE /* RMessageView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
+		8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* RMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = RMessage.framework; path = RMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9236FA37671635F1E33CE9671FA42936 /* Pods-RMessageTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RMessageTests-dummy.m"; sourceTree = "<group>"; };
+		9480254FBB5D74E751926B684F7C2921 /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessageView.m; path = RMessage/RMessageView.m; sourceTree = "<group>"; };
+		9A7F0EB72BC18F8D68A8260F7CAB30B9 /* Pods-RMessage-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessage-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9CB2C02661164A49F174D27C50C30CD3 /* Pods-RMessage-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessage-acknowledgements.plist"; sourceTree = "<group>"; };
+		9CDBE1D8C31699980D99529766BEB1F5 /* Pods-RMessageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D820DE3C5F1597ABE78A15B1FA73793 /* HexColors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.debug.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F0F6FBA589E7026703BD028CA0023F7 /* Pods-RMessageUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessageUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A19BF70BC17453A4D636AAD5EA57AA60 /* Pods-RMessageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageUITests.release.xcconfig"; sourceTree = "<group>"; };
-		AE183455CE7C8B384470E58BA06C5FCF /* PPTopMostController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPTopMostController-prefix.pch"; sourceTree = "<group>"; };
-		AE2E1E7A5E0B2BB62653B7DBB1F21075 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+PPTopMostController.m"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
-		B35CC9D6832A9433AEE10703F9E06A8C /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
-		B6BA115DC9F33AC5A55CF106143E8F09 /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessageView.h; path = RMessage/RMessageView.h; sourceTree = "<group>"; };
-		BC7A33D358CD387D9DF2B19FC35F9F43 /* Pods-RMessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C661EA541EBF00D09AF221A152EB7CEE /* libPPTopMostController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPPTopMostController.a; path = libPPTopMostController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8FFEFDE61FA272B042EC4C1252F0B7B /* Pods-RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.debug.xcconfig"; sourceTree = "<group>"; };
-		CA4A421507AA6AE9FC7ECD5EC76F4A39 /* RMessageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessageView.m; path = RMessage/RMessageView.m; sourceTree = "<group>"; };
-		CF1D1315D397415D2D0790D002A995A4 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
-		CFA8A1E9377C58B7088A41BCA571755A /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
-		D2022B250073073F16CA23285F59C3B9 /* RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.debug.xcconfig; sourceTree = "<group>"; };
-		D2A530FC4CA083504FF5B7D1674E304C /* PPTopMostController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.debug.xcconfig; sourceTree = "<group>"; };
-		D570FF41686E02AFB7C928B7951727F3 /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITabBarController+PPTopMostController.h"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
+		9F24E93BBD9C2E2AD7CC6B11013F8EF2 /* RMessageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMessageView.h; path = RMessage/RMessageView.h; sourceTree = "<group>"; };
+		9F99AC962622E1DD36367D0F9DDD362E /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
+		A126DC00120B2CA97255D0F61D9A7E26 /* HexColors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HexColors.modulemap; sourceTree = "<group>"; };
+		A1D09DF3852E32165522194114F8898F /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+PPTopMostController.h"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
+		A34AB027AB9C5CB8ACAE28470A0D8F65 /* Pods-RMessageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A8DE805D1DCBC5E8CED51C2CF62E0101 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+PPTopMostController.m"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
+		AB9DC807397AC9C537866672A14CBF69 /* Pods-RMessageTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageTests-Info.plist"; sourceTree = "<group>"; };
+		AD212929715D6C0DEAA5755E01028C1D /* PPTopMostController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PPTopMostController.modulemap; sourceTree = "<group>"; };
+		AE00B8FD9953AF7314D97E20FFE027B5 /* Pods-RMessageTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessageTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BDE034E34B6206E5D78A1C94838D1885 /* PPTopMostController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.release.xcconfig; sourceTree = "<group>"; };
+		C0F664575A54D85D13F48EE074969842 /* Pods-RMessageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C50EFDE2764841E96812B0E4C0AD7318 /* Pods-RMessageUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessageUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C661EA541EBF00D09AF221A152EB7CEE /* PPTopMostController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PPTopMostController.framework; path = PPTopMostController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBE0A66718FB65270906A33F4DA0F605 /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
+		CD5B285666783C0209303580E75182B6 /* Pods-RMessageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CF2B70B9F0AFDC9F2514E06D6917E43B /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITabBarController+PPTopMostController.m"; path = "PPTopMostController-Files/UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
+		D654C7CC3DA640EECA25C9AED0487A69 /* HexColors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.release.xcconfig; sourceTree = "<group>"; };
 		D78298B38FE5ECE28F297C6B78565225 /* Reveal-iOS-SDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Reveal-iOS-SDK.debug.xcconfig"; sourceTree = "<group>"; };
 		D99CB8ED292F4D84B9D06AFF93F235F0 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "Reveal-Framework-iOS-1.6.2/Reveal.framework"; sourceTree = "<group>"; };
-		E087D7637751CCDF96E53F87860594B4 /* Pods-RMessage-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RMessage-resources.sh"; sourceTree = "<group>"; };
-		E2DD4B9D378A4AC3042DE05855E24792 /* libPods-RMessageUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RMessageUITests.a"; path = "libPods-RMessageUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E46A320B91A1CA10C1A439E09EDE7C48 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+PPTopMostController.h"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
-		E46F16148FCF9314DBF45800A3198EAD /* Pods-RMessageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessageTests.release.xcconfig"; sourceTree = "<group>"; };
-		E4AEFEC1D6A995EC7FB180EE41983841 /* PPTopMostController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PPTopMostController-dummy.m"; sourceTree = "<group>"; };
-		E505E5BF47B2CA97A197B3B3C930A8A8 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
-		E69C072E544FC45111468FFF792688C1 /* Pods-RMessageTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RMessageTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DA636387DAD35DD9C7110052CEA64504 /* RMessage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-prefix.pch"; sourceTree = "<group>"; };
+		DAD54A3608AF719AE93819755EAC4BC1 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+PPTopMostController.h"; path = "PPTopMostController-Files/UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
+		DBAC59C646C880C2028449169153A597 /* PPTopMostController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PPTopMostController-umbrella.h"; sourceTree = "<group>"; };
+		DC1D8D601CCAB509C6E2F6A198770C8C /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		E04D8AB15BB1CC7F944B46E692B340DA /* Pods-RMessageUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RMessageUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E09322A4C5F69E1A0B1F3FD573301364 /* Pods-RMessageUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RMessageUITests.modulemap"; sourceTree = "<group>"; };
+		E2DD4B9D378A4AC3042DE05855E24792 /* Pods_RMessageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_RMessageUITests.framework; path = "Pods-RMessageUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		E8C9AEF0E4C5EC43BC97E1AF0B176057 /* PPTopMostController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PPTopMostController.debug.xcconfig; sourceTree = "<group>"; };
 		EC7149820F48A7C09F6321DE8B89A2CE /* RMessage.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = RMessage.bundle; path = "RMessage-RMessage.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F164430DFF5216AD3F0AEC19BD953F04 /* RMessage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMessage-prefix.pch"; sourceTree = "<group>"; };
-		F673A18440B6CE13499CDF895956772E /* Pods-RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RMessage.release.xcconfig"; sourceTree = "<group>"; };
-		F7D90EEECBB19EFA923C3FCB8F72D72E /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; includeInIndex = 1; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
-		FA0C30E0BB81FC359E12995F22BEA80F /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+PPTopMostController.m"; path = "PPTopMostController-Files/UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
-		FD6A9845C6E71CE60B5AC7A4E4AAF400 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		FDC5FDBD9C6F69AEA003DBAB53A68EA4 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
-		FDE29216DCB2968B3CB945D700015497 /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
+		EDA37C3C3CDC986CB30E955DFD07BECC /* Pods-RMessageTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RMessageTests.modulemap"; sourceTree = "<group>"; };
+		EFDDD26B8DFA40E0E8A1FAD535F21C37 /* RMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.release.xcconfig; sourceTree = "<group>"; };
+		F0CD3F398DFEA24263E5ACF51321D7DE /* RMessage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMessage.debug.xcconfig; sourceTree = "<group>"; };
+		F254B47F2A49F954BD78A1DFAB546E79 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		F2A7D5733077A10897285EC094066267 /* RMessage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMessage.m; path = RMessage/RMessage.m; sourceTree = "<group>"; };
+		F4215219F981D002C252732F7F60CEC4 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		13E8A4EE4C0F0306C82E9ACE1609AF59 /* Frameworks */ = {
+		17779696DB57C407C09CBCC7F2316C88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59214E37DC1C0BD79368095636CA0827 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63715CD5CD2C0A9AEABD53F758EC1815 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EAA6E15969F5322017D3D07CFB4AF66 /* Frameworks */ = {
+		6DDDF4F237986352FD6C50D1F8FF91EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B1BB6979666635A2D398BFFE67BC12 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CED0DEF29B51CD24B2C24459834AE85 /* Frameworks */ = {
+		9FC38A90569EC83B62BB398CD8AF7F7A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0119FEAEA1A778A9EA8C387E9C2E0F8F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		69229775EC59B36587C7024B3C0388FF /* Frameworks */ = {
+		B3602F033E2E317342910075CEBA8A36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				623FDB858111815264442681B7897A85 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		997915DF81737E3E58C720554CF4DB69 /* Frameworks */ = {
+		B8E4FEB3A34A637D5E91EF551328B76D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82DB407F9BDAEC92C40C295B8D1C3A4D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6E5B29F7BD5BE5E00DE0FBCD34323BD /* Frameworks */ = {
+		BEF5B38D2564E92AD868ED67870C2A69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E10200F56311F30180FC2609CF2E75CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				8A9693B84ECCEAFC33F96EAA0FCCE365 /* Foundation.framework in Frameworks */,
+				7F7ABE9B6E4224D215B15FC081D721E7 /* HexColors.framework in Frameworks */,
+				405A7A1FEEA2FA29569FA497A9D9D5FD /* PPTopMostController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		10F7D6192FE4C7502B2E958B2A53AA85 /* Pods-RMessage */ = {
+		0A6D85FE7457A7016D0AF245F8F2309D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				67F75C0820B1772298F4D47B077F13B0 /* Pods-RMessage-acknowledgements.markdown */,
-				4D291C7EFCF863610D2D87DF3FE19943 /* Pods-RMessage-acknowledgements.plist */,
-				7433050912932F7B0B21DFE5F7BC3AEC /* Pods-RMessage-dummy.m */,
-				E087D7637751CCDF96E53F87860594B4 /* Pods-RMessage-resources.sh */,
-				C8FFEFDE61FA272B042EC4C1252F0B7B /* Pods-RMessage.debug.xcconfig */,
-				F673A18440B6CE13499CDF895956772E /* Pods-RMessage.release.xcconfig */,
+				AD212929715D6C0DEAA5755E01028C1D /* PPTopMostController.modulemap */,
+				6E25A5093E5E8F1BABC172CCB4A7506D /* PPTopMostController-dummy.m */,
+				6EE155916A3CBD815EA53B9559CC9B6A /* PPTopMostController-Info.plist */,
+				2941B49760C10E21FAC076F66E21F4E6 /* PPTopMostController-prefix.pch */,
+				DBAC59C646C880C2028449169153A597 /* PPTopMostController-umbrella.h */,
+				E8C9AEF0E4C5EC43BC97E1AF0B176057 /* PPTopMostController.debug.xcconfig */,
+				BDE034E34B6206E5D78A1C94838D1885 /* PPTopMostController.release.xcconfig */,
 			);
-			name = "Pods-RMessage";
-			path = "Target Support Files/Pods-RMessage";
+			name = "Support Files";
+			path = "../Target Support Files/PPTopMostController";
+			sourceTree = "<group>";
+		};
+		0F872B3AB5F2A11CF1BD5E37D10220C6 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				DC1D8D601CCAB509C6E2F6A198770C8C /* RMessageDefaultDesign.json */,
+				91E5431557066F9AAA2E1C40D58A5A52 /* Images */,
+			);
+			name = Assets;
+			path = RMessage/Assets;
+			sourceTree = "<group>";
+		};
+		1138D77C7082EAFEEC0D43DC35EB8E8D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7B4BC8FE6CC3243412FDC2E9BAF6B1CA /* ResourceBundle-RMessage-RMessage-Info.plist */,
+				3A42EB50F4A8ACB25C42BEF042C300F1 /* RMessage.modulemap */,
+				3642B1A8CDA1E0B7529A7655B643F03A /* RMessage-dummy.m */,
+				6B8DE6B28C52D80127DAAED02E9B96CD /* RMessage-Info.plist */,
+				DA636387DAD35DD9C7110052CEA64504 /* RMessage-prefix.pch */,
+				7A33FB1F06642BF14FC7FF3F3A2DA63E /* RMessage-umbrella.h */,
+				F0CD3F398DFEA24263E5ACF51321D7DE /* RMessage.debug.xcconfig */,
+				EFDDD26B8DFA40E0E8A1FAD535F21C37 /* RMessage.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/RMessage";
+			sourceTree = "<group>";
+		};
+		127E9D8D6B681725C94A0757EB6B6FBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				048E2D6385FBA1D47ADBA9FF8BF3E803 /* HexColors.framework */,
+				57D7B0A71AA75AD1C78D68063E5751F4 /* PPTopMostController.framework */,
+				E2826E7AC097483513F5A3736047C7D1 /* iOS */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		12A2C6DAEA83DA33530B4F4C2E5AD42F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E1BD5065B4FA5182D70EB4FC02F23D4B /* HexColors */,
-				5B2B417B8D6E63BC49977CCB094126AB /* PPTopMostController */,
+				A0EF61875F4A790F5148EC7BB055C7CF /* HexColors */,
+				188063098D32DE7D707D45F5A03ACEF6 /* PPTopMostController */,
 				438148851DD0FC18D91CBC3F99FB4880 /* Reveal-iOS-SDK */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		1441E3101FAA98CF401D350033C2D4C2 /* Images */ = {
+		173B89E6473B6998AE12E48F7D2520BA /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				1E4A306558F0063AB77A74E7080E1273 /* NotificationBackgroundErrorIcon.png */,
-				60800EB80B90D73D6FE49CB905DDFCB1 /* NotificationBackgroundErrorIcon@2x.png */,
-				71F924A90748EED26DBB98B02F1D8ABA /* NotificationBackgroundSuccessIcon.png */,
-				CF1D1315D397415D2D0790D002A995A4 /* NotificationBackgroundSuccessIcon@2x.png */,
-				990E040135B78E783DE5C15714CFF3F3 /* NotificationBackgroundWarningIcon.png */,
-				002C105B0BCCD9CA641FEEE8DC38E831 /* NotificationBackgroundWarningIcon@2x.png */,
-				E505E5BF47B2CA97A197B3B3C930A8A8 /* NotificationButtonBackground.png */,
-				34C364ABAA1CF6F9A7F98F875A9BAD8C /* NotificationButtonBackground@2x.png */,
+				40381F470C0A60AFD8A4ED3705CFD494 /* LICENSE */,
+				F254B47F2A49F954BD78A1DFAB546E79 /* README.md */,
+				7F04F0B2FDDCE3E110BD7537DE6BB631 /* RMessage.podspec */,
 			);
-			name = Images;
-			path = Images;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		1F59F5BC67C77B2AEF7D6AD821518E86 /* Pods-RMessageUITests */ = {
+		188063098D32DE7D707D45F5A03ACEF6 /* PPTopMostController */ = {
 			isa = PBXGroup;
 			children = (
-				9F0F6FBA589E7026703BD028CA0023F7 /* Pods-RMessageUITests-acknowledgements.markdown */,
-				906FBF530BD84CE1F4592F58E99CC2B5 /* Pods-RMessageUITests-acknowledgements.plist */,
-				540C4FAFBC43FB52E7FA39481DB2896F /* Pods-RMessageUITests-dummy.m */,
-				492B46DEE5310AA44D9BB06E65F0D80F /* Pods-RMessageUITests.debug.xcconfig */,
-				A19BF70BC17453A4D636AAD5EA57AA60 /* Pods-RMessageUITests.release.xcconfig */,
+				27B80C62D4D0CFB07FCCD9DC105B3A2A /* PPTopMostControllerProtocol.h */,
+				DAD54A3608AF719AE93819755EAC4BC1 /* UINavigationController+PPTopMostController.h */,
+				A8DE805D1DCBC5E8CED51C2CF62E0101 /* UINavigationController+PPTopMostController.m */,
+				68F2281AB083B0A552FCB362D020A479 /* UITabBarController+PPTopMostController.h */,
+				CF2B70B9F0AFDC9F2514E06D6917E43B /* UITabBarController+PPTopMostController.m */,
+				A1D09DF3852E32165522194114F8898F /* UIViewController+PPTopMostController.h */,
+				8A21B233E27147613499175E275C5509 /* UIViewController+PPTopMostController.m */,
+				0A6D85FE7457A7016D0AF245F8F2309D /* Support Files */,
 			);
-			name = "Pods-RMessageUITests";
-			path = "Target Support Files/Pods-RMessageUITests";
+			name = PPTopMostController;
+			path = PPTopMostController;
 			sourceTree = "<group>";
 		};
 		38CD692CE8FAD26D76FDA6A68F24CAAF /* Support Files */ = {
@@ -285,16 +363,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Reveal-iOS-SDK";
-			sourceTree = "<group>";
-		};
-		3D2DD54307989BFEF764F25A32525985 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				48A466536330E7C8F88DA8A57A393846 /* LICENSE */,
-				FD6A9845C6E71CE60B5AC7A4E4AAF400 /* README.md */,
-				28B367AEEB0E8C2799203B8F33F56DC7 /* RMessage.podspec */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		438148851DD0FC18D91CBC3F99FB4880 /* Reveal-iOS-SDK */ = {
@@ -315,110 +383,105 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		58E4EAAAFF0A4CEC27B9436D9E4F07C8 /* Pods-RMessageTests */ = {
+		541B5C8AB697F0FE37DD33625A0AF0E6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E69C072E544FC45111468FFF792688C1 /* Pods-RMessageTests-acknowledgements.markdown */,
-				4294A0D44CEA64ED30B8509EB4EEA6AC /* Pods-RMessageTests-acknowledgements.plist */,
-				0D7E7F2D63194E24C5DE0C4038FFDAEC /* Pods-RMessageTests-dummy.m */,
-				BC7A33D358CD387D9DF2B19FC35F9F43 /* Pods-RMessageTests.debug.xcconfig */,
-				E46F16148FCF9314DBF45800A3198EAD /* Pods-RMessageTests.release.xcconfig */,
+				0F872B3AB5F2A11CF1BD5E37D10220C6 /* Assets */,
+				F8B3FA90F4F8CA76F9B03177E8AD08DD /* Xibs */,
 			);
-			name = "Pods-RMessageTests";
-			path = "Target Support Files/Pods-RMessageTests";
-			sourceTree = "<group>";
-		};
-		5B2B417B8D6E63BC49977CCB094126AB /* PPTopMostController */ = {
-			isa = PBXGroup;
-			children = (
-				0482E240DCB3892B8F0442FCB29D7403 /* PPTopMostControllerProtocol.h */,
-				E46A320B91A1CA10C1A439E09EDE7C48 /* UINavigationController+PPTopMostController.h */,
-				AE2E1E7A5E0B2BB62653B7DBB1F21075 /* UINavigationController+PPTopMostController.m */,
-				D570FF41686E02AFB7C928B7951727F3 /* UITabBarController+PPTopMostController.h */,
-				1F8A5A3038404BF0DF7991F58A96055F /* UITabBarController+PPTopMostController.m */,
-				16F2AD3A2E7269F4CE5A7D1B5411C8D3 /* UIViewController+PPTopMostController.h */,
-				FA0C30E0BB81FC359E12995F22BEA80F /* UIViewController+PPTopMostController.m */,
-				77C321C84CBEF89E2218A4DF5CCCE644 /* Support Files */,
-			);
-			name = PPTopMostController;
-			path = PPTopMostController;
-			sourceTree = "<group>";
-		};
-		6DFEA1AB4A7D3CCBB82605E1549C83C4 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				94189E02CD2AE09DBB54CCF6153275D3 /* ResourceBundle-RMessage-RMessage-Info.plist */,
-				0EB2191854340FE3883516513FC53CB1 /* RMessage-dummy.m */,
-				F164430DFF5216AD3F0AEC19BD953F04 /* RMessage-prefix.pch */,
-				D2022B250073073F16CA23285F59C3B9 /* RMessage.debug.xcconfig */,
-				9112354F73BA79D3B540977E1CBF3067 /* RMessage.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/RMessage";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		722AA0ABEA52D30298F1ED1FF28523D1 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E51BDB68D0154B587E78B705C55A7CF4 /* RMessage */,
+				F19698E7BB0022CF5EAEDCF264D08E7A /* RMessage */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		73AE85B074AC9AE1E834AC958E9A5443 /* Support Files */ = {
+		7A35B3C5617DA997AFF8B9EFC551A5B5 /* Pods-RMessageUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B35CC9D6832A9433AEE10703F9E06A8C /* HexColors-dummy.m */,
-				CFA8A1E9377C58B7088A41BCA571755A /* HexColors-prefix.pch */,
-				50DC6F5D3C57BAA2C82FED2ED24F3FD0 /* HexColors.debug.xcconfig */,
-				125D8B5EE1B57564BABE2AC579B4D245 /* HexColors.release.xcconfig */,
+				E09322A4C5F69E1A0B1F3FD573301364 /* Pods-RMessageUITests.modulemap */,
+				C50EFDE2764841E96812B0E4C0AD7318 /* Pods-RMessageUITests-acknowledgements.markdown */,
+				E04D8AB15BB1CC7F944B46E692B340DA /* Pods-RMessageUITests-acknowledgements.plist */,
+				560EE402A039BE3DB4F1C149681CE990 /* Pods-RMessageUITests-dummy.m */,
+				019E756868D69D0C01CE34FCC32BDBF7 /* Pods-RMessageUITests-Info.plist */,
+				79781CA0C58AA3FBDD7B035C0E30836E /* Pods-RMessageUITests-umbrella.h */,
+				A34AB027AB9C5CB8ACAE28470A0D8F65 /* Pods-RMessageUITests.debug.xcconfig */,
+				C0F664575A54D85D13F48EE074969842 /* Pods-RMessageUITests.release.xcconfig */,
+			);
+			name = "Pods-RMessageUITests";
+			path = "Target Support Files/Pods-RMessageUITests";
+			sourceTree = "<group>";
+		};
+		91E5431557066F9AAA2E1C40D58A5A52 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				482ECA3F93615DFBDFEAA78EB32AAC53 /* NotificationBackgroundErrorIcon.png */,
+				0B116772897A931F9BF9A873AF02FE14 /* NotificationBackgroundErrorIcon@2x.png */,
+				092DED565882E8137F11C231A098BBC1 /* NotificationBackgroundSuccessIcon.png */,
+				F4215219F981D002C252732F7F60CEC4 /* NotificationBackgroundSuccessIcon@2x.png */,
+				429DA22596C7B14FEA067685D22F6772 /* NotificationBackgroundWarningIcon.png */,
+				061B583699AA55FFDEBBAAE767F692AC /* NotificationBackgroundWarningIcon@2x.png */,
+				0DB996DFCDC1BC205A383C4D8E958C08 /* NotificationButtonBackground.png */,
+				03A1707E72EFE562A0872BB11AF82377 /* NotificationButtonBackground@2x.png */,
+			);
+			name = Images;
+			path = Images;
+			sourceTree = "<group>";
+		};
+		9536A57EFB4EEA7FE4940D416E046F41 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D52CFE081A9E70D6E64BD120B13965F5 /* Pods-RMessage */,
+				A4E6C1125134E91E36DE119A01398091 /* Pods-RMessageTests */,
+				7A35B3C5617DA997AFF8B9EFC551A5B5 /* Pods-RMessageUITests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		A0EF61875F4A790F5148EC7BB055C7CF /* HexColors */ = {
+			isa = PBXGroup;
+			children = (
+				4BE18A6CCD490BED39AA64BFDF968FB2 /* HexColors.h */,
+				9F99AC962622E1DD36367D0F9DDD362E /* HexColors.m */,
+				AA16DEEA0BE73D7A64FC91DB16162D2B /* Support Files */,
+			);
+			name = HexColors;
+			path = HexColors;
+			sourceTree = "<group>";
+		};
+		A4E6C1125134E91E36DE119A01398091 /* Pods-RMessageTests */ = {
+			isa = PBXGroup;
+			children = (
+				EDA37C3C3CDC986CB30E955DFD07BECC /* Pods-RMessageTests.modulemap */,
+				AE00B8FD9953AF7314D97E20FFE027B5 /* Pods-RMessageTests-acknowledgements.markdown */,
+				732F737F387D8BA0678B6DB96C10A827 /* Pods-RMessageTests-acknowledgements.plist */,
+				9236FA37671635F1E33CE9671FA42936 /* Pods-RMessageTests-dummy.m */,
+				AB9DC807397AC9C537866672A14CBF69 /* Pods-RMessageTests-Info.plist */,
+				80EB3DCE4412B7CCE8035F75194DC3D8 /* Pods-RMessageTests-umbrella.h */,
+				CD5B285666783C0209303580E75182B6 /* Pods-RMessageTests.debug.xcconfig */,
+				9CDBE1D8C31699980D99529766BEB1F5 /* Pods-RMessageTests.release.xcconfig */,
+			);
+			name = "Pods-RMessageTests";
+			path = "Target Support Files/Pods-RMessageTests";
+			sourceTree = "<group>";
+		};
+		AA16DEEA0BE73D7A64FC91DB16162D2B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A126DC00120B2CA97255D0F61D9A7E26 /* HexColors.modulemap */,
+				111D93804D5DC815DB94DE834BDB2DE8 /* HexColors-dummy.m */,
+				058914ED2B0A5BE9EBC4676B35CCFF12 /* HexColors-Info.plist */,
+				449EEB33E098C85FF6A105417B8871BC /* HexColors-prefix.pch */,
+				82C33CD745DCF2D26AB26D187CB0C239 /* HexColors-umbrella.h */,
+				9D820DE3C5F1597ABE78A15B1FA73793 /* HexColors.debug.xcconfig */,
+				D654C7CC3DA640EECA25C9AED0487A69 /* HexColors.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/HexColors";
-			sourceTree = "<group>";
-		};
-		77C321C84CBEF89E2218A4DF5CCCE644 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				E4AEFEC1D6A995EC7FB180EE41983841 /* PPTopMostController-dummy.m */,
-				AE183455CE7C8B384470E58BA06C5FCF /* PPTopMostController-prefix.pch */,
-				D2A530FC4CA083504FF5B7D1674E304C /* PPTopMostController.debug.xcconfig */,
-				4467BB79FE51AEEFA72B2CF56B5253E7 /* PPTopMostController.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/PPTopMostController";
-			sourceTree = "<group>";
-		};
-		8CF83D471AB683803E5DD5E4B402D976 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				44812E48823B4405DE6E3C109FB70172 /* RMessageView.xib */,
-			);
-			name = Xibs;
-			path = RMessage/Xibs;
-			sourceTree = "<group>";
-		};
-		BAC225F91CF3CC8B621019AA24EE6D3A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7350B247CE345D198416FCCE17761066 /* libHexColors.a */,
-				2AE0D0322D1B09C9BFF462E147EEBFAF /* libPods-RMessage.a */,
-				7A07F54F15D91EF3D75323CDE2E8C6FD /* libPods-RMessageTests.a */,
-				E2DD4B9D378A4AC3042DE05855E24792 /* libPods-RMessageUITests.a */,
-				C661EA541EBF00D09AF221A152EB7CEE /* libPPTopMostController.a */,
-				8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* libRMessage.a */,
-				EC7149820F48A7C09F6321DE8B89A2CE /* RMessage.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CA3C48ED030CDEF7205B36EFB7819083 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D00F3B2B37AE7CE686BA8126C54857FF /* Assets */,
-				8CF83D471AB683803E5DD5E4B402D976 /* Xibs */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -426,115 +489,131 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				722AA0ABEA52D30298F1ED1FF28523D1 /* Development Pods */,
-				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				127E9D8D6B681725C94A0757EB6B6FBA /* Frameworks */,
 				12A2C6DAEA83DA33530B4F4C2E5AD42F /* Pods */,
-				BAC225F91CF3CC8B621019AA24EE6D3A /* Products */,
-				DB2E2DBA2303F7CC9ADF5FE9D4D07E90 /* Targets Support Files */,
+				DF262C9BA71747FF764C35B6BD6C93E9 /* Products */,
+				9536A57EFB4EEA7FE4940D416E046F41 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D00F3B2B37AE7CE686BA8126C54857FF /* Assets */ = {
+		D52CFE081A9E70D6E64BD120B13965F5 /* Pods-RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				F7D90EEECBB19EFA923C3FCB8F72D72E /* RMessageDefaultDesign.json */,
-				1441E3101FAA98CF401D350033C2D4C2 /* Images */,
+				29D1B76E2D400097FB73D609251D04C9 /* Pods-RMessage.modulemap */,
+				9A7F0EB72BC18F8D68A8260F7CAB30B9 /* Pods-RMessage-acknowledgements.markdown */,
+				9CB2C02661164A49F174D27C50C30CD3 /* Pods-RMessage-acknowledgements.plist */,
+				151AFD21F3201BD915ED1EF7C74A2B7C /* Pods-RMessage-dummy.m */,
+				46B54B61C235911D48CA2EEF4E4DAE1D /* Pods-RMessage-frameworks.sh */,
+				8194C4FF72CAE3750AA47A08D0408F89 /* Pods-RMessage-Info.plist */,
+				79877CA025F8A76B97FA71217CE1C5EF /* Pods-RMessage-umbrella.h */,
+				4EB6647D76C0BFE60981E3CEAD129188 /* Pods-RMessage.debug.xcconfig */,
+				CBE0A66718FB65270906A33F4DA0F605 /* Pods-RMessage.release.xcconfig */,
 			);
-			name = Assets;
-			path = RMessage/Assets;
+			name = "Pods-RMessage";
+			path = "Target Support Files/Pods-RMessage";
 			sourceTree = "<group>";
 		};
-		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+		DF262C9BA71747FF764C35B6BD6C93E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				7350B247CE345D198416FCCE17761066 /* HexColors.framework */,
+				2AE0D0322D1B09C9BFF462E147EEBFAF /* Pods_RMessage.framework */,
+				7A07F54F15D91EF3D75323CDE2E8C6FD /* Pods_RMessageTests.framework */,
+				E2DD4B9D378A4AC3042DE05855E24792 /* Pods_RMessageUITests.framework */,
+				C661EA541EBF00D09AF221A152EB7CEE /* PPTopMostController.framework */,
+				EC7149820F48A7C09F6321DE8B89A2CE /* RMessage.bundle */,
+				8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* RMessage.framework */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		DB2E2DBA2303F7CC9ADF5FE9D4D07E90 /* Targets Support Files */ = {
+		E2826E7AC097483513F5A3736047C7D1 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				10F7D6192FE4C7502B2E958B2A53AA85 /* Pods-RMessage */,
-				58E4EAAAFF0A4CEC27B9436D9E4F07C8 /* Pods-RMessageTests */,
-				1F59F5BC67C77B2AEF7D6AD821518E86 /* Pods-RMessageUITests */,
+				E705E2B67D746F3BAC3BEC6EEC6C6044 /* Foundation.framework */,
 			);
-			name = "Targets Support Files";
+			name = iOS;
 			sourceTree = "<group>";
 		};
-		E1BD5065B4FA5182D70EB4FC02F23D4B /* HexColors */ = {
+		F19698E7BB0022CF5EAEDCF264D08E7A /* RMessage */ = {
 			isa = PBXGroup;
 			children = (
-				FDC5FDBD9C6F69AEA003DBAB53A68EA4 /* HexColors.h */,
-				FDE29216DCB2968B3CB945D700015497 /* HexColors.m */,
-				73AE85B074AC9AE1E834AC958E9A5443 /* Support Files */,
-			);
-			name = HexColors;
-			path = HexColors;
-			sourceTree = "<group>";
-		};
-		E51BDB68D0154B587E78B705C55A7CF4 /* RMessage */ = {
-			isa = PBXGroup;
-			children = (
-				7310EE8CFF0E0B683F86FB91FA1602D4 /* RMessage.h */,
-				6D3A0B2BD00C1E798DC15C596EAA261D /* RMessage.m */,
-				B6BA115DC9F33AC5A55CF106143E8F09 /* RMessageView.h */,
-				CA4A421507AA6AE9FC7ECD5EC76F4A39 /* RMessageView.m */,
-				3D2DD54307989BFEF764F25A32525985 /* Pod */,
-				CA3C48ED030CDEF7205B36EFB7819083 /* Resources */,
-				6DFEA1AB4A7D3CCBB82605E1549C83C4 /* Support Files */,
+				3C6DA8F5DFBF976717CE4A7EB70EC988 /* RMessage.h */,
+				F2A7D5733077A10897285EC094066267 /* RMessage.m */,
+				9F24E93BBD9C2E2AD7CC6B11013F8EF2 /* RMessageView.h */,
+				9480254FBB5D74E751926B684F7C2921 /* RMessageView.m */,
+				173B89E6473B6998AE12E48F7D2520BA /* Pod */,
+				541B5C8AB697F0FE37DD33625A0AF0E6 /* Resources */,
+				1138D77C7082EAFEEC0D43DC35EB8E8D /* Support Files */,
 			);
 			name = RMessage;
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		F8B3FA90F4F8CA76F9B03177E8AD08DD /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				8CFFA7E9EC99251CDED1BDA643670CCE /* RMessageView.xib */,
+			);
+			name = Xibs;
+			path = RMessage/Xibs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		224C816881C583F4F1735AC439F9D130 /* Headers */ = {
+		11D137ABD94C143DA66240DB333D1694 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A9A42C92DD95D42A719853E4B51E368 /* HexColors.h in Headers */,
+				3F13640FEFF7DF2988C2D2AF6B659F77 /* Pods-RMessageTests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		514569F3D7CA3A78125BFBDC2F32974F /* Headers */ = {
+		1D5E9F56730D4E81967C8E780DEB9511 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				617BD717DD89C62C9647694EF5E37C3E /* RMessage-umbrella.h in Headers */,
+				B0732B676B5EB6F3B75C60B493A954F3 /* RMessage.h in Headers */,
+				8EECE6EA829AE06D3F48C1C947CF433B /* RMessageView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		56DAF70DBD5D62C461DE18765A862B9F /* Headers */ = {
+		3D145E4ABB8C35DD19FEC5644F48D0E5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A1738591180ED4E4D6976A16643CB4A /* Pods-RMessage-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6332F06ECDC3851F4165F55EBE815267 /* Headers */ = {
+		59B4E6A8F79D4192D5957835DDE6AF7A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADE5969B05EEE800184425FBB1809DE2 /* Pods-RMessageUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BDEDF21E17DA57DDC8466DF578D300C1 /* Headers */ = {
+		8B8A1801502C1157C29E19615B41F4C7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0337DD2BADEAEBAE5A5F703ED1C1738 /* RMessage.h in Headers */,
-				4EC17FCA9D33F0EC3C942253C9F5D15F /* RMessageView.h in Headers */,
+				0F732D96100549D2D5A21ABF0155B0AA /* HexColors-umbrella.h in Headers */,
+				1AC3D91AD9CE54DD7048F077309F25C0 /* HexColors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DBF638479F3FF19A345A7BD625FF7500 /* Headers */ = {
+		EF940E94EABB114D88FF6069C96E3362 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				131F2CFE3012266DC2B4351CA4D7D96C /* PPTopMostControllerProtocol.h in Headers */,
-				BB9008A2BAB5C4D1EDD4E77DFFDEF3AB /* UINavigationController+PPTopMostController.h in Headers */,
-				602FBDD88135952B06C2D15C6D84946D /* UITabBarController+PPTopMostController.h in Headers */,
-				BD0AA820EF6DD0DCBF52ED3B4D7EB0F4 /* UIViewController+PPTopMostController.h in Headers */,
+				CCFA5333643AA118570323CCCD8CD453 /* PPTopMostController-umbrella.h in Headers */,
+				8DE22AC68EF2E335F3BB7FC10C1B532D /* PPTopMostControllerProtocol.h in Headers */,
+				408FC3D3914D69E7F838641F26CD0DD0 /* UINavigationController+PPTopMostController.h in Headers */,
+				0D9428C8C4104345B01C85FF95B3B1EC /* UITabBarController+PPTopMostController.h in Headers */,
+				5289B857EE2CD313755D2988CF787E27 /* UIViewController+PPTopMostController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,11 +622,12 @@
 /* Begin PBXNativeTarget section */
 		0C714C20522B9D8E6697FD30BB2F082F /* Pods-RMessageUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21AB250366F447838C3AB1FBA5FCF947 /* Build configuration list for PBXNativeTarget "Pods-RMessageUITests" */;
+			buildConfigurationList = 635E395D0B6A98DA80E033AF03A2CCFB /* Build configuration list for PBXNativeTarget "Pods-RMessageUITests" */;
 			buildPhases = (
-				514569F3D7CA3A78125BFBDC2F32974F /* Headers */,
-				B4A0D0AA47FD02EAA735CF736780915D /* Sources */,
-				13E8A4EE4C0F0306C82E9ACE1609AF59 /* Frameworks */,
+				59B4E6A8F79D4192D5957835DDE6AF7A /* Headers */,
+				FDA64A72D731498C38E1309C6A6F4446 /* Sources */,
+				17779696DB57C407C09CBCC7F2316C88 /* Frameworks */,
+				1A8F52AD9EDA203AD5529C58D37EDB5E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -555,16 +635,17 @@
 			);
 			name = "Pods-RMessageUITests";
 			productName = "Pods-RMessageUITests";
-			productReference = E2DD4B9D378A4AC3042DE05855E24792 /* libPods-RMessageUITests.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = E2DD4B9D378A4AC3042DE05855E24792 /* Pods_RMessageUITests.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		55D38D35ABCC6A6C56D9E2649165ED52 /* PPTopMostController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 57E627CAFBDD7A3D9E9E579D9247F7EA /* Build configuration list for PBXNativeTarget "PPTopMostController" */;
+			buildConfigurationList = B5B55E9F92493E3D95010334CA71EA42 /* Build configuration list for PBXNativeTarget "PPTopMostController" */;
 			buildPhases = (
-				DBF638479F3FF19A345A7BD625FF7500 /* Headers */,
-				AAD55E39E14A595751678CB4C70677F0 /* Sources */,
-				69229775EC59B36587C7024B3C0388FF /* Frameworks */,
+				EF940E94EABB114D88FF6069C96E3362 /* Headers */,
+				FF038BD23F1906D21E20DF51CC8879DD /* Sources */,
+				6DDDF4F237986352FD6C50D1F8FF91EB /* Frameworks */,
+				EB82C0C665B53132887EF16D06D99C45 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -572,57 +653,60 @@
 			);
 			name = PPTopMostController;
 			productName = PPTopMostController;
-			productReference = C661EA541EBF00D09AF221A152EB7CEE /* libPPTopMostController.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = C661EA541EBF00D09AF221A152EB7CEE /* PPTopMostController.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		7625CD80A6161991D37AE50E068007E1 /* Pods-RMessage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96AC06211F5A4FDC829093AB114F8B4B /* Build configuration list for PBXNativeTarget "Pods-RMessage" */;
+			buildConfigurationList = 50884D168E2A0F6F015719B60F59032C /* Build configuration list for PBXNativeTarget "Pods-RMessage" */;
 			buildPhases = (
-				56DAF70DBD5D62C461DE18765A862B9F /* Headers */,
-				94402E5D1101F3EB1C4B3FC09C8BA392 /* Sources */,
-				C6E5B29F7BD5BE5E00DE0FBCD34323BD /* Frameworks */,
+				3D145E4ABB8C35DD19FEC5644F48D0E5 /* Headers */,
+				1C064EC0B541B3C9A90D99172A87A21F /* Sources */,
+				B3602F033E2E317342910075CEBA8A36 /* Frameworks */,
+				CEFB273D5BFA2AA7C14F904850CD2590 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6CF041ECDFF21B9B975C10E4C0499CC7 /* PBXTargetDependency */,
-				AC2E5C3F332A71F59175D3D5F6B50461 /* PBXTargetDependency */,
-				3645BCF6DC3E796F042C2CAA960F5B7A /* PBXTargetDependency */,
-				7D0BA9F9A0D14E035E68CDBA1571563F /* PBXTargetDependency */,
+				54AA7E4DD50333CB17AED37B7B83C06A /* PBXTargetDependency */,
+				609F1C9A638F0058404240F33EEFDEA6 /* PBXTargetDependency */,
+				885A5AB20DF7A40ACDEEAA628F56F77C /* PBXTargetDependency */,
+				6976A7D7BB3633CB22A5BB83EC8EC82D /* PBXTargetDependency */,
 			);
 			name = "Pods-RMessage";
 			productName = "Pods-RMessage";
-			productReference = 2AE0D0322D1B09C9BFF462E147EEBFAF /* libPods-RMessage.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 2AE0D0322D1B09C9BFF462E147EEBFAF /* Pods_RMessage.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		9EE7A34880B9382E4499E5611FECB220 /* RMessage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FED397C7C470DDAEC7A1E39A90369886 /* Build configuration list for PBXNativeTarget "RMessage" */;
+			buildConfigurationList = 92045B63F249646ECDE5900A03E0E73E /* Build configuration list for PBXNativeTarget "RMessage" */;
 			buildPhases = (
-				BDEDF21E17DA57DDC8466DF578D300C1 /* Headers */,
-				11F0D03A8352388F8E2058CF86024F15 /* Sources */,
-				997915DF81737E3E58C720554CF4DB69 /* Frameworks */,
+				1D5E9F56730D4E81967C8E780DEB9511 /* Headers */,
+				91CE604787DCF262F3DA984C52382F70 /* Sources */,
+				BEF5B38D2564E92AD868ED67870C2A69 /* Frameworks */,
+				A43AEDBACB28D58EA070B472275F3E3B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4F5E50BB4A6CBEF83FA8744A203915F /* PBXTargetDependency */,
-				7DB2BF82E82A6FA02C7E649056489C68 /* PBXTargetDependency */,
-				1F878262B1DF27074EE893AD7780D182 /* PBXTargetDependency */,
+				0B0735A768A29C93331AA99CB8942B53 /* PBXTargetDependency */,
+				E260BBB89458BEF53B801F92607E90BE /* PBXTargetDependency */,
+				3A06FB8045EEB5BED0365C5C104FF27A /* PBXTargetDependency */,
 			);
 			name = RMessage;
 			productName = RMessage;
-			productReference = 8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* libRMessage.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 8F75D5F57FFDA3E2C19B25B0AF7FBA25 /* RMessage.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		A7BE256EA2521B526245D404FF5E841F /* HexColors */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C9851D981CEAD83CBF162D8DB4C1CDF1 /* Build configuration list for PBXNativeTarget "HexColors" */;
+			buildConfigurationList = 7F018BA5151D5BBA03D190CAA4ACB3DC /* Build configuration list for PBXNativeTarget "HexColors" */;
 			buildPhases = (
-				224C816881C583F4F1735AC439F9D130 /* Headers */,
-				2146C10BB2A61DE53839541E91C68B02 /* Sources */,
-				3CED0DEF29B51CD24B2C24459834AE85 /* Frameworks */,
+				8B8A1801502C1157C29E19615B41F4C7 /* Headers */,
+				BF40409AD018A081160965DC4EDB6905 /* Sources */,
+				9FC38A90569EC83B62BB398CD8AF7F7A /* Frameworks */,
+				22EACADB7A729E08FFC31D6FF796D0BF /* Resources */,
 			);
 			buildRules = (
 			);
@@ -630,16 +714,17 @@
 			);
 			name = HexColors;
 			productName = HexColors;
-			productReference = 7350B247CE345D198416FCCE17761066 /* libHexColors.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 7350B247CE345D198416FCCE17761066 /* HexColors.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		A7E4A9721530A8D6BC3BD8ACBC3084E3 /* Pods-RMessageTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B50AB86BCB9D1306FD408C1E26130918 /* Build configuration list for PBXNativeTarget "Pods-RMessageTests" */;
+			buildConfigurationList = 07E5B7729CF36AA19CF2BD19517363A5 /* Build configuration list for PBXNativeTarget "Pods-RMessageTests" */;
 			buildPhases = (
-				6332F06ECDC3851F4165F55EBE815267 /* Headers */,
-				C5DECE9D99BA9250E5BD4992327ED185 /* Sources */,
-				E10200F56311F30180FC2609CF2E75CA /* Frameworks */,
+				11D137ABD94C143DA66240DB333D1694 /* Headers */,
+				F59397057DDCC10BDFE1764487036D97 /* Sources */,
+				B8E4FEB3A34A637D5E91EF551328B76D /* Frameworks */,
+				2854A9F1F7D64073E88F922D0B5CEECB /* Resources */,
 			);
 			buildRules = (
 			);
@@ -647,16 +732,16 @@
 			);
 			name = "Pods-RMessageTests";
 			productName = "Pods-RMessageTests";
-			productReference = 7A07F54F15D91EF3D75323CDE2E8C6FD /* libPods-RMessageTests.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 7A07F54F15D91EF3D75323CDE2E8C6FD /* Pods_RMessageTests.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		C011176D5EA51C19A2753796A30DD938 /* RMessage-RMessage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99CE8498612EF4D5DDE7BD18D035845E /* Build configuration list for PBXNativeTarget "RMessage-RMessage" */;
+			buildConfigurationList = E87618D222A1C6A0D9CAF9D390AE6B3D /* Build configuration list for PBXNativeTarget "RMessage-RMessage" */;
 			buildPhases = (
-				2081556647235F9CA056528554CCC05B /* Sources */,
-				2EAA6E15969F5322017D3D07CFB4AF66 /* Frameworks */,
-				EDCA080F772016C431BF2F2E09001138 /* Resources */,
+				4307F311DE7C53AE7EFBC32E51009937 /* Sources */,
+				63715CD5CD2C0A9AEABD53F758EC1815 /* Frameworks */,
+				C908235BAECB7189800E6B953791FE25 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -685,7 +770,7 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = BAC225F91CF3CC8B621019AA24EE6D3A /* Products */;
+			productRefGroup = DF262C9BA71747FF764C35B6BD6C93E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -702,270 +787,233 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EDCA080F772016C431BF2F2E09001138 /* Resources */ = {
+		1A8F52AD9EDA203AD5529C58D37EDB5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				498D39704FD0A63DCF160431A274C432 /* NotificationBackgroundErrorIcon.png in Resources */,
-				06F308CD2B9A39305C3FCD24B9461552 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
-				12185BE971A6BF036988133DE22F4980 /* NotificationBackgroundSuccessIcon.png in Resources */,
-				9FB692F9D05738042A644A2CB9560ABF /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
-				1ADBCE51E07496AAFF4CF77DF306BF8A /* NotificationBackgroundWarningIcon.png in Resources */,
-				490CC38B2840607343331C55D9B4F69F /* NotificationBackgroundWarningIcon@2x.png in Resources */,
-				692F9EA07BC269DFE806294C88ACBA73 /* NotificationButtonBackground.png in Resources */,
-				E3860C848298915753B6E5A34DFDE347 /* NotificationButtonBackground@2x.png in Resources */,
-				BC027220BF4543F44AF44C17763A611B /* RMessageDefaultDesign.json in Resources */,
-				73BFADE78B5B3594EF2A01AB6D92F998 /* RMessageView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22EACADB7A729E08FFC31D6FF796D0BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2854A9F1F7D64073E88F922D0B5CEECB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A43AEDBACB28D58EA070B472275F3E3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C7A187FE8167944C65794891E714E3D /* RMessage.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C908235BAECB7189800E6B953791FE25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97DBA3A1F8914958976B4D7071AB72B3 /* NotificationBackgroundErrorIcon.png in Resources */,
+				3EBC1DDED5FE8CB9CE6C6AE4A2E60C63 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
+				5D4E68D313BE75B963445A189EDFA645 /* NotificationBackgroundSuccessIcon.png in Resources */,
+				3AEFCE4AC78977A1DDAEFD349B12F263 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
+				F195B82ACFD0EE5DBB93CB26C67F0CEA /* NotificationBackgroundWarningIcon.png in Resources */,
+				06C14B9EBD2334B5E465CEFFDBC3E88D /* NotificationBackgroundWarningIcon@2x.png in Resources */,
+				8A330B2771C00A42D670B640E2491CDE /* NotificationButtonBackground.png in Resources */,
+				994115F370550B2C4CB37E6F878BDDFF /* NotificationButtonBackground@2x.png in Resources */,
+				E9BD238BF487872468D8A91444709D58 /* RMessageDefaultDesign.json in Resources */,
+				443936558E4BC1FCAC6C277A82215E40 /* RMessageView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEFB273D5BFA2AA7C14F904850CD2590 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB82C0C665B53132887EF16D06D99C45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		11F0D03A8352388F8E2058CF86024F15 /* Sources */ = {
+		1C064EC0B541B3C9A90D99172A87A21F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A26E837015FAFCEE8A4551879F8A0E /* RMessage-dummy.m in Sources */,
-				8128995C85D8B8196D4DF8369FFE2BBD /* RMessage.m in Sources */,
-				82B7592D7BA250272E804B19ECE5E4D3 /* RMessageView.m in Sources */,
+				447A041FB36D9894087E57820FFACEFC /* Pods-RMessage-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2081556647235F9CA056528554CCC05B /* Sources */ = {
+		4307F311DE7C53AE7EFBC32E51009937 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2146C10BB2A61DE53839541E91C68B02 /* Sources */ = {
+		91CE604787DCF262F3DA984C52382F70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB4DDD35F1BA2100E03E1B97BC8E6C03 /* HexColors-dummy.m in Sources */,
-				950F5989F17EA8A29CB7A3F3C42EE6ED /* HexColors.m in Sources */,
+				2E891D5888494EE43843C79FDDC02FCB /* RMessage-dummy.m in Sources */,
+				BF58040738E24F96E53E430E5E3B23DE /* RMessage.m in Sources */,
+				C9EB96F901CDB24E1F14BF5CF03E0B59 /* RMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		94402E5D1101F3EB1C4B3FC09C8BA392 /* Sources */ = {
+		BF40409AD018A081160965DC4EDB6905 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BC37502C62E87DDA8B3239E15F8DC30 /* Pods-RMessage-dummy.m in Sources */,
+				053305D9A2B2D6FBE6BF23572EED51CA /* HexColors-dummy.m in Sources */,
+				6AC53CAC91CE6D44E2C3E6816833CC11 /* HexColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAD55E39E14A595751678CB4C70677F0 /* Sources */ = {
+		F59397057DDCC10BDFE1764487036D97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				299FB0A1D911B32CB6A7C2EBA2BB720E /* PPTopMostController-dummy.m in Sources */,
-				D39EAC819B53BE5894CC7D321812AB50 /* UINavigationController+PPTopMostController.m in Sources */,
-				D1B6268A5ABE735EBBF8C6AB95BCBEBD /* UITabBarController+PPTopMostController.m in Sources */,
-				5B9147866007FFA0BC8BE496FCFA70B8 /* UIViewController+PPTopMostController.m in Sources */,
+				2C4962BD8015FE5894E1915230305867 /* Pods-RMessageTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B4A0D0AA47FD02EAA735CF736780915D /* Sources */ = {
+		FDA64A72D731498C38E1309C6A6F4446 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57AE44449F7691A4EFCADC9DFAC54A23 /* Pods-RMessageUITests-dummy.m in Sources */,
+				AFA1ACC96AD0A6ED33230DF62296B9F3 /* Pods-RMessageUITests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5DECE9D99BA9250E5BD4992327ED185 /* Sources */ = {
+		FF038BD23F1906D21E20DF51CC8879DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				464FD11C1F46BCA1D30C53250EA3FE01 /* Pods-RMessageTests-dummy.m in Sources */,
+				501803705D226A4794309BAEC7AF1F98 /* PPTopMostController-dummy.m in Sources */,
+				71A5BB1D830ACCC99165A5D7DB39D141 /* UINavigationController+PPTopMostController.m in Sources */,
+				50910D653059C41F1121C4A3B2239FEB /* UITabBarController+PPTopMostController.m in Sources */,
+				27303B7209CE2EBAAB041619AB21303A /* UIViewController+PPTopMostController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1F878262B1DF27074EE893AD7780D182 /* PBXTargetDependency */ = {
+		0B0735A768A29C93331AA99CB8942B53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HexColors;
+			target = A7BE256EA2521B526245D404FF5E841F /* HexColors */;
+			targetProxy = 35C8040BBBE1F5B95811F202C1F53B24 /* PBXContainerItemProxy */;
+		};
+		3A06FB8045EEB5BED0365C5C104FF27A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "RMessage-RMessage";
 			target = C011176D5EA51C19A2753796A30DD938 /* RMessage-RMessage */;
-			targetProxy = 20CCA5656D16346418EEE06452426658 /* PBXContainerItemProxy */;
+			targetProxy = 530F7E9F2C1E0431C3EFBC3932B4DBE3 /* PBXContainerItemProxy */;
 		};
-		3645BCF6DC3E796F042C2CAA960F5B7A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RMessage;
-			target = 9EE7A34880B9382E4499E5611FECB220 /* RMessage */;
-			targetProxy = 8E3ED55C764C9614AC1DF123816D9424 /* PBXContainerItemProxy */;
-		};
-		6CF041ECDFF21B9B975C10E4C0499CC7 /* PBXTargetDependency */ = {
+		54AA7E4DD50333CB17AED37B7B83C06A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HexColors;
 			target = A7BE256EA2521B526245D404FF5E841F /* HexColors */;
-			targetProxy = 9E86CC07A39E85D365CE532C554975A3 /* PBXContainerItemProxy */;
+			targetProxy = 6397ADCEDDFFD0535460ADF5D0B98980 /* PBXContainerItemProxy */;
 		};
-		7D0BA9F9A0D14E035E68CDBA1571563F /* PBXTargetDependency */ = {
+		609F1C9A638F0058404240F33EEFDEA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PPTopMostController;
+			target = 55D38D35ABCC6A6C56D9E2649165ED52 /* PPTopMostController */;
+			targetProxy = 768CB0A5857A61092F45B9E52A0CB35C /* PBXContainerItemProxy */;
+		};
+		6976A7D7BB3633CB22A5BB83EC8EC82D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Reveal-iOS-SDK";
 			target = DB660A18A33275B0B2A1C2A90BB1D93F /* Reveal-iOS-SDK */;
-			targetProxy = 478F2904EFDDD2F230888CD836BFC815 /* PBXContainerItemProxy */;
+			targetProxy = 614072ADECACCD5D96400F07D46882E0 /* PBXContainerItemProxy */;
 		};
-		7DB2BF82E82A6FA02C7E649056489C68 /* PBXTargetDependency */ = {
+		885A5AB20DF7A40ACDEEAA628F56F77C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RMessage;
+			target = 9EE7A34880B9382E4499E5611FECB220 /* RMessage */;
+			targetProxy = C930C5C1A5E3D4708B11027E2F274C9E /* PBXContainerItemProxy */;
+		};
+		E260BBB89458BEF53B801F92607E90BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PPTopMostController;
 			target = 55D38D35ABCC6A6C56D9E2649165ED52 /* PPTopMostController */;
-			targetProxy = 82C3545F8592E572077A9A67828C1B33 /* PBXContainerItemProxy */;
-		};
-		AC2E5C3F332A71F59175D3D5F6B50461 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PPTopMostController;
-			target = 55D38D35ABCC6A6C56D9E2649165ED52 /* PPTopMostController */;
-			targetProxy = 9F27875199F316F5BACD2FDF519CE846 /* PBXContainerItemProxy */;
-		};
-		D4F5E50BB4A6CBEF83FA8744A203915F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HexColors;
-			target = A7BE256EA2521B526245D404FF5E841F /* HexColors */;
-			targetProxy = 9AD5BC7F72A021516826D834B5E61260 /* PBXContainerItemProxy */;
+			targetProxy = 33286BE1579B28635AF6CD78E5A43FA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		01C32F837DEB3CA4C0035837C62DB457 /* Debug */ = {
+		143012FB5C3AF3A52A8AD4A6C1C063B5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2022B250073073F16CA23285F59C3B9 /* RMessage.debug.xcconfig */;
+			baseConfigurationReference = D654C7CC3DA640EECA25C9AED0487A69 /* HexColors.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = RMessage;
-				PRODUCT_NAME = RMessage;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HexColors/HexColors-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/HexColors/HexColors.modulemap";
+				PRODUCT_MODULE_NAME = HexColors;
+				PRODUCT_NAME = HexColors;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		150B64CF99F07F4E3F630C4CBE078372 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E46F16148FCF9314DBF45800A3198EAD /* Pods-RMessageTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		1CB4B1745CC0A45A26FC88C0B433CB8E /* Debug */ = {
+		19B30E56434250EBEDD9245F54C4F149 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC7A33D358CD387D9DF2B19FC35F9F43 /* Pods-RMessageTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1CECC1BB8802C174D91BEAA1326E12BF /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9112354F73BA79D3B540977E1CBF3067 /* RMessage.release.xcconfig */;
+			baseConfigurationReference = F0CD3F398DFEA24263E5ACF51321D7DE /* RMessage.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/RMessage";
 				IBSC_MODULE = RMessage;
 				INFOPLIST_FILE = "Target Support Files/RMessage/ResourceBundle-RMessage-RMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = RMessage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Release;
-		};
-		3C43FA35A33E1C36F84FB8CEF1CB18E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2A530FC4CA083504FF5B7D1674E304C /* PPTopMostController.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/PPTopMostController/PPTopMostController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = PPTopMostController;
-				PRODUCT_NAME = PPTopMostController;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
 			name = Debug;
 		};
-		3D81C180CA4DB4355DDB7D2646EEFB5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F673A18440B6CE13499CDF895956772E /* Pods-RMessage.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		5784B4A6530D8CA25241FD9E29250E64 /* Release */ = {
+		2C0B5D37AEBD721B2539009224CE2B99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17C65AF7179AA96863E7B92DED2D14D7 /* Reveal-iOS-SDK.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -973,72 +1021,195 @@
 			};
 			name = Release;
 		};
-		59491D29F768C8F508F09B3213A30CE9 /* Release */ = {
+		434DDA43CFC2B158BE47811EC6BE9C3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4467BB79FE51AEEFA72B2CF56B5253E7 /* PPTopMostController.release.xcconfig */;
+			baseConfigurationReference = E8C9AEF0E4C5EC43BC97E1AF0B176057 /* PPTopMostController.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/PPTopMostController/PPTopMostController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				INFOPLIST_FILE = "Target Support Files/PPTopMostController/PPTopMostController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PPTopMostController/PPTopMostController.modulemap";
 				PRODUCT_MODULE_NAME = PPTopMostController;
 				PRODUCT_NAME = PPTopMostController;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		551D6E012A4145C606BFF283EE45F7D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFDDD26B8DFA40E0E8A1FAD535F21C37 /* RMessage.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RMessage/RMessage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RMessage/RMessage.modulemap";
+				PRODUCT_MODULE_NAME = RMessage;
+				PRODUCT_NAME = RMessage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		59CF27A02CADC2EFEA1556ACC0DFF5E5 /* Debug */ = {
+		5CE3E1B112DF214D85B1DB9F226C5F00 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 492B46DEE5310AA44D9BB06E65F0D80F /* Pods-RMessageUITests.debug.xcconfig */;
+			baseConfigurationReference = CBE0A66718FB65270906A33F4DA0F605 /* Pods-RMessage.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessage/Pods-RMessage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessage/Pods-RMessage.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		729E5E2F09961BD0020F1F6175E7A52E /* Release */ = {
+		5EC8FDB9E13D41305403541B6A93E81E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9112354F73BA79D3B540977E1CBF3067 /* RMessage.release.xcconfig */;
+			baseConfigurationReference = 9D820DE3C5F1597ABE78A15B1FA73793 /* HexColors.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = RMessage;
-				PRODUCT_NAME = RMessage;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HexColors/HexColors-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/HexColors/HexColors.modulemap";
+				PRODUCT_MODULE_NAME = HexColors;
+				PRODUCT_NAME = HexColors;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		640C82217ABE970A0D575F99F84A71E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A34AB027AB9C5CB8ACAE28470A0D8F65 /* Pods-RMessageUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6911347A290B5ED24A9F62595A077703 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0F664575A54D85D13F48EE074969842 /* Pods-RMessageUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessageUITests/Pods-RMessageUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1102,102 +1273,133 @@
 			};
 			name = Release;
 		};
-		91C496E95E6A0D3C952DCB2543546A4F /* Release */ = {
+		84E8DD0091BDE0B4D73CE095B44FC227 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 125D8B5EE1B57564BABE2AC579B4D245 /* HexColors.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = HexColors;
-				PRODUCT_NAME = HexColors;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		9D0CB4FC928FB259654E2DE2BBFCFAA1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D78298B38FE5ECE28F297C6B78565225 /* Reveal-iOS-SDK.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		A63E6954222CC298C7C192BE70854EB7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C8FFEFDE61FA272B042EC4C1252F0B7B /* Pods-RMessage.debug.xcconfig */;
+			baseConfigurationReference = 9CDBE1D8C31699980D99529766BEB1F5 /* Pods-RMessageTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessageTests/Pods-RMessageTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessageTests/Pods-RMessageTests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		A85C2ED7572EAEE9793E613B13FB198F /* Debug */ = {
+		93131AA3C448AABB0FE238EE3A20A768 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2022B250073073F16CA23285F59C3B9 /* RMessage.debug.xcconfig */;
+			baseConfigurationReference = EFDDD26B8DFA40E0E8A1FAD535F21C37 /* RMessage.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/RMessage";
 				IBSC_MODULE = RMessage;
 				INFOPLIST_FILE = "Target Support Files/RMessage/ResourceBundle-RMessage-RMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = RMessage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
-		DFBF2941D5BE5038CB5FCC4CA9FD3663 /* Release */ = {
+		B3135C6A4A71410B1D465CCD3F6EB7FB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A19BF70BC17453A4D636AAD5EA57AA60 /* Pods-RMessageUITests.release.xcconfig */;
+			baseConfigurationReference = CD5B285666783C0209303580E75182B6 /* Pods-RMessageTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessageTests/Pods-RMessageTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessageTests/Pods-RMessageTests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E37B174E70E292C72B4E40C87B2C9838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDE034E34B6206E5D78A1C94838D1885 /* PPTopMostController.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/PPTopMostController/PPTopMostController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PPTopMostController/PPTopMostController-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/PPTopMostController/PPTopMostController.modulemap";
+				PRODUCT_MODULE_NAME = PPTopMostController;
+				PRODUCT_NAME = PPTopMostController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		E7320748E0C89ACEEBBF935561B95AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D78298B38FE5ECE28F297C6B78565225 /* Reveal-iOS-SDK.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		E7818A6D226CC23A15D561F4F5519E0B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1263,37 +1465,77 @@
 			};
 			name = Debug;
 		};
-		F38DF05C2CA799EBE7AB0ED35E0B2467 /* Debug */ = {
+		F83CBE81131397DDA4AF6C86AEA4A680 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50DC6F5D3C57BAA2C82FED2ED24F3FD0 /* HexColors.debug.xcconfig */;
+			baseConfigurationReference = F0CD3F398DFEA24263E5ACF51321D7DE /* RMessage.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = HexColors;
-				PRODUCT_NAME = HexColors;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/RMessage/RMessage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RMessage/RMessage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/RMessage/RMessage.modulemap";
+				PRODUCT_MODULE_NAME = RMessage;
+				PRODUCT_NAME = RMessage;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F9FAA24DDFED177772DB23F3F77784AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EB6647D76C0BFE60981E3CEAD129188 /* Pods-RMessage.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RMessage/Pods-RMessage-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RMessage/Pods-RMessage.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21AB250366F447838C3AB1FBA5FCF947 /* Build configuration list for PBXNativeTarget "Pods-RMessageUITests" */ = {
+		07E5B7729CF36AA19CF2BD19517363A5 /* Build configuration list for PBXNativeTarget "Pods-RMessageTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				59CF27A02CADC2EFEA1556ACC0DFF5E5 /* Debug */,
-				DFBF2941D5BE5038CB5FCC4CA9FD3663 /* Release */,
+				B3135C6A4A71410B1D465CCD3F6EB7FB /* Debug */,
+				84E8DD0091BDE0B4D73CE095B44FC227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1307,56 +1549,56 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		57E627CAFBDD7A3D9E9E579D9247F7EA /* Build configuration list for PBXNativeTarget "PPTopMostController" */ = {
+		50884D168E2A0F6F015719B60F59032C /* Build configuration list for PBXNativeTarget "Pods-RMessage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C43FA35A33E1C36F84FB8CEF1CB18E5 /* Debug */,
-				59491D29F768C8F508F09B3213A30CE9 /* Release */,
+				F9FAA24DDFED177772DB23F3F77784AB /* Debug */,
+				5CE3E1B112DF214D85B1DB9F226C5F00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96AC06211F5A4FDC829093AB114F8B4B /* Build configuration list for PBXNativeTarget "Pods-RMessage" */ = {
+		635E395D0B6A98DA80E033AF03A2CCFB /* Build configuration list for PBXNativeTarget "Pods-RMessageUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A63E6954222CC298C7C192BE70854EB7 /* Debug */,
-				3D81C180CA4DB4355DDB7D2646EEFB5A /* Release */,
+				640C82217ABE970A0D575F99F84A71E7 /* Debug */,
+				6911347A290B5ED24A9F62595A077703 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		99CE8498612EF4D5DDE7BD18D035845E /* Build configuration list for PBXNativeTarget "RMessage-RMessage" */ = {
+		7F018BA5151D5BBA03D190CAA4ACB3DC /* Build configuration list for PBXNativeTarget "HexColors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A85C2ED7572EAEE9793E613B13FB198F /* Debug */,
-				1CECC1BB8802C174D91BEAA1326E12BF /* Release */,
+				5EC8FDB9E13D41305403541B6A93E81E /* Debug */,
+				143012FB5C3AF3A52A8AD4A6C1C063B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B50AB86BCB9D1306FD408C1E26130918 /* Build configuration list for PBXNativeTarget "Pods-RMessageTests" */ = {
+		92045B63F249646ECDE5900A03E0E73E /* Build configuration list for PBXNativeTarget "RMessage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1CB4B1745CC0A45A26FC88C0B433CB8E /* Debug */,
-				150B64CF99F07F4E3F630C4CBE078372 /* Release */,
+				F83CBE81131397DDA4AF6C86AEA4A680 /* Debug */,
+				551D6E012A4145C606BFF283EE45F7D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C9851D981CEAD83CBF162D8DB4C1CDF1 /* Build configuration list for PBXNativeTarget "HexColors" */ = {
+		B5B55E9F92493E3D95010334CA71EA42 /* Build configuration list for PBXNativeTarget "PPTopMostController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F38DF05C2CA799EBE7AB0ED35E0B2467 /* Debug */,
-				91C496E95E6A0D3C952DCB2543546A4F /* Release */,
+				434DDA43CFC2B158BE47811EC6BE9C3F /* Debug */,
+				E37B174E70E292C72B4E40C87B2C9838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FED397C7C470DDAEC7A1E39A90369886 /* Build configuration list for PBXNativeTarget "RMessage" */ = {
+		E87618D222A1C6A0D9CAF9D390AE6B3D /* Build configuration list for PBXNativeTarget "RMessage-RMessage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				01C32F837DEB3CA4C0035837C62DB457 /* Debug */,
-				729E5E2F09961BD0020F1F6175E7A52E /* Release */,
+				19B30E56434250EBEDD9245F54C4F149 /* Debug */,
+				93131AA3C448AABB0FE238EE3A20A768 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1364,8 +1606,8 @@
 		FFCFAA52F3D8D43F57F6939D8DCB0CA6 /* Build configuration list for PBXAggregateTarget "Reveal-iOS-SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9D0CB4FC928FB259654E2DE2BBFCFAA1 /* Debug */,
-				5784B4A6530D8CA25241FD9E29250E64 /* Release */,
+				E7320748E0C89ACEEBBF935561B95AFA /* Debug */,
+				2C0B5D37AEBD721B2539009224CE2B99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

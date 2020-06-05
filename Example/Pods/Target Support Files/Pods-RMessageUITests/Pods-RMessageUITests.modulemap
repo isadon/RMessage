@@ -1,0 +1,6 @@
+framework module Pods_RMessageUITests {
+  umbrella header "Pods-RMessageUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

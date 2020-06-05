@@ -1,0 +1,6 @@
+framework module RMessage {
+  umbrella header "RMessage-umbrella.h"
+
+  export *
+  module * { export * }
+}

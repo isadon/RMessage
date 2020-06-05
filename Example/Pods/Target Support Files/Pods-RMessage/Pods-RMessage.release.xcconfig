@@ -1,7 +1,8 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HexColors" "${PODS_CONFIGURATION_BUILD_DIR}/PPTopMostController" "${PODS_CONFIGURATION_BUILD_DIR}/RMessage"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HexColors" "${PODS_ROOT}/Headers/Public/PPTopMostController" "${PODS_ROOT}/Headers/Public/RMessage"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HexColors" "${PODS_CONFIGURATION_BUILD_DIR}/PPTopMostController" "${PODS_CONFIGURATION_BUILD_DIR}/RMessage"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"HexColors" -l"PPTopMostController" -l"RMessage"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/HexColors/HexColors.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/PPTopMostController/PPTopMostController.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/RMessage/RMessage.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_LDFLAGS = $(inherited) -framework "HexColors" -framework "PPTopMostController" -framework "RMessage"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
