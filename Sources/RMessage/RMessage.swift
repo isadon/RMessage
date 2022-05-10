@@ -80,8 +80,8 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
       containerView.topAnchor.constraint(equalTo: topAnchor),
       containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
       containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerView.trailingAnchor.constraint(equalTo: trailingAnchor)
-      ])
+      containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+    ])
   }
 
   private func setupComponents(withMessageSpec spec: RMessageSpec) {
@@ -124,7 +124,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
         contentViewTrailingConstraint,
         titleLabelLeadingConstraint, titleLabelTrailingConstraint,
         bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-        ].compactMap { $0 }
+      ].compactMap { $0 }
     )
 
     titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
@@ -142,7 +142,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
   // MARK: - Respond to Layout Changes
 
-  public override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
 
     if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }

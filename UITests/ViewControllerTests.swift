@@ -29,7 +29,6 @@ class ViewControllerTests: XCTestCase {
   }
 
   func showMessageFromTopByPressingButton(withName buttonName: String, timeToShow displayTimeout: TimeInterval, timeToHide dismissTimeout: TimeInterval) {
-
     app.buttons[buttonName].firstMatch.tap()
 
     // The base view where all the elements reside. Here we grab this to get where the position of
@@ -57,7 +56,6 @@ class ViewControllerTests: XCTestCase {
   }
 
   func showBottomMessage(withTimeout displayTimeout: TimeInterval, timeToHide dismissTimeout: TimeInterval) {
-
     let buttonName = "Bottom"
     app.buttons[buttonName].firstMatch.tap()
 

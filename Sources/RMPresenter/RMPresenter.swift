@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-@objc class RMPresenter: NSObject, RMessageAnimatorDelegate {
+@objc
+class RMPresenter: NSObject, RMessageAnimatorDelegate {
   /// Delegate of the presenter object.
   weak var delegate: RMPresenterDelegate?
 
@@ -131,8 +132,9 @@ import UIKit
   /// Call this method to have the presenter perform any required changes necessary to account for the interface
   /// being rotated.
   func interfaceDidRotate() {
-    guard screenStatus == .presenting &&
-      (message.spec.durationType == .automatic || message.spec.durationType == .timed) else {
+    guard screenStatus == .presenting,
+          message.spec.durationType == .automatic || message.spec.durationType == .timed
+    else {
       return
     }
     // Cancel the previous dismissal and restart dismissal clock

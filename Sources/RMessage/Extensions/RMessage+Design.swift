@@ -76,11 +76,9 @@ extension RMessage {
     bodyLabel.attributedText = bodyAttributedText
   }
 
-  func setPreferredLayoutWidth(forTitleLabel titleLabel: UILabel,
-                               bodyLabel: UILabel,
-                               inSuperview superview: UIView,
-                               sizingToFit: Bool) {
-
+  func setPreferredLayoutWidth(
+    forTitleLabel titleLabel: UILabel, bodyLabel: UILabel, inSuperview superview: UIView, sizingToFit: Bool
+  ) {
     var accessoryViewsAndPadding: CGFloat = 0
     if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
     if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }

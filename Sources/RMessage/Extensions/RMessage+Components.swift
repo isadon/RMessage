@@ -28,8 +28,8 @@ extension RMessage {
       view.leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 15),
       view.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -15),
       view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 10),
-      view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10)
-      ])
+      view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10),
+    ])
   }
 
   func setup(rightView view: UIView, inSuperview superview: UIView) {
@@ -48,8 +48,8 @@ extension RMessage {
       view.trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -15),
       view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 10),
       view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10),
-      viewTrailingOptConstraint
-      ])
+      viewTrailingOptConstraint,
+    ])
   }
 
   func backgroundImageView(withImage image: UIImage, superview: UIView) -> UIImageView {

@@ -153,6 +153,7 @@ public struct DefaultRMessageSpec: RMessageSpec {
 }
 
 // MARK: Implementation for the builtin message types
+
 public var errorSpec: RMessageSpec {
   var errorSpec = DefaultRMessageSpec()
   errorSpec.backgroundColor = UIColor("#FF2D55") ?? UIColor.black

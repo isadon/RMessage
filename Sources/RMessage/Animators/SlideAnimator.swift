@@ -94,7 +94,7 @@ class SlideAnimator: NSObject, RMAnimator {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
     // 2. If already presented or have not yet dismissed
-    guard !isPresenting && !hasPresented && hasDismissed else {
+    guard !isPresenting, !hasPresented, hasDismissed else {
       return false
     }
 
@@ -119,7 +119,7 @@ class SlideAnimator: NSObject, RMAnimator {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
     // 2. If already dismissed or have not yet presented
-    guard !isDismissing && hasDismissed && hasPresented else {
+    guard !isDismissing, hasDismissed, hasPresented else {
       return false
     }
 
@@ -243,8 +243,8 @@ class SlideAnimator: NSObject, RMAnimator {
     NSLayoutConstraint.activate([
       view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
       view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-      view.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
-      ])
+      view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+    ])
 
     delegate?.animatorDidLayout?(self)
     calculateSpringAnimationPadding()

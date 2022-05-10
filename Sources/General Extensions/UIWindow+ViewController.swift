@@ -15,10 +15,9 @@ extension UIWindow {
   /// - Parameter viewController: The view controller from which to start traversing.
   /// - Returns: The top view controller in the window.
   static func topViewController(forViewController viewController: UIViewController) -> UIViewController {
-
     if let navController = viewController as? UINavigationController,
-      let navTopVC = navController.topViewController, !navTopVC.isKind(of: UIAlertController.self) {
-
+       let navTopVC = navController.topViewController, !navTopVC.isKind(of: UIAlertController.self)
+    {
       return topViewController(forViewController: navTopVC)
     }
 
@@ -27,8 +26,8 @@ extension UIWindow {
     }
 
     if let tabBarController = viewController as? UITabBarController,
-      let selectedTabBarVC = tabBarController.selectedViewController {
-
+       let selectedTabBarVC = tabBarController.selectedViewController
+    {
       return topViewController(forViewController: selectedTabBarVC)
     }
 

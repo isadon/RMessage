@@ -26,7 +26,7 @@ public class RMController: NSObject, RMPresenterDelegate {
     return queue.operationCount
   }
 
-  public override init() {
+  override public init() {
     queue = OperationQueue()
     // Make it a serial queue
     queue.maxConcurrentOperationCount = 1

@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-@objc public protocol RMAnimator {
+@objc
+public protocol RMAnimator {
   /// The delegate of the animator.
   var delegate: RMessageAnimatorDelegate? { get set }
 
@@ -39,7 +40,8 @@ import UIKit
   func dismiss(withCompletion completion: (() -> Void)?) -> Bool
 }
 
-@objc public protocol RMessageAnimatorDelegate {
+@objc
+public protocol RMessageAnimatorDelegate {
   /// Notifies the animator delegate the animator will soon start to layout the view it manages.
   /// - Parameter animator: The animator instance doing the layout.
   @objc optional func animatorWillLayout(_ animator: RMAnimator)

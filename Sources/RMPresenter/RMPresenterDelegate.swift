@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-@objc protocol RMPresenterDelegate {
+@objc
+protocol RMPresenterDelegate {
   /// Notifies the presenter's delegate that the presenter will soon present the message.
   ///
   /// - Parameters:
