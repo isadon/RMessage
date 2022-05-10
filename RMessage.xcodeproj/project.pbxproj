@@ -35,8 +35,6 @@
 		7AB38439211386C700DA8076 /* RMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38438211386C700DA8076 /* RMessageTests.swift */; };
 		7AB38444211386C700DA8076 /* NavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB38443211386C700DA8076 /* NavigationControllerTests.swift */; };
 		7AB384562113883700DA8076 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB384552113883700DA8076 /* Main.storyboard */; };
-		7ADB44922144EAD1009C5782 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E69052144E9C9007D0F50 /* HexColors.framework */; };
-		7ADB44932144EAF1009C5782 /* HexColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8E69052144E9C9007D0F50 /* HexColors.framework */; };
 		7ADB44952144EFA9009C5782 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB44942144EFA9009C5782 /* ViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,7 +88,6 @@
 		7A7AB90B2115191C00A9D5C1 /* UIWindow+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+ViewController.swift"; sourceTree = "<group>"; };
 		7A7F96C6211ECBD600107868 /* RMPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPresenter.swift; sourceTree = "<group>"; };
 		7A7F96CB211F4F4800107868 /* RMAnimationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAnimationOptions.swift; sourceTree = "<group>"; };
-		7A8E69052144E9C9007D0F50 /* HexColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HexColors.framework; path = Carthage/Build/iOS/HexColors.framework; sourceTree = "<group>"; };
 		7AB38420211386C600DA8076 /* RMessageDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMessageDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB38423211386C600DA8076 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AB38425211386C600DA8076 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ADB44922144EAD1009C5782 /* HexColors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +125,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ADB44932144EAF1009C5782 /* HexColors.framework in Frameworks */,
 				7A43CAF12144E8A300A2A0D1 /* RMessage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,7 +209,6 @@
 		7A8E69042144E9C9007D0F50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7A8E69052144E9C9007D0F50 /* HexColors.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -665,6 +659,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.donileo.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -700,6 +695,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.donileo.RMessage;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -834,11 +830,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Demo",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -863,11 +854,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Demo",
-				);
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
