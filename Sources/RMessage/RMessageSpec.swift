@@ -6,7 +6,7 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
+import SwiftHEXColors
 import UIKit
 
 /** A value representing a position *to* which to present the message.
@@ -156,35 +156,35 @@ public struct DefaultRMessageSpec: RMessageSpec {
 
 public var errorSpec: RMessageSpec {
   var errorSpec = DefaultRMessageSpec()
-  errorSpec.backgroundColor = UIColor("#FF2D55") ?? UIColor.black
-  errorSpec.titleColor = UIColor.white
-  errorSpec.bodyColor = UIColor.white
-  errorSpec.iconImage = UIImage(named: "ErrorMessageIcon", in: RMessage.bundle, compatibleWith: nil)
+  errorSpec.backgroundColor = UIColor(hexString: "#FF2D55") ?? .black
+  errorSpec.titleColor = .white
+  errorSpec.bodyColor = .white
+  errorSpec.iconImage = UIImage(named: "ErrorMessageIcon", in: .module, compatibleWith: nil)
   return errorSpec
 }
 
 public var warningSpec: RMessageSpec {
   var warningSpec = DefaultRMessageSpec()
-  warningSpec.backgroundColor = UIColor("#FFCC00") ?? UIColor.black
-  warningSpec.titleColor = UIColor("#484638") ?? UIColor.white
+  warningSpec.backgroundColor = UIColor(hexString: "#FFCC00") ?? .black
+  warningSpec.titleColor = UIColor(hexString: "#484638") ?? .white
   warningSpec.bodyColor = warningSpec.titleColor
-  warningSpec.iconImage = UIImage(named: "WarningMessageIcon", in: RMessage.bundle, compatibleWith: nil)
+  warningSpec.iconImage = UIImage(named: "WarningMessageIcon", in: .module, compatibleWith: nil)
   return warningSpec
 }
 
 public var normalSpec: RMessageSpec {
   var normalSpec = DefaultRMessageSpec()
-  normalSpec.backgroundColor = UIColor("#E8E8E8") ?? UIColor.black
-  normalSpec.titleColor = UIColor("#727C83") ?? UIColor.white
+  normalSpec.backgroundColor = UIColor(hexString: "#E8E8E8") ?? .black
+  normalSpec.titleColor = UIColor(hexString: "#727C83") ?? .white
   normalSpec.bodyColor = normalSpec.titleColor
   return normalSpec
 }
 
 public var successSpec: RMessageSpec {
   var successSpec = DefaultRMessageSpec()
-  successSpec.backgroundColor = UIColor("#00C060") ?? UIColor.black
-  successSpec.titleColor = UIColor.white
+  successSpec.backgroundColor = UIColor(hexString: "#00C060") ?? .black
+  successSpec.titleColor = .white
   successSpec.bodyColor = successSpec.titleColor
-  successSpec.iconImage = UIImage(named: "SuccessMessageIcon", in: RMessage.bundle, compatibleWith: nil)
+  successSpec.iconImage = UIImage(named: "SuccessMessageIcon", in: .module, compatibleWith: nil)
   return successSpec
 }

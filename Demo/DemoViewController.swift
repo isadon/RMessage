@@ -6,7 +6,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import HexColors
 import RMessage
 import UIKit
 
@@ -17,6 +16,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    navigationController?.view.backgroundColor = .white
     navigationController?.navigationBar.isTranslucent = true
     extendedLayoutIncludesOpaqueBars = true
     // RMessageController.appearance.setTitleSubtitleLabelsSizeToFit = true
@@ -189,14 +189,14 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     }
 
     let button = UIButton(type: .custom)
-    button.setTitleColor(UIColor("#FF0040")!, for: .normal)
+    button.setTitleColor(UIColor(hexString: "#FF0040")!, for: .normal)
     button.setImage(buttonBackgroundImage, for: .normal)
     button.sizeToFit()
     button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
     var alternateErr = errorSpec
-    alternateErr.backgroundColor = UIColor("#008AFC")!
-    alternateErr.titleColor = UIColor("#48FCEB")!
+    alternateErr.backgroundColor = UIColor(hexString: "#008AFC")!
+    alternateErr.titleColor = UIColor(hexString: "#48FCEB")!
     alternateErr.bodyColor = .white
     alternateErr.targetAlpha = 0.95
     alternateErr.iconImage = UIImage(named: "ErrorMessageIcon.png")
@@ -211,7 +211,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   @IBAction private func didTapTapOnlyDismissal(_: Any) {
     var tapOnlySpec = normalSpec
     tapOnlySpec.durationType = .tap
-    tapOnlySpec.backgroundColor = UIColor("#CF00F8")!
+    tapOnlySpec.backgroundColor = UIColor(hexString: "#CF00F8")!
     tapOnlySpec.titleColor = .white
     tapOnlySpec.bodyColor = .white
 

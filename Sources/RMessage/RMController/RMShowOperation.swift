@@ -9,12 +9,12 @@ import UIKit
 
 class RMShowOperation: Operation, RMPresenterDelegate {
   override var isAsynchronous: Bool {
-    return true
+    true
   }
 
   private var executingState: Bool = false
   override var isExecuting: Bool {
-    get { return executingState }
+    get { executingState }
     set {
       willChangeValue(forKey: "isExecuting")
       executingState = newValue
@@ -24,7 +24,7 @@ class RMShowOperation: Operation, RMPresenterDelegate {
 
   private var finishedState: Bool = false
   override var isFinished: Bool {
-    get { return finishedState }
+    get { finishedState }
     set {
       willChangeValue(forKey: "isFinished")
       finishedState = newValue

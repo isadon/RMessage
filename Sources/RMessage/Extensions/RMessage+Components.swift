@@ -5,7 +5,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension RMessage {

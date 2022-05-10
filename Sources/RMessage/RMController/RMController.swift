@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import HexColors
+import SwiftHEXColors
 import UIKit
 
 public class RMController: NSObject, RMPresenterDelegate {
@@ -23,7 +23,7 @@ public class RMController: NSObject, RMPresenterDelegate {
   private let queue: OperationQueue
 
   public var queueCount: Int {
-    return queue.operationCount
+    queue.operationCount
   }
 
   override public init() {
@@ -62,10 +62,8 @@ public class RMController: NSObject, RMPresenterDelegate {
 
     let animOpts = DefaultRMAnimationOptions()
 
-    let presentVC = viewController ?? presentationViewController ?? UIWindow.topViewController()
-
     // Make sure we have a presentation view controller for the message
-    guard let presentationVC = presentVC else {
+    guard let presentationVC = viewController ?? presentationViewController ?? UIWindow.topViewController() else {
       return
     }
 

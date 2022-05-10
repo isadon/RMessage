@@ -18,5 +18,5 @@ func validateFloatsToScale(_ f1: Float, _ f2: Float, scale: Int) -> Bool {
 }
 
 func springAnimationPadding(forHeight height: Float) -> Float {
-  return ceilf(height / 120) * -5.0
+  ceilf(height / 120) * -5.0
 }

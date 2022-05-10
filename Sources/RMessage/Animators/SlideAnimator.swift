@@ -5,7 +5,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 private enum Constants {
@@ -236,6 +235,7 @@ class SlideAnimator: NSObject, RMAnimator {
 
     // Add RMessage to superview and prepare the ending constraints
     if view.superview == nil { superview.addSubview(view) }
+
     view.translatesAutoresizingMaskIntoConstraints = false
 
     delegate?.animatorDidAddToSuperview?(self)

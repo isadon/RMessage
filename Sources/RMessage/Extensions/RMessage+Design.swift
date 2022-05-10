@@ -5,7 +5,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension RMessage {
@@ -38,7 +37,7 @@ extension RMessage {
     titleLabel.textColor = .black
     titleLabel.shadowColor = nil
     titleLabel.shadowOffset = CGSize.zero
-    titleLabel.backgroundColor = nil
+    titleLabel.backgroundColor = .clear
     titleLabel.font = spec.titleFont
     titleLabel.textAlignment = spec.titleTextAlignment
     titleLabel.textColor = spec.titleColor
@@ -54,7 +53,7 @@ extension RMessage {
     bodyLabel.textColor = .darkGray
     bodyLabel.shadowColor = nil
     bodyLabel.shadowOffset = CGSize.zero
-    bodyLabel.backgroundColor = nil
+    bodyLabel.backgroundColor = .clear
     bodyLabel.font = spec.bodyFont
     bodyLabel.textAlignment = spec.bodyTextAlignment
     bodyLabel.textColor = spec.bodyColor

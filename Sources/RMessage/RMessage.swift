@@ -6,37 +6,50 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
-import HexColors
 import UIKit
 
 public class RMessage: UIView, RMessageAnimatorDelegate {
-  static let bundle = Bundle(for: RMessage.self)
-
   private(set) var spec: RMessageSpec
 
-  @IBOutlet private(set) var containerView: UIView!
-
-  @IBOutlet private(set) var contentView: UIView!
+  private(set) lazy var contentView = UIView(frame: .zero)
 
   private(set) var leftView: UIView?
   private(set) var rightView: UIView?
   private(set) var backgroundView: UIView?
 
-  @IBOutlet private(set) var titleLabel: UILabel!
-  @IBOutlet private(set) var bodyLabel: UILabel!
-
-  @IBOutlet private var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
-  @IBOutlet private var titleLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet private var titleLabelTrailingConstraint: NSLayoutConstraint!
-  @IBOutlet private var bodyLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet private var bodyLabelTrailingConstraint: NSLayoutConstraint!
-
-  @IBOutlet private var contentViewTrailingConstraint: NSLayoutConstraint!
+  private let titleLabel = UILabel(frame: .zero)
+  private let bodyLabel = UILabel(frame: .zero)
 
   private var messageSpecIconImageViewSet = false
-
   private var messageSpecBackgroundImageViewSet = false
+
+  // MARK: - Constraint Vars
+
+  private lazy var titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(
+    equalTo: contentView.leadingAnchor
+  )
+
+  private lazy var titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(
+    equalTo: contentView.trailingAnchor
+  )
+
+  private lazy var bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(
+    equalTo: contentView.leadingAnchor
+  )
+
+  private lazy var bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(
+    equalTo: contentView.trailingAnchor
+  )
+
+  private lazy var contentViewTrailingConstraint: NSLayoutConstraint = {
+    let constraint = contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+    constraint.priority = .init(rawValue: 749)
+    return constraint
+  }()
+
+  private lazy var titleBodyVerticalSpacingConstraint = bodyLabel.topAnchor.constraint(
+    equalTo: titleLabel.bottomAnchor, constant: 5
+  )
 
   // MARK: Instance Methods
 
@@ -51,11 +64,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     super.init(frame: CGRect.zero)
 
-    guard RMessage.bundle.loadNibNamed("RMessage", owner: self, options: nil) != nil else {
-      assertionFailure("Error loading the RMessage nib file for the RMessage class")
-      return
-    }
-
+    setupContentView()
     layoutViews()
 
     titleLabel.text = title
@@ -67,20 +76,63 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
   }
 
-  public required init?(coder aDecoder: NSCoder) {
-    spec = DefaultRMessageSpec()
-    super.init(coder: aDecoder)
+  @available(*, unavailable) required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setupContentView() {
+    for sub in [titleLabel, bodyLabel] {
+      contentView.addSubview(sub)
+      sub.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    NSLayoutConstraint.activate([
+      titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+      titleLabelLeadingConstraint,
+      titleLabelTrailingConstraint,
+      titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+      titleBodyVerticalSpacingConstraint,
+      bodyLabelLeadingConstraint,
+      bodyLabelTrailingConstraint,
+      bodyLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+    ])
   }
 
   private func layoutViews() {
-    addSubview(containerView)
-    containerView.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(contentView)
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+
+    let sag = safeAreaLayoutGuide
+
+    let contentViewOptLeading = contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15)
+    contentViewOptLeading.priority = .init(rawValue: 749)
+
+    let contentViewOptTop = contentView.topAnchor.constraint(equalTo: sag.topAnchor, constant: 10)
+    contentViewOptTop.priority = .init(rawValue: 249)
+
+    let contentViewOptBottom = contentView.bottomAnchor.constraint(equalTo: sag.bottomAnchor, constant: -10)
+    contentViewOptBottom.priority = .init(rawValue: 249)
+
+    let contentViewCenterXOpt = contentView.centerXAnchor.constraint(equalTo: centerXAnchor)
+    contentViewCenterXOpt.priority = .init(rawValue: 748)
+
+    let contentViewCenterYOpt = contentView.centerYAnchor.constraint(equalTo: centerYAnchor)
+    contentViewCenterYOpt.priority = .init(rawValue: 248)
 
     NSLayoutConstraint.activate([
-      containerView.topAnchor.constraint(equalTo: topAnchor),
-      containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      contentViewCenterXOpt,
+      contentView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+      contentViewOptLeading,
+      contentView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+      contentViewTrailingConstraint,
+
+      contentViewCenterYOpt,
+      contentView.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+      contentViewOptTop,
+      contentView.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
+      contentViewOptBottom,
     ])
   }
 
@@ -119,12 +171,11 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
       return
     }
 
-    NSLayoutConstraint.deactivate(
-      [
-        contentViewTrailingConstraint,
-        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-      ].compactMap { $0 }
+    NSLayoutConstraint.deactivate([
+      contentViewTrailingConstraint,
+      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
+      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+    ].compactMap { $0 }
     )
 
     titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
