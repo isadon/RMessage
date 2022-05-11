@@ -14,18 +14,18 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
   weak var delegate: RMPresenterDelegate?
 
   /// The target position to which the message should be presented.
-  private(set) var targetPosition: RMessagePosition
+  private(set) var targetPosition: RMessage.Config.Presentation.Position
 
   /// The amount of time the message will be presented before being dismissed. Only applies when the *durationType* is
   /// .automatic.
   var dimissTime: TimeInterval {
-    switch message.spec.durationType {
+    switch message.config.presentation.durationType {
     case .automatic:
       return animator.presentationDuration + animator.dismissalDuration + 1.5 + Double(message.bounds.size.height) * 0.04
     case .tap, .swipe, .tapSwipe, .endless:
       return -1
     case .timed:
-      return abs(message.spec.timeToDismiss)
+      return abs(message.config.presentation.timeToDismiss)
     }
   }
 
@@ -68,7 +68,7 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
   private let animator: RMAnimator
 
   init(
-    message: RMessage, targetPosition: RMessagePosition, animator: RMAnimator,
+    message: RMessage, targetPosition: RMessage.Config.Presentation.Position, animator: RMAnimator,
     animationOptions animationOpts: RMAnimationOptions,
     tapCompletion: (() -> Void)? = nil, presentCompletion: (() -> Void)? = nil, dismissCompletion: (() -> Void)? = nil
   ) {
@@ -87,13 +87,13 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
   private func setupAnimator() {
     animator.delegate = self
     if let animator = animator as? SlideAnimator {
-      animator.disableAnimationPadding = message.spec.disableSpringAnimationPadding
+      animator.disableAnimationPadding = message.config.presentation.disableSpringAnimationPadding
       animator.presentationDuration = animationOpts.presentationDuration
       animator.dismissalDuration = animationOpts.presentationDuration - 0.2
       animator.animationStartAlpha = 0
       /* As per apple docs when using UIVisualEffectView and blurring the superview of the blur view
        must have an opacity of 1.f */
-      animator.animationEndAlpha = message.spec.blurBackground ? 1.0 : message.spec.targetAlpha
+      animator.animationEndAlpha = message.config.design.blurBackground ? 1.0 : message.config.design.targetAlpha
     }
   }
 
@@ -104,7 +104,7 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
     guard animator.present(withCompletion: completion) else {
       return
     }
-    if message.spec.durationType == .automatic || message.spec.durationType == .timed {
+    if message.config.presentation.durationType == .automatic || message.config.presentation.durationType == .timed {
       perform(#selector(animatorDismiss), with: nil, afterDelay: dimissTime)
     }
   }
@@ -133,7 +133,7 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
   /// being rotated.
   func interfaceDidRotate() {
     guard screenStatus == .presenting,
-          message.spec.durationType == .automatic || message.spec.durationType == .timed
+          message.config.presentation.durationType == .automatic || message.config.presentation.durationType == .timed
     else {
       return
     }

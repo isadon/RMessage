@@ -35,7 +35,7 @@ public class RMController: NSObject, RMPresenterDelegate {
   /// Shows a notification message.
   ///
   /// - Parameters:
-  ///   - spec: A message spec to use for styling the message, please see *RMessageSpec for usage details.
+  ///   - config: A message configuration to use for styling the message, please see *RMessage.Config for usage details.
   ///   - targetPosition: The position *to* which the message should be presented, (default = top).
   ///   - title: The title text of the message.
   ///   - body: The body text of the message.
@@ -46,39 +46,31 @@ public class RMController: NSObject, RMPresenterDelegate {
   ///   - tapCompletion: A callback to be called when the message is tapped.
   ///   - presentCompletion: A callback to be called when the message is presented.
   ///   - dismissCompletion: A callback to be called when the message is dismissed.
-  public func showMessage(
-    withSpec spec: RMessageSpec, atPosition targetPosition: RMessagePosition = .top,
-    title: String, body: String? = nil, viewController: UIViewController? = nil,
-    leftView: UIView? = nil, rightView: UIView? = nil, backgroundView: UIView? = nil,
-    tapCompletion: (() -> Void)? = nil, presentCompletion: (() -> Void)? = nil,
-    dismissCompletion: (() -> Void)? = nil
-  ) {
-    guard let message = RMessage(
-      spec: spec, title: title, body: body,
-      leftView: leftView, rightView: rightView, backgroundView: backgroundView
-    ) else {
-      return
-    }
-
+  public func showMessage(_ message: RMessage) {
+    let config = message.config
     let animOpts = DefaultRMAnimationOptions()
 
     // Make sure we have a presentation view controller for the message
-    guard let presentationVC = viewController ?? presentationViewController ?? UIWindow.topViewController() else {
+    guard let presentationVC = config.presentation.presentationViewController ??
+      config.presentation.defaultPresentationViewController
+    else {
       return
     }
 
     let animator = SlideAnimator(
-      targetPosition: targetPosition, view: message,
+      targetPosition: config.presentation.position, view: message,
       superview: presentationVC.view, contentView: message.contentView
     )
 
     let presenter = RMPresenter(
-      message: message, targetPosition: targetPosition, animator: animator,
-      animationOptions: animOpts, tapCompletion: tapCompletion, presentCompletion: presentCompletion,
-      dismissCompletion: dismissCompletion
+      message: message, targetPosition: config.presentation.position, animator: animator,
+      animationOptions: animOpts, tapCompletion: config.presentation.didTapCompletion,
+      presentCompletion: config.presentation.didPresentCompletion,
+      dismissCompletion: config.presentation.didDismissCompletion
     )
 
     delegate?.customize?(message: message, controller: self)
+
     let presentOp = RMShowOperation(message: message, presenter: presenter)
     queue.addOperation(presentOp)
   }
@@ -107,8 +99,11 @@ public class RMController: NSObject, RMPresenterDelegate {
    Ideally should go inside the calling view controllers viewWillTransitionToSize:withTransitionCoordinator: method.
    */
   public func interfaceDidRotate() {
-    if let operation = queue.operations.first as? RMShowOperation, operation.presenter.screenStatus == .presenting {
-      operation.presenter.interfaceDidRotate()
+    guard let operation = queue.operations.first as? RMShowOperation,
+          operation.presenter.screenStatus == .presenting
+    else {
+      return
     }
+    operation.presenter.interfaceDidRotate()
   }
 }

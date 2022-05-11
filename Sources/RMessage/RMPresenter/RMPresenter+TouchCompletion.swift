@@ -21,7 +21,7 @@ extension RMPresenter {
   @objc func didTapMessage() {
     delegate?.messageTapped?(forPresenter: self, message: message)
     tapCompletion?()
-    if message.spec.durationType != .endless, message.spec.durationType != .swipe { dismiss() }
+    if message.config.presentation.durationType != .endless, message.config.presentation.durationType != .swipe { dismiss() }
   }
 
   /* called after the following gesture depending on message position during initialization
@@ -29,6 +29,6 @@ extension RMPresenter {
    UISwipeGestureRecognizerDirectionDown when message position set to bottom */
   @objc func didSwipeMessage() {
     delegate?.messageSwiped?(forPresenter: self, message: message)
-    if message.spec.durationType != .endless, message.spec.durationType != .tap { dismiss() }
+    if message.config.presentation.durationType != .endless, message.config.presentation.durationType != .tap { dismiss() }
   }
 }

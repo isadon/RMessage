@@ -9,7 +9,7 @@
 import UIKit
 
 public class RMessage: UIView, RMessageAnimatorDelegate {
-  private(set) var spec: RMessageSpec
+  private(set) var config: RMessage.Config
 
   private(set) lazy var contentView = UIView(frame: .zero)
 
@@ -23,7 +23,6 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     textView.backgroundColor = .clear
     textView.isScrollEnabled = false
     textView.textContainerInset = .zero
-    textView.isSelectable = false
     textView.setContentHuggingPriority(.required, for: .vertical)
     return textView
   }()
@@ -34,7 +33,6 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     textView.backgroundColor = .clear
     textView.isScrollEnabled = false
     textView.textContainerInset = .zero
-    textView.isSelectable = false
     textView.setContentHuggingPriority(.required, for: .vertical)
     return textView
   }()
@@ -82,34 +80,46 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
   // MARK: Instance Methods
 
-  init?(
-    spec: RMessageSpec, title: String, body: String?, leftView: UIView? = nil, rightView: UIView? = nil,
-    backgroundView: UIView? = nil
-  ) {
-    self.spec = spec
-    self.leftView = leftView
-    self.rightView = rightView
-    self.backgroundView = backgroundView
+  public init(_ config: RMessage.Config) {
+    self.config = config
+    leftView = config.content.leftView
+    rightView = config.content.rightView
+    backgroundView = config.content.backgroundView
 
     super.init(frame: CGRect.zero)
 
-    titleTextView.text = title
-    bodyTextView.text = body
-
-    setupContentView()
-    layoutViews()
-
     accessibilityIdentifier = String(describing: type(of: self))
 
-    setupComponents(withMessageSpec: spec)
-    setupDesign(withMessageSpec: spec, titleTextView: titleTextView, bodyTextView: bodyTextView)
+    setupDesign()
+
+    titleTextView.text = config.content.title
+
+    if let attributedTitle = config.content.attributedTitle {
+      titleTextView.attributedText = attributedTitle
+    }
+
+    bodyTextView.text = config.content.body
+    if let attributedBody = config.content.attributedBody {
+      bodyTextView.attributedText = attributedBody
+    }
+
+    setupOptionalComponents()
+    layoutViews()
   }
 
   @available(*, unavailable) required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func setupContentView() {
+  // MARK: - Layout Methods
+
+  private func layoutViews() {
+    layoutContentViewSubviews()
+    layoutContentView()
+    layoutOptionalComponents()
+  }
+
+  private func layoutContentViewSubviews() {
     for sub in [titleTextView, bodyTextView] {
       contentView.addSubview(sub)
       sub.translatesAutoresizingMaskIntoConstraints = false
@@ -141,7 +151,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     ] + dynamicBodyConstraints)
   }
 
-  private func layoutViews() {
+  private func layoutContentView() {
     addSubview(contentView)
     contentView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -180,12 +190,8 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     ])
   }
 
-  private func setupComponents(withMessageSpec spec: RMessageSpec) {
-    if let image = spec.iconImage, leftView == nil {
-      leftView = iconImageView(withImage: image, imageTintColor: spec.iconImageTintColor, superview: self)
-    }
-
-    // Let any left view passed in programmatically override any icon image view initiated via a message spec
+  private func layoutOptionalComponents() {
+    // Let any left view passed in programmatically override any icon image view initiated via a message config
     if let leftView = leftView {
       setup(leftView: leftView, inSuperview: self)
     }
@@ -194,25 +200,69 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
       setup(rightView: rightView, inSuperview: self)
     }
 
-    if let backgroundImage = spec.backgroundImage, backgroundView == nil {
-      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
-    }
-
     // Let any background view passed in programmatically override any background image view initiated
-    // via a message spec
+    // via a message config
     if let backgroundView = backgroundView {
       setup(backgroundView: backgroundView, inSuperview: self)
     }
 
-    if spec.blurBackground {
+    if config.design.blurBackground {
       setupBlurBackgroundView(inSuperview: self)
+    }
+  }
+
+  private func setupOptionalComponents() {
+    if let image = config.design.iconImage, leftView == nil {
+      leftView = iconImageView(withImage: image, imageTintColor: config.design.iconImageTintColor, superview: self)
+    }
+
+    if let backgroundImage = config.design.backgroundImage, backgroundView == nil {
+      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
+    }
+  }
+
+  // MARK: - Design Setup Methods
+
+  private func setupDesign() {
+    if config.design.cornerRadius > 0 { clipsToBounds = true }
+    backgroundColor = config.design.backgroundColor
+
+    setupDesignForTitleTextView()
+    setupDesignForBodyTextView()
+
+    if config.design.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
+  }
+
+  private func setupDesignForTitleTextView() {
+    titleTextView.backgroundColor = .clear
+    titleTextView.font = config.design.titleFont
+    titleTextView.textAlignment = config.design.titleTextAlignment
+    titleTextView.textColor = config.design.titleColor
+    titleTextView.layer.shadowColor = config.design.titleShadowColor.cgColor
+    titleTextView.layer.shadowOffset = config.design.titleShadowOffset
+
+    if let linkTextAttrs = config.design.titleLinkAttributes {
+      titleTextView.linkTextAttributes = linkTextAttrs
+    }
+  }
+
+  private func setupDesignForBodyTextView() {
+    bodyTextView.backgroundColor = .clear
+    bodyTextView.font = config.design.bodyFont
+    bodyTextView.textAlignment = config.design.bodyTextAlignment
+    bodyTextView.textColor = config.design.bodyColor
+    bodyTextView.layer.shadowColor = config.design.bodyShadowColor.cgColor
+    bodyTextView.layer.shadowOffset = config.design.bodyShadowOffset
+
+    if let linkTextAttrs = config.design.bodyLinkAttributes {
+      bodyTextView.linkTextAttributes = linkTextAttrs
     }
   }
 
   func setupLabelConstraintsToSizeToFit() {
     assert(superview != nil, "RMessage instance must have a superview by this point!")
 
-    guard spec.titleBodyLabelsSizeToFit else {
+    guard config.design.titleBodyLabelsSizeToFit else {
       return
     }
 
@@ -243,10 +293,10 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     if titleTextView.text == nil || bodyTextView.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
 
-    if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
-      leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
+    if let leftView = leftView, messageSpecIconImageViewSet, config.design.iconImageRelativeCornerRadius > 0 {
+      leftView.layer.cornerRadius = config.design.iconImageRelativeCornerRadius * leftView.bounds.size.width
     }
 
-    if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
+    if config.design.cornerRadius >= 0 { layer.cornerRadius = config.design.cornerRadius }
   }
 }

@@ -46,7 +46,7 @@ class SlideAnimator: NSObject, RMAnimator {
   @objc private let view: UIView
   private let contentView: UIView
 
-  private let targetPosition: RMessagePosition
+  private let targetPosition: RMessage.Config.Presentation.Position
 
   /** The starting animation constraint for the view */
   private var viewStartConstraint: NSLayoutConstraint?
@@ -70,7 +70,7 @@ class SlideAnimator: NSObject, RMAnimator {
 
   private var kvcContext = 0
 
-  init(targetPosition: RMessagePosition, view: UIView, superview: UIView, contentView: UIView) {
+  init(targetPosition: RMessage.Config.Presentation.Position, view: UIView, superview: UIView, contentView: UIView) {
     self.targetPosition = targetPosition
     self.superview = superview
     self.contentView = contentView
