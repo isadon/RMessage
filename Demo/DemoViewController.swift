@@ -113,8 +113,8 @@ class DemoViewController: UIViewController, RMControllerDelegate {
       withSpec: endlessSpec,
       title: "Endless",
       body: """
-      This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the
-      currently shown message
+      This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the\
+       currently shown message.
       """,
       tapCompletion: { print("tapped") },
       presentCompletion: { print("presented") },
@@ -124,9 +124,13 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapAttributed(_: Any) {
     var attributedSpec = warningSpec
-    attributedSpec.titleAttributes = [.backgroundColor: UIColor.red, .foregroundColor: UIColor.white]
+
+    attributedSpec.titleAttributes = [
+      .font: attributedSpec.titleFont, .backgroundColor: UIColor.red, .foregroundColor: UIColor.white
+    ]
+
     attributedSpec.bodyAttributes = [
-      .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
+      .font: attributedSpec.bodyFont, .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
       .underlineStyle: NSUnderlineStyle.single.rawValue,
     ]
 

@@ -8,17 +8,17 @@
 import UIKit
 
 extension RMessage {
-  func setupDesign(withMessageSpec spec: RMessageSpec, titleLabel: UILabel, bodyLabel: UILabel) {
+  func setupDesign(withMessageSpec spec: RMessageSpec, titleTextView: UITextView, bodyTextView: UITextView) {
     setupDesign(messageSpec: spec)
-    setupDesign(forTitleLabel: titleLabel, messageSpec: spec)
-    setupDesign(forBodyLabel: bodyLabel, messageSpec: spec)
+    setupDesign(forTitleTextView: titleTextView, messageSpec: spec)
+    setupDesign(forBodyTextView: bodyTextView, messageSpec: spec)
 
-    if let titleAttributes = spec.titleAttributes {
-      setup(attributedTitleLabel: titleLabel, withAttributes: titleAttributes)
+    if let titleText = titleTextView.text, let attrs = spec.titleAttributes {
+      titleTextView.attributedText = NSAttributedString(string: titleText, attributes: attrs)
     }
 
-    if let bodyAttributes = spec.bodyAttributes {
-      setup(attributedTitleLabel: bodyLabel, withAttributes: bodyAttributes)
+    if let bodyText = bodyTextView.text, let attrs = spec.bodyAttributes {
+      bodyTextView.attributedText = NSAttributedString(string: bodyText, attributes: attrs)
     }
 
     if spec.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
@@ -29,99 +29,21 @@ extension RMessage {
     backgroundColor = spec.backgroundColor
   }
 
-  private func setupDesign(forTitleLabel titleLabel: UILabel, messageSpec spec: RMessageSpec) {
-    titleLabel.numberOfLines = 0
-    titleLabel.lineBreakMode = .byWordWrapping
-    titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
-    titleLabel.textAlignment = .left
-    titleLabel.textColor = .black
-    titleLabel.shadowColor = nil
-    titleLabel.shadowOffset = CGSize.zero
-    titleLabel.backgroundColor = .clear
-    titleLabel.font = spec.titleFont
-    titleLabel.textAlignment = spec.titleTextAlignment
-    titleLabel.textColor = spec.titleColor
-    titleLabel.shadowColor = spec.titleShadowColor
-    titleLabel.shadowOffset = spec.titleShadowOffset
+  private func setupDesign(forTitleTextView titleTextView: UITextView, messageSpec spec: RMessageSpec) {
+    titleTextView.backgroundColor = .clear
+    titleTextView.font = spec.titleFont
+    titleTextView.textAlignment = spec.titleTextAlignment
+    titleTextView.textColor = spec.titleColor
+    titleTextView.layer.shadowColor = spec.titleShadowColor.cgColor
+    titleTextView.layer.shadowOffset = spec.titleShadowOffset
   }
 
-  private func setupDesign(forBodyLabel bodyLabel: UILabel, messageSpec spec: RMessageSpec) {
-    bodyLabel.numberOfLines = 0
-    bodyLabel.lineBreakMode = .byWordWrapping
-    bodyLabel.font = UIFont.boldSystemFont(ofSize: 12)
-    bodyLabel.textAlignment = .left
-    bodyLabel.textColor = .darkGray
-    bodyLabel.shadowColor = nil
-    bodyLabel.shadowOffset = CGSize.zero
-    bodyLabel.backgroundColor = .clear
-    bodyLabel.font = spec.bodyFont
-    bodyLabel.textAlignment = spec.bodyTextAlignment
-    bodyLabel.textColor = spec.bodyColor
-    bodyLabel.shadowColor = spec.bodyShadowColor
-    bodyLabel.shadowOffset = spec.bodyShadowOffset
-  }
-
-  private func setup(attributedTitleLabel titleLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
-    guard let titleText = titleLabel.text else { return }
-
-    let titleAttributedText = NSAttributedString(string: titleText, attributes: attrs)
-    titleLabel.attributedText = titleAttributedText
-  }
-
-  private func setup(attributedBodyLabel bodyLabel: UILabel, withAttributes attrs: [NSAttributedString.Key: Any]) {
-    guard let bodyText = bodyLabel.text else { return }
-
-    let bodyAttributedText = NSAttributedString(string: bodyText, attributes: attrs)
-    bodyLabel.attributedText = bodyAttributedText
-  }
-
-  func setPreferredLayoutWidth(
-    forTitleLabel titleLabel: UILabel, bodyLabel: UILabel, inSuperview superview: UIView, sizingToFit: Bool
-  ) {
-    var accessoryViewsAndPadding: CGFloat = 0
-    if let leftView = leftView { accessoryViewsAndPadding = leftView.bounds.size.width + 15 }
-    if let rightView = rightView { accessoryViewsAndPadding += rightView.bounds.size.width + 15 }
-
-    var preferredLayoutWidth = CGFloat(superview.bounds.size.width - accessoryViewsAndPadding - 30)
-
-    // Always set the preferredLayoutWidth before exit. Note that titleBodyLabelsSizeToFit changes
-    // preferredLayoutWidth further down below if it is true
-    defer {
-      titleLabel.preferredMaxLayoutWidth = preferredLayoutWidth
-      bodyLabel.preferredMaxLayoutWidth = preferredLayoutWidth
-    }
-
-    guard sizingToFit else { return }
-
-    // Get the biggest occupied width of the two strings, set the max preferred layout width to that of the longest label
-    let titleOneLineSize: CGSize
-    let bodyOneLineSize: CGSize
-
-    if let titleAttributedText = titleLabel.attributedText {
-      titleOneLineSize = titleAttributedText.size()
-    } else if let titleText = titleLabel.text {
-      let titleFont = titleLabel.font ?? UIFont.systemFont(ofSize: 12)
-      titleOneLineSize = titleText.size(withAttributes: [.font: titleFont])
-    } else {
-      titleOneLineSize = .zero
-    }
-
-    if let bodyAttributedText = bodyLabel.attributedText {
-      bodyOneLineSize = bodyAttributedText.size()
-    } else if let bodyText = bodyLabel.text {
-      let bodyFont = titleLabel.font ?? UIFont.systemFont(ofSize: 14)
-      bodyOneLineSize = bodyText.size(withAttributes: [.font: bodyFont])
-    } else {
-      bodyOneLineSize = .zero
-    }
-
-    guard titleOneLineSize != .zero, bodyOneLineSize != .zero else { return }
-
-    let maxOccupiedLineWidth =
-      (titleOneLineSize.width > bodyOneLineSize.width) ? titleOneLineSize.width : bodyOneLineSize.width
-
-    if maxOccupiedLineWidth < preferredLayoutWidth {
-      preferredLayoutWidth = maxOccupiedLineWidth
-    }
+  private func setupDesign(forBodyTextView bodyTextView: UITextView, messageSpec spec: RMessageSpec) {
+    bodyTextView.backgroundColor = .clear
+    bodyTextView.font = spec.bodyFont
+    bodyTextView.textAlignment = spec.bodyTextAlignment
+    bodyTextView.textColor = spec.bodyColor
+    bodyTextView.layer.shadowColor = spec.bodyShadowColor.cgColor
+    bodyTextView.layer.shadowOffset = spec.bodyShadowOffset
   }
 }

@@ -17,38 +17,67 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
   private(set) var rightView: UIView?
   private(set) var backgroundView: UIView?
 
-  private let titleLabel = UILabel(frame: .zero)
-  private let bodyLabel = UILabel(frame: .zero)
+  private let titleTextView: UITextView = {
+    let textView = UITextView(frame: .zero)
+    textView.isEditable = false
+    textView.backgroundColor = .clear
+    textView.isScrollEnabled = false
+    textView.textContainerInset = .zero
+    textView.isSelectable = false
+    textView.setContentHuggingPriority(.required, for: .vertical)
+    return textView
+  }()
+
+  private let bodyTextView: UITextView = {
+    let textView = UITextView(frame: .zero)
+    textView.isEditable = false
+    textView.backgroundColor = .clear
+    textView.isScrollEnabled = false
+    textView.textContainerInset = .zero
+    textView.isSelectable = false
+    textView.setContentHuggingPriority(.required, for: .vertical)
+    return textView
+  }()
 
   private var messageSpecIconImageViewSet = false
   private var messageSpecBackgroundImageViewSet = false
 
+  let leftViewLeading: CGFloat = 15
+  let leftViewTrailing: CGFloat = 8
+  let rightViewLeading: CGFloat = 8
+  let rightViewTrailing: CGFloat = 15
+
+  let contentViewLeadingSpace: CGFloat = 12
+  let contentViewTrailingSpace: CGFloat = 15
+
   // MARK: - Constraint Vars
 
-  private lazy var titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(
+  private lazy var titleLeadingConstraint = titleTextView.leadingAnchor.constraint(
     equalTo: contentView.leadingAnchor
   )
 
-  private lazy var titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(
+  private lazy var titleTrailingConstraint = titleTextView.trailingAnchor.constraint(
     equalTo: contentView.trailingAnchor
   )
 
-  private lazy var bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(
+  private lazy var bodyZeroHeightConstraint = bodyTextView.heightAnchor.constraint(equalToConstant: 0)
+
+  private lazy var bodyLeadingConstraint = bodyTextView.leadingAnchor.constraint(
     equalTo: contentView.leadingAnchor
   )
 
-  private lazy var bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(
+  private lazy var bodyTrailingConstraint = bodyTextView.trailingAnchor.constraint(
     equalTo: contentView.trailingAnchor
   )
 
   private lazy var contentViewTrailingConstraint: NSLayoutConstraint = {
-    let constraint = contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
-    constraint.priority = .init(rawValue: 749)
+    let constraint = contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -contentViewTrailingSpace)
+    constraint.priority = .defaultHigh
     return constraint
   }()
 
-  private lazy var titleBodyVerticalSpacingConstraint = bodyLabel.topAnchor.constraint(
-    equalTo: titleLabel.bottomAnchor, constant: 5
+  private lazy var titleBodyVerticalSpacingConstraint = bodyTextView.topAnchor.constraint(
+    equalTo: titleTextView.bottomAnchor, constant: 5
   )
 
   // MARK: Instance Methods
@@ -64,16 +93,16 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     super.init(frame: CGRect.zero)
 
+    titleTextView.text = title
+    bodyTextView.text = body
+
     setupContentView()
     layoutViews()
-
-    titleLabel.text = title
-    bodyLabel.text = body
 
     accessibilityIdentifier = String(describing: type(of: self))
 
     setupComponents(withMessageSpec: spec)
-    setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
+    setupDesign(withMessageSpec: spec, titleTextView: titleTextView, bodyTextView: bodyTextView)
   }
 
   @available(*, unavailable) required init?(coder: NSCoder) {
@@ -81,23 +110,35 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
   }
 
   private func setupContentView() {
-    for sub in [titleLabel, bodyLabel] {
+    for sub in [titleTextView, bodyTextView] {
       contentView.addSubview(sub)
       sub.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-      titleLabelLeadingConstraint,
-      titleLabelTrailingConstraint,
-      titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+    let dynamicBodyConstraints: [NSLayoutConstraint] = {
+      var constraints: [NSLayoutConstraint] = [titleBodyVerticalSpacingConstraint]
 
-      titleBodyVerticalSpacingConstraint,
-      bodyLabelLeadingConstraint,
-      bodyLabelTrailingConstraint,
-      bodyLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      bodyLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-    ])
+      // Check if body is empty and modify our constraints
+      if bodyTextView.text == "" || bodyTextView.attributedText.string == "" {
+        constraints.append(bodyZeroHeightConstraint)
+        // Remove extra spacing added when the body text is set
+        titleBodyVerticalSpacingConstraint.constant = 0
+      }
+
+      return constraints
+    }()
+
+    NSLayoutConstraint.activate([
+      titleTextView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      titleLeadingConstraint,
+      titleTrailingConstraint,
+      titleTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+      bodyLeadingConstraint,
+      bodyTrailingConstraint,
+      bodyTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      bodyTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+    ] + dynamicBodyConstraints)
   }
 
   private func layoutViews() {
@@ -106,8 +147,11 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     let sag = safeAreaLayoutGuide
 
-    let contentViewOptLeading = contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15)
-    contentViewOptLeading.priority = .init(rawValue: 749)
+    let contentViewOptLeading = contentView.leadingAnchor.constraint(
+      equalTo: leadingAnchor, constant: contentViewLeadingSpace
+    )
+
+    contentViewOptLeading.priority = .defaultHigh
 
     let contentViewOptTop = contentView.topAnchor.constraint(equalTo: sag.topAnchor, constant: 10)
     contentViewOptTop.priority = .init(rawValue: 249)
@@ -167,26 +211,27 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
   func setupLabelConstraintsToSizeToFit() {
     assert(superview != nil, "RMessage instance must have a superview by this point!")
+
     guard spec.titleBodyLabelsSizeToFit else {
       return
     }
 
     NSLayoutConstraint.deactivate([
       contentViewTrailingConstraint,
-      titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-      bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+      titleLeadingConstraint, titleTrailingConstraint,
+      bodyLeadingConstraint, bodyTrailingConstraint,
     ].compactMap { $0 }
     )
 
-    titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
-    titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
-    bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
-    bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    titleLeadingConstraint = titleTextView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    titleTrailingConstraint = titleTextView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    bodyLeadingConstraint = bodyTextView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    bodyTrailingConstraint = bodyTextView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
 
     NSLayoutConstraint.activate(
       [
-        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+        titleLeadingConstraint, titleTrailingConstraint,
+        bodyLeadingConstraint, bodyTrailingConstraint,
       ]
     )
   }
@@ -196,19 +241,12 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
   override public func layoutSubviews() {
     super.layoutSubviews()
 
-    if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
+    if titleTextView.text == nil || bodyTextView.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
 
     if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
       leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
     }
 
     if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
-
-    guard let superview = superview else { return }
-
-    setPreferredLayoutWidth(
-      forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
-      sizingToFit: spec.titleBodyLabelsSizeToFit
-    )
   }
 }
