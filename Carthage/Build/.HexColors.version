@@ -2,13 +2,13 @@
   "Mac" : [
     {
       "name" : "HexColors",
-      "hash" : "1062703b73fbdaf9106eb3bfab294181c3c3c69c5eeb09687d4f6e1ef54fd85f",
-      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
+      "hash" : "26a0e9daf82f84eab04b7e08f15682fb5ff1cdbbc6145adc441883242c5bc804",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     },
     {
       "name" : "HexColors",
-      "hash" : "1062703b73fbdaf9106eb3bfab294181c3c3c69c5eeb09687d4f6e1ef54fd85f",
-      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
+      "hash" : "26a0e9daf82f84eab04b7e08f15682fb5ff1cdbbc6145adc441883242c5bc804",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ],
   "watchOS" : [
@@ -21,13 +21,13 @@
   "iOS" : [
     {
       "name" : "HexColors",
-      "hash" : "aedada9772ff41fd4b4c54b38f30ed101329bbac67699fd7faae9e9e17803301",
-      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
+      "hash" : "499c05e5798d374ad00b2f798dba531aa757f218e55d7ff104a787e190f52801",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     },
     {
       "name" : "HexColors",
-      "hash" : "aedada9772ff41fd4b4c54b38f30ed101329bbac67699fd7faae9e9e17803301",
-      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
+      "hash" : "499c05e5798d374ad00b2f798dba531aa757f218e55d7ff104a787e190f52801",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }
