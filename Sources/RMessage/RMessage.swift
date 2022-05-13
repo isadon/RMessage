@@ -17,8 +17,8 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
   private(set) var rightView: UIView?
   private(set) var backgroundView: UIView?
 
-  private let titleTextView: UITextView = {
-    let textView = UITextView(frame: .zero)
+  private let titleTextView: NonSelectableLinkUITextView = {
+    let textView = NonSelectableLinkUITextView(frame: .zero)
     textView.isEditable = false
     textView.backgroundColor = .clear
     textView.isScrollEnabled = false
@@ -27,8 +27,8 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
     return textView
   }()
 
-  private let bodyTextView: UITextView = {
-    let textView = UITextView(frame: .zero)
+  private let bodyTextView: NonSelectableLinkUITextView = {
+    let textView = NonSelectableLinkUITextView(frame: .zero)
     textView.isEditable = false
     textView.backgroundColor = .clear
     textView.isScrollEnabled = false
