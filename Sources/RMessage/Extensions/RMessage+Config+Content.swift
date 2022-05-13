@@ -13,9 +13,11 @@ public extension RMessage.Config {
     public var body: String?
 
     /// An attributed string to apply to the title. Has precedence in use over the title property.
+    /// Styles set here override "title" styles set via the design config.
     public var attributedTitle: NSAttributedString?
 
     /// An attributed string to apply to the body. Has precedence in use over the body property.
+    /// Styles set here override "body" styles set via the design config.
     public var attributedBody: NSAttributedString?
 
     public var leftView: UIView?
