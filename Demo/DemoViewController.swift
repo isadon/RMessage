@@ -304,10 +304,30 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction func didTapHtmlEmbed(_ sender: UIButton) {
-    let html = "Here is some <b><a href=\"https://www.w3schools.com\">Visit W3Schools.com!</a></b>"
+    let html = """
+    <!doctype html>
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: -apple-system;
+            font-size: 14px;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        Here is an html <b><a href=\"https://www.w3schools.com\">link</a></b>
+      </body>
+    </html>
+    """
+
     let htmlData = html.data(using: .utf8)!
 
-    var config: RMessage.Config = .init(design: .success)
+    var config = RMessage.Config()
+    config.design.backgroundColor = UIColor(hexString: "3c3c3c")!
+    config.design.titleColor = .white
+
     config.content.title = "Tap Tap"
 
     config.content.attributedBody = try! NSMutableAttributedString(
