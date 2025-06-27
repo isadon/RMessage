@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RMShowOperation: Operation, RMPresenterDelegate {
+class RMShowOperation: Operation, RMPresenterDelegate, @unchecked Sendable {
   override var isAsynchronous: Bool {
     true
   }

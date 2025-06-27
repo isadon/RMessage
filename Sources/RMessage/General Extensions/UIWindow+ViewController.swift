@@ -38,7 +38,7 @@ extension UIWindow {
   ///
   /// - Returns: The top view controller in the window.
   static func topViewController() -> UIViewController? {
-    guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else { return nil }
+    guard let rootViewController = UIApplication.shared.connectedScenesFirstKeyWindow?.rootViewController else { return nil }
 
     return topViewController(forViewController: rootViewController)
   }
