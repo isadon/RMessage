@@ -21,38 +21,10 @@ Welcome to RMessage! RMessage is a simple notification library written in Swift 
 
 Get in contact with the developer on Twitter: [donileo](https://twitter.com/donileo) (Adonis Peralta)
 
-# 3.0.0 Release
-
-RMessage 3.0.0 is finally here with many new features from 2.x.x:
-
-* Rewritten in Swift.
-* Message notification designs are now easily specified in code via the RMessageSpec protocol - no more passing in design styles via a json design file.
-* Support for generic UIViews for the Left/Right/Background of the message. Want to pass a UIButton for the left view or background view? Go ahead.
-* Support for Attributed string stylings.
-* Support for new message duration types such as messages that can only be dismissed by tapping, or swiping, or both.
-* Support for canceling messages already in the queue waiting to be presented.
-* Support for Carthage.
-* Groundwork for custom animator objects via the RMessageAnimator Protocol has been set, support for passing in your own animators coming soon.
-
-**Note: RMessage now requires iOS 11.0 and Swift 4.1. So be sure you are ok with not supporting devices below these targets when using RMessage. If you aren't ready to commit to these version of iOS yet feel free to use RMessage 2.x.x until you can.**
-
 # Installation
-
-### CocoaPods
-For installation via [CocoaPods](https://cocoapods.org/) add the following line to your Podfile:
-
-```
-pod "RMessage" #This will install the latest
-#pod "RMessage", '~> 2.3.0' # This will install RMessage versions of 2.3.x based on ObjC
-```
-
-### Carthage
-
-For installation via [Carthage](https://github.com/Carthage/Carthage) add the following line to your Cartfile:
-
-```
-github "donileo/RMessage" ~> 3.0
-```
+### Swift Package Manager (SwiftPM)
+In XCode use add the repository: https://github.com/isadon/RMessage.git and pin
+the version to 4.0.0 with a dependency rule of your preference.
 
 ### Manually
 For manual installation copy the all the source files in the Sources folder to your project.
