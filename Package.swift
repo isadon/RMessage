@@ -9,10 +9,10 @@ let package = Package(
   products: [
     .library(name: "RMessage", targets: ["RMessage"]),
   ],
-  dependencies: [],
   targets: [
     .target(
       name: "RMessage",
+      resources: [.process("Resources")]
     ),
     .testTarget(
       name: "RMessageTests",
