@@ -13,6 +13,8 @@ DateTime Format (UTC): `yyyy-mm-ddThh:mm:ssZ`
 - Security in case of vulnerabilities.
 
 ## [Unreleased]
+
+# [4.0.0] - 2025-06-27T20:47:38Z]
 ### Added
 - General:
   - Migrate code to support to Swift 5.0.
