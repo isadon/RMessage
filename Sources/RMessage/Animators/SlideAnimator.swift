@@ -5,7 +5,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 private enum Constants {
@@ -47,7 +46,7 @@ class SlideAnimator: NSObject, RMAnimator {
   @objc private let view: UIView
   private let contentView: UIView
 
-  private let targetPosition: RMessagePosition
+  private let targetPosition: RMessage.Config.Presentation.Position
 
   /** The starting animation constraint for the view */
   private var viewStartConstraint: NSLayoutConstraint?
@@ -71,7 +70,7 @@ class SlideAnimator: NSObject, RMAnimator {
 
   private var kvcContext = 0
 
-  init(targetPosition: RMessagePosition, view: UIView, superview: UIView, contentView: UIView) {
+  init(targetPosition: RMessage.Config.Presentation.Position, view: UIView, superview: UIView, contentView: UIView) {
     self.targetPosition = targetPosition
     self.superview = superview
     self.contentView = contentView
@@ -94,7 +93,7 @@ class SlideAnimator: NSObject, RMAnimator {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
     // 2. If already presented or have not yet dismissed
-    guard !isPresenting && !hasPresented && hasDismissed else {
+    guard !isPresenting, !hasPresented, hasDismissed else {
       return false
     }
 
@@ -119,7 +118,7 @@ class SlideAnimator: NSObject, RMAnimator {
     // Guard against being called under the following conditions:
     // 1. If currently presenting or dismissing
     // 2. If already dismissed or have not yet presented
-    guard !isDismissing && hasDismissed && hasPresented else {
+    guard !isDismissing, hasDismissed, hasPresented else {
       return false
     }
 
@@ -236,6 +235,7 @@ class SlideAnimator: NSObject, RMAnimator {
 
     // Add RMessage to superview and prepare the ending constraints
     if view.superview == nil { superview.addSubview(view) }
+
     view.translatesAutoresizingMaskIntoConstraints = false
 
     delegate?.animatorDidAddToSuperview?(self)
@@ -243,8 +243,8 @@ class SlideAnimator: NSObject, RMAnimator {
     NSLayoutConstraint.activate([
       view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
       view.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-      view.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
-      ])
+      view.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+    ])
 
     delegate?.animatorDidLayout?(self)
     calculateSpringAnimationPadding()

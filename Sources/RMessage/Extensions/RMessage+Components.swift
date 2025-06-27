@@ -5,7 +5,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension RMessage {
@@ -14,42 +13,45 @@ extension RMessage {
     iconImageView.clipsToBounds = true
     iconImageView.tintColor = imageTintColor
     iconImageView.contentMode = .scaleAspectFit
-
-    setup(leftView: iconImageView, inSuperview: superview)
     return iconImageView
   }
 
   func setup(leftView view: UIView, inSuperview superview: UIView) {
+    view.setContentCompressionResistancePriority(.required, for: .horizontal)
+
     superview.addSubview(view)
     view.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint.activate([
       view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      view.leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 15),
-      view.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -15),
+      view.leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: leftViewLeading),
+      view.trailingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -leftViewTrailing),
       view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 10),
-      view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10)
-      ])
+      view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10),
+    ])
   }
 
   func setup(rightView view: UIView, inSuperview superview: UIView) {
+    view.setContentCompressionResistancePriority(.required, for: .horizontal)
+
     superview.addSubview(view)
     view.translatesAutoresizingMaskIntoConstraints = false
 
     let viewTrailingOptConstraint = view.trailingAnchor.constraint(
-      equalTo: contentView.trailingAnchor,
-      constant: -15
+      equalTo: superview.trailingAnchor,
+      constant: -rightViewTrailing
     )
+
     viewTrailingOptConstraint.priority = UILayoutPriority(rawValue: 749)
 
     NSLayoutConstraint.activate([
       view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-      view.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 15),
-      view.trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -15),
+      view.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: rightViewLeading),
+      view.trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -rightViewTrailing),
       view.topAnchor.constraint(greaterThanOrEqualTo: superview.topAnchor, constant: 10),
       view.bottomAnchor.constraint(lessThanOrEqualTo: superview.bottomAnchor, constant: -10),
-      viewTrailingOptConstraint
-      ])
+      viewTrailingOptConstraint,
+    ])
   }
 
   func backgroundImageView(withImage image: UIImage, superview: UIView) -> UIImageView {
