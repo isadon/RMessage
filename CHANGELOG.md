@@ -28,6 +28,10 @@ DateTime Format (UTC): `yyyy-mm-ddThh:mm:ssZ`
   - Code cleanup and simplification of nib bundle loading.
   - Use custom textViews that don't allow selection for title and body labels so
     as to support embedding html formatted text.
+- Build: Make iOS 17.0 the minimum supported version.
+- Demo App:
+  - Set the minimum deployment target to 17.0.
+  - Build: Remove support for unused platforms.
 
 ### Removed
 - Build:

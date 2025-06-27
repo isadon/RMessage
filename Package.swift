@@ -1,11 +1,10 @@
-// swift-tools-version: 5.6
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
   name: "RMessage",
   platforms: [
-    .iOS(.v11),
+    .iOS(.v17),
   ],
   products: [
     .library(name: "RMessage", targets: ["RMessage"]),
