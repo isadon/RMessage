@@ -33,3 +33,4 @@ DateTime Format (UTC): `yyyy-mm-ddThh:mm:ssZ`
 - Build:
   - Remove Mac Catalyst Support.
   - Remove support for Carthage.
+  - Remove use of SwiftHEXColors Dependency.

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftHEXColors
 import UIKit
 
 public class RMController: NSObject, RMPresenterDelegate {

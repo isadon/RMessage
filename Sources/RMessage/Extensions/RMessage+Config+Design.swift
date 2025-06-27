@@ -6,7 +6,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import SwiftHEXColors
 import UIKit
 
 public extension RMessage.Config {
@@ -15,7 +14,7 @@ public extension RMessage.Config {
 
     public static var error: Self {
       var errorSpec = Self()
-      errorSpec.backgroundColor = UIColor(hexString: "#FF2D55") ?? .black
+      errorSpec.backgroundColor = .init(hex: "#FF2D55") ?? .black
       errorSpec.titleColor = .white
       errorSpec.bodyColor = .white
       errorSpec.iconImage = UIImage(named: "ErrorMessageIcon", in: .module, compatibleWith: nil)
@@ -24,8 +23,8 @@ public extension RMessage.Config {
 
     public static var warning: Self {
       var warningSpec = Self()
-      warningSpec.backgroundColor = UIColor(hexString: "#FFCC00") ?? .black
-      warningSpec.titleColor = UIColor(hexString: "#484638") ?? .white
+      warningSpec.backgroundColor = .init(hex: "#FFCC00") ?? .black
+      warningSpec.titleColor = .init(hex: "#484638") ?? .white
       warningSpec.bodyColor = warningSpec.titleColor
       warningSpec.iconImage = UIImage(named: "WarningMessageIcon", in: .module, compatibleWith: nil)
       return warningSpec
@@ -33,15 +32,15 @@ public extension RMessage.Config {
 
     public static var normal: Self {
       var normalSpec = Self()
-      normalSpec.backgroundColor = UIColor(hexString: "#E8E8E8") ?? .black
-      normalSpec.titleColor = UIColor(hexString: "#727C83") ?? .white
+      normalSpec.backgroundColor = .init(hex: "#E8E8E8") ?? .black
+      normalSpec.titleColor = .init(hex: "#727C83") ?? .white
       normalSpec.bodyColor = normalSpec.titleColor
       return normalSpec
     }
 
     public static var success: Self {
       var successSpec = Self()
-      successSpec.backgroundColor = UIColor(hexString: "#00C060") ?? .black
+      successSpec.backgroundColor = .init(hex: "#00C060") ?? .black
       successSpec.titleColor = .white
       successSpec.bodyColor = successSpec.titleColor
       successSpec.iconImage = UIImage(named: "SuccessMessageIcon", in: .module, compatibleWith: nil)

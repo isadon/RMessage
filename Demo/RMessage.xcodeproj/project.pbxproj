@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7A4DE8ED282AFFAA00D76A7D /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4DE8EA282AFFAA00D76A7D /* DemoViewController.swift */; };
 		7A4DE8EF282AFFAA00D76A7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4DE8EC282AFFAA00D76A7D /* AppDelegate.swift */; };
+		7A9561F22E0F31930089E406 /* Demo+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9561F12E0F31860089E406 /* Demo+UIColor.swift */; };
 		7A9C89D4282B031500AF4D48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AA7243C282B011000C229FF /* LaunchScreen.storyboard */; };
 		7A9C89D9282B050200AF4D48 /* RMessage in Frameworks */ = {isa = PBXBuildFile; productRef = 7A9C89D8282B050200AF4D48 /* RMessage */; };
 		7AA72436282B00DA00C229FF /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA72433282B00DA00C229FF /* TestHelpers.swift */; };
@@ -33,6 +34,7 @@
 		7A4DE8EB282AFFAA00D76A7D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A4DE8EC282AFFAA00D76A7D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4DE8FC282B006500D76A7D /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A9561F12E0F31860089E406 /* Demo+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Demo+UIColor.swift"; sourceTree = "<group>"; };
 		7A9C89D7282B04C600AF4D48 /* RMessage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RMessage; path = ..; sourceTree = "<group>"; };
 		7AA72433282B00DA00C229FF /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		7AA72434282B00DA00C229FF /* NavigationControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerTests.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				7A9C89D6282B04C600AF4D48 /* Packages */,
 				7A4DE8EC282AFFAA00D76A7D /* AppDelegate.swift */,
 				7A4DE8EA282AFFAA00D76A7D /* DemoViewController.swift */,
+				7A9561F12E0F31860089E406 /* Demo+UIColor.swift */,
 				7A9C89D5282B031A00AF4D48 /* Resources */,
 				7A4DE8EB282AFFAA00D76A7D /* Info.plist */,
 				7A4DE8FD282B006500D76A7D /* UITests */,
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A4DE8EF282AFFAA00D76A7D /* AppDelegate.swift in Sources */,
+				7A9561F22E0F31930089E406 /* Demo+UIColor.swift in Sources */,
 				7A4DE8ED282AFFAA00D76A7D /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -198,8 +198,8 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapCustomDesign(_: Any) {
     var config: RMessage.Config = .init(design: .error)
-    config.design.backgroundColor = UIColor(hexString: "#008AFC")!
-    config.design.titleColor = UIColor(hexString: "#48FCEB")!
+    config.design.backgroundColor = .init(hex: "#008AFC") ?? .red
+    config.design.titleColor = .init(hex: "#48FCEB") ?? .red
     config.design.bodyColor = .white
     config.design.targetAlpha = 0.95
     config.design.iconImage = UIImage(named: "ErrorMessageIcon.png")
@@ -212,7 +212,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapTapOnlyDismissal(_: Any) {
     var config: RMessage.Config = .init(design: .normal)
-    config.design.backgroundColor = UIColor(hexString: "#CF00F8")!
+    config.design.backgroundColor = .init(hex: "#CF00F8") ?? .red
     config.design.titleColor = .white
     config.design.bodyColor = .white
     config.content.title = "Tap Tap"
@@ -325,7 +325,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     let htmlData = html.data(using: .utf8)!
 
     var config = RMessage.Config()
-    config.design.backgroundColor = UIColor(hexString: "3c3c3c")!
+    config.design.backgroundColor = .init(hex: "#3C3C3C") ?? .red
     config.design.titleColor = .white
 
     config.content.title = "Tap Tap"
