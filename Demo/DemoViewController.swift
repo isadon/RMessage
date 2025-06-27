@@ -235,12 +235,12 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapToggleNavigationBar(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
     navigationController.setNavigationBarHidden(!navigationController.isNavigationBarHidden, animated: true)
   }
 
   @IBAction private func didTapToggleNavigationBarAlpha(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
 
     let alpha = navigationController.navigationBar.alpha
     navigationController.navigationBar.alpha = (alpha == 1) ? 0.5 : 1
@@ -248,13 +248,13 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapToggleWantsFullscreen(_: Any) {
     extendedLayoutIncludesOpaqueBars = !extendedLayoutIncludesOpaqueBars
-    if let navigationController = navigationController {
+    if let navigationController {
       navigationController.navigationBar.isTranslucent = !navigationController.navigationBar.isTranslucent
     }
   }
 
   @IBAction private func didTapNavBarOverlay(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
     navigationController.isNavigationBarHidden = false
 
     var config: RMessage.Config = .init(design: .success)
@@ -268,7 +268,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapNavbarHidden(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
     navigationController.isNavigationBarHidden = !navigationController.isNavigationBarHidden
   }
 

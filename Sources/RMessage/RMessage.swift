@@ -192,17 +192,17 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
   private func layoutOptionalComponents() {
     // Let any left view passed in programmatically override any icon image view initiated via a message config
-    if let leftView = leftView {
+    if let leftView {
       setup(leftView: leftView, inSuperview: self)
     }
 
-    if let rightView = rightView {
+    if let rightView {
       setup(rightView: rightView, inSuperview: self)
     }
 
     // Let any background view passed in programmatically override any background image view initiated
     // via a message config
-    if let backgroundView = backgroundView {
+    if let backgroundView {
       setup(backgroundView: backgroundView, inSuperview: self)
     }
 
@@ -293,7 +293,7 @@ public class RMessage: UIView, RMessageAnimatorDelegate {
 
     if titleTextView.text == nil || bodyTextView.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
 
-    if let leftView = leftView, messageSpecIconImageViewSet, config.design.iconImageRelativeCornerRadius > 0 {
+    if let leftView, messageSpecIconImageViewSet, config.design.iconImageRelativeCornerRadius > 0 {
       leftView.layer.cornerRadius = config.design.iconImageRelativeCornerRadius * leftView.bounds.size.width
     }
 

@@ -1,5 +1,5 @@
 //
-//  RMessage+PresentationConfig.swift
+//  RMessage+Config.Presentation.swift
 //
 //
 //  Created by Adonis Peralta on 5/11/22.

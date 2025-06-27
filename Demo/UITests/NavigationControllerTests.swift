@@ -1,5 +1,5 @@
 //
-//  RMessageUITests.swift
+//  NavigationControllerTests.swift
 //  RMessageUITests
 //
 //  Created by Adonis Peralta on 8/2/18.

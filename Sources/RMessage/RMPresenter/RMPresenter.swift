@@ -21,11 +21,11 @@ class RMPresenter: NSObject, RMessageAnimatorDelegate {
   var dimissTime: TimeInterval {
     switch message.config.presentation.durationType {
     case .automatic:
-      return animator.presentationDuration + animator.dismissalDuration + 1.5 + Double(message.bounds.size.height) * 0.04
+      animator.presentationDuration + animator.dismissalDuration + 1.5 + Double(message.bounds.size.height) * 0.04
     case .tap, .swipe, .tapSwipe, .endless:
-      return -1
+      -1
     case .timed:
-      return abs(message.config.presentation.timeToDismiss)
+      abs(message.config.presentation.timeToDismiss)
     }
   }
 

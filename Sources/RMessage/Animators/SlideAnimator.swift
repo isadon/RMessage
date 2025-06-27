@@ -134,7 +134,7 @@ class SlideAnimator: NSObject, RMAnimator {
       return
     }
 
-    guard let viewStartConstraint = viewStartConstraint, let viewEndConstraint = viewEndConstraint else { return }
+    guard let viewStartConstraint, let viewEndConstraint else { return }
 
     isPresenting = true
     viewStartConstraint.isActive = true
@@ -176,7 +176,7 @@ class SlideAnimator: NSObject, RMAnimator {
       return
     }
 
-    guard let viewStartConstraint = viewStartConstraint, let viewEndConstraint = viewEndConstraint else { return }
+    guard let viewStartConstraint, let viewEndConstraint else { return }
 
     isDismissing = true
     DispatchQueue.main.async {
