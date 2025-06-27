@@ -6,153 +6,297 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import Foundation
-import HexColors
 import UIKit
 
 public class RMessage: UIView, RMessageAnimatorDelegate {
-  private(set) var spec: RMessageSpec
+  private(set) var config: RMessage.Config
 
-  @IBOutlet private(set) var containerView: UIView!
-
-  @IBOutlet private(set) var contentView: UIView!
+  private(set) lazy var contentView = UIView(frame: .zero)
 
   private(set) var leftView: UIView?
   private(set) var rightView: UIView?
   private(set) var backgroundView: UIView?
 
-  @IBOutlet private(set) var titleLabel: UILabel!
-  @IBOutlet private(set) var bodyLabel: UILabel!
+  private let titleTextView: NonSelectableLinkUITextView = {
+    let textView = NonSelectableLinkUITextView(frame: .zero)
+    textView.isEditable = false
+    textView.backgroundColor = .clear
+    textView.isScrollEnabled = false
+    textView.textContainerInset = .zero
+    textView.setContentHuggingPriority(.required, for: .vertical)
+    return textView
+  }()
 
-  @IBOutlet private var titleBodyVerticalSpacingConstraint: NSLayoutConstraint!
-  @IBOutlet private var titleLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet private var titleLabelTrailingConstraint: NSLayoutConstraint!
-  @IBOutlet private var bodyLabelLeadingConstraint: NSLayoutConstraint!
-  @IBOutlet private var bodyLabelTrailingConstraint: NSLayoutConstraint!
-
-  @IBOutlet private var contentViewTrailingConstraint: NSLayoutConstraint!
+  private let bodyTextView: NonSelectableLinkUITextView = {
+    let textView = NonSelectableLinkUITextView(frame: .zero)
+    textView.isEditable = false
+    textView.backgroundColor = .clear
+    textView.isScrollEnabled = false
+    textView.textContainerInset = .zero
+    textView.setContentHuggingPriority(.required, for: .vertical)
+    return textView
+  }()
 
   private var messageSpecIconImageViewSet = false
-
   private var messageSpecBackgroundImageViewSet = false
+
+  let leftViewLeading: CGFloat = 15
+  let leftViewTrailing: CGFloat = 8
+  let rightViewLeading: CGFloat = 8
+  let rightViewTrailing: CGFloat = 15
+
+  let contentViewLeadingSpace: CGFloat = 12
+  let contentViewTrailingSpace: CGFloat = 15
+
+  // MARK: - Constraint Vars
+
+  private lazy var titleLeadingConstraint = titleTextView.leadingAnchor.constraint(
+    equalTo: contentView.leadingAnchor
+  )
+
+  private lazy var titleTrailingConstraint = titleTextView.trailingAnchor.constraint(
+    equalTo: contentView.trailingAnchor
+  )
+
+  private lazy var bodyZeroHeightConstraint = bodyTextView.heightAnchor.constraint(equalToConstant: 0)
+
+  private lazy var bodyLeadingConstraint = bodyTextView.leadingAnchor.constraint(
+    equalTo: contentView.leadingAnchor
+  )
+
+  private lazy var bodyTrailingConstraint = bodyTextView.trailingAnchor.constraint(
+    equalTo: contentView.trailingAnchor
+  )
+
+  private lazy var contentViewTrailingConstraint: NSLayoutConstraint = {
+    let constraint = contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -contentViewTrailingSpace)
+    constraint.priority = .defaultHigh
+    return constraint
+  }()
+
+  private lazy var titleBodyVerticalSpacingConstraint = bodyTextView.topAnchor.constraint(
+    equalTo: titleTextView.bottomAnchor, constant: 5
+  )
 
   // MARK: Instance Methods
 
-  init?(
-    spec: RMessageSpec, title: String, body: String?, leftView: UIView? = nil, rightView: UIView? = nil,
-    backgroundView: UIView? = nil
-  ) {
-    self.spec = spec
-    self.leftView = leftView
-    self.rightView = rightView
-    self.backgroundView = backgroundView
+  public init(_ config: RMessage.Config) {
+    self.config = config
+    leftView = config.content.leftView
+    rightView = config.content.rightView
+    backgroundView = config.content.backgroundView
 
     super.init(frame: CGRect.zero)
 
-    loadNib()
-
-    titleLabel.text = title
-    bodyLabel.text = body
-
     accessibilityIdentifier = String(describing: type(of: self))
 
-    setupComponents(withMessageSpec: spec)
-    setupDesign(withMessageSpec: spec, titleLabel: titleLabel, bodyLabel: bodyLabel)
-  }
+    setupDesign()
 
-  public required init?(coder aDecoder: NSCoder) {
-    spec = DefaultRMessageSpec()
-    super.init(coder: aDecoder)
-  }
+    titleTextView.text = config.content.title
 
-  private func loadNib() {
-    Bundle(for: RMessage.self).loadNibNamed(String(describing: RMessage.self), owner: self, options: nil)
-
-    addSubview(containerView)
-    containerView.translatesAutoresizingMaskIntoConstraints = false
-
-    NSLayoutConstraint.activate([
-      containerView.topAnchor.constraint(equalTo: topAnchor),
-      containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerView.trailingAnchor.constraint(equalTo: trailingAnchor)
-      ])
-  }
-
-  private func setupComponents(withMessageSpec spec: RMessageSpec) {
-    if let image = spec.iconImage, leftView == nil {
-      leftView = iconImageView(withImage: image, imageTintColor: spec.iconImageTintColor, superview: self)
+    if let attributedTitle = config.content.attributedTitle {
+      titleTextView.attributedText = attributedTitle
     }
 
-    // Let any left view passed in programmatically override any icon image view initiated via a message spec
-    if let leftView = leftView {
+    bodyTextView.text = config.content.body
+    if let attributedBody = config.content.attributedBody {
+      bodyTextView.attributedText = attributedBody
+    }
+
+    setupOptionalComponents()
+    layoutViews()
+  }
+
+  @available(*, unavailable) required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  // MARK: - Layout Methods
+
+  private func layoutViews() {
+    layoutContentViewSubviews()
+    layoutContentView()
+    layoutOptionalComponents()
+  }
+
+  private func layoutContentViewSubviews() {
+    for sub in [titleTextView, bodyTextView] {
+      contentView.addSubview(sub)
+      sub.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let dynamicBodyConstraints: [NSLayoutConstraint] = {
+      var constraints: [NSLayoutConstraint] = [titleBodyVerticalSpacingConstraint]
+
+      // Check if body is empty and modify our constraints
+      if bodyTextView.text == "" || bodyTextView.attributedText.string == "" {
+        constraints.append(bodyZeroHeightConstraint)
+        // Remove extra spacing added when the body text is set
+        titleBodyVerticalSpacingConstraint.constant = 0
+      }
+
+      return constraints
+    }()
+
+    NSLayoutConstraint.activate([
+      titleTextView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      titleLeadingConstraint,
+      titleTrailingConstraint,
+      titleTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+
+      bodyLeadingConstraint,
+      bodyTrailingConstraint,
+      bodyTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      bodyTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+    ] + dynamicBodyConstraints)
+  }
+
+  private func layoutContentView() {
+    addSubview(contentView)
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+
+    let sag = safeAreaLayoutGuide
+
+    let contentViewOptLeading = contentView.leadingAnchor.constraint(
+      equalTo: leadingAnchor, constant: contentViewLeadingSpace
+    )
+
+    contentViewOptLeading.priority = .defaultHigh
+
+    let contentViewOptTop = contentView.topAnchor.constraint(equalTo: sag.topAnchor, constant: 10)
+    contentViewOptTop.priority = .init(rawValue: 249)
+
+    let contentViewOptBottom = contentView.bottomAnchor.constraint(equalTo: sag.bottomAnchor, constant: -10)
+    contentViewOptBottom.priority = .init(rawValue: 249)
+
+    let contentViewCenterXOpt = contentView.centerXAnchor.constraint(equalTo: centerXAnchor)
+    contentViewCenterXOpt.priority = .init(rawValue: 748)
+
+    let contentViewCenterYOpt = contentView.centerYAnchor.constraint(equalTo: centerYAnchor)
+    contentViewCenterYOpt.priority = .init(rawValue: 248)
+
+    NSLayoutConstraint.activate([
+      contentViewCenterXOpt,
+      contentView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+      contentViewOptLeading,
+      contentView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+      contentViewTrailingConstraint,
+
+      contentViewCenterYOpt,
+      contentView.topAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+      contentViewOptTop,
+      contentView.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -10),
+      contentViewOptBottom,
+    ])
+  }
+
+  private func layoutOptionalComponents() {
+    // Let any left view passed in programmatically override any icon image view initiated via a message config
+    if let leftView {
       setup(leftView: leftView, inSuperview: self)
     }
 
-    if let rightView = rightView {
+    if let rightView {
       setup(rightView: rightView, inSuperview: self)
     }
 
-    if let backgroundImage = spec.backgroundImage, backgroundView == nil {
-      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
-    }
-
     // Let any background view passed in programmatically override any background image view initiated
-    // via a message spec
-    if let backgroundView = backgroundView {
+    // via a message config
+    if let backgroundView {
       setup(backgroundView: backgroundView, inSuperview: self)
     }
 
-    if spec.blurBackground {
+    if config.design.blurBackground {
       setupBlurBackgroundView(inSuperview: self)
+    }
+  }
+
+  private func setupOptionalComponents() {
+    if let image = config.design.iconImage, leftView == nil {
+      leftView = iconImageView(withImage: image, imageTintColor: config.design.iconImageTintColor, superview: self)
+    }
+
+    if let backgroundImage = config.design.backgroundImage, backgroundView == nil {
+      backgroundView = backgroundImageView(withImage: backgroundImage, superview: self)
+    }
+  }
+
+  // MARK: - Design Setup Methods
+
+  private func setupDesign() {
+    if config.design.cornerRadius > 0 { clipsToBounds = true }
+    backgroundColor = config.design.backgroundColor
+
+    setupDesignForTitleTextView()
+    setupDesignForBodyTextView()
+
+    if config.design.titleBodyLabelsSizeToFit { setupLabelConstraintsToSizeToFit() }
+  }
+
+  private func setupDesignForTitleTextView() {
+    titleTextView.backgroundColor = .clear
+    titleTextView.font = config.design.titleFont
+    titleTextView.textAlignment = config.design.titleTextAlignment
+    titleTextView.textColor = config.design.titleColor
+    titleTextView.layer.shadowColor = config.design.titleShadowColor.cgColor
+    titleTextView.layer.shadowOffset = config.design.titleShadowOffset
+
+    if let linkTextAttrs = config.design.titleLinkAttributes {
+      titleTextView.linkTextAttributes = linkTextAttrs
+    }
+  }
+
+  private func setupDesignForBodyTextView() {
+    bodyTextView.backgroundColor = .clear
+    bodyTextView.font = config.design.bodyFont
+    bodyTextView.textAlignment = config.design.bodyTextAlignment
+    bodyTextView.textColor = config.design.bodyColor
+    bodyTextView.layer.shadowColor = config.design.bodyShadowColor.cgColor
+    bodyTextView.layer.shadowOffset = config.design.bodyShadowOffset
+
+    if let linkTextAttrs = config.design.bodyLinkAttributes {
+      bodyTextView.linkTextAttributes = linkTextAttrs
     }
   }
 
   func setupLabelConstraintsToSizeToFit() {
     assert(superview != nil, "RMessage instance must have a superview by this point!")
-    guard spec.titleBodyLabelsSizeToFit else {
+
+    guard config.design.titleBodyLabelsSizeToFit else {
       return
     }
 
-    NSLayoutConstraint.deactivate(
-      [
-        contentViewTrailingConstraint,
-        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
-        ].compactMap { $0 }
+    NSLayoutConstraint.deactivate([
+      contentViewTrailingConstraint,
+      titleLeadingConstraint, titleTrailingConstraint,
+      bodyLeadingConstraint, bodyTrailingConstraint,
+    ].compactMap { $0 }
     )
 
-    titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
-    titleLabelTrailingConstraint = titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
-    bodyLabelLeadingConstraint = bodyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
-    bodyLabelTrailingConstraint = bodyLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    titleLeadingConstraint = titleTextView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    titleTrailingConstraint = titleTextView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
+    bodyLeadingConstraint = bodyTextView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor)
+    bodyTrailingConstraint = bodyTextView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor)
 
     NSLayoutConstraint.activate(
       [
-        titleLabelLeadingConstraint, titleLabelTrailingConstraint,
-        bodyLabelLeadingConstraint, bodyLabelTrailingConstraint,
+        titleLeadingConstraint, titleTrailingConstraint,
+        bodyLeadingConstraint, bodyTrailingConstraint,
       ]
     )
   }
 
   // MARK: - Respond to Layout Changes
 
-  public override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
 
-    if titleLabel.text == nil || bodyLabel.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
+    if titleTextView.text == nil || bodyTextView.text == nil { titleBodyVerticalSpacingConstraint.constant = 0 }
 
-    if let leftView = leftView, messageSpecIconImageViewSet, spec.iconImageRelativeCornerRadius > 0 {
-      leftView.layer.cornerRadius = spec.iconImageRelativeCornerRadius * leftView.bounds.size.width
+    if let leftView, messageSpecIconImageViewSet, config.design.iconImageRelativeCornerRadius > 0 {
+      leftView.layer.cornerRadius = config.design.iconImageRelativeCornerRadius * leftView.bounds.size.width
     }
 
-    if spec.cornerRadius >= 0 { layer.cornerRadius = spec.cornerRadius }
-
-    guard let superview = superview else { return }
-
-    setPreferredLayoutWidth(
-      forTitleLabel: titleLabel, bodyLabel: bodyLabel, inSuperview: superview,
-      sizingToFit: spec.titleBodyLabelsSizeToFit
-    )
+    if config.design.cornerRadius >= 0 { layer.cornerRadius = config.design.cornerRadius }
   }
 }

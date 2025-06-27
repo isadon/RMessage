@@ -6,7 +6,6 @@
 //  Copyright © 2018 None. All rights reserved.
 //
 
-import HexColors
 import RMessage
 import UIKit
 
@@ -17,6 +16,7 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    navigationController?.view.backgroundColor = .white
     navigationController?.navigationBar.isTranslucent = true
     extendedLayoutIncludesOpaqueBars = true
     // RMessageController.appearance.setTitleSubtitleLabelsSizeToFit = true
@@ -40,35 +40,39 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapError(_: Any) {
-    rControl.showMessage(
-      withSpec: errorSpec,
-      title: "Something failed",
-      body: "The internet connection seems to be down. Please check it!"
-    )
+    var config: RMessage.Config = .init(design: .error)
+    config.content.title = "Something failed"
+    config.content.body = "The internet connection seems to be down. Please check it!"
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapWarning(_: Any) {
-    rControl.showMessage(
-      withSpec: warningSpec,
-      title: "Some random warning",
-      body: "Look out! Something is happening there!"
-    )
+    var config: RMessage.Config = .init(design: .warning)
+    config.content.title = "Some random warning"
+    config.content.body = "Look out! Something is happening there!"
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapMessage(_: Any) {
-    rControl.showMessage(
-      withSpec: normalSpec,
-      title: "Tell the user something",
-      body: "This is a neutral notification!"
-    )
+    var config: RMessage.Config = .init(design: .normal)
+    config.content.title = "Tell the user something"
+    config.content.body = "This is a neutral notification!"
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapSuccess(_: Any) {
-    rControl.showMessage(
-      withSpec: successSpec,
-      title: "Success",
-      body: "Some task was successfully completed!"
-    )
+    var config: RMessage.Config = .init(design: .success)
+    config.content.title = "Success"
+    config.content.body = "Some task was successfully completed!"
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapButton(_: Any) {
@@ -77,153 +81,149 @@ class DemoViewController: UIViewController, RMControllerDelegate {
     button.setTitle("Update", for: .normal)
 
     if let buttonResizeableImage =
-      UIImage(named: "TestButtonBackground")?.resizableImage(withCapInsets: UIEdgeInsetsMake(15, 12, 15, 11)) {
+      UIImage(named: "TestButtonBackground")?.resizableImage(withCapInsets: UIEdgeInsets(top: 15, left: 12, bottom: 15, right: 11))
+    {
       button.setBackgroundImage(buttonResizeableImage, for: .normal)
-      button.contentEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)
+      button.contentEdgeInsets = UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 5.0)
     }
 
     button.setTitleColor(.black, for: .normal)
     button.sizeToFit()
     button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
-    rControl.showMessage(
-      withSpec: normalSpec,
-      title: "New version available",
-      body: "Please update our app. We would be very thankful", rightView: button
-    )
+    var config: RMessage.Config = .init(design: .normal)
+    config.content.title = "New version available"
+    config.content.body = "Please update our app. We would be very thankful"
+    config.content.rightView = button
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapCustomImage(_: Any) {
-    var iconSpec = normalSpec
-    iconSpec.iconImage = UIImage(named: "TestButtonBackground.png")
+    var config: RMessage.Config = .init(design: .normal)
+    config.content.title = "Custom image"
+    config.content.body = "This uses an image you can define"
+    config.design.iconImage = UIImage(named: "TestButtonBackground.png")
 
-    rControl.showMessage(
-      withSpec: iconSpec,
-      title: "Custom image",
-      body: "This uses an image you can define"
-    )
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapEndless(_: Any) {
-    var endlessSpec = successSpec
-    endlessSpec.durationType = .endless
+    var config: RMessage.Config = .init(design: .success)
+    config.content.title = "Endless"
+    config.content.body = """
+    This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the\
+     currently shown message.
+    """
+    config.presentation.durationType = .endless
+    config.presentation.didTapCompletion = { print("tapped") }
+    config.presentation.didPresentCompletion = { print("presented") }
+    config.presentation.didDismissCompletion = { print("dismissed") }
 
-    rControl.showMessage(
-      withSpec: endlessSpec,
-      title: "Endless",
-      body: """
-      This message can not be dismissed and will not be hidden automatically. Tap the 'Dismiss' button to dismiss the
-      currently shown message
-      """,
-      tapCompletion: { print("tapped") },
-      presentCompletion: { print("presented") },
-      dismissCompletion: { print("dismissed") }
-    )
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapAttributed(_: Any) {
-    var attributedSpec = warningSpec
-    attributedSpec.titleAttributes = [.backgroundColor: UIColor.red, .foregroundColor: UIColor.white]
-    attributedSpec.bodyAttributes = [
-      .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
-      .underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
-    ]
+    var config: RMessage.Config = .init(design: .warning)
+    let title = "Attributed for real"
+    let body = """
+    Enjoy some attributed text:
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed\
+     diam nonumy eirmod tempor invidunt ut labore et dolore magna\
+     aliquyam erat, sed diam voluptua.
+    """
 
-    rControl.showMessage(
-      withSpec: attributedSpec,
-      title: "Attributed for real",
-      body: """
-      Enjoy some attributed text:
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed \
-      diam nonumy eirmod tempor invidunt ut labore et dolore magna \
-      aliquyam erat, sed diam voluptua.
-      """
-    )
+    config.content.attributedTitle = .init(string: title, attributes: [
+      .font: config.design.titleFont, .backgroundColor: UIColor.red, .foregroundColor: UIColor.white,
+    ])
+
+    config.content.attributedBody = .init(string: body, attributes: [
+      .font: config.design.bodyFont, .backgroundColor: UIColor.blue, .foregroundColor: UIColor.white,
+      .underlineStyle: NSUnderlineStyle.single.rawValue,
+    ])
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapLong(_: Any) {
-    var durationSpec = warningSpec
-    durationSpec.durationType = .timed
-    durationSpec.timeToDismiss = 10.0
+    var config: RMessage.Config = .init(design: .warning)
+    config.content.title = "Long"
+    config.content.title = "This message is displayed for 10 seconds"
+    config.presentation.durationType = .timed
+    config.presentation.timeToDismiss = 10.0
+    config.presentation.didTapCompletion = { print("tapped") }
+    config.presentation.didPresentCompletion = { print("presented") }
+    config.presentation.didDismissCompletion = { print("dismissed") }
 
-    rControl.showMessage(
-      withSpec: durationSpec, title: "Long",
-      body: "This message is displayed for 10 seconds",
-      tapCompletion: { print("tapped") },
-      presentCompletion: { print("presented") },
-      dismissCompletion: { print("dismissed") }
-    )
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapBottom(_: Any) {
-    rControl.showMessage(withSpec: successSpec, atPosition: .bottom, title: "Hi!", body: "I'm down here :)")
+    var config: RMessage.Config = .init(design: .success)
+    config.content.title = "Hi!"
+    config.content.body = "I'm down here 😃"
+    config.presentation.position = .bottom
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapText(_: Any) {
-    rControl.showMessage(
-      withSpec: warningSpec,
-      title: "With 'Text' I meant a long text, so here it is",
-      body: """
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed \
-      diam nonumy eirmod tempor invidunt ut labore et dolore magna \
-      aliquyam erat, sed diam voluptua. At vero eos et accusam et \
-      justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
-      sea takimata sanctus.At vero eos et accusam et justo duo \
-      dolores et ea rebum. Stet clita kasd gubergren, no sea takimata \
-      sanctus.Lorem ipsum dolor sit amet, consetetur sadipscing \
-      elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
-      dolore magna aliquyam erat, sed diam voluptua. At vero eos et \
-      accusam et justo duo dolores et ea rebum. Stet clita kasd \
-      gubergren, no sea takimata sanctus.At vero eos et accusam et \
-      justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
-      sea takimata sanctus.
-      """
-    )
+    var config: RMessage.Config = .init(design: .warning)
+    config.content.title = "With 'Text' I meant a long text, so here it is"
+    config.content.body = """
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed \
+    diam nonumy eirmod tempor invidunt ut labore et dolore magna \
+    aliquyam erat, sed diam voluptua. At vero eos et accusam et \
+    justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+    sea takimata sanctus.At vero eos et accusam et justo duo \
+    dolores et ea rebum. Stet clita kasd gubergren, no sea takimata \
+    sanctus.Lorem ipsum dolor sit amet, consetetur sadipscing \
+    elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+    dolore magna aliquyam erat, sed diam voluptua. At vero eos et \
+    accusam et justo duo dolores et ea rebum. Stet clita kasd \
+    gubergren, no sea takimata sanctus.At vero eos et accusam et \
+    justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+    sea takimata sanctus.
+    """
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapCustomDesign(_: Any) {
-    guard let buttonBackgroundImage = UIImage(named: "TestButtonBackground.png") else {
-      print("Unable to find button background image 'NotificationButtonBackground.png' in the app bundle")
-      return
-    }
+    var config: RMessage.Config = .init(design: .error)
+    config.design.backgroundColor = .init(hex: "#008AFC") ?? .red
+    config.design.titleColor = .init(hex: "#48FCEB") ?? .red
+    config.design.bodyColor = .white
+    config.design.targetAlpha = 0.95
+    config.design.iconImage = UIImage(named: "ErrorMessageIcon.png")
+    config.content.title = "A different error message"
+    config.content.body = "This background is blue while the body is white. Yes this is an alternate error!"
 
-    let button = UIButton(type: .custom)
-    button.setTitleColor(UIColor("#FF0040")!, for: .normal)
-    button.setImage(buttonBackgroundImage, for: .normal)
-    button.sizeToFit()
-    button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
-    var alternateErr = errorSpec
-    alternateErr.backgroundColor = UIColor("#008AFC")!
-    alternateErr.titleColor = UIColor("#48FCEB")!
-    alternateErr.bodyColor = .white
-    alternateErr.targetAlpha = 0.95
-    alternateErr.iconImage = UIImage(named: "ErrorMessageIcon.png")
-
-    rControl.showMessage(
-      withSpec: alternateErr,
-      title: "A different error message",
-      body: "This background is blue while the body is white. Yes this is an alternate error!"
-    )
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapTapOnlyDismissal(_: Any) {
-    var tapOnlySpec = normalSpec
-    tapOnlySpec.durationType = .tap
-    tapOnlySpec.backgroundColor = UIColor("#CF00F8")!
-    tapOnlySpec.titleColor = .white
-    tapOnlySpec.bodyColor = .white
+    var config: RMessage.Config = .init(design: .normal)
+    config.design.backgroundColor = .init(hex: "#CF00F8") ?? .red
+    config.design.titleColor = .white
+    config.design.bodyColor = .white
+    config.content.title = "Tap Tap"
+    config.content.body = "This message can only be dismissed by tapping on it. Not swiping or anything else."
+    config.presentation.durationType = .tap
+    config.presentation.didTapCompletion = { print("tapped") }
+    config.presentation.didPresentCompletion = { print("presented") }
+    config.presentation.didDismissCompletion = { print("dismissed") }
 
-    rControl.showMessage(
-      withSpec: tapOnlySpec,
-      title: "Tap Tap",
-      body: """
-      This message can only be dismissed by tapping on it. Not swiping or anything else.
-      """,
-      tapCompletion: { print("tapped") },
-      presentCompletion: { print("presented") },
-      dismissCompletion: { print("dismissed") }
-    )
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapDismissCurrentMessage(_: Any) {
@@ -235,12 +235,12 @@ class DemoViewController: UIViewController, RMControllerDelegate {
   }
 
   @IBAction private func didTapToggleNavigationBar(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
     navigationController.setNavigationBarHidden(!navigationController.isNavigationBarHidden, animated: true)
   }
 
   @IBAction private func didTapToggleNavigationBarAlpha(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
 
     let alpha = navigationController.navigationBar.alpha
     navigationController.navigationBar.alpha = (alpha == 1) ? 0.5 : 1
@@ -248,27 +248,27 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
   @IBAction private func didTapToggleWantsFullscreen(_: Any) {
     extendedLayoutIncludesOpaqueBars = !extendedLayoutIncludesOpaqueBars
-    if let navigationController = navigationController {
+    if let navigationController {
       navigationController.navigationBar.isTranslucent = !navigationController.navigationBar.isTranslucent
     }
   }
 
   @IBAction private func didTapNavBarOverlay(_: Any) {
-    guard let navigationController = navigationController else { return }
-
+    guard let navigationController else { return }
     navigationController.isNavigationBarHidden = false
 
-    rControl.showMessage(
-      withSpec: successSpec,
-      atPosition: .navBarOverlay,
-      title: "Whoa!",
-      body: "Over the Navigation Bar!",
-      viewController: navigationController
-    )
+    var config: RMessage.Config = .init(design: .success)
+    config.content.title = "Whoa!"
+    config.content.body = "Over the Navigation Bar!"
+    config.presentation.position = .navBarOverlay
+    config.presentation.presentationViewController = navigationController
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   @IBAction private func didTapNavbarHidden(_: Any) {
-    guard let navigationController = navigationController else { return }
+    guard let navigationController else { return }
     navigationController.isNavigationBarHidden = !navigationController.isNavigationBarHidden
   }
 
@@ -283,14 +283,60 @@ class DemoViewController: UIViewController, RMControllerDelegate {
 
     present(alert, animated: true, completion: nil)
 
+    var config: RMessage.Config = .init(design: .normal)
+    config.content.title = "Showing whilst an alert is visible"
+
+    let message = RMessage(config)
+
     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-      self.rControl.showMessage(withSpec: normalSpec, title: "Showing whilst an alert is visible")
+      self.rControl.showMessage(message)
     }
   }
 
   @objc private func buttonPressed() {
     _ = rControl.dismissOnScreenMessage()
-    rControl.showMessage(withSpec: successSpec, title: "Thanks for updating")
+
+    var config: RMessage.Config = .init(design: .success)
+    config.content.title = "Thanks for updating"
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
+  }
+
+  @IBAction func didTapHtmlEmbed(_ sender: UIButton) {
+    let html = """
+    <!doctype html>
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: -apple-system;
+            font-size: 14px;
+            color: white;
+          }
+        </style>
+      </head>
+      <body>
+        Here is an html <b><a href=\"https://www.w3schools.com\">link</a></b>
+      </body>
+    </html>
+    """
+
+    let htmlData = html.data(using: .utf8)!
+
+    var config = RMessage.Config()
+    config.design.backgroundColor = .init(hex: "#3C3C3C") ?? .red
+    config.design.titleColor = .white
+
+    config.content.title = "Tap Tap"
+
+    config.content.attributedBody = try! NSMutableAttributedString(
+      data: htmlData, options: [.documentType: NSAttributedString.DocumentType.html],
+      documentAttributes: nil
+    )
+
+    let message = RMessage(config)
+    rControl.showMessage(message)
   }
 
   //  private func customize(message: RMessage) {
